@@ -1,0 +1,64 @@
+/* common */
+p{
+  margin: 20px 0;
+}
+button{
+  width: 200px;
+  height: 60px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+/* section */
+section{
+  width: 1000px;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* chocolate image */
+.chocolate1{
+  width: 500px;
+  height: 500px;
+}
+
+/* detail information */
+.detailedInfo{
+  width: 500px;
+  position: relative;
+  left: 30px;
+
+}
+#productName{
+  font-size: 30px;
+}
+#price{
+  font-size: 26px;
+  font-weight: bold;
+}
+#productDescription{
+  font-size: 20px;
+}
+.buttonGroup{
+  position: absolute;
+  bottom: 0;
+}
+#addCart{
+  background-color: #ffe08a;
+}
+#addCart:hover{
+  background-color: #ffdc7d;
+
+}
+#buyDirect{
+  background-color: #3e8ed0;
+  color: #ffffff;
+}
+#buyDirect:hover{
+  background-color: #3488ce;
+}

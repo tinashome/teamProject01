@@ -121,9 +121,9 @@ i{
   border-radius: 10px;
   background-color: #f0f5f7;
   padding: 10px;
-  position: relative;
-  top: -200px;
-  left: 730px;
+  position: fixed;
+  top: 190px;
+  left: 740px;
   box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
 }
 
@@ -165,4 +165,5 @@ i{
   line-height: 55px;
   border-radius: 10px;
   background-color: #3e8ed0;
+  cursor: pointer;
 }

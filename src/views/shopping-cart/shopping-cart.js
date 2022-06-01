@@ -2,6 +2,7 @@ const selectedProduct = document.getElementById("selectedProduct")
 const selectedPrice = document.getElementById("productPrice");
 const modifyQuantity = document.querySelectorAll(".productQuantity");
 const chocolateImg = document.getElementById("chocolateImg");
+const SelectedProductName = document.getElementById("SelectedProductName");
 
 //localStorage의 데이터를 받아오기
 for(let i = 1; i <= localStorage.length; i++){
@@ -9,6 +10,7 @@ for(let i = 1; i <= localStorage.length; i++){
   //localStorage의 가격 입력
   selectedPrice.innerText = print.price;
   chocolateImg.src = print.img;
+  SelectedProductName.innerText = print.name
 }
 
 //버튼을 누르면 증가, 감소
@@ -42,7 +44,7 @@ function plusQuantity(){
   modifyQuantity.forEach(i => i.innerText = modifying);
 
   //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
-  totalPrice.innerText = print.price * modifying
+  totalPrice.innerText =  selectedPrice.innerText * Number(modifying)
 
   //결제 정보창에도 반영
   payProductQuantity.innerText = modifying;
@@ -52,17 +54,23 @@ function plusQuantity(){
 
 function minusQuantity(){
   let modifying = --orderedQuantity;
+  // if(modifying == 1){
+  //   minus.disabled = true;
+  // }
 
   //수량 입력
   modifyQuantity.forEach(i => i.innerText = modifying);
 
   //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
-  totalPrice.innerText = print.price * modifying
+  totalPrice.innerText = selectedPrice.innerText * modifying
 
   //결제 정보창에도 반영
   payProductQuantity.innerText = modifying;
   payProductPrice.innerText = totalPrice.innerText;
   payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText)
 }
+
+//전체선택 구현
+const allSelectedCheckbox = document.getElementById("allSelectedCheckbox");
 
 

@@ -1,0 +1,96 @@
+/* common */
+
+section{
+  width: 1000px;
+  height: 100vh;
+  margin: 50px auto;
+}
+/* 장바구니 > 주문결제 > 주문완료 */
+.shoppingCartHeader{
+  font-size: 20px;
+  border-bottom: 1px solid #999;
+}
+.shoppingCartHeader .shoppingCartChapter{
+  font-size: 36px;
+  font-weight: bold;
+}
+
+/* shoppingCartMainBox */
+.shoppingCartMainBox{
+  width: 100%;
+  background-color: aqua;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+/* 전체삭제 | 선택삭제 */
+.shoppingListHeader{
+  display: flex;
+  margin-top: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #888;
+}
+#selectedProduct{
+  display: flex;
+}
+.checkbox{
+  display: flex;
+}
+.checkbox p{
+  position: relative;
+  top: -3px;
+  left: 10px;
+}
+#deletePart{
+  position: relative;
+  left: 20px;
+  top: -5px;
+} 
+.seperator{
+  position:relative;
+  top: -8px;
+  left: 15px;
+}
+
+
+/* 장바구니에 담은 품목 */
+#selectedProduct{
+  margin:10px 0 0 10px;
+}
+#selectedProduct img{
+  width: 150px;
+  height: 150px;
+  margin: 0 10px;
+}
+
+#modifyProductQuantity{
+  width: 120px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* 장바구니에 담은 품목 수량 추가, 삭제 */
+
+
+/* 금액 X 수량 */
+#selectedPrice{
+  width: 150px;
+  display: flex;
+  
+}
+
+/* 결제정보 */
+.payBox{
+  width: 300px;
+  height: 300px;
+  margin: 10px;
+  border-radius: 20px;
+  background-color: #f0f5f7;
+}
+
+.info {
+  width: 250px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}

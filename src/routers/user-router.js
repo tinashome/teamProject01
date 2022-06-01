@@ -66,6 +66,13 @@ userRouter.post('/login', async function (req, res, next) {
 userRouter.get('/userlist', loginRequired, async function (req, res, next) {
   try {
     // 전체 사용자 목록을 얻음
+    const userRole = await req.currentUserRole;
+    if (userRole !== "admin" ){
+      console.log("basic-user 등급 유저의 회원목록조회 요청이 거부됨")
+      throw new Error(
+        '권한이 없습니다.'
+      );
+    }
     const users = await userService.getUsers();
 
     // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
@@ -165,12 +172,24 @@ userRouter.post(
       );
 
       // 삭제이후 프론트에 무엇을 보내줘야할까?
-      // res.status(200).json(updatedUserInfo);
-      res.status(200)
+      res.status(200).redirect("/")
     } catch (error) {
       next(error);
     }
   }
 );
 
+// 아이디값가져오는 api (아래는 /getUserId 이지만, 실제로는 /api/getUserId 요청해야 함.)
+// postman 테스트중 id값불러오기위해 작성 login과 동시에 하고싶지만 
+//로그인시에는 loginRequired를 활용하지못해서 당장은 따로 사용
+userRouter.get('/users/getUserId', loginRequired, async function (req, res, next) {
+  try {
+    const userId = req.currentUserId;
+    // id를 프론트에 보냄 (id는, object ID임)
+    res.status(200).json({userId});
+  } catch (error) {
+    next(error);
+  }
+}
+);
 export { userRouter };

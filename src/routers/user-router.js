@@ -134,4 +134,43 @@ userRouter.patch(
   }
 );
 
+//사용자 정보 삭제(탈퇴)
+userRouter.post(
+  '/users/delete/:userId',
+  loginRequired,
+  async function (req, res, next) {
+    try {
+      // content-type 을 application/json 로 프론트에서
+      // 설정 안 하고 요청하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요'
+        );
+      }
+
+      // params로부터 id를 가져옴
+      const userId = req.params.userId;
+      // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
+      const currentPassword = req.body.currentPassword;
+
+      // currentPassword 없을 시, 진행 불가
+      if (!currentPassword) {
+        throw new Error('회원정보 삭제를 위해, 현재의 비밀번호가 필요합니다.');
+      }
+
+      const userInfoRequired = { userId, currentPassword };
+
+      const deleteUser = await userService.deleteUser(
+        userInfoRequired
+      );
+
+      // 삭제이후 프론트에 무엇을 보내줘야할까?
+      // res.status(200).json(updatedUserInfo);
+      res.status(200)
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 export { userRouter };

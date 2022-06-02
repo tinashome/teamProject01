@@ -12,8 +12,8 @@ function currentSlide(n) {
 
 function imgSlide(n) {
   var i;
-  var slides = document.getElementsByClassName('slide');
-  var dots = document.getElementsByClassName('dot');
+  var slides = document.getElementsByClassName("slide");
+  var dots = document.getElementsByClassName("dot");
   if (n > slides.length) {
     slideIdx = 1;
   }
@@ -21,17 +21,17 @@ function imgSlide(n) {
     slideIdx = slides.length;
   }
   for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = 'none';
+    slides[i].style.display = "none";
   }
   for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(' active', '');
+    dots[i].className = dots[i].className.replace(" active", "");
   }
-  slides[slideIdx - 1].style.display = 'block';
-  dots[slideIdx - 1].className += ' active';
+  slides[slideIdx - 1].style.display = "block";
+  dots[slideIdx - 1].className += " active";
 }
 
 // 자동 슬라이드 구현
-setInterval('nextSlides(1)', 6000);
+setInterval("nextSlides(1)", 6000);
 
 // 아래는 현재 home.html 페이지에서 쓰이는 코드는 아닙니다.
 // 다만, 앞으로 ~.js 파일을 작성할 때 아래의 코드 구조를 참조할 수 있도록,

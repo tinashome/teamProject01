@@ -84,7 +84,7 @@ userRouter.get('/userlist', loginRequired, async function (req, res, next) {
 
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
-userRouter.patch("/users/:userId", loginRequired, async function (req, res, next) {
+userRouter.patch("/account/update", loginRequired, async function (req, res, next) {
 	try {
 		// content-type 을 application/json 로 프론트에서
 		// 설정 안 하고 요청하면, body가 비어 있게 됨.
@@ -92,8 +92,8 @@ userRouter.patch("/users/:userId", loginRequired, async function (req, res, next
 			throw new Error("headers의 Content-Type을 application/json으로 설정해주세요");
 		}
 
-		// params로부터 id를 가져옴
-		const userId = req.params.userId;
+		// loginRequired를 통한 req에서 id를 가져옴
+		const userId = req.currentUserId;
 
 		// body data 로부터 업데이트할 사용자 정보를 추출함.
 		const fullName = req.body.fullName;
@@ -133,7 +133,7 @@ userRouter.patch("/users/:userId", loginRequired, async function (req, res, next
 });
 
 //사용자 정보 삭제(탈퇴)
-userRouter.post("/users/delete/:userId", loginRequired, async function (req, res, next) {
+userRouter.post("/account/signout", loginRequired, async function (req, res, next) {
 	try {
 		// content-type 을 application/json 로 프론트에서
 		// 설정 안 하고 요청하면, body가 비어 있게 됨.
@@ -142,7 +142,7 @@ userRouter.post("/users/delete/:userId", loginRequired, async function (req, res
 		}
 
 		// params로부터 id를 가져옴
-		const userId = req.params.userId;
+		const userId = req.currentUserId;
 		// body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
 		const currentPassword = req.body.currentPassword;
 
@@ -165,8 +165,7 @@ userRouter.post("/users/delete/:userId", loginRequired, async function (req, res
 // 현재 유저 정보을 가져옴
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 userRouter.get('/getUserInfo', loginRequired, async function (req, res, next) {
-  try {
-    // 전체 사용자 목록을 얻음
+  try {    
     const userId = await req.currentUserId;
     const users = await userService.getUserInfo(userId);
     
@@ -183,10 +182,45 @@ userRouter.get('/getUserInfo', loginRequired, async function (req, res, next) {
   }
 });
 
+// 주문서 작성시 사용자 주소 입력
+// (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
+userRouter.post("/user/deliveryinfo", loginRequired, async function (req, res, next) {
+	try {
+		// content-type 을 application/json 로 프론트에서
+		// 설정 안 하고 요청하면, body가 비어 있게 됨.
+		if (is.emptyObject(req.body)) {
+			throw new Error("headers의 Content-Type을 application/json으로 설정해주세요");
+		}
+
+		// loginRequired를 통한 req에서 id를 가져옴
+		const userId = req.currentUserId;
+		// body data 로부터 업데이트할 사용자 정보를 추출함.
+		const address = req.body.address;
+		const phoneNumber = req.body.phoneNumber;
+
+		const userInfoRequired = { userId };
+
+		// 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
+		// 보내주었다면, 업데이트용 객체에 삽입함.
+		const toUpdate = {
+			...(address && { address }),
+			...(phoneNumber && { phoneNumber }),
+		};
+
+		// 사용자 정보를 업데이트함.
+		const updatedUserInfo = await userService.setUserAddress(userInfoRequired, toUpdate);
+
+		// 업데이트 이후의 유저 데이터를 프론트에 보내 줌
+		res.status(200).json(updatedUserInfo);
+	} catch (error) {
+		next(error);
+	}
+});
+
 // 아이디값가져오는 api (아래는 /getUserId 이지만, 실제로는 /api/getUserId 요청해야 함.)
 // postman 테스트중 id값불러오기위해 작성 login과 동시에 하고싶지만 
 //로그인시에는 loginRequired를 활용하지못해서 당장은 따로 사용
-userRouter.get('/users/getUserId', loginRequired, async function (req, res, next) {
+userRouter.get('/getUserId', loginRequired, async function (req, res, next) {
   try {
     const userId = req.currentUserId;
     // id를 프론트에 보냄 (id는, object ID임)

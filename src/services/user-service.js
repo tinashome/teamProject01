@@ -161,6 +161,13 @@ class UserService {
     // return user;
     return;
   }
+
+  // 사용자 정보를 받음.
+  async getUserInfo(userId) {
+    const users = await this.userModel.findById(userId);
+    return users;
+  }
+
 }
 
 const userService = new UserService(userModel);

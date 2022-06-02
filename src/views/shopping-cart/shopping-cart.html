@@ -78,8 +78,23 @@
           </p>
         </div>
         <div class="shoppingCartMainBox">
-          <!-- 장바구니 부분 박스 / js에서 구현 -->
-        </div>
+
+        <!-- 전체삭제 | 선택삭제 -->
+          <div class="shoppingListHeader">
+            <label class="checkbox">
+              <input type="checkbox" id="allSelectedCheckbox" checked = "true">
+              <p>전체선택</p>
+            </label>
+            <label class="seperator">
+              <span>|</span>
+            </label>
+            <label id="deletePart">
+              <p>선택삭제</p>
+            </label>
+          </div>
+          <div class="shoppingListBox">
+            <!-- 장바구니 부분 박스 / js에서 구현 -->
+            </div>
         <!-- 결제정보 -->
         <div class="payBox">
           <div class="payInfoHeader">

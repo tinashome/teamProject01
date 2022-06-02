@@ -1,51 +1,40 @@
 //localStorage의 데이터를 받아오기
+//printArr에 배열로 데이터들을 저장하여 반복문을 돌면서 데이터 펴기
+const printArr = [];
 for(let i = 1; i <= localStorage.length; i++){
-  const print = JSON.parse(localStorage.getItem(i));
-
-  const displaying = document.querySelector(".shoppingCartMainBox");
-  displaying.innerHTML = `
-        <div class="shoppingListBox">
-              <!-- 전체삭제 | 선택삭제 -->
-              <div class="shoppingListHeader">
-                <label class="checkbox">
-                  <input type="checkbox" id="allSelectedCheckbox" checked = "true">
-                  <p>전체선택</p>
-                </label>
-                <label class="seperator">
-                  <span>|</span>
-                </label>
-                <label id="deletePart">
-                  <p>선택삭제</p>
-                </label>
+  printArr.push(JSON.parse(localStorage.getItem(i)));
+};
+for(let j = 0; j < printArr.length; j++){
+    const displaying = document.querySelector(".shoppingListBox");
+    displaying.innerHTML = `              
+            <div id="selectedProduct">
+              <input type="checkbox" class="selectedCheckBox" checked = "true">
+              <img id="chocolateImg" src = ${printArr[j].img} alt="chocolate1">
+              <div id="SelectedProductName">
+                ${printArr[j].name}
               </div>
-              
-              <!-- 장바구니 목록 -->
-              <div id="selectedProduct">
-                <input type="checkbox" class="selectedCheckBox" checked = "true">
-                <img id="chocolateImg" src = ${print.img} alt="chocolate1">
-                <div id="SelectedProductName">
-                  ${print.name}
-                </div>
-
-                <div id="modifyProductQuantity">
-                  <button id="minusProductQuantity">-</button>
-                  <p class="productQuantity"></p>
-                  <button id="plusProductQuantity">+</button>
-                </div>
-                <div id="selectedPrice">
-                  <p><span id="productPrice">${print.price}</span>원</p>
-                  <i class="fas fa-thin fa-xmark"></i>
-                  <p class="productQuantity"></p>
-                  <i class="fas fa-thin fa-equals"></i>
-                  <p><span id="totalPrice"></span>원</p>
-                </div>
-                <div id="deleteIcon">
-                  <i class="fas fa-trash-can"></i>
-                </div>
-              </div>          
-            </div>
-`
+  
+              <div id="modifyProductQuantity">
+                <button id="minusProductQuantity">-</button>
+                <p class="productQuantity"></p>
+                <button id="plusProductQuantity">+</button>
+              </div>
+              <div id="selectedPrice">
+                <p><span id="productPrice">${printArr[j].price}</span>원</p>
+                <i class="fas fa-thin fa-xmark"></i>
+                <p class="productQuantity"></p>
+                <i class="fas fa-thin fa-equals"></i>
+                <p><span id="totalPrice"></span>원</p>
+              </div>
+              <div id="deleteIcon">
+                <i class="fas fa-trash-can"></i>
+              </div>
+            </div>          
+          </div>
+  `
 }
+
+
 
 const selectedPrice = document.getElementById("productPrice");
 const modifyQuantity = document.querySelectorAll(".productQuantity");
@@ -61,7 +50,7 @@ const payTotalPrice = document.getElementById("payTotalPrice");
 
 //default값으로 1을 부여 
 let orderedQuantity = 1;
-modifyQuantity.forEach(i => i.innerText = orderedQuantity);
+modifyQuantity.forEach( modify => modify.innerText = orderedQuantity);
 payProductQuantity.innerText = orderedQuantity;
 //default 값으로 가격 * 수량을 보여줌
 totalPrice.innerText = selectedPrice.innerText;
@@ -90,6 +79,7 @@ function plusQuantity(){
 
 function minusQuantity(){
   let modifying = --orderedQuantity;
+//error1: 수량이 0이되면 - 버튼 disabled, 다시 1이 되면 disabled=false
   if(modifying == 0){
     minus.disabled = true;
   } else if(modifying > 0){
@@ -97,7 +87,7 @@ function minusQuantity(){
   }
 
   //수량 입력
-  modifyQuantity.forEach(i => i.innerText = modifying);
+  modifyQuantity.forEach(quantity => quantity.innerText = modifying);
 
   //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
   totalPrice.innerText = selectedPrice.innerText * modifying
@@ -121,3 +111,19 @@ function selectAll(){
     selectedCheckBox.forEach((check) => check.checked = false)
   }
 }
+
+//fake data
+localStorage.setItem(2, JSON.stringify({name: "loyal chocolate", price: 4000, img:"http://127.0.0.1:5500/src/views/elice-rabbit.png"}))
+
+// 휴지통 버튼을 누르면 localStorage에서 데이터 삭제
+const deleteIcon = document.getElementById("deleteIcon");
+
+deleteIcon.addEventListener("click", () => {
+  const productName = document.getElementById("SelectedProductName").innerText;
+  for(let i = 1; i <= localStorage.length; i++){
+    const foundArr = []
+    const findKeyNumber = foundArr.push(JSON.parse(localStorage.getItem(i)));
+    console.log(foundArr);
+  }
+  //localStorage.removeItem()
+})

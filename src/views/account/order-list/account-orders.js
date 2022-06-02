@@ -1,98 +1,154 @@
-const list = document.getElementById("ordersContainer")
+
 // 테스트용
 const date = [{
+        date: '2020',
+        listProduct: "dd",
+        userStatus: "준비중",
+        productId: 1,
+},
+{
     date: '2020',
-    product_list: "dd",
+    listProduct: "1",
     userStatus: "준비중",
+    productId: 2,
+},
+{
+    date: '2020',
+    listProduct: "2",
+    userStatus: "준비중",
+    productId: 3,
+},
+{
+    date: '2020',
+    listProduct: "3",
+    userStatus: "준비중",
+    productId: 4,
+},
+{
+    date: '2020',
+    listProduct: "4",
+    userStatus: "준비중",
+    productId:7,
+},
+{
+    date: '2020',
+    listProduct: "5",
+    userStatus: "준비중",
+    productId: 5,
+},
+{
+    date: '2020',
+    listProduct: "6",
+    userStatus: "준비중",
+    productId: 6,
 },
 ]
 
 
 // 날짜, 상품리스트, 준비상태 불러오기
 document.addEventListener("DOMContentLoaded", await function() {
-    //     const res = await fetch(`불러오기`)
-    //     const data = await res.json()
-    date.forEach(element=>{
+
+        //  **********get으로 서버 데이터 받아오기**********
+        date.forEach(element=>{
+                // 임시 데이터 받아오기
                 const date = element.date
-                const product_list = element.product_list
+                const listProduct = element.listProduct
                 const userStatusData = element.userStatus
+                const productId = element.productId
+
+                // 추가할 요소 생성
+
+                        //전체를 감싸줄 컨테이너
                 const wrapper = document.createElement("div")
-                wrapper.classList.add("columns orders-item")
-                wrapper.setAttribute("id", "order-629428a0eb5d1ed00c61f51c")
+                wrapper.classList.add("columns", "orders-item")
+                        // 백에서 받아온 id
+                // wrapper.setAttribute("id", "ssss")
 
+                        // 주문날짜
                 const orderDate = document.createElement("div")
-                orderDate.classList.add("column is-2")
+                orderDate.classList.add("column", "is-2")
                 orderDate.textContent = date
-
+                
+                        // 상품정보
                 const orderProduct = document.createElement("div")
-                orderProduct.classList.add("column is-6 order-summary")
-                orderProduct.textContent = product_list
-
+                orderProduct.classList.add("column", "is-6", "order-summary")
+                orderProduct.textContent = listProduct
+                        
+                        // 상태정보 
                 const userStatus = document.createElement("div")
-                userStatus.classList.add("column is-2")
+                userStatus.classList.add("column", "is-2")
                 userStatus.textContent = userStatusData
-
+                
+                        // 버튼 컨테이너
                 const btnWrapper = document.createElement("div")
-                btnWrapper.classList.add("column is-2")
+                btnWrapper.classList.add("column", "is-2")
                 
+                        // 버튼
+                                // id값 가져와서 버튼에 id값 넣기
                 const btn = document.createElement("button")
-                btn.classList.add("button")
-                btn.setAttribute("id", "deleteButton-629428a0eb5d1ed00c61f51c")
+                btn.classList.add("button", "cencleOrder")
+                btn.setAttribute("id", `${productId}`)
+                btn.textContent = "주문 취소"
 
-
-                btnWrapper.appendChild(btn)
+                        //화면에 보이게 할려고
+                btnWrapper.append(btn)
                 wrapper.append(orderDate, orderProduct, userStatus, btnWrapper)
-                
 
-                list.innerHTML+=`
-                    <div class="columns orders-item" id="order-629428a0eb5d1ed00c61f51c">
-                        <div class="column is-2">${date}</div>
-                        <div class="column is-6 order-summary">${product_list}</div>
-                        <div class="column is-2">${userStatus}</div>
-                        <div class="column is-2">
-                            <button class="button" id="deleteButton-629428a0eb5d1ed00c61f51c">주문취소</button>
-                        </div>
-                    </div>
-                `
+                const ordersContainer = document.getElementById("ordersContainer")
+                ordersContainer.append(wrapper)
             });
 
-            // 버튼 여러개를 하나로 묶어야함
-            const button = document.getElementById("deleteButton-629428a0eb5d1ed00c61f51c")
-            button.addEventListener("click", (e)=>{
-                e.preventDefault()
-               
-                const modal = document.getElementById("modal")
-                modal.className="modal is-active"
+        // 여러개의 클릭 버튼 구현
+        const button = document.querySelectorAll(".cencleOrder");
 
-                const deleteCancelButton = document.getElementById("deleteCancelButton")
-                const deleteCompleteButton = document.getElementById("deleteCompleteButton")
-                const modalCloseButton = document.getElementById("modalCloseButton")
-
-                deleteCancelButton.addEventListener("click", (e)=>{
-                    e.preventDefault()
-                    modal.className = "modal" 
-                })
-
-            })
-
-                deleteCompleteButton.addEventListener("click", (e)=>{
-                    e.preventDefault()
-                    alert("주문정보가 삭제되었습니다") 
-
-                    modal.className = "modal"
-
-                    const block_delete = document.getElementById("order-629428a0eb5d1ed00c61f51c")
-                    block_delete.remove()
-                 })
-
-
-                 modalCloseButton.addEventListener("click", (e)=>{
+        // 서버에서 id값 받아오면 사용할 id
+        const cancleBtn = []
+        button.forEach((btn)=>{
+                btn.addEventListener("click", (e)=>{
                      e.preventDefault()
-                     modal.className = "modal" 
+                    cancleBtn.push(btn.getAttribute("id")) 
+                    
+                     // 숨겨둔 모달을 보이게
+                    const modal = document.getElementById("modal")
+                    modal.classList ="modal is-active"
+            })
+        })
+        
+        // 모달 보이게 한 후
+                // 삭제확인 취소 x버튼 
+        const deleteCompleteButton = document.getElementById("deleteCompleteButton")
+        const modalCloseButton = document.getElementById("modalCloseButton")
+        const deleteCancelButton = document.getElementById("deleteCancelButton")
+
+        // 취소버튼 클릭
+        deleteCancelButton.addEventListener("click", (e)=>{
+                e.preventDefault()
+
+                 // 모달안보이게
+                modal.className = "modal" 
+        })
+        // 삭제 확인 버튼
+        deleteCompleteButton.addEventListener("click", (e)=>{
+                e.preventDefault()
+                alert("주문정보가 삭제되었습니다") 
+
+                //  **********주문을 취소 했으니 서버에 주문취소 알리기**********
+
+                // 모달안보이게
+                modal.className = "modal"
+
+                // id값에 맞는 버튼의 컨테이너 삭제
+                const deleteBlock = document.getElementById(`${cancleBtn.shift()}`)
+                deleteBlock.parentNode.parentNode.remove()
                  })
 
-                //  주문을 취소 했으니 서버에서도 취소를 알려야한다
-           
+
+        modalCloseButton.addEventListener("click", (e)=>{
+
+                 // 모달안보이게
+                 e.preventDefault()
+                 modal.className = "modal" 
+                 })           
   });
 
 

@@ -198,7 +198,7 @@ function checkSelectAll(){
 
 
 //fake data
-localStorage.setItem(2, JSON.stringify({name: "loyal chocolate", price: 4000, img:"http://127.0.0.1:5500/src/views/elice-rabbit.png"}))
+//localStorage.setItem(2, JSON.stringify({name: "loyal chocolate", price: 4000, img:"http://127.0.0.1:5500/src/views/elice-rabbit.png"}))
 
 // 휴지통 버튼을 누르면 localStorage에서 데이터 삭제
 const deleteIcon = document.querySelector(".deleteIcon");

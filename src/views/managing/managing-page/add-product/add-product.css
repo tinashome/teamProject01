@@ -1,0 +1,43 @@
+.addProductHeader{
+  width: 1400px;
+  margin: auto;
+}
+h1{
+  font-size: 28px;
+  font-weight: bold;
+  margin-left: 60px;
+}
+h2{
+  font-size: 20px;
+  margin: 20px 0;
+  color: #00d1b2;
+  width: 100%;
+  text-align: center;
+}
+form{
+  width: 600px;
+  margin: auto;
+  text-align: left;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
+  padding: 10px;
+}
+label{
+  display: block;
+}
+input{
+  width: 500px;
+  height: 30px;
+}
+.labelName{
+  font-weight: bold;
+}
+#addButton{
+  width: 400px;
+  height: 50px;
+  margin: 20px;
+  text-align: center;
+  color: #fff;
+  background-color: #00d1b2;
+  border: none;
+}

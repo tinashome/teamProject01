@@ -68,6 +68,59 @@
     </nav>
 
     <!-- 메인 -->
+    <main role="main">
+      <div class="addProductHeader">
+        <h1>제품판매</h1>
+        <hr>
+      </div>
+      <form>
+        <h2>제품을 판매해 보세요</h2>
+
+        <label for="productName" class="labelName"> 제품 이름</label>
+        <input type="text" placeholder="다크 초콜릿">
+
+        <label for="category" class="labelName"> 카테고리</label>
+        <select name="category" id="selectCategory">
+          <option> 카테고리를 선택해 주세요. </option>
+          <option value="HandMade"> HandMade </option>
+          <option value="milka"> Milka </option>
+          <option value="Ghana"> Ghana </option>
+          <option value="Kinder"> Kinder </option>
+          <option value="Ferrero"> Ferrero Rocher </option>
+        </select>
+        
+        <label for="madeFrom" class="labelName"> 제조사 </label>
+        <input type="text" placeholder="00 초콜릿 제조 (주)">
+
+        <label for="description" class="labelName"> 요약 설명 </label>
+        <textarea name="description" id="descrption" cols="80" rows="10"></textarea>
+
+        <label for="detailedDescription" class="labelName"> 상세 설명 </label>
+        <textarea name="detailedDescription" id="detailedDescription" cols="80" rows="10"></textarea>
+
+        <label for="detailedDescription" class="labelName"> 제품 사진 </label>
+        <label class="fileLabel">
+          <input type="file" accept=".png, .jpeg, .jpg" class="inputFile">
+          <span class="fileLabel">사진 업로드</span>
+          <span id="fileName">사진 파일(png, jpeg, jpg)</span>
+        </label>
+
+        <label for="productNumber" class="labelName"> 재고 수 </label>
+        <input type="text" placeholder="10">
+
+        <label for="productPrice" class="labelName"> 가격 </label>
+        <input type="text" placeholder="10000">
+
+        <label for="productKeyWord" class="labelName"> 검색 키워드 </label>
+        <label for="productKeyWord">
+          <input type="text" placeholder="남자옷">
+          <button id="addKeyWordButton">추가하기</button>
+        </label>
+        
+        <button id="addButton"> 제품 판매하기 </button>
+        
+      </form>
+    </main>
   </body>
 </html>
 

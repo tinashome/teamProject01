@@ -109,7 +109,6 @@ class UserService {
     }
 
     // 이제 드디어 업데이트 시작
-
     // 비밀번호도 변경하는 경우에는, 회원가입 때처럼 해쉬화 해주어야 함.
     const { password } = toUpdate;
 
@@ -119,6 +118,28 @@ class UserService {
     }
 
     // 업데이트 진행
+    user = await this.userModel.update({
+      userId,
+      update: toUpdate,
+    });
+
+    return user;
+  }
+
+  // 유저정보중 주소와,연락처 수정,비밀번호값없이 변경할수있는 점이 유저정보수정과 다름
+  async setUserAddress(userInfoRequired, toUpdate) {
+    // 객체 destructuring
+    const { userId } = userInfoRequired;
+
+    // 우선 해당 id의 유저가 db에 있는지 확인
+    let user = await this.userModel.findById(userId);
+
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
+    // 이제 주소와,연락처 정보 변경 시작
     user = await this.userModel.update({
       userId,
       update: toUpdate,
@@ -162,6 +183,15 @@ class UserService {
     // return user;
     return;
   }
+
+  
+
+  // 사용자 정보를 받음.
+  async getUserInfo(userId) {
+    const users = await this.userModel.findById(userId);
+    return users;
+  }
+
 }
 
 const userService = new UserService(userModel);

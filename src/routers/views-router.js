@@ -10,6 +10,7 @@ const viewsRouter = express.Router();
 viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
+viewsRouter.use('/sample', serveStatic('temp'));
 
 //테스트용입니다.
 // viewsRouter.use('/', serveStatic('test'));

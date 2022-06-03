@@ -12,8 +12,8 @@ class ProductService {
   // 상품등록
   async addProduct(productInfo) {
     // 객체 destructuring
-    const { name, price, info, company } = productInfo;
-    const newProductInfo = { name, price, info, company };
+    const { name, price, info, company, categoryL, categoryM, categoryS, img } = productInfo;
+    const newProductInfo = { name, price, info, company, categoryL, categoryM, categoryS, img };
     // 이메일 중복 확인
     // const user = await this.userModel.findById(email);
     // if (user) {

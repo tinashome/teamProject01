@@ -15,12 +15,24 @@ const ProductSchema = new Schema(
       required: false,
     },
     company: {
-        type: String,
-        required: false,
+      type: String,
+      required: false,
+    },
+    categoryL: { 
+      type: String, 
+    },
+    categoryM: { 
+      type: String, 
+    },
+    categoryS: { 
+      type: String, 
+    },
+    img: {
+      type: String,
     },
   },
   {
-    collection: 'products',
+    collection: "products",
     timestamps: true,
   }
 );

@@ -2,6 +2,8 @@
 node_modules
 yarn.lock
 
-package-lock.json
-package.json
-src/routers/views-router.js
+.prettierrc
+
+src/views/test/home.css
+src/views/test/test.html
+src/views/test/test.js

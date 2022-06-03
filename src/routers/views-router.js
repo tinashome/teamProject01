@@ -6,10 +6,17 @@ const viewsRouter = express.Router();
 // 페이지별로 html, css, js 파일들을 라우팅함
 // 아래와 같이 하면, http://localhost:5000/ 에서는 views/home/home.html 파일을,
 // http://localhost:5000/register 에서는 views/register/register.html 파일을 화면에 띄움
+<<<<<<< HEAD
 viewsRouter.use("/", serveStatic("home"));
 viewsRouter.use("/register", serveStatic("register"));
 viewsRouter.use("/login", serveStatic("login"));
 viewsRouter.use("/sample", serveStatic("temp"));
+=======
+viewsRouter.use('/', serveStatic('home'));
+viewsRouter.use('/register', serveStatic('register'));
+viewsRouter.use('/login', serveStatic('login'));
+viewsRouter.use('/sample', serveStatic('temp'));
+>>>>>>> 471f03910841485d137636d47fbfba3f0faa11ee
 
 //테스트용입니다.
 // viewsRouter.use('/', serveStatic('test'));

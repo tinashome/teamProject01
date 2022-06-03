@@ -93,14 +93,14 @@ document.addEventListener("DOMContentLoaded", await function() {
                         //화면에 보이게 할려고
                 btnWrapper.append(btn)
                 wrapper.append(orderDate, orderProduct, userStatus, btnWrapper)
-
+                console.log(wrapper)
                 const ordersContainer = document.getElementById("ordersContainer")
                 ordersContainer.append(wrapper)
             });
 
         // 여러개의 클릭 버튼 구현
         const button = document.querySelectorAll(".cencleOrder");
-
+        
         // 서버에서 id값 받아오면 사용할 id
         const cancleBtn = []
         button.forEach((btn)=>{

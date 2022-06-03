@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-2팀</title>
+    <title>이상한 나라의 초콜릿</title>
     <!-- 아이콘 -->
     <link
       rel="icon"
@@ -33,7 +33,7 @@
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
             <img src="../elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-n팀</span>
+            <span class="has-text-link">이상한 나라의 초콜릿</span>
           </a>
 
           <a
@@ -77,75 +77,48 @@
             <span class="shoppingCartChapter">장바구니</span> > 주문결제 > 주문완료
           </p>
         </div>
-
-        
         <div class="shoppingCartMainBox">
-          <!-- 장바구니 부분 박스 -->
+
+        <!-- 전체삭제 | 선택삭제 -->
+          <div class="shoppingListHeader">
+            <label class="checkbox">
+              <input type="checkbox" id="allSelectedCheckbox" checked = "true">
+              <p>전체선택</p>
+            </label>
+            <label class="seperator">
+              <span>|</span>
+            </label>
+            <label id="deletePart">
+              <p>선택삭제</p>
+            </label>
+          </div>
           <div class="shoppingListBox">
-              <!-- 전체삭제 | 선택삭제 -->
-              <div class="shoppingListHeader">
-                <label class="checkbox">
-                  <input type="checkbox" id="allSelectedCheckbox">
-                  <p>전체선택</p>
-                </label>
-                <label class="seperator">
-                  <span>|</span>
-                </label>
-                <label id="deletePart">
-                  <p>선택삭제</p>
-                </label>
-              </div>
-              
-              <!-- 장바구니 목록 -->
-              <div id="selectedProduct">
-                <input type="checkbox" class="selectedCheckBox">
-                <img id="chocolateImg" alt="chocolate1">
-                <div id="SelectedProductName">
-                  <p></p>
-                </div>
-
-                <div id="modifyProductQuantity">
-                  <button id="minusProductQuantity">-</button>
-                  <p class="productQuantity"></p>
-                  <button id="plusProductQuantity">+</button>
-                </div>
-                <div id="selectedPrice">
-                  <p><span id="productPrice"></span>원</p>
-                  <i class="fas fa-thin fa-xmark"></i>
-                  <p class="productQuantity"></p>
-                  <i class="fas fa-thin fa-equals"></i>
-                  <p id="totalPrice"></p>
-                </div>
-                <div id="deleteIcon">
-                  <i class="fas fa-trash-can"></i>
-                </div>
-              </div>          
+            <!-- 장바구니 부분 박스 / js에서 구현 -->
             </div>
-
-          <!-- 결제정보 -->
-          <div class="payBox">
-            <div class="payInfoHeader">
-              <p>결제정보</p>
+        <!-- 결제정보 -->
+        <div class="payBox">
+          <div class="payInfoHeader">
+            <p>결제정보</p>
+          </div>
+          <div class="payInfo">
+            <div class="info">
+              <p>상품수</p>
+              <p><span id="payProductQuantity"></span>개</p>
             </div>
-            <div class="payInfo">
-              <div class="info">
-                <p>상품수</p>
-                <p><span id="payProductQuantity"></span>개</p>
-              </div>
-              <div class="info">
-                <p>상품금액</p>
-                <p><span id="payProductPrice"></span>원</p>
-              </div>
-              <div class="info">
-                <p>배송비</p>
-                <p><span id="payShippingPrice"></span>원</p>
-              </div>
+            <div class="info">
+              <p>상품금액</p>
+              <p><span id="payProductPrice"></span>원</p>
             </div>
-            <div class="payTotalPricePart">
-              <p>총 결제금액</p>
-              <p><span id="payTotalPrice"></span>원</p>
+            <div class="info">
+              <p>배송비</p>
+              <p><span id="payShippingPrice"></span>원</p>
             </div>
           </div>
+          <div class="payTotalPricePart">
+            <p>총 결제금액</p>
+            <p><span id="payTotalPrice"></span>원</p>
+          </div>
+          <div id="buyButton">구매하기</div>
         </div>
       </section>
     </main>

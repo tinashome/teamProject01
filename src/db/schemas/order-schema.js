@@ -1,4 +1,5 @@
-import mongoose, { mongo, Schema } from "mongoose";
+// import mongoose, { mongo, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const OrderSchema = new Schema(
 	{
@@ -7,11 +8,7 @@ const OrderSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		orderDate: {
-			type: Date,
-			required: true,
-		},
-		customerId: {
+		userId: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
 		},
@@ -21,7 +18,8 @@ const OrderSchema = new Schema(
 					postalCode: String,
 					address1: String,
 					address2: String,
-					phoneNumber: String,
+					receiverName: String,
+					receiverPhoneNumber: String,
 				},
 				{
 					_id: false,
@@ -29,14 +27,23 @@ const OrderSchema = new Schema(
 			),
 			required: false,
 		},
-		orderProduct: [
+		request: {
+			type: String,
+			required: true,
+		},
+		summaryTitle: {
+			type: String,
+			required: true,
+		},
+		orderitem: [
 			{
 				type: new Schema(
 					{
 						productId: { type: Schema.Types.ObjectId, ref: "products" },
 						productName: String,
-						productPrice: Number,
-						productQuantity: Number,
+						price: Number,
+						quantity: Number,
+						totalPrice: Number,
 					},
 					{
 						_id: false,
@@ -45,11 +52,11 @@ const OrderSchema = new Schema(
 				required: true,
 			},
 		],
-		orderTotal: {
+		totalPrice: {
 			type: Number,
 			required: true,
 		},
-		orderStaue: {
+		status: {
 			type: String,
 			required: true,
 		},

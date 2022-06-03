@@ -7,12 +7,14 @@ const viewsRouter = express.Router();
 // 페이지별로 html, css, js 파일들을 라우팅함
 // 아래와 같이 하면, http://localhost:5000/ 에서는 views/home/home.html 파일을,
 // http://localhost:5000/register 에서는 views/register/register.html 파일을 화면에 띄움
-// viewsRouter.use('/', serveStatic('home'));
-viewsRouter.use('/', serveStatic('test'));
-viewsRouter.use('/1', serveStatic('shopping-cart'));
-viewsRouter.use('/2', serveStatic('product-detail'));
+viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
+
+//테스트용입니다.
+// viewsRouter.use('/', serveStatic('test'));
+// viewsRouter.use('/1', serveStatic('shopping-cart'));
+// viewsRouter.use('/2', serveStatic('product-detail'));
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));

@@ -1,129 +1,209 @@
+
 //localStorage의 데이터를 받아오기
 //printArr에 배열로 데이터들을 저장하여 반복문을 돌면서 데이터 펴기
 const printArr = [];
 for(let i = 1; i <= localStorage.length; i++){
   printArr.push(JSON.parse(localStorage.getItem(i)));
 };
-for(let j = 0; j < printArr.length; j++){
+const displayData = () => {
+  for(let j = 0; j < printArr.length; j++){
     const displaying = document.querySelector(".shoppingListBox");
-    displaying.innerHTML = `              
-            <div id="selectedProduct">
-              <input type="checkbox" class="selectedCheckBox" checked = "true">
-              <img id="chocolateImg" src = ${printArr[j].img} alt="chocolate1">
-              <div id="SelectedProductName">
-                ${printArr[j].name}
-              </div>
-  
-              <div id="modifyProductQuantity">
-                <button id="minusProductQuantity">-</button>
-                <p class="productQuantity"></p>
-                <button id="plusProductQuantity">+</button>
-              </div>
-              <div id="selectedPrice">
-                <p><span id="productPrice">${printArr[j].price}</span>원</p>
-                <i class="fas fa-thin fa-xmark"></i>
-                <p class="productQuantity"></p>
-                <i class="fas fa-thin fa-equals"></i>
-                <p><span id="totalPrice"></span>원</p>
-              </div>
-              <div id="deleteIcon">
-                <i class="fas fa-trash-can"></i>
-              </div>
-            </div>          
-          </div>
-  `
-}
+    const productContainer = document.createElement("div");
+    productContainer.setAttribute("id", "selectedProduct");
+
+    const inputCheck = document.createElement("input");
+    inputCheck.type = "checkbox";
+    inputCheck.checked = "true";
+    inputCheck.classList.add("selectedCheckBox");
+    inputCheck.onclick = checkSelectAll;
+
+    const pushProductImage = document.createElement("img");
+    pushProductImage.src = `${printArr[j].img}`;
+    pushProductImage.classList.add("chocolateImg");
+    pushProductImage.alt = "chocolate1";
+
+    const pushProductName = document.createElement("div");
+    pushProductName.classList.add("SelectedProductName");
+    pushProductName.textContent = `${printArr[j].name}`;
+
+    const modifynumb = document.createElement("div");
+    modifynumb.classList.add("modifyProductQuantity");
+    
+
+    const minusBtn = document.createElement("button");
+    minusBtn.classList.add("minusProductQuantity");
+    minusBtn.textContent = "-";
+    minusBtn.onclick = minusQuantity;
+
+    const productQuantityNumb = document.createElement("p");
+    productQuantityNumb.classList.add("productQuantityNumb");
+    productQuantityNumb.textContent = 1;
+    const changeQuantity = document.createElement("p");
+    changeQuantity.classList.add("productQuantity");
+    changeQuantity.textContent = 1;
+
+    const plusBtn = document.createElement("button");
+    plusBtn.classList.add("plusProductQuantity");
+    plusBtn.textContent = "+";
+    plusBtn.onclick = plusQuantity;
+
+    const priceBox = document.createElement("div");
+    priceBox.classList.add("selectedPrice");
+
+    const wonP = document.createElement("p");
+    const won = document.createElement("span");
+    won.textContent = "원";
+    const priceSpan = document.createElement("span");
+    priceSpan.classList.add("productPriceSpan");
+    priceSpan.textContent = `${printArr[j].price}`;
+    wonP.appendChild(priceSpan);
+    wonP.appendChild(won);
+    const xIcon = document.createElement("i");
+    xIcon.classList.add("fas");
+    xIcon.classList.add("fa-thin");
+    xIcon.classList.add("fa-xmark");
+    const equalIcon = document.createElement("i");
+    equalIcon.classList.add("fas");
+    equalIcon.classList.add("fa-thin");
+    equalIcon.classList.add("fa-equals");
+
+    const totalWonP = document.createElement("p");
+    const totalWon = document.createElement("span");
+    totalWon.textContent = "원";
+    const totalPriceSpan = document.createElement("span");
+    totalPriceSpan.classList.add("totalPrice");
+    totalPriceSpan.textContent = `${printArr[j].price}`;
+    totalWonP.appendChild(totalPriceSpan);
+    totalWonP.appendChild(totalWon);
+   
+
+    const trashIconContiner = document.createElement("div");
+    trashIconContiner.classList.add("deleteIcon");
+    const trashIcon = document.createElement("i");
+    trashIcon.classList.add("fas");
+    trashIcon.classList.add("fa-trash-can");
+    trashIcon.onclick = deleteData;
+    trashIconContiner.appendChild(trashIcon);
+
+    productContainer.appendChild(inputCheck);
+    productContainer.appendChild(pushProductImage);
+    productContainer.appendChild(pushProductName);
+    modifynumb.appendChild(minusBtn);
+    modifynumb.appendChild(changeQuantity);
+    modifynumb.appendChild(plusBtn);
+    priceBox.appendChild(wonP);
+    priceBox.appendChild(xIcon);
+    priceBox.appendChild(productQuantityNumb);
+    priceBox.appendChild(equalIcon);
+    priceBox.appendChild(totalWonP);
+    
+
+    productContainer.appendChild(modifynumb);
+    productContainer.appendChild(priceBox);
+    productContainer.appendChild(trashIconContiner);
+
+    displaying.appendChild(productContainer);
+}}
+displayData();
 
 
 
-const selectedPrice = document.getElementById("productPrice");
-const modifyQuantity = document.querySelectorAll(".productQuantity");
+const selectedPrice = document.querySelector(".productPriceSpan");
+// const modifyQuantity = document.querySelectorAll(".productQuantity");
 
 //버튼을 누르면 증가, 감소
-const plus = document.getElementById("plusProductQuantity");
-const minus = document.getElementById("minusProductQuantity");
-const totalPrice = document.getElementById("totalPrice");
-const payProductQuantity = document.getElementById("payProductQuantity");
-const payProductPrice = document.getElementById("payProductPrice");
-const payShippingPrice = document.getElementById("payShippingPrice");
-const payTotalPrice = document.getElementById("payTotalPrice");
+const payProductQuantity = document.querySelector("#payProductQuantity");
+const payProductPrice = document.querySelector("#payProductPrice");
+const payShippingPrice = document.querySelector("#payShippingPrice");
+const payTotalPrice = document.querySelector("#payTotalPrice");
 
-//default값으로 1을 부여 
-let orderedQuantity = 1;
-modifyQuantity.forEach( modify => modify.innerText = orderedQuantity);
-payProductQuantity.innerText = orderedQuantity;
 //default 값으로 가격 * 수량을 보여줌
-totalPrice.innerText = selectedPrice.innerText;
 payProductPrice.innerText = selectedPrice.innerText;
 payShippingPrice.innerText = 3000;
 payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText);
 
-// + 버튼을 클릭하면 수량 증가, - 버튼을 클릭하면 수량 감소
-plus.addEventListener("click", plusQuantity)
-minus.addEventListener("click", minusQuantity)
+let modifying = 1;
+function plusQuantity(item){
+  let innerNumb = item.path[1].querySelector(".productQuantity").innerText;
+  let targetNumber = item.path[1].querySelector(".productQuantity");
+  let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
+  innerNumb++;
 
-function plusQuantity(){
-  let modifying = ++orderedQuantity;
+  targetNumber.textContent = innerNumb;
+  targetQuantity.textContent = innerNumb;
 
-  //수량 입력
-  modifyQuantity.forEach(i => i.innerText = modifying);
-
+  const totalPrice = item.path[2].querySelector(".totalPrice");
   //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
-  totalPrice.innerText =  selectedPrice.innerText * Number(modifying)
+  totalPrice.innerText =  selectedPrice.innerText * innerNumb;
 
-  //결제 정보창에도 반영
-  payProductQuantity.innerText = modifying;
-  payProductPrice.innerText = totalPrice.innerText;
-  payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText)
+  //+ 버튼을 누르면 다시 활성화
+  const minus = item.path[1].querySelector(".minusProductQuantity");
+  minus.disabled = false;
 }
 
-function minusQuantity(){
-  let modifying = --orderedQuantity;
-//error1: 수량이 0이되면 - 버튼 disabled, 다시 1이 되면 disabled=false
-  if(modifying == 0){
+function minusQuantity(item){
+  let innerNumb = item.path[1].querySelector(".productQuantity").innerText;
+  let targetNumber = item.path[1].querySelector(".productQuantity");
+  let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
+  innerNumb--;
+
+  targetNumber.textContent = innerNumb;
+  targetQuantity.textContent = innerNumb
+
+  const totalPrice = item.path[2].querySelector(".totalPrice");
+  //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
+  totalPrice.innerText =  selectedPrice.innerText * innerNumb;
+
+  // 마이너스 수량으로 넘어가지 않도록 구현
+  const minus = item.path[1].querySelector(".minusProductQuantity");
+  if(innerNumb<1){
     minus.disabled = true;
-  } else if(modifying > 0){
+    return;
+  } else{
     minus.disabled = false;
   }
 
-  //수량 입력
-  modifyQuantity.forEach(quantity => quantity.innerText = modifying);
-
-  //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
-  totalPrice.innerText = selectedPrice.innerText * modifying
-
-  //결제 정보창에도 반영
-  payProductQuantity.innerText = modifying;
-  payProductPrice.innerText = totalPrice.innerText;
-  payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText)
+  // 주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
+  //totalPrice.innerText = selectedPrice.innerText * modifying
 }
 
 
+  // //결제 정보창에도 반영
+  // payProductQuantity.innerText = modifying;
+  // payProductPrice.innerText = totalPrice.innerText;
+  // payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText)
+
 //전체선택 구현
-const allSelectedCheckbox = document.getElementById("allSelectedCheckbox");
-allSelectedCheckbox.addEventListener("click", selectAll)
+const allSelectedCheckbox = document.querySelector("#allSelectedCheckbox");
+const selectedCheckBox = document.querySelectorAll(".selectedCheckBox");
+allSelectedCheckbox.addEventListener("click", selectAll);
 function selectAll(){
-  const selectedCheckBox = document.querySelectorAll(".selectedCheckBox");
   if(allSelectedCheckbox.checked == true){
     selectedCheckBox.forEach((check) => check.checked = true)
   }
   if(allSelectedCheckbox.checked == false){
-    selectedCheckBox.forEach((check) => check.checked = false)
+    selectedCheckBox.forEach((check) => check.checked = false);
   }
 }
+function checkSelectAll(){
+  for(let i = 0; i< selectedCheckBox.length; i++){
+    if(selectedCheckBox[i].checked == false){
+      allSelectedCheckbox.checked = false;
+      return;
+    } else{
+      allSelectedCheckbox.checked = true;
+    }
+  }
+}
+
 
 //fake data
 localStorage.setItem(2, JSON.stringify({name: "loyal chocolate", price: 4000, img:"http://127.0.0.1:5500/src/views/elice-rabbit.png"}))
 
 // 휴지통 버튼을 누르면 localStorage에서 데이터 삭제
-const deleteIcon = document.getElementById("deleteIcon");
+const deleteIcon = document.querySelector(".deleteIcon");
+function deleteData(item){
+  alert("삭제되었습니다.");
+  item.path[2].style.display = "none";
+}
 
-deleteIcon.addEventListener("click", () => {
-  const productName = document.getElementById("SelectedProductName").innerText;
-  for(let i = 1; i <= localStorage.length; i++){
-    const foundArr = []
-    const findKeyNumber = foundArr.push(JSON.parse(localStorage.getItem(i)));
-    console.log(foundArr);
-  }
-  //localStorage.removeItem()
-})

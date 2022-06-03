@@ -21,10 +21,10 @@ i{
 
 /* shoppingCartMainBox */
 .shoppingCartMainBox{
-  width: 700px;
+  width: 800px;
 }
 .shoppingListBox{
-  width: 700px;
+  width: 800px;
   border-radius: 10px;
   box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
 }
@@ -61,6 +61,7 @@ i{
 
 /* 장바구니에 담은 품목 */
 #selectedProduct{
+  width: 800px;
   margin:10px 0 0 10px;
   padding: 10px;
 }
@@ -70,16 +71,17 @@ i{
   margin: 10px;
 }
 
-#modifyProductQuantity{
+.modifyProductQuantity{
   width: 120px;
   height: 40px;
+  font-size: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   position: relative;
-  top: 80px;
-  left: -80px;
+  top: 100px;
+  left: -130px;
 }
-#SelectedProductName{
+.SelectedProductName{
   width: 180px;
   height: 80px;
   font-size: 24px;
@@ -90,8 +92,8 @@ i{
 }
 
 /* 장바구니에 담은 품목 수량 추가, 삭제 */
-#minusProductQuantity,
-#plusProductQuantity{
+.minusProductQuantity,
+.plusProductQuantity{
   width: 30px;
   height: 30px;
   background-color: #fff;
@@ -99,7 +101,8 @@ i{
   line-height: 15px;
   border-radius: 50px;
 }
-.productQuantity{
+.productQuantity,
+.productQuantityNumb{
   width: 30px;
   height: 30px;
   line-height: 30px;
@@ -108,13 +111,13 @@ i{
 
 
 /* 금액 X 수량 */
-#selectedPrice{
-  width: 220px;
+.selectedPrice{
+  width: 230px;
   display: flex;
   font-size: 20px;
   position: relative;
-  top: 40px;
-  left: -20px;
+  top: 50px;
+  left: -50px;
 }
 
 /* 결제정보 */
@@ -124,10 +127,7 @@ i{
   border-radius: 10px;
   background-color: #f0f5f7;
   padding: 10px;
-  float: left;
   position: relative;
-  top: -220px;
-  left: 740px;
   box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
 }
 
@@ -172,7 +172,10 @@ i{
   cursor: pointer;
 }
 
-#deleteIcon{
+.deleteIcon{
+  position: relative;
+  top: 0px;
+  left: 0px;
   height: 30px;
   cursor: pointer;
 }

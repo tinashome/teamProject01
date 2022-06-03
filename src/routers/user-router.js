@@ -184,7 +184,7 @@ userRouter.get('/getUserInfo', loginRequired, async function (req, res, next) {
 
 // 주문서 작성시 사용자 주소 입력
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
-userRouter.post("/user/deliveryinfo", loginRequired, async function (req, res, next) {
+userRouter.post("/user/deliveryInfo", loginRequired, async function (req, res, next) {
 	try {
 		// content-type 을 application/json 로 프론트에서
 		// 설정 안 하고 요청하면, body가 비어 있게 됨.

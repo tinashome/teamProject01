@@ -1,3 +1,4 @@
+
 import express from 'express';
 import path from 'path';
 
@@ -10,6 +11,11 @@ viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
 viewsRouter.use('/sample', serveStatic('temp'));
+
+//테스트용입니다.
+// viewsRouter.use('/', serveStatic('test'));
+// viewsRouter.use('/1', serveStatic('shopping-cart'));
+// viewsRouter.use('/2', serveStatic('product-detail'));
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));

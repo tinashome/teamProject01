@@ -16,6 +16,7 @@ const displayData = () => {
     inputCheck.checked = "true";
     inputCheck.classList.add("selectedCheckBox");
     inputCheck.onclick = checkSelectAll;
+    //inputCheck.onclick = makingOrder;
 
     const pushProductImage = document.createElement("img");
     pushProductImage.src = `${printArr[j].img}`;
@@ -82,7 +83,7 @@ const displayData = () => {
     const trashIcon = document.createElement("i");
     trashIcon.classList.add("fas");
     trashIcon.classList.add("fa-trash-can");
-    trashIcon.onclick = deleteData;
+    //trashIcon.onclick = deleteData;
     trashIconContiner.appendChild(trashIcon);
 
     productContainer.appendChild(inputCheck);
@@ -106,27 +107,17 @@ const displayData = () => {
 }}
 displayData();
 
-
-
-const selectedPrice = document.querySelector(".productPriceSpan");
-// const modifyQuantity = document.querySelectorAll(".productQuantity");
-
 //버튼을 누르면 증가, 감소
 const payProductQuantity = document.querySelector("#payProductQuantity");
 const payProductPrice = document.querySelector("#payProductPrice");
 const payShippingPrice = document.querySelector("#payShippingPrice");
 const payTotalPrice = document.querySelector("#payTotalPrice");
 
-//default 값으로 가격 * 수량을 보여줌
-payProductPrice.innerText = selectedPrice.innerText;
-payShippingPrice.innerText = 3000;
-payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText);
-
-let modifying = 1;
 function plusQuantity(item){
   let innerNumb = item.path[1].querySelector(".productQuantity").innerText;
   let targetNumber = item.path[1].querySelector(".productQuantity");
   let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
+  let selectedPrice = item.path[2].querySelector(".productPriceSpan");
   innerNumb++;
 
   targetNumber.textContent = innerNumb;
@@ -139,12 +130,32 @@ function plusQuantity(item){
   //+ 버튼을 누르면 다시 활성화
   const minus = item.path[1].querySelector(".minusProductQuantity");
   minus.disabled = false;
+
+  // 결제정보 창에 변경된 수량 반영
+  const selectedProduct = document.querySelectorAll(".productQuantity");
+  const quantityArr = [];
+  for(let i = 0; i<selectedProduct.length;i++){
+    quantityArr.push(selectedProduct[i].innerText);
+  }
+  const sumOfQuantity = quantityArr.reduce( (prev, next) => Number(prev)+ Number(next), 0);
+  payProductQuantity.innerText = sumOfQuantity;
+
+  //결제 정보 창에 총가격 표시
+  const selectedProductPrice = document.querySelectorAll(".totalPrice");
+  const totalPriceArr = [];
+  for(let i = 0; i<selectedProductPrice.length;i++){
+    totalPriceArr.push(selectedProductPrice[i].innerText);
+  }
+  const sumOfTotalPrice = totalPriceArr.reduce( (prev, next) => Number(prev)+ Number(next), 0);
+  payProductPrice.innerText = sumOfTotalPrice;
+  payTotalPrice.innerText = sumOfTotalPrice + 3000;
 }
 
 function minusQuantity(item){
   let innerNumb = item.path[1].querySelector(".productQuantity").innerText;
   let targetNumber = item.path[1].querySelector(".productQuantity");
   let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
+  let selectedPrice = item.path[2].querySelector(".productPriceSpan");
   innerNumb--;
 
   targetNumber.textContent = innerNumb;
@@ -162,16 +173,40 @@ function minusQuantity(item){
   } else{
     minus.disabled = false;
   }
+  payProductQuantity.innerText = totalPrice.innerText;
 
-  // 주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
-  //totalPrice.innerText = selectedPrice.innerText * modifying
+  // 결제정보 창에 변경된 수량 반영
+  const selectedProduct = document.querySelectorAll(".productQuantity");
+  const quantityArr = [];
+  for(let i = 0; i<selectedProduct.length;i++){
+    quantityArr.push(selectedProduct[i].innerText);
+  }
+  const sumOfQuantity = quantityArr.reduce( (prev, next) => Number(prev)+ Number(next), 0);
+  payProductQuantity.innerText = sumOfQuantity;
+    
+  const selectedProductPrice = document.querySelectorAll(".totalPrice");
+  const totalPriceArr = [];
+  for(let i = 0; i<selectedProductPrice.length;i++){
+    totalPriceArr.push(selectedProductPrice[i].innerText);
+  }
+  const sumOfTotalPrice = totalPriceArr.reduce( (prev, next) => Number(prev)+ Number(next), 0);
+  payProductPrice.innerText = sumOfTotalPrice;
+  payTotalPrice.innerText = sumOfTotalPrice + 3000;
 }
 
+//결제 정보창 초기 설정
+const totalPrice = document.querySelectorAll(".totalPrice");
+const totalPriceArrForPay = [];
+for(let i = 0; i<totalPrice.length; i++){
+  totalPriceArrForPay.push(totalPrice[i].innerText);
+}
+payProductQuantity.innerText = localStorage.length;
+const totalPriceForPay = totalPriceArrForPay.reduce( (prev, next) => Number(prev)+ Number(next), 0);
+payProductPrice.innerText = totalPriceForPay;
+payShippingPrice.innerText = 3000;
+payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText);
 
-  // //결제 정보창에도 반영
-  // payProductQuantity.innerText = modifying;
-  // payProductPrice.innerText = totalPrice.innerText;
-  // payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText)
+
 
 //전체선택 구현
 const allSelectedCheckbox = document.querySelector("#allSelectedCheckbox");
@@ -179,7 +214,7 @@ const selectedCheckBox = document.querySelectorAll(".selectedCheckBox");
 allSelectedCheckbox.addEventListener("click", selectAll);
 function selectAll(){
   if(allSelectedCheckbox.checked == true){
-    selectedCheckBox.forEach((check) => check.checked = true)
+    selectedCheckBox.forEach((check) => check.checked = true);
   }
   if(allSelectedCheckbox.checked == false){
     selectedCheckBox.forEach((check) => check.checked = false);
@@ -196,14 +231,38 @@ function checkSelectAll(){
   }
 }
 
+/**
+ * ❌ 휴지통 버튼을 누르면 localStorage에서 해당 데이터 삭제
+ * ❌ 체크박스 해제가 되면 결제정보 창 정보 변경 
+ */
 
-//fake data
-//localStorage.setItem(2, JSON.stringify({name: "loyal chocolate", price: 4000, img:"http://127.0.0.1:5500/src/views/elice-rabbit.png"}))
+// console.log(selectedCheckBox[0].parentNode);
 
-// 휴지통 버튼을 누르면 localStorage에서 데이터 삭제
-const deleteIcon = document.querySelector(".deleteIcon");
-function deleteData(item){
-  alert("삭제되었습니다.");
-  item.path[2].style.display = "none";
-}
+// // payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText);
+// //console.log(selectedCheckBox[0].parentElement.querySelector(".totalPrice").innerText);
+// const totalPriceArr = [];
+// function makingOrder(selected){
+//   const checkedQuantity = selected.path[1].querySelector(".productQuantityNumb").innerText;
+//   console.log(selected.path[1].querySelector(".productQuantityNumb").innerText);
+//   if(selected.path[0].checked == false){
+//     alert("llkj");
+//     payProductQuantity.innerText = Number(payProductQuantity.innerText) - Number(checkedQuantity.innerText)
+//   }
+  
+//   //상품수
+//   //상품금액
+//   //총금액
+//   //console.log(selected.path[1].querySelector(".totalPrice").innerText);
+// }
+
+
+// //fake data
+// //localStorage.setItem(2, JSON.stringify({name: "loyal chocolate", price: 4000, img:"http://127.0.0.1:5500/src/views/elice-rabbit.png"}))
+
+// // 휴지통 버튼을 누르면 localStorage에서 데이터 삭제
+// const deleteIcon = document.querySelector(".deleteIcon");
+// function deleteData(item){
+//   alert("삭제되었습니다.");
+//   console.log(item.pointerId);
+// }
 

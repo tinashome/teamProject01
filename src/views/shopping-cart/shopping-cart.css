@@ -127,7 +127,9 @@ i{
   border-radius: 10px;
   background-color: #f0f5f7;
   padding: 10px;
-  position: relative;
+  position: absolute;
+  top: 220px;
+  left: 1050px;
   box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
 }
 

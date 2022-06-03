@@ -25,16 +25,16 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 
     data.forEach(element=>{
-                const title = element.productsTitle
-                const total = element.productsTotal
-                const fee = element.deliveryFee
-                const order = element.orderTotal
+        const title = element.productsTitle
+        const total = element.productsTotal
+        const fee = element.deliveryFee
+        const order = element.orderTotal
                 
-                productsTitle.innerText = title
-                productsTotal.innerText = title
-                deliveryFee.innerText = title
-                orderTotal.innerText = title
-            });
+        productsTitle.innerText = title
+        productsTotal.innerText = title
+        deliveryFee.innerText = title
+        orderTotal.innerText = title
+    });
            
   });
 
@@ -83,27 +83,27 @@ function searchAddress() {
 
 
   async function doCheckout() {
-    // 각 입력값 가져옴
-    const receiverName = document.getElementById("receiverName").value;
-    const receiverPhoneNumber = document.getElementById("receiverPhoneNumber").value;
-    const postalCode = postalCodeInput.value;
-    const address1 = address1Input.value;
-    const address2 = address2Input.value;
-    const request = document.getElementById("requestSelectBox").value;
+      // 각 입력값 가져옴
+      const receiverName = document.getElementById("receiverName").value;
+      const receiverPhoneNumber = document.getElementById("receiverPhoneNumber").value;
+      const postalCode = postalCodeInput.value;
+      const address1 = address1Input.value;
+      const address2 = address2Input.value;
+      const request = document.getElementById("requestSelectBox").value;
     
-    // 입력이 안 되어 있을 시
-    if (!receiverName || !receiverPhoneNumber || !postalCode || !address2) {
-      return alert("배송지 정보를 모두 입력해 주세요.")
-    }
+      // 입력이 안 되어 있을 시
+      if (!receiverName || !receiverPhoneNumber || !postalCode || !address2) {
+          return alert("배송지 정보를 모두 입력해 주세요.")
+      }
     
-    // 테스트용
-    const data = {
-      receiverName,
-      receiverPhoneNumber,
-      postalCode,
-      address1,
-      address2,
-      request
+      // 테스트용
+      const data = {
+          receiverName,
+          receiverPhoneNumber,
+          postalCode,
+          address1,
+          address2,
+          request
     }
     
     // JSON 만듦

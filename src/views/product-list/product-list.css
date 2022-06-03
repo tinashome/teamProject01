@@ -87,7 +87,7 @@ ul.navbar-items a {
 }
 .productList {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: repeat(minmax(30%, 1fr));
   grid-gap: 23px 8px;
 

@@ -30,7 +30,7 @@ a {
 }
 
 /* 이미지 슬라이드 */
-#slider {
+.slider {
   width: 1024px;
   height: 600px;
   overflow: hidden;
@@ -38,13 +38,13 @@ a {
   top: 80px;
 }
 
-#slider .slides {
+.slider .slides {
   display: block;
   /* width: 8000px; */
   height: 90%;
 }
 
-#slider .slide {
+.slider .slide {
   display: none;
   float: left;
   width: 1024px;

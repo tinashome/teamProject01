@@ -1,0 +1,40 @@
+.header-search-input{
+    width:20rem
+}
+.navbar-menu .is-info:focus{
+    box-shadow:none;
+    outline:none
+}
+.account-header{
+    border-bottom:1px solid #ddd;
+    display:block;
+    padding-bottom:.7rem
+}
+.heading{
+    font-size:.8rem
+}
+.orders-container{
+    margin:5rem auto 2rem;
+    max-width:1000px!important
+}
+.orders-top{
+    border-bottom:1px solid #aaa;
+    padding:0;
+    text-align:center
+}
+.orders-item{
+    align-items:center;
+    text-align:center
+}
+.orders-item:not(:last-child){
+    border-bottom:1px solid #bbb
+}
+.order-summary{
+    white-space:pre-line
+}
+.modal .box{
+    text-align:center
+}
+.modal .buttons{
+    justify-content:center
+}

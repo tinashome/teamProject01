@@ -15,12 +15,30 @@ orderRouter.post("/", loginRequired, async (req, res, next) => {
 		const userId = req.currentUserId;
 		const { ShipAddress, request, summaryTitle, orderitem, totalPrice, status } = req.body;
 
-		const newUser = await orderService.addOrder({ userId, ShipAddress, request, summaryTitle, orderitem, totalPrice, status });
+		const newOrder = await orderService.addOrder({ userId, ShipAddress, request, summaryTitle, orderitem, totalPrice, status });
 
-		res.status(201).json(newUser);
+		res.status(201).json(newOrder);
 	} catch (error) {
 		next(error);
 	}
 });
+
+orderRouter.get('/', loginRequired, async function (req, res, next) {
+  try {
+    const userRole = await req.currentUserRole;
+    if (userRole !== "admin" ){
+      console.log("basic-user 등급 유저의 주문목록조회 요청이 거부됨")
+      throw new Error(
+        '권한이 없습니다.'
+      );
+    }
+    const orders = await orderService.getOrders();
+
+    res.status(200).json(orders);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 export { orderRouter };

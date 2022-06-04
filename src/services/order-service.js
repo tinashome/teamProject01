@@ -16,7 +16,14 @@ class OrderService {
 
 		return createdNewOrder;
 	}
+
+  // 전체주문 목록을 받음.
+  async getOrders() {
+    const orders = await this.orderModel.findAll();
+    return orders;
+  }
 }
+
 
 const orderService = new OrderService(orderModel);
 

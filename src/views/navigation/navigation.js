@@ -1,3 +1,6 @@
+const getToken = sessionStorage.getItem("token");
+console.log(getToken);
+
 const nav = document.querySelector(".nav");
 
 // logo 부분
@@ -30,9 +33,21 @@ navbarItems.setAttribute("class", "navbarItems");
 const liLoginTag = document.createElement("li");
 const aLoginTag = document.createElement("a");
 const textLogin = document.createTextNode("로그인");
-liLoginTag.appendChild(aLoginTag);
-aLoginTag.appendChild(textLogin);
 aLoginTag.setAttribute("href", "/login");
+aLoginTag.appendChild(textLogin);
+
+const aLogoutTag = document.createElement("a");
+const textLogout = document.createTextNode("로그아웃");
+aLogoutTag.setAttribute("href", "/");
+aLogoutTag.appendChild(textLogout);
+
+// 로그인 되었을 경우 (토큰 값 존재)
+if (getToken !== null) {
+  liLoginTag.appendChild(aLogoutTag);
+} else {
+  // 로그인이 되어 있지 않을 경우
+  liLoginTag.appendChild(aLoginTag);
+}
 
 const liCartTag = document.createElement("li");
 const aCartTag = document.createElement("a");

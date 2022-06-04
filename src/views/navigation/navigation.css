@@ -23,28 +23,28 @@ a {
   z-index: 100;
 }
 
-.navbar-logo {
+.navbarLogo {
   float: left;
   width: 50%;
   padding: 25px 0 25px 50px;
 }
 
-.navbar-brand {
+.navbarBrand {
   color: black;
 }
 
-.navbar-items {
+.navbarItems {
   float: left;
   width: 50%;
   padding: 25px 50px;
 }
 
-.navbar-items li {
+.navbarItems li {
   float: right;
   padding: 0 5px 0 30px;
 }
 
-ul.navbar-items a {
+ul.navbarItems a {
   float: left;
   list-style-type: none;
   color: black;

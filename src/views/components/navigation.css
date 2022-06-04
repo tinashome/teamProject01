@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav {
+  background-color: white;
+  position: fixed;
+  width: 100%;
+
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.navbar-logo {
+  float: left;
+  width: 50%;
+  padding: 25px 0 25px 50px;
+}
+
+.navbar-brand {
+  color: black;
+}
+
+.navbar-items {
+  float: left;
+  width: 50%;
+  padding: 25px 50px;
+}
+
+.navbar-items li {
+  float: right;
+  padding: 0 5px 0 30px;
+}
+
+ul.navbar-items a {
+  float: left;
+  list-style-type: none;
+  color: black;
+}

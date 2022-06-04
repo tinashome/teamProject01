@@ -29,44 +29,6 @@ a {
   height: 100vh;
 }
 
-/* Nav Bar */
-.nav {
-  background-color: white;
-  position: fixed;
-  width: 100%;
-
-  top: 0;
-  left: 0;
-  z-index: 100;
-}
-
-.navbar-logo {
-  float: left;
-  width: 65%;
-  padding: 25px 0 25px 50px;
-}
-
-.navbar-brand {
-  color: black;
-}
-
-.navbar-items {
-  float: left;
-  width: 35%;
-  padding: 25px 50px;
-}
-
-.navbar-items li {
-  float: right;
-  padding: 0 5px 0 30px;
-}
-
-ul.navbar-items a {
-  float: left;
-  list-style-type: none;
-  color: black;
-}
-
 /* 이미지 슬라이드 */
 #slider {
   width: 1024px;

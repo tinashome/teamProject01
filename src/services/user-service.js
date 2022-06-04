@@ -185,7 +185,8 @@ class UserService {
   // email로 userId를 받음.objectId를 문자열로 변환
   async getUserId(email) {
     const { _id } = await this.userModel.findByEmail(email);
-    const UserId = _id.toString();
+    // const UserId = _id.toString();
+    const UserId = _id;
     return UserId;
   }  
 

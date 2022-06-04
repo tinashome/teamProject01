@@ -23,7 +23,6 @@ class UserService {
     }
 
     // 이메일 중복은 이제 아니므로, 회원가입을 진행함
-
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -49,7 +48,6 @@ class UserService {
     }
 
     // 이제 이메일은 문제 없는 경우이므로, 비밀번호를 확인함
-
     // 비밀번호 일치 여부 확인
     const correctPasswordHash = user.password; // db에 저장되어 있는 암호화된 비밀번호
 
@@ -71,7 +69,7 @@ class UserService {
     // 2개 프로퍼티를 jwt 토큰에 담음
     const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
 
-    return { token };
+    return token;
   }
 
   // 사용자 목록을 받음.
@@ -184,14 +182,18 @@ class UserService {
     return;
   }
 
-  
+  // email로 userId를 받음.objectId를 문자열로 변환
+  async getUserId(email) {
+    const { _id } = await this.userModel.findByEmail(email);
+    const UserId = _id.toString();
+    return UserId;
+  }  
 
-  // 사용자 정보를 받음.
+  // userId로 사용자 정보를 받음.
   async getUserInfo(userId) {
     const users = await this.userModel.findById(userId);
     return users;
   }
-
 }
 
 const userService = new UserService(userModel);

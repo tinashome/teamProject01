@@ -83,7 +83,7 @@ const displayData = () => {
     const trashIcon = document.createElement("i");
     trashIcon.classList.add("fas");
     trashIcon.classList.add("fa-trash-can");
-    //trashIcon.onclick = deleteData;
+    //trashIcon.onclick = deleteData(j+1);
     trashIconContiner.appendChild(trashIcon);
 
     productContainer.appendChild(inputCheck);
@@ -263,6 +263,6 @@ function checkSelectAll(){
 // const deleteIcon = document.querySelector(".deleteIcon");
 // function deleteData(item){
 //   alert("삭제되었습니다.");
-//   console.log(item.pointerId);
+//   console.log(item);
 // }
 

@@ -52,15 +52,22 @@ orderRouter.get("/:userId", loginRequired, async function (req, res, next) {
 	}
 });
 
-//주문조회(회원)
+//주문조회(관리,회원)
 orderRouter.get("/:userId/:orderId", loginRequired, async function (req, res, next) {
 	try {
 		const userId = req.params.userId;
 		const orderId = req.params.orderId;
-		const order = await orderService.getOrder(userId, orderId);
+    const userRole = await req.currentUserRole;
 
-		if (is.undefined(order)) {
+		const userOrder = await orderService.getUserOrder(userId, orderId);
+
+		if (is.undefined(userOrder) && userRole !== "admin") {
 			throw new Error("해당사용자의 주문번호가 존재하지않습니다.");
+		}
+    const order = await orderService.getOrder(orderId);
+
+    if (is.undefined(order)) {
+			throw new Error("해당 주문번호가 존재하지않습니다.");
 		}
 
 		res.status(200).json(order);
@@ -70,7 +77,7 @@ orderRouter.get("/:userId/:orderId", loginRequired, async function (req, res, ne
 });
 
 // (관리)주문정보를 변경(배송정보,주문일부취소만 가능)
-orderRouter.patch("/:orderId", loginRequired, async function (req, res, next) {
+orderRouter.put("/:orderId", loginRequired, async function (req, res, next) {
 	try {
 		const userRole = await req.currentUserRole;
 		if (userRole !== "admin") {
@@ -79,22 +86,48 @@ orderRouter.patch("/:orderId", loginRequired, async function (req, res, next) {
 		}
 
 		const orderId = req.params.orderId;
-		const { shipAddress, request, summaryTitle, orderitem, totalPrice, status } = req.body;
+		const { shipAddress, request, orderitem, status } = req.body;
 
 		const toUpdate = {
 			...(shipAddress && { shipAddress }),
 			...(request && { request }),
-			...(summaryTitle && { summaryTitle }),
 			...(orderitem && { orderitem }),
-			...(totalPrice && { totalPrice }),
 			...(status && { status }),
 		};
-
-    console.log(toUpdate);
 
 		// 주문정보를 변경함
 		const updateOrderInfo = await orderService.setOrder(orderId, toUpdate);
 
+    // summaryTitle추가하여 보내주기
+		// 업데이트 이후의 주문정보를 프론트에 보내 줌
+		res.status(200).json(updateOrderInfo);
+	} catch (error) {
+		next(error);
+	}
+});
+
+// (회원)주문정보를 변경(발송 전 상태일때 : 배송정보,주문일부취소만 가능)
+orderRouter.put("/:userId/:orderId", loginRequired, async function (req, res, next) {
+	try {
+		const userId = req.params.userId;
+		const orderId = req.params.orderId;
+		const order = await orderService.getOrder(userId, orderId);
+
+		if (is.undefined(order)) {
+			throw new Error("해당사용자의 주문번호가 존재하지않습니다.");
+    }
+		const { shipAddress, request, orderitem } = req.body;
+
+		const toUpdate = {
+			...(shipAddress && { shipAddress }),
+			...(request && { request }),
+			...(orderitem && { orderitem }),
+		};
+
+		// 주문정보를 변경함
+		const updateOrderInfo = await orderService.setOrder(orderId, toUpdate, userId);
+    
+    // summaryTitle추가하여 보내주기
 		// 업데이트 이후의 주문정보를 프론트에 보내 줌
 		res.status(200).json(updateOrderInfo);
 	} catch (error) {

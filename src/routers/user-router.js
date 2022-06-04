@@ -6,7 +6,7 @@ import { userService } from '../services';
 
 const userRouter = Router();
 
-// 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
+// 회원가입 api (아래는 /register이지만, 실제로는 /api/users/users/register로 요청해야 함.)
 userRouter.post('/register', async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
@@ -18,16 +18,10 @@ userRouter.post('/register', async (req, res, next) => {
     }
 
     // req (request)의 body 에서 데이터 가져오기
-    const fullName = req.body.fullName;
-    const email = req.body.email;
-    const password = req.body.password;
+    const { fullName, email, password } = req.body;
 
     // 위 데이터를 유저 db에 추가하기
-    const newUser = await userService.addUser({
-      fullName,
-      email,
-      password,
-    });
+    const newUser = await userService.addUser({ fullName, email, password });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
@@ -37,8 +31,8 @@ userRouter.post('/register', async (req, res, next) => {
   }
 });
 
-// 로그인 api (아래는 /login 이지만, 실제로는 /api/login로 요청해야 함.)
-userRouter.post('/login', async function (req, res, next) {
+// 로그인 api (아래는 / 이지만, 실제로는 /api/users 요청해야 함.)
+userRouter.post('/', async function (req, res, next) {
   try {
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
@@ -47,15 +41,13 @@ userRouter.post('/login', async function (req, res, next) {
       );
     }
 
-    // req (request) 에서 데이터 가져오기
-    const email = req.body.email;
-    const password = req.body.password;
+    const { email, password } = req.body;
 
-    // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
-    const userToken = await userService.getUserToken({ email, password });
-
-    // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
-    res.status(200).json(userToken);
+    // 로그인 진행 성공시 userId(문자열) 와 jwt 토큰(문자열)을 프론트에 보냄
+    const token = await userService.getUserToken({ email, password });
+    const userId = await userService.getUserId(email);
+    
+    res.status(200).json({userId, token});
   } catch (error) {
     next(error);
   }
@@ -63,7 +55,7 @@ userRouter.post('/login', async function (req, res, next) {
 
 // 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
-userRouter.get('/userlist', loginRequired, async function (req, res, next) {
+userRouter.get('/id', loginRequired, async function (req, res, next) {
   try {
     // 전체 사용자 목록을 얻음
     const userRole = await req.currentUserRole;
@@ -217,10 +209,8 @@ userRouter.post("/user/deliveryInfo", loginRequired, async function (req, res, n
 	}
 });
 
-// 아이디값가져오는 api (아래는 /getUserId 이지만, 실제로는 /api/getUserId 요청해야 함.)
-// postman 테스트중 id값불러오기위해 작성 login과 동시에 하고싶지만 
-//로그인시에는 loginRequired를 활용하지못해서 당장은 따로 사용
-userRouter.get('/getUserId', loginRequired, async function (req, res, next) {
+// 아이디값가져오는 api (아래는 /id 이지만, 실제로는 /api/users/id 요청해야 함.)
+userRouter.get('/id', loginRequired, async function (req, res, next) {
   try {
     const userId = req.currentUserId;
     // id를 프론트에 보냄 (id는, object ID임)

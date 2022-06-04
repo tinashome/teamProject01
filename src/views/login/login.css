@@ -76,6 +76,7 @@
 }
 
 .input {
+  width: 160px;
   border: none;
   border-bottom: 2px solid black;
   padding: 3px;
@@ -90,4 +91,7 @@
 .registerBtn a {
   text-decoration: none;
   color: black;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: lightgrey;
 }

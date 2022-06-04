@@ -17,13 +17,23 @@ class OrderService {
 		return createdNewOrder;
 	}
 
-  // 전체주문 목록을 받음.
-  async getOrders() {
-    const orders = await this.orderModel.findAll();
-    return orders;
-  }
-}
+	// userId의 전체주문목록을 받음.userId값이없다면 회원전체주문조회
+	async getOrders(userId) {
+		if (!userId) {
+			const orders = await this.orderModel.findAll();
+			return orders;
+		}
+		const orders = await this.orderModel.find({ userId });
+		return orders;
+	}
 
+	// 주문 목록을 받음.
+	async getOrder(userId, orderId) {
+		const orders = await this.orderModel.find({ userId });
+		const order = orders.find((e) => e.orderId === orderId);
+		return order;
+	}
+}
 
 const orderService = new OrderService(orderModel);
 

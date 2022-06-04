@@ -5,7 +5,12 @@ const Order = model("orders", OrderSchema);
 
 export class OrderModel {
 	async findById(orderId) {
-		const order = await Order.findOne({ _id: orderId });
+		const order = await Order.findOne({ _Id: orderId });
+		return order;
+	}
+
+  async findByOrderId(orderId) {
+		const order = await Order.findOne({ orderId: orderId });
 		return order;
 	}
 
@@ -25,7 +30,7 @@ export class OrderModel {
 	}
 
 	async update({ orderId, update }) {
-		const filter = { _id: orderId };
+		const filter = { orderId: orderId };
 		const option = { returnOriginal: false };
 
 		const updatedOrder = await Order.findOneAndUpdate(filter, update, option);

@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", await function() {
         wrapper.classList.add("columns", "orders-item")
         wrapper.setAttribute("id", "order-629428a0eb5d1ed00c61f51c")
     
-        // 날자
+        // 날짜
         const orderDate = document.createElement("dev")
         orderDate.classList.add("column", "is-2")
         orderDate.textContent = date
@@ -137,10 +137,14 @@ document.addEventListener("DOMContentLoaded", await function() {
                 const ordersCount = document.getElementById("ordersCount")
                 const btnCnt = document.querySelectorAll(".orderCancel")
                 const ordercnt = btnCnt.length
-                ordersCount.textContent = ordercnt
+                if(ordercnt===0){
+                        ordersCount.textContent = "-"
+                }else{
+                        ordersCount.textContent = ordercnt
+                }
 }
                 // 준비중 갯수
-                gettingReadyCnt()
+      gettingReadyCnt()
       function gettingReadyCnt(){
                 const gettingReadyArr = document.querySelectorAll(".clickSelect")
                 let gettingReadyTotal = 0
@@ -150,9 +154,52 @@ document.addEventListener("DOMContentLoaded", await function() {
                                 gettingReadyTotal++
                }
                 })
-                console.log(gettingReadyTotal)
+                const prepareCount = document.getElementById("prepareCount")
+                if(gettingReadyTotal===0){
+                        prepareCount.textContent="-"
+                }else{
+                        prepareCount.textContent = gettingReadyTotal
+                }            
             
       }     
+                // 배송중 갯수
+        deliveringCnt()        
+        function deliveringCnt(){
+                const delivering = document.querySelectorAll(".clickSelect")
+                let deliveringTotal = 0
+                delivering.forEach((element)=>{
+                        const deliveryStatus=element.options[element.selectedIndex].value
+                        if(deliveryStatus==="상품 배송중"){
+                                deliveringTotal++
+                       }
+                        })
+                        const deliveryCount = document.getElementById("deliveryCount")
+                        if(deliveringTotal===0){
+                                deliveryCount.textContent="-"
+                        }else{
+                                deliveryCount.textContent = deliveringTotal
+                        }            
+                    
+              }     
+                //  배송완료
+        deliveryCompletedCnt()        
+        function deliveryCompletedCnt(){
+                const checkSelet = document.querySelectorAll(".clickSelect")
+                let deliveryCompletedTotal = 0
+                checkSelet.forEach((element)=>{
+                        const deliveryStatus=element.options[element.selectedIndex].value
+                        if(deliveryStatus==="배송완료"){
+                                deliveryCompletedTotal++
+                       }
+                        })
+                        const completeCount = document.getElementById("completeCount")
+                        if(deliveryCompletedTotal===0){
+                                completeCount.textContent="-"
+                        }else{
+                                completeCount.textContent = deliveryCompletedTotal
+                        }            
+                    
+              }     
      
       // 모든 버튼 들고오기, 이벤트 부여위해
     const button = document.querySelectorAll(".orderCancel")
@@ -192,13 +239,22 @@ document.addEventListener("DOMContentLoaded", await function() {
                    
                    if(selectValue==="상품 준비중"){
                         removeSelectClass(splitBtnClass,btn)
-                         btn.classList.add("has-background-danger-light", "has-text-danger","clickSelect")
+                                btn.classList.add("has-background-danger-light", "has-text-danger","clickSelect")
+                                gettingReadyCnt()
+                                deliveringCnt()
+                                deliveryCompletedCnt()  
                    }else if(selectValue==="상품 배송중"){
                         removeSelectClass(splitBtnClass,btn)
-                        btn.classList.add("has-background-primary-light", "has-text-primary", "clickSelect")
+                                btn.classList.add("has-background-primary-light", "has-text-primary", "clickSelect")
+                                gettingReadyCnt()
+                                deliveringCnt()
+                                deliveryCompletedCnt()  
                    }else{
                         removeSelectClass(splitBtnClass,btn)
-                        btn.classList.add("has-background-grey-light", "clickSelect")
+                                btn.classList.add("has-background-grey-light", "clickSelect")
+                                gettingReadyCnt()
+                                deliveringCnt()
+                                deliveryCompletedCnt()  
                    }
                    
                 
@@ -218,7 +274,10 @@ document.addEventListener("DOMContentLoaded", await function() {
             const deleteBlock = document.getElementById(cancleBtnId)
 
             deleteBlock.parentNode.parentNode.remove()
-            Ordertotal()
+            gettingReadyCnt()
+            deliveringCnt()
+            deliveryCompletedCnt() 
+            Ordertotal() 
      })
 
     //  모달? x버튼

@@ -11,8 +11,9 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="my-information.css" />
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="my-information.js" type="module" defer></script>
+    <link rel="stylesheet" href="my-information.css" />
     <script src="../navigation/navigation.js" type="module"></script>
     <link rel="stylesheet" href="../navigation/navigation.css" />
   </head>
@@ -75,9 +76,7 @@
               </div>
 
               <div class="field">
-                <label class="smallTitle" for="passwordInput"
-                  >새 비밀번호</label
-                >
+                <label class="smallTitle">새 비밀번호</label>
                 <div class="control">
                   <input
                     class="input"
@@ -90,9 +89,7 @@
               </div>
 
               <div class="field">
-                <label class="smallTitle" for="passwordConfirmInput">
-                  비밀번호 확인</label
-                >
+                <label class="smallTitle"> 비밀번호 확인</label>
                 <div class="control">
                   <input
                     class="input"
@@ -110,7 +107,7 @@
                 <div class="control">
                   <input
                     class="input"
-                    id="addressInput"
+                    id="postalCodeInput"
                     type="address"
                     placeholder="주소 찾기를 클릭해 주세요."
                   />
@@ -118,15 +115,22 @@
                 </div>
                 <div class="control">
                   <input
-                    class="inputDetailAddress"
-                    id="detiailAddressInput"
+                    class="detailAddressInput"
+                    id="addressInput"
+                    type="detailAddress"
+                  />
+                </div>
+                <div class="control">
+                  <input
+                    class="detailAddressInput"
+                    id="detailAddressInput"
                     type="detailAddress"
                     placeholder="상세 주소를 입력해주세요. "
                   />
                 </div>
               </div>
             </div>
-            <button class="submitEdit">수정하기</button>
+            <button class="submitEdit" id="submitEdit">수정하기</button>
           </form>
         </div>
       </div>

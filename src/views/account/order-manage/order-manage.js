@@ -248,9 +248,9 @@ document.addEventListener(
 
     const clickSelect = document.querySelectorAll(".clickSelect");
     clickSelect.forEach((btn) => {
-      btn.addEventListener("change", (e) => {
-        e.preventDefault();
+      btn.addEventListener("change", () => {
         const selectValue = btn.options[btn.selectedIndex].value;
+        console.log(selectValue);
         const btnClass = btn.getAttribute("class");
         const splitBtnClass = btnClass.split(" ");
 

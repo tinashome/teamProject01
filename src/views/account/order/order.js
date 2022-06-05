@@ -1,14 +1,14 @@
-const button = document.getElementById("checkoutButton");
+const button = document.getElementById("buyButton");
 const postalCodeInput = document.querySelector("#postalCode");
 const searchAddressButton = document.querySelector("#searchAddressButton");
+
 const address1Input = document.querySelector("#address1");
 const address2Input = document.querySelector("#address2");
 
-const productsTitle = document.getElementById("productsTitle");
-const productsTotal = document.getElementById("productsTotal");
-const deliveryFee = document.getElementById("deliveryFee");
-const orderTotal = document.getElementById("orderTotal");
-
+const productsTitle = document.getElementById("payProductQuantity");
+const productsTotal = document.getElementById("payProductPrice");
+const deliveryFee = document.getElementById("payShippingPrice");
+const orderTotal = document.getElementById("payTotalPrice");
 // 결제정보
 document.addEventListener("DOMContentLoaded", async function () {
   // const res = await fetch("주소")
@@ -67,13 +67,27 @@ function searchAddress() {
 }
 searchAddressButton.addEventListener("click", searchAddress);
 
+// select클릭시
+const ClickSelectBox = document.getElementById("requestSelectBox");
+ClickSelectBox.addEventListener("change", () => {
+  const selectValue =
+    ClickSelectBox.options[ClickSelectBox.selectedIndex].value;
+
+  if (selectValue == 0) {
+    ClickSelectBox.style.color = "rgba(0, 0, 0, 0.3)";
+  } else {
+    ClickSelectBox.style.color = "rgb(0, 0, 0)";
+  }
+});
 // 결제 버튼 클릭
+
 async function doCheckout() {
   // 각 입력값 가져옴
   const receiverName = document.getElementById("receiverName").value;
   const receiverPhoneNumber = document.getElementById(
     "receiverPhoneNumber"
   ).value;
+
   const postalCode = postalCodeInput.value;
   const address1 = address1Input.value;
   const address2 = address2Input.value;

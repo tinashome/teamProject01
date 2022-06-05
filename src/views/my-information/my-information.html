@@ -36,93 +36,98 @@
         <div class="myInfoBox">
           <div class="pageTitle">내 정보 수정</div>
           <hr />
-          <div class="FormBox">
-            <div class="field">
-              <div class="label">이름</div>
-              <div class="control">
-                <input class="input" id="fullNameInput" type="text" />
-              </div>
-            </div>
 
-            <hr class="smallHr" />
-            <div class="field">
-              <div class="label">전화번호</div>
-              <div class="control">
-                <input
-                  class="input"
-                  id="phoneNumberInput"
-                  type="phoneNumber"
-                  placeholder="- 없이 입력해 주세요."
-                />
+          <form>
+            <div class="FormBox">
+              <div class="field">
+                <div class="label">이름</div>
+                <div class="control">
+                  <input class="input" id="fullNameInput" type="text" />
+                </div>
               </div>
-            </div>
 
-            <hr class="smallHr" />
-            <div class="label">비밀번호 변경</div>
-            <div class="field">
-              <label class="smallTitle">현재 비밀번호</label>
-              <div class="control">
-                <input
-                  class="input"
-                  id="passwordInput"
-                  type="password"
-                  placeholder="현재 비밀번호를 입력해주세요."
-                  autocomplete="off"
-                />
+              <hr class="smallHr" />
+              <div class="field">
+                <div class="label">전화번호</div>
+                <div class="control">
+                  <input
+                    class="input"
+                    id="phoneNumberInput"
+                    type="phoneNumber"
+                    placeholder="- 없이 입력해 주세요."
+                  />
+                </div>
               </div>
-            </div>
 
-            <div class="field">
-              <label class="smallTitle" for="passwordInput">새 비밀번호</label>
-              <div class="control">
-                <input
-                  class="input"
-                  id="passwordInput"
-                  type="password"
-                  placeholder="새로운 비밀번호를 입력해주세요."
-                  autocomplete="off"
-                />
+              <hr class="smallHr" />
+              <div class="label">비밀번호 변경</div>
+              <div class="field">
+                <label class="smallTitle">현재 비밀번호</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    id="passwordInput"
+                    type="password"
+                    placeholder="현재 비밀번호를 입력해주세요."
+                    autocomplete="off"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div class="field">
-              <label class="smallTitle" for="passwordConfirmInput">
-                비밀번호 확인</label
-              >
-              <div class="control">
-                <input
-                  class="input"
-                  id="passwordConfirmInput"
-                  type="password"
-                  placeholder="비밀번호를 한번 더 입력해주세요."
-                  autocomplete="off"
-                />
+              <div class="field">
+                <label class="smallTitle" for="passwordInput"
+                  >새 비밀번호</label
+                >
+                <div class="control">
+                  <input
+                    class="input"
+                    id="newPasswordInput"
+                    type="password"
+                    placeholder="새로운 비밀번호를 입력해주세요."
+                    autocomplete="off"
+                  />
+                </div>
               </div>
-            </div>
 
-            <hr class="smallHr" />
-            <div class="field">
-              <div class="label">주소</div>
-              <div class="control">
-                <input
-                  class="input"
-                  id="addressInput"
-                  type="address"
-                  placeholder="주소 찾기를 클릭해 주세요."
-                />
-                <button class="searchBtn">주소 찾기</button>
+              <div class="field">
+                <label class="smallTitle" for="passwordConfirmInput">
+                  비밀번호 확인</label
+                >
+                <div class="control">
+                  <input
+                    class="input"
+                    id="passwordConfirmInput"
+                    type="password"
+                    placeholder="비밀번호를 한번 더 입력해주세요."
+                    autocomplete="off"
+                  />
+                </div>
               </div>
-              <div class="control">
-                <input
-                  class="inputDetailAddress"
-                  id="addressInput"
-                  type="detailAddress"
-                  placeholder="상세 주소를 입력해주세요. "
-                />
+
+              <hr class="smallHr" />
+              <div class="field">
+                <div class="label">주소</div>
+                <div class="control">
+                  <input
+                    class="input"
+                    id="addressInput"
+                    type="address"
+                    placeholder="주소 찾기를 클릭해 주세요."
+                  />
+                  <button class="searchBtn">주소 찾기</button>
+                </div>
+                <div class="control">
+                  <input
+                    class="inputDetailAddress"
+                    id="detiailAddressInput"
+                    type="detailAddress"
+                    placeholder="상세 주소를 입력해주세요. "
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <button class="submitEdit">수정하기</button>
+            <button class="submitEdit">수정하기</button>
+          </form>
         </div>
       </div>
     </div>

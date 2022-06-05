@@ -1,27 +1,41 @@
-import { Router } from 'express';
-import is from '@sindresorhus/is';
+import { Router } from "express";
+import is from "@sindresorhus/is";
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
-import { loginRequired } from '../middlewares';
+// import { loginRequired } from '../middlewares';
 import { productService } from '../services';
+import { upload } from '../middlewares';
+import fs from "fs";
 
 const productRouter = Router();
 
-// 상품등록 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
-productRouter.post('/product/register', async (req, res, next) => {
+// 상품등록 api (/api/product/register로 요청해야 함.)
+productRouter.post('/product/register', upload.single("upload"), async (req, res, next) => {
   try {
-    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
-    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-    if (is.emptyObject(req.body)) {
+    if(!req.file) {
       throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요'
+        `파일이 첨부되지 않았습니다. form의 enctype="multipart/form-data"으로 지정했는지, 내부의 input 태그의 name인자를 upload로 지정해주세요.`
       );
     }
+
+    // json아닌 form으로 받으므로 하단 코드를 사용치 않음
+
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    // if (is.emptyObject(req.body)) {
+    //   throw new Error(
+    //     'headers의 Content-Type을 application/json으로 설정해주세요'
+    //   );
+    // }
 
     // req (request)의 body 에서 데이터 가져오기
     const name = req.body.name;
     const price = Number(req.body.price);
     const info = req.body.info;
     const company = req.body.company;
+    const categoryL = req.body.categoryL;
+    const categoryM = req.body.categoryM;
+    const categoryS = req.body.categoryS;
+    const img = req.file.path.replaceAll("\\", "/"); 
 
     // 위 데이터를 유저 db에 추가하기
     const newProduct = await productService.addProduct({
@@ -29,6 +43,10 @@ productRouter.post('/product/register', async (req, res, next) => {
       price,
       info,
       company,
+      categoryL,
+      categoryM,
+      categoryS,
+      img
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -69,8 +87,9 @@ productRouter.get('/product/:productId', async function (req, res, next) {
 
 // 상품 정보 수정
 // (예를 들어 /api/products/abc12345 로 요청하면 req.params.productId 'abc12345' 문자열로 됨)
-productRouter.put(
+productRouter.patch(
   '/products/:productId',
+  upload.single("upload"),
   // loginRequired,
   async function (req, res, next) {
     try {
@@ -78,7 +97,7 @@ productRouter.put(
       // 설정 안 하고 요청하면, body가 비어 있게 됨.
       if (is.emptyObject(req.body)) {
         throw new Error(
-          'headers의 Content-Type을 application/json으로 설정해주세요'
+          'headers의 Content-Type을 application/form-data로 설정해주세요'
         );
       }
 
@@ -87,9 +106,18 @@ productRouter.put(
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
       const name = req.body.name;
-      const price = req.body.price;
+      const price = Number(req.body.price);
       const info = req.body.info;
       const company = req.body.company;
+      const categoryL = req.body.categoryL;
+      const categoryM = req.body.categoryM;
+      const categoryS = req.body.categoryS;
+      let img;
+      if(req.file) {
+        img = req.file.path.replaceAll("\\", "/"); 
+      } else {
+        img = undefined;
+      }
 
       // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
       // const currentPassword = req.body.currentPassword;
@@ -103,12 +131,32 @@ productRouter.put(
 
       // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
       // 보내주었다면, 업데이트용 객체에 삽입함.
-      const toUpdate = {
-        ...(name && { name }),
-        ...(price && { price }),
-        ...(info && { info }),
-        ...(company && { company }),
-      };
+
+
+      let toUpdate = {};
+      // 수정용으로 들어온 데이터의 유무 체크, 후에 있는 데이터만 patch로 수정한다.
+      if(req.file) {
+        toUpdate = {
+          ...(name && { name }),
+          ...(price && { price }),
+          ...(info && { info }),
+          ...(company && { company }),
+          ...(categoryL && { categoryL }),
+          ...(categoryM && { categoryM }),
+          ...(categoryS && { categoryS }),
+          ...(img && { img }),
+        };
+      } else {
+        toUpdate = {
+          ...(name && { name }),
+          ...(price && { price }),
+          ...(info && { info }),
+          ...(company && { company }),
+          ...(categoryL && { categoryL }),
+          ...(categoryM && { categoryM }),
+          ...(categoryS && { categoryS }),
+        };
+      }
 
       // 상품 정보를 업데이트함.
       const updatedProductInfo = await productService.setProduct(
@@ -128,7 +176,20 @@ productRouter.put(
 productRouter.delete('/products/:productId', async (req, res, next) => {
   const { productId } = req.params;
   try {
+    // 삭제 후 삭제된 정보 반환
     const deletedProduct = await productService.delProduct(productId);
+
+    // 삭제된 데이터의 img path를 받아서 기존 img 삭제
+    if(fs.existsSync(deletedProduct.img)) {
+      try {
+        fs.unlinkSync(deletedProduct.img);
+        console.log("image delete");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // 삭제된 정보 반환
     res.json(deletedProduct);
   } catch (error) {
     next(error);

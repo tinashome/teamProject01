@@ -1,4 +1,4 @@
-.addProductHeader{
+.addCategoryHeader{
   width: 1400px;
   margin: 80px auto 0;
 }
@@ -39,7 +39,8 @@ label{
 }
 
 /* 카테고리 선택 */
-#selectCategory,
+#selectTopCategory,
+#selectMiddleCategory,
 input{
   width: 500px;
   height: 30px;

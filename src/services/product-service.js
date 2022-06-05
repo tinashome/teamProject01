@@ -12,8 +12,8 @@ class ProductService {
   // 상품등록
   async addProduct(productInfo) {
     // 객체 destructuring
-    const { name, price, info, company, categoryL, categoryM, categoryS, img } = productInfo;
-    const newProductInfo = { name, price, info, company, categoryL, categoryM, categoryS, img };
+    const { name, price, summary, detail, company, quantity, categoryL, categoryM, categoryS, img } = productInfo;
+    const newProductInfo = { name, price, summary, detail, company, quantity, categoryL, categoryM, categoryS, img };
     // 이메일 중복 확인
     // const user = await this.userModel.findById(email);
     // if (user) {
@@ -47,7 +47,7 @@ class ProductService {
     return product;
   }
 
-  // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
+  // 상품 정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async setProduct(productId, toUpdate) {
     // 객체 destructuring
     // const { userId, currentPassword } = userInfoRequired;

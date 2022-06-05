@@ -30,8 +30,10 @@ productRouter.post('/product/register', upload.single("upload"), async (req, res
     // req (request)의 body 에서 데이터 가져오기
     const name = req.body.name;
     const price = Number(req.body.price);
-    const info = req.body.info;
+    const summary = req.body.summary;
+    const detail = req.body.detail;
     const company = req.body.company;
+    const quantity = Number(req.body.quantity);
     const categoryL = req.body.categoryL;
     const categoryM = req.body.categoryM;
     const categoryS = req.body.categoryS;
@@ -41,8 +43,10 @@ productRouter.post('/product/register', upload.single("upload"), async (req, res
     const newProduct = await productService.addProduct({
       name,
       price,
-      info,
+      summary,
+      detail,
       company,
+      quantity,
       categoryL,
       categoryM,
       categoryS,
@@ -59,7 +63,7 @@ productRouter.post('/product/register', upload.single("upload"), async (req, res
 
 // 전체 상품 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
-productRouter.get('/productlist', /*loginRequired,*/ async function (req, res, next) {
+productRouter.get('/products', /*loginRequired,*/ async function (req, res, next) {
   try {
     // 전체 상품 목록을 얻음
     const products = await productService.getProducts();
@@ -107,8 +111,10 @@ productRouter.patch(
       // body data 로부터 업데이트할 사용자 정보를 추출함.
       const name = req.body.name;
       const price = Number(req.body.price);
-      const info = req.body.info;
+      const summary = req.body.summary;
+      const detail = req.body.detail;
       const company = req.body.company;
+      const quantity = Number(req.body.quantity);
       const categoryL = req.body.categoryL;
       const categoryM = req.body.categoryM;
       const categoryS = req.body.categoryS;
@@ -139,8 +145,10 @@ productRouter.patch(
         toUpdate = {
           ...(name && { name }),
           ...(price && { price }),
-          ...(info && { info }),
+          ...(summary && { summary }),
+          ...(detail && { detail }),
           ...(company && { company }),
+          ...(quantity && { quantity }),
           ...(categoryL && { categoryL }),
           ...(categoryM && { categoryM }),
           ...(categoryS && { categoryS }),
@@ -150,8 +158,10 @@ productRouter.patch(
         toUpdate = {
           ...(name && { name }),
           ...(price && { price }),
-          ...(info && { info }),
+          ...(summary && { summary }),
+          ...(detail && { detail }),
           ...(company && { company }),
+          ...(quantity && { quantity }),
           ...(categoryL && { categoryL }),
           ...(categoryM && { categoryM }),
           ...(categoryS && { categoryS }),

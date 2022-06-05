@@ -1,6 +1,7 @@
 /* section */
 section {
   padding: 3rem 1.5rem;
+  margin-top: 70px;
 }
 
 /* 장바구니 > 주문결제 > 주문완료 */
@@ -101,7 +102,6 @@ section {
 
 /* payBpx */
 .payBox {
-  height: 350px;
   border-radius: 10px;
   background-color: #f0f5f7;
   padding: 10px;
@@ -112,19 +112,23 @@ section {
 
 .payInfoHeader {
   width: 100%;
-  height: 60px;
+
+  height: 20%;
+
   line-height: 60px;
   font-weight: bold;
   font-size: 20px;
   margin: auto;
   border-bottom: 1px solid black;
 }
-
+.payInfo {
+  height: 40%;
+}
 .info {
-  width: 250px;
-  height: 40px;
+  height: 30%;
   display: grid;
   grid-template-columns: 2fr 1fr;
+  line-height: 4;
 }
 .payTotalPricePart {
   display: grid;

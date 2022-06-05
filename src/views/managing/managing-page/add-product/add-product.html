@@ -78,7 +78,7 @@
 
         <div class="field">
           <label for="productName" class="labelName"> 제품 이름</label>
-          <input type="text" placeholder="다크 초콜릿">
+          <input type="text" placeholder="다크 초콜릿" name="name">
         </div>
 
         <div class="field">
@@ -95,7 +95,7 @@
         
         <div class="field">
           <label for="madeFrom" class="labelName"> 제조사 </label>
-          <input type="text" placeholder="00 초콜릿 제조 (주)">
+          <input type="text" placeholder="00 초콜릿 제조 (주)" name="company">
         </div>
 
         <div class="textArea">
@@ -112,7 +112,7 @@
           <label for="detailedDescription" class="labelName"> 제품 사진 </label>
           <div class="file">
             <label class="fileLabel">
-              <input type="file" accept=".png, .jpeg, .jpg" class="inputFile">
+              <input type="file" accept=".png, .jpeg, .jpg" class="inputFile" name="productImage">
               <span class="uploadContainer">
                 <span class="fileIcon">
                   <i class="fas fa-upload"></i>
@@ -126,23 +126,15 @@
 
         <div class="field">
           <label for="productNumber" class="labelName"> 재고 수 </label>
-          <input type="text" placeholder="10">
+          <input type="text" placeholder="10" name="productQuantity">
         </div>
 
         <div class="field">
           <label for="productPrice" class="labelName"> 가격 </label>
-          <input type="text" placeholder="10000">
-        </div>
-
-        <div class="field">
-          <label for="productKeyWord" class="labelName"> 검색 키워드 </label>
-          <label for="productKeyWord">
-            <input type="text" placeholder="밀크 초콜릿">
-            <button id="addKeyWordButton">추가하기</button>
-          </label>
+          <input type="text" placeholder="10000" name="price">
         </div>
         
-        <button id="addButton"> 제품 판매하기 </button>
+        <input type="submit" id="addButton" value="제품 판매하기">
         
       </form>
     </main>

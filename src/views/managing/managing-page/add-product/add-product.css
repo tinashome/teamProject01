@@ -16,12 +16,14 @@ h2{
 }
 form{
   width: 600px;
-  margin: auto;
+  margin: 10px auto 30px;
   text-align: left;
   border-radius: 10px;
   box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
   padding: 10px;
 }
+
+/* form 내부 공통부분 */
 .field{
   width: 600px;
   height: 50px;
@@ -35,6 +37,11 @@ form{
 label{
   display: block;
 }
+.labelName{
+  font-weight: bold;
+}
+
+/* 카테고리 선택 */
 #selectCategory,
 input{
   width: 500px;
@@ -42,6 +49,8 @@ input{
   border: 1px solid rgb(209, 209, 209);
   border-radius: 5px;
 }
+
+/* 사진 업로드 */
 .fileField{
   width: 500px;
   height: 100px;
@@ -78,22 +87,8 @@ input:hover,
 textarea:hover{
   border:1px solid #999;
 }
-.labelName{
-  font-weight: bold;
-}
-#addKeyWordButton{
-  width: 100px;
-  height: 30px;
-  text-align: center;
-  font-size: 20px;
-  color: #fff;
-  background-color: #00d1b2;
-  border: none;
-  border-radius: 5px;
-  position: relative;
-  top: -30px;
-  left: 400px;
-}
+
+/* 제품 판매하기 버튼 */
 #addButton{
   width: 550px;
   height: 50px;
@@ -105,3 +100,4 @@ textarea:hover{
   border: none;
   border-radius: 10px;
 }
+

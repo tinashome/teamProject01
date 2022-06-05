@@ -25,12 +25,31 @@
 }
 
 .loginFormBox {
-  width: 30rem;
+  width: 25em;
+  padding-top: 80px;
 }
 
 .inputContainer {
   float: left;
-  width: 300px;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginBox {
+  width: 100%;
+  height: 100px;
+}
+
+.btnBox {
+  width: 30%;
+  height: 100%;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .loginBtn {
@@ -57,7 +76,22 @@
 }
 
 .input {
+  width: 160px;
   border: none;
   border-bottom: 2px solid black;
   padding: 3px;
+  margin-left: 10px;
+}
+
+.registerBtn {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.registerBtn a {
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: lightgrey;
 }

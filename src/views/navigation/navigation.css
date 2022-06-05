@@ -60,6 +60,14 @@ ul.navbarItems a {
     float: right;
   }
 
+  .navbarLogo {
+    width: 60%;
+  }
+
+  .navbarItems {
+    width: 40%;
+  }
+
   .navbarItems li {
     display: none;
   }
@@ -69,6 +77,7 @@ ul.navbarItems a {
     width: 100%;
     padding-top: 70px;
     background-color: rgb(233, 233, 233);
+    z-index: 1;
   }
 
   .menu li {

@@ -35,7 +35,7 @@
         <h1>제품판매</h1>
         <hr>
       </div>
-      <form>
+      <form method="post" enctype="multipart/form-data">
         <h2>제품을 판매해 보세요</h2>
 
         <div class="field">
@@ -74,7 +74,7 @@
           <label for="image" class="labelName"> 제품 사진 </label>
           <div class="file">
             <label class="fileLabel">
-              <input type="file" accept=".png, .jpeg, .jpg" class="inputFile" name="productImage">
+              <input type="file" accept=".png, .jpeg, .jpg" class="inputFile" name="upload">
               <span class="uploadContainer">
                 <span class="fileIcon">
                   <i class="fas fa-upload"></i>

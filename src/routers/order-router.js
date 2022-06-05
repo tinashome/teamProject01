@@ -150,7 +150,7 @@ orderRouter.patch("/:orderId", loginRequired, async function (req, res, next) {
 
 		const deleteOrderInfo = await orderService.deleteOrder(orderId);
 
-    // 업데이트 이후의 주문정보를 프론트에 보내 줌
+    // 취소이후의 주문정보를 프론트에 보내 줌
 		res.status(200).json(deleteOrderInfo);
 	} catch (error) {
 		next(error);
@@ -170,7 +170,7 @@ orderRouter.patch("/:userId/:orderId", loginRequired, async function (req, res, 
 
 		const deleteOrderInfo = await orderService.deleteOrder(orderId);
 
-    // 업데이트 이후의 주문정보를 프론트에 보내 줌
+    // 취소이후의 주문정보를 프론트에 보내 줌
 		res.status(200).json(deleteOrderInfo);
 	} catch (error) {
 		next(error);

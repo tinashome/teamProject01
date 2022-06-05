@@ -14,9 +14,9 @@ orderRouter.post("/", loginRequired, async (req, res, next) => {
 		}
 
 		const userId = req.currentUserId;
-		const { shipAddress, request, summaryTitle, orderitem, totalPrice, status } = req.body;
+		const { shipAddress, request, orderItems, totalPrice, status } = req.body;
 
-		const newOrder = await orderService.addOrder({ userId, shipAddress, request, summaryTitle, orderitem, totalPrice, status });
+		const newOrder = await orderService.addOrder({ userId, shipAddress, request, orderItems, totalPrice, status });
 
 		res.status(201).json(newOrder);
 	} catch (error) {
@@ -86,13 +86,14 @@ orderRouter.put("/:orderId", loginRequired, async function (req, res, next) {
 		}
 
 		const orderId = req.params.orderId;
-		const { shipAddress, request, orderitem, status } = req.body;
+		const { shipAddress, request, orderItems, status, totalPrice } = req.body;
 
 		const toUpdate = {
 			...(shipAddress && { shipAddress }),
 			...(request && { request }),
-			...(orderitem && { orderitem }),
+			...(orderItems && { orderItems }),
 			...(status && { status }),
+      ...(totalPrice && { totalPrice }),
 		};
 
 		// 주문정보를 변경함
@@ -116,12 +117,13 @@ orderRouter.put("/:userId/:orderId", loginRequired, async function (req, res, ne
 		if (is.undefined(order)) {
 			throw new Error("해당사용자의 주문번호가 존재하지않습니다.");
     }
-		const { shipAddress, request, orderitem } = req.body;
+		const { shipAddress, request, orderItems, totalPrice } = req.body;
 
 		const toUpdate = {
 			...(shipAddress && { shipAddress }),
 			...(request && { request }),
-			...(orderitem && { orderitem }),
+			...(orderItems && { orderItems }),
+      ...(totalPrice && { totalPrice }),
 		};
 
 		// 주문정보를 변경함
@@ -148,7 +150,7 @@ orderRouter.patch("/:orderId", loginRequired, async function (req, res, next) {
 
 		const deleteOrderInfo = await orderService.deleteOrder(orderId);
 
-    // 업데이트 이후의 주문정보를 프론트에 보내 줌
+    // 취소이후의 주문정보를 프론트에 보내 줌
 		res.status(200).json(deleteOrderInfo);
 	} catch (error) {
 		next(error);
@@ -168,7 +170,7 @@ orderRouter.patch("/:userId/:orderId", loginRequired, async function (req, res, 
 
 		const deleteOrderInfo = await orderService.deleteOrder(orderId);
 
-    // 업데이트 이후의 주문정보를 프론트에 보내 줌
+    // 취소이후의 주문정보를 프론트에 보내 줌
 		res.status(200).json(deleteOrderInfo);
 	} catch (error) {
 		next(error);

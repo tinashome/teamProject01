@@ -8,10 +8,12 @@ class OrderService {
 
 	//새주문
 	async addOrder(orderInfo) {
-		const { userId, shipAddress, request, summaryTitle, orderitem, totalPrice, status } = orderInfo;
+		const { userId, shipAddress, request, orderItems, totalPrice, status } = orderInfo;
+
+    const summaryTitle = orderItems.reduce((acc,cur,idx)=> acc + `${idx===0?"":"\n"}${cur.productName} ${cur.quantity}개`, "")
 		const orderId = await this.orderModel.newOrderId();
 
-		const newOrderInfo = { orderId, userId, shipAddress, request, summaryTitle, orderitem, totalPrice, status };
+		const newOrderInfo = { orderId, userId, shipAddress, request, summaryTitle, orderItems, totalPrice, status };
 		const createdNewOrder = await this.orderModel.create(newOrderInfo);
 
 		return createdNewOrder;
@@ -52,9 +54,12 @@ class OrderService {
       throw new Error(`${order.status} : 주문변경이 불가능합니다. 고객센터에 문의 바랍니다.`);
     }
 
-    
-    //shipAddress,orderitem은 변경후 전체를 받아야함, 변경 값만 받으면 나머지는 초기화됨
+    //shipAddress,orderItems은 변경후 전체를 받아야함, 변경 값만 받으면 나머지는 초기화됨
     //status가 결제완료 이면 주문정보 변경가능, 배송준비중/발송완료일때는 변경 불가
+
+    const summaryTitle = toUpdate.orderItems.reduce((acc,cur,idx)=> acc + `${idx===0?"":"\n"}${cur.productName} ${cur.quantity}개`, "")
+    toUpdate.summaryTitle = summaryTitle;
+
     const updatedOrder = await this.orderModel.update({
       orderId,
       update: toUpdate,

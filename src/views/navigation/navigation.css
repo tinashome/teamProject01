@@ -37,6 +37,7 @@ a {
   float: left;
   width: 60%;
   padding: 25px 60px;
+  z-index: 1;
 }
 
 .navbarItems li {
@@ -51,6 +52,10 @@ ul.navbarItems a {
 }
 
 .hamburger {
+  display: none;
+}
+
+.menu {
   display: none;
 }
 
@@ -73,6 +78,7 @@ ul.navbarItems a {
   }
 
   .menu {
+    display: block;
     position: absolute;
     width: 100%;
     padding-top: 70px;

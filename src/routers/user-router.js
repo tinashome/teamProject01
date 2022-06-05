@@ -60,7 +60,7 @@ userRouter.get('/', loginRequired, async function (req, res, next) {
     // 전체 사용자 목록을 얻음
     const userRole = await req.currentUserRole;
     if (userRole !== "admin" ){
-      console.log("basic-user 등급 유저의 회원목록조회 요청이 거부됨")
+			console.log(`${userRole}의  회원목록조회 요청이 거부됨`)
       throw new Error(
         '권한이 없습니다.'
       );

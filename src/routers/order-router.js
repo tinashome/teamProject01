@@ -29,7 +29,7 @@ orderRouter.get("/", loginRequired, async function (req, res, next) {
 	try {
 		const userRole = await req.currentUserRole;
 		if (userRole !== "admin") {
-			console.log("basic-user 등급 유저의 주문목록조회 요청이 거부됨");
+			console.log("basic-user의 주문목록조회 요청이 거부됨");
 			throw new Error("권한이 없습니다.");
 		}
 		const orders = await orderService.getOrders();
@@ -81,7 +81,7 @@ orderRouter.put("/:orderId", loginRequired, async function (req, res, next) {
 	try {
 		const userRole = await req.currentUserRole;
 		if (userRole !== "admin") {
-			console.log("basic-user 등급 유저의 전체 주문정보변경 요청이 거부됨");
+			console.log(`${userRole}의 전체 주문정보변경 요청이 거부됨`);
 			throw new Error("권한이 없습니다.");
 		}
 
@@ -126,7 +126,7 @@ orderRouter.put("/:userId/:orderId", loginRequired, async function (req, res, ne
 
 		// 주문정보를 변경함
 		const updateOrderInfo = await orderService.setOrder(orderId, toUpdate, userId);
-    
+
     // summaryTitle추가하여 보내주기
 		// 업데이트 이후의 주문정보를 프론트에 보내 줌
 		res.status(200).json(updateOrderInfo);
@@ -135,4 +135,43 @@ orderRouter.put("/:userId/:orderId", loginRequired, async function (req, res, ne
 	}
 });
 
+// (관리)주문을 취소 (주문상태를 주문취소로 변경)
+orderRouter.patch("/:orderId", loginRequired, async function (req, res, next) {
+	try {
+		const userRole = await req.currentUserRole;
+		if (userRole !== "admin") {
+			console.log(`${userRole}의 전체 주문취소 요청이 거부됨`);
+			throw new Error("권한이 없습니다.");
+		}
+
+		const orderId = req.params.orderId;
+
+		const deleteOrderInfo = await orderService.deleteOrder(orderId);
+
+    // 업데이트 이후의 주문정보를 프론트에 보내 줌
+		res.status(200).json(deleteOrderInfo);
+	} catch (error) {
+		next(error);
+	}
+});
+
+// (회원)주문을 취소 (주문상태를 주문취소로 변경)
+orderRouter.patch("/:userId/:orderId", loginRequired, async function (req, res, next) {
+	try {
+		const userId = req.params.userId;
+		const orderId = req.params.orderId;
+		const order = await orderService.getOrder(userId, orderId);
+
+		if (is.undefined(order)) {
+			throw new Error("해당사용자의 주문번호가 존재하지않습니다.");
+    }
+
+		const deleteOrderInfo = await orderService.deleteOrder(orderId);
+
+    // 업데이트 이후의 주문정보를 프론트에 보내 줌
+		res.status(200).json(deleteOrderInfo);
+	} catch (error) {
+		next(error);
+	}
+});
 export { orderRouter };

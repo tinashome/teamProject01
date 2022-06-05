@@ -9,7 +9,7 @@ import fs from "fs";
 const productRouter = Router();
 
 // 상품등록 api (/api/product/register로 요청해야 함.)
-productRouter.post('/product/register', upload.single("upload"), async (req, res, next) => {
+productRouter.post('/product', upload.single("upload"), async (req, res, next) => {
   try {
     if(!req.file) {
       throw new Error(

@@ -1,12 +1,13 @@
 import * as Api from '../../../api.js'
 
-let data = {};
+
 const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async(e) => {
   e.preventDefault();
   alert("제품 정보가 저장되었습니다.");
 
   //데이터 만들기
+  let data = {};
   for(const item of form.elements){
     switch(item.type){
       case 'text':
@@ -25,6 +26,6 @@ form.addEventListener("submit", (e) => {
         break;
     }
   }
+  Api.post("/api/product",data);
 });
 
-Api.post(data);

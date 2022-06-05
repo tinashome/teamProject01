@@ -3,14 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-n팀</title>
-    <!-- 아이콘 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/elice-rabbit-favicon.png"
-    />
+    <title>내 정보 수정</title>
     <!-- 폰트 어썸: 아이콘 -->
     <script
       defer
@@ -18,9 +11,8 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="home.css" />
-    <script src="home.js" type="module" defer></script>
-    <script src="home.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="my-information.css" />
+    <script src="my-information.js" type="module" defer></script>
     <script src="../navigation/navigation.js" type="module"></script>
     <link rel="stylesheet" href="../navigation/navigation.css" />
   </head>
@@ -28,6 +20,111 @@
     <div class="container">
       <nav class="nav"></nav>
       <div class="menu"></div>
+
+      <div class="myInfo">
+        <div class="categoryBar">
+          <div class="myTitle">MY PAGE</div>
+
+          <ul class="categoryList">
+            <li><a href="/orderlist">주문조회</a></li>
+            <li><a href="/cart">장바구니</a></li>
+            <li><a href="/mypage">내 정보 수정</a></li>
+          </ul>
+        </div>
+
+        <!-- 내 정보 수정 container -->
+        <div class="myInfoBox">
+          <div class="pageTitle">내 정보 수정</div>
+          <hr />
+          <div class="FormBox">
+            <div class="field">
+              <div class="label">이름</div>
+              <div class="control">
+                <input class="input" id="fullNameInput" type="text" />
+              </div>
+            </div>
+
+            <hr class="smallHr" />
+            <div class="field">
+              <div class="label">전화번호</div>
+              <div class="control">
+                <input
+                  class="input"
+                  id="phoneNumberInput"
+                  type="phoneNumber"
+                  placeholder="- 없이 입력해 주세요."
+                />
+              </div>
+            </div>
+
+            <hr class="smallHr" />
+            <div class="label">비밀번호 변경</div>
+            <div class="field">
+              <label class="smallTitle">현재 비밀번호</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="passwordInput"
+                  type="password"
+                  placeholder="현재 비밀번호를 입력해주세요."
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="smallTitle" for="passwordInput">새 비밀번호</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="passwordInput"
+                  type="password"
+                  placeholder="새로운 비밀번호를 입력해주세요."
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="smallTitle" for="passwordConfirmInput">
+                비밀번호 확인</label
+              >
+              <div class="control">
+                <input
+                  class="input"
+                  id="passwordConfirmInput"
+                  type="password"
+                  placeholder="비밀번호를 한번 더 입력해주세요."
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <hr class="smallHr" />
+            <div class="field">
+              <div class="label">주소</div>
+              <div class="control">
+                <input
+                  class="input"
+                  id="addressInput"
+                  type="address"
+                  placeholder="주소 찾기를 클릭해 주세요."
+                />
+                <button class="searchBtn">주소 찾기</button>
+              </div>
+              <div class="control">
+                <input
+                  class="inputDetailAddress"
+                  id="addressInput"
+                  type="detailAddress"
+                  placeholder="상세 주소를 입력해주세요. "
+                />
+              </div>
+            </div>
+          </div>
+          <button class="submitEdit">수정하기</button>
+        </div>
+      </div>
     </div>
   </body>
 </html>

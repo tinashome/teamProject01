@@ -1,4 +1,3 @@
-import * as Api from "/api.js";
 const button = document.getElementById("buyButton");
 const postalCodeInput = document.querySelector("#postalCode");
 const searchAddressButton = document.querySelector("#searchAddressButton");
@@ -11,39 +10,26 @@ const productsTotal = document.getElementById("payProductPrice");
 const deliveryFee = document.getElementById("payShippingPrice");
 const orderTotal = document.getElementById("payTotalPrice");
 // 결제정보
-document.addEventListener("DOMContentLoaded", async function () {
-  // const res = await fetch("주소")
-  // const data = await res.json()
-  // 테스트용 객체
-  try {
-    const res = Api.get(`/api/users/`);
-    console.log(res);
-  } catch (e) {
-    {
-      console.log(e);
-    }
-  }
 
-  const data = [
-    {
-      productsTitle: "2020",
-      productsTotal: "dd",
-      deliveryFee: "준비중",
-      orderTotal: "주문취소",
-    },
-  ];
+const data = [
+  {
+    productsTitle: "2020",
+    productsTotal: "dd",
+    deliveryFee: "준비중",
+    orderTotal: "주문취소",
+  },
+];
 
-  data.forEach((element) => {
-    const title = element.productsTitle;
-    const total = element.productsTotal;
-    const fee = element.deliveryFee;
-    const order = element.orderTotal;
+data.forEach((element) => {
+  const title = element.productsTitle;
+  const total = element.productsTotal;
+  const fee = element.deliveryFee;
+  const order = element.orderTotal;
 
-    productsTitle.textContent = title;
-    productsTotal.textContent = title;
-    deliveryFee.textContent = title;
-    orderTotal.textContent = title;
-  });
+  productsTitle.textContent = title;
+  productsTotal.textContent = title;
+  deliveryFee.textContent = title;
+  orderTotal.textContent = title;
 });
 
 // 주소찾기
@@ -131,6 +117,6 @@ async function doCheckout() {
   //   body: dataJson,
   // });
   alert("결제완료");
-  window.location.href = "../order-completion/order-complete.html";
+  window.location.href = "../order-complete/order-comple.html";
 }
 button.addEventListener("click", doCheckout);

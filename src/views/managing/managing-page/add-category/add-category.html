@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>이상한 나라의 초콜릿</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../elice-rabbit-favicon.png"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="add-category.css" />
+    <link rel="stylesheet" href="../../../navigation/navigation.css" />
+    <script src="add-category.js" type="module" defer></script>
+    <script src="../../../navigation/navigation.js" type="module"></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div class="container">
+      <nav class="nav"></nav>
+      <div class="menu"></div>
+    </div>
+    <!-- 메인 -->
+    <main role="main">
+      <div class="addCategoryHeader">
+        <h1>카테고리 추가</h1>
+        <hr>
+      </div>
+      <form>
+        <h2>카테고리 추가하기</h2>
+
+        <div class="field">
+          <label for="categoryName" class="labelName"> 카테고리 이름</label>
+          <input type="text" placeholder="다크 초콜릿" name="name">
+        </div>
+
+        <div class="textArea">
+          <label for="description" class="labelName"> 카테고리 설명 </label>
+          <textarea name="description" id="descrption" cols="80" rows="10"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="category" class="labelName"> 상위 카테고리</label>
+          <select name="topCategory" id="selectTopCategory">
+            <option> 상위 카테고리를 선택해 주세요. </option>
+            <option value="normal"> 초콜릿 </option>
+            <option value="gift"> 선물용 </option>
+            <option value="bulk"> 대용량 </option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="category" class="labelName"> 중분류 카테고리</label>
+          <select name="middleCategory" id="selectMiddleCategory">
+            <option> 중분류 카테고리를 선택해 주세요. </option>
+            <option value="milkChocolate"> milkChocolate </option>
+            <option value="darkChocolate"> darkChocolate </option>
+            <option value="whiteChocolate"> whiteChocolate </option>
+          </select>
+        </div>
+      
+        <div class="fileField">
+          <label for="detailedDescription" class="labelName"> 제품 사진 </label>
+          <div class="file">
+            <label class="fileLabel">
+              <input type="file" accept=".png, .jpeg, .jpg" class="inputFile" name="productImage">
+              <span class="uploadContainer">
+                <span class="fileIcon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="fileUpload">사진 업로드</span>
+              </span>
+              <span id="fileName">사진 파일(png, jpeg, jpg)</span>
+            </label>
+          </div>
+        </div>
+        
+        <input type="submit" id="addButton" value="제품 판매하기">
+        
+      </form>
+    </main>
+  </body>
+</html>
+
+

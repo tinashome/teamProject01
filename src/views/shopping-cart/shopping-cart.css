@@ -1,6 +1,6 @@
 /* common */
 
-section{
+article{
   width: 1000px;
   height: 100vh;
   margin: 50px auto;
@@ -36,7 +36,7 @@ i{
   padding: 10px;
   border-bottom: 1px solid #888;
 }
-#selectedProduct{
+.selectedProduct{
   display: flex;
 }
 .checkbox{
@@ -60,12 +60,12 @@ i{
 
 
 /* 장바구니에 담은 품목 */
-#selectedProduct{
+.selectedProduct{
   width: 800px;
   margin:10px 0 0 10px;
   padding: 10px;
 }
-#selectedProduct img{
+.selectedProduct img{
   width: 150px;
   height: 150px;
   margin: 10px;

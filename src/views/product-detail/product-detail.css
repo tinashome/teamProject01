@@ -14,7 +14,7 @@ button{
 }
 
 /* section */
-section{
+.productContainer{
   width: 1000px;
   margin: 50px auto;
   display: grid;
@@ -22,7 +22,7 @@ section{
 }
 
 /* chocolate image */
-#chocolate1{
+#chocolate{
   width: 500px;
   height: 500px;
 }
@@ -46,7 +46,7 @@ section{
 }
 .buttonGroup{
   position: absolute;
-  bottom: 0;
+  top: 500px;
 }
 #addCart{
   background-color: #ffe08a;

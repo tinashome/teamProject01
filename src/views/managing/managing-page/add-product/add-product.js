@@ -1,8 +1,8 @@
-import * as Api from '../../../api.js'
+//import * as Api from '../../../api.js'
 
 
 const form = document.querySelector("form");
-form.addEventListener("submit", async(e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
   alert("제품 정보가 저장되었습니다.");
 
@@ -26,6 +26,8 @@ form.addEventListener("submit", async(e) => {
         break;
     }
   }
-  Api.post("/api/product",data);
+  console.log(data);
+  //Api.post("/api/product",data);
+
 });
 

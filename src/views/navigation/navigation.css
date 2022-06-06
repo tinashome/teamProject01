@@ -37,6 +37,7 @@ a {
   float: left;
   width: 60%;
   padding: 25px 60px;
+  z-index: 1;
 }
 
 .navbarItems li {
@@ -54,10 +55,22 @@ ul.navbarItems a {
   display: none;
 }
 
+.menu {
+  display: none;
+}
+
 @media screen and (max-width: 650px) {
   .hamburger {
     display: block;
     float: right;
+  }
+
+  .navbarLogo {
+    width: 60%;
+  }
+
+  .navbarItems {
+    width: 40%;
   }
 
   .navbarItems li {
@@ -65,10 +78,12 @@ ul.navbarItems a {
   }
 
   .menu {
+    display: block;
     position: absolute;
     width: 100%;
     padding-top: 70px;
     background-color: rgb(233, 233, 233);
+    z-index: 1;
   }
 
   .menu li {

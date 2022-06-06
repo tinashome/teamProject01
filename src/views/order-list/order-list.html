@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./order-list.css">
+    <script src="./order-list.js" type="module"></script>
+    <script src="../../navigation/navigation.js" type="module"></script>
+    <link rel="stylesheet" href="../../navigation/navigation.css" />
+</head>
+
+<body>
+    <header>
+        <nav class="nav"></nav>
+        <div class="menu">
+            <div>
+    </header>
+    <section class="section" id="section">
+        <div class="shoppingCartHeader">
+            <p>
+                <span class="shoppingCartChapter">주문조회</span>
+            </p>
+        </div>
+        <div class="orderSearch">
+            <div class="orderSearchHeaderBox">
+                <div class="orderSearchHeader">날짜</div>
+                <div class="orderSearchHeader">주문정보</div>
+                <div class="orderSearchHeader">상태</div>
+                <div class="orderSearchHeader">신청</div>
+            </div>
+
+        </div>
+
+        <div id="modal" class="hidden">
+            <div class="modalBackground"></div>
+            <div class="modalContent">
+                <div class="modalContentBox">
+                    <p>
+                        주문 취소 시 복구할 수 없습니다. 정말로 취소하시겠습니까?
+                    </p>
+                    <div class="checkBox">
+                        <button id="deleteCompleteButton">예</button>
+                        <button id="deleteCancelButton">아니오</button>
+                    </div>
+                </div>
+            </div>
+            <button class="modalBtn" id="modalCloseButton">x</button>
+        </div>
+    </section>
+
+</body>
+
+</html>

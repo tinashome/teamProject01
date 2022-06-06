@@ -55,89 +55,74 @@ document.addEventListener(
 
       // 전체감싸기
       const wrapper = document.createElement("dev");
-      wrapper.classList.add("columns", "orders-item");
+      wrapper.classList.add("creatOrderInquiryWrapper");
       wrapper.setAttribute("id", "order-629428a0eb5d1ed00c61f51c");
 
       // 날짜
       const orderDate = document.createElement("dev");
-      orderDate.classList.add("column", "is-2");
+      orderDate.classList.add("orderInfo");
       orderDate.textContent = date;
 
       // 상품
       const orderProduct = document.createElement("div");
-      orderProduct.classList.add("column", "is-4", "order-summary");
+      orderProduct.classList.add("orderInfo");
       orderProduct.textContent = listProduct;
 
       // 총액
       const orderAmount = document.createElement("div");
-      orderAmount.classList.add("column", "is-2");
+      orderAmount.classList.add("orderInfo");
       orderAmount.textContent = totalAmount;
 
       // select
       const selectWrapper = document.createElement("div");
-      selectWrapper.classList.add("column", "is-2");
-      const selectContainer = document.createElement("div");
-      selectContainer.classList.add("select");
+      selectWrapper.classList.add("orderInfo");
 
       const select = document.createElement("select");
       // select.classList.add("has-background-danger-light", "has-text-danger")
       select.setAttribute("id", "statusSelectBox-628c85a9ae629ef7dc9d7dfe");
+      select.setAttribute("class", "select");
 
       // 옵션
       // 준비중
       const readyOption = document.createElement("option");
-      readyOption.classList.add(
-        "has-background-danger-light",
-        "has-text-danger"
-      );
+      readyOption.classList.add("gettingReady");
       readyOption.setAttribute("value", "상품 준비중");
       readyOption.textContent = "상품 준비중";
       // 배송중
       const shippingOption = document.createElement("option");
-      shippingOption.classList.add(
-        "has-background-primary-light",
-        "has-text-primary"
-      );
+      shippingOption.classList.add("delivering");
       shippingOption.setAttribute("value", "상품 배송중");
       shippingOption.textContent = "상품 배송중";
       // 완료
       const completionOption = document.createElement("option");
-      completionOption.classList.add("has-background-grey-light");
+      completionOption.classList.add("completion");
       completionOption.setAttribute("value", "배송완료");
       completionOption.textContent = "배송완료";
 
       // selected넣기
       if (userStatusData === "배송완료") {
         completionOption.setAttribute("selected", "true");
-        select.classList.add("has-background-grey-light", "clickSelect");
+        select.classList.add("completionColor", "clickSelect");
       } else if (userStatusData === "상품 준비중") {
         readyOption.setAttribute("selected", "true");
-        select.classList.add(
-          "has-background-danger-light",
-          "has-text-danger",
-          "clickSelect"
-        );
+        select.classList.add("gettingReadyColor", "clickSelect");
       } else {
         shippingOption.setAttribute("selected", "true");
-        select.classList.add(
-          "has-background-primary-light",
-          "has-text-primary",
-          "clickSelect"
-        );
+        select.classList.add("deliveringColor", "clickSelect");
       }
 
       // 버튼
       const btnWrapper = document.createElement("div");
-      btnWrapper.classList.add("column", "is-2");
+      btnWrapper.classList.add("orderInfo");
       const btn = document.createElement("button");
-      btn.classList.add("button", "orderCancel");
+      btn.classList.add("button", "cencleOrder");
       btn.setAttribute("id", productId);
       btn.textContent = "주문취소";
       // 화면에 보이기
       btnWrapper.append(btn);
       select.append(readyOption, shippingOption, completionOption);
-      selectContainer.append(select);
-      selectWrapper.append(selectContainer);
+
+      selectWrapper.append(select);
       wrapper.append(
         orderDate,
         orderProduct,

@@ -1,152 +1,94 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-데모</title>
-    <!-- 아이콘 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/elice-rabbit-favicon.png"
-    />
-    <!-- bulma css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <!-- 폰트 어썸: 아이콘 -->
-    <script
-      defer
-      src="https://kit.fontawesome.com/7630448495.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="./order-manage.css" />
-    <script src="./order-manage.js" type="module" defer></script>
-  </head>
-  <body>
-    <!-- 헤더 -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="container mt-3">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-데모</span>
-          </a>
+<html lang="en">
 
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./order-manage.css">
+    <script src="../../navigation/navigation.js" type="module"></script>
+    <link rel="stylesheet" href="../../navigation/navigation.css">
+    <script src="./order-manage.js" type="module"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="nav"></nav>
+        <div class="menu">
+            <div>
+    </header>
+    <section class="section" id="section">
+        <div class="shoppingCartHeader">
+            <p>
+                <span class="shoppingCartChapter">주문관리</span>
+            </p>
         </div>
+        <nav class="orderManageNav">
 
-        <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-          <ul id="navbar">
-            <li>
-              <a href="/cart" aria-current="page">
-                <span class="icon">
-                  <i class="fas fa-cart-shopping"></i>
-                </span>
-                <span>카트</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+            <div class="statusBox">
+                <p class="orderStatusHeader">총주문수</p>
+                <p class="orderStatus">123</p>
+            </div>
+            <div class="statusBox">
+                <p class="orderStatusHeader">상품준비중</p>
+                <p class="orderStatus">123</p>
+            </div>
+            <div class="statusBox">
+                <p class="orderStatusHeader">상품배송중</p>
+                <p class="orderStatus">123</p>
+            </div>
+            <div class="statusBox">
+                <p class="orderStatusHeader">배송완료</p>
+                <p class="orderStatus">123</p>
+            </div>
 
-    <!-- 주문관리 -->
-    <section class="section">
-      <div class="container">
-        <!-- 제목 -->
-        <div class="block account-header">
-          <h1 class="subtitle is-4">주문관리</h1>
-        </div>
-
-        <!-- 총 요약 -->
-        <nav class="level">
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">총주문수</p>
-              <p class="title" id="ordersCount">-</p>
-            </div>
-          </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">상품준비중</p>
-              <p class="title" id="prepareCount">-</p>
-            </div>
-          </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">상품배송중</p>
-              <p class="title" id="deliveryCount">-</p>
-            </div>
-          </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">배송완료</p>
-              <p class="title" id="completeCount">-</p>
-            </div>
-          </div>
         </nav>
+        <div class="orderSearch">
+            <div class="orderSearchHeaderBox">
+                <div class="orderSearchHeader">날짜</div>
+                <div class="orderSearchHeader">주문정보</div>
+                <div class="orderSearchHeader">주문총액</div>
+                <div class="orderSearchHeader">상태</div>
+                <div class="orderSearchHeader">신청</div>
+            </div>
 
-        <div class="container orders-container" id="ordersContainer">
-          <div
-            class="columns notification is-info is-light is-mobile orders-top"
-          >
-            <div class="column is-2">날짜</div>
-            <div class="column is-4">주문정보</div>
-            <div class="column is-2">주문총액</div>
-            <div class="column is-2">상태관리</div>
-            <div class="column is-2">취소</div>
-          </div>
         </div>
-      </div>
+        <div class="creatOrderInquiryWrapper">
+            <div class="orderInfo">20</div>
+            <div class="orderInfo">222</div>
+            <div class="orderInfo">22</div>
+            <div class="orderInfo">
+                <div>
+                    <select name="" id="" class="select">
+                        <option value="" class="gettingReady">상품준비중</option>
+                        <option value="" class="delivering">상품배송중</option>
+                        <option value="" class="
+                        completion">배송완료</option>
+                    </select>
+                </div>
+            </div>
+            <div class="orderInfo">
+                <button class="cencleOrder">주문취소</button>
+            </div>
+        </div>
+
+        <div id="modal" class="hidden">
+            <div class="modalBackground"></div>
+            <div class="modalContent">
+                <div class="modalContentBox">
+                    <p>
+                        주문 취소 시 복구할 수 없습니다. 정말로 취소하시겠습니까?
+                    </p>
+                    <div class="checkBox">
+                        <button id="deleteCompleteButton">예</button>
+                        <button id="deleteCancelButton">아니오</button>
+                    </div>
+                </div>
+            </div>
+            <button class="modalBtn" id="modalCloseButton">x</button>
+        </div>
     </section>
+</body>
 
-    <!-- 주문을 정말 취소할 지 묻는 Modal 창 -->
-    <div id="modal" class="modal">
-      <div class="modal-background" id="modalBackground"></div>
-      <div class="modal-content">
-        <div class="box">
-          <p class="mb-3">
-            주문 삭제 시 복구할 수 없습니다. 정말로 취소하시겠습니까?
-          </p>
-
-          <div class="buttons">
-            <button
-              class="button mt-5"
-              id="deleteCompleteButton"
-              aria-label="close"
-            >
-              네
-            </button>
-            <button
-              class="button is-primary mt-5"
-              id="deleteCancelButton"
-              aria-label="close"
-            >
-              아니오
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <button
-        class="modal-close is-large"
-        id="modalCloseButton"
-        aria-label="close"
-      ></button>
-    </div>
-  </body>
 </html>

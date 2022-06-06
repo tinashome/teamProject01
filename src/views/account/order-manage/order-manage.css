@@ -1,40 +1,184 @@
-.header-search-input{
-    width:20rem
+/* section */
+section {
+  padding: 3rem 1.5rem;
+  margin-top: 70px;
 }
-.navbar-menu .is-info:focus{
-    box-shadow:none;
-    outline:none
+
+/* 장바구니 > 주문결제 > 주문완료 */
+.shoppingCartHeader {
+  font-size: 20px;
+  border-bottom: 1px solid #999;
+  margin-bottom: 20px;
 }
-.account-header{
-    border-bottom:1px solid #ddd;
-    display:block;
-    padding-bottom:.7rem
+.shoppingCartHeader .shoppingCartChapter {
+  font-size: 36px;
+  font-weight: bold;
 }
-.heading{
-    font-size:.8rem
+
+/* orderStatus */
+.orderManageNav {
+  display: flex;
+  margin-bottom: 1.5rem;
 }
-.orders-container{
-    margin:5rem auto 2rem;
-    max-width:1000px!important
+.statusBox {
+  flex-grow: 1;
+  text-align: center;
 }
-.orders-top{
-    border-bottom:1px solid #aaa;
-    padding:0;
-    text-align:center
+.orderStatusHeader {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  color: #4a4a4a;
 }
-.orders-item{
-    align-items:center;
-    text-align:center
+.orderStatus {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.125;
 }
-.orders-item:not(:last-child){
-    border-bottom:1px solid #bbb
+
+/* orderSearch */
+.orderSearch {
+  background-color: #eff5fb;
+  color: #296fa8;
+  margin-top: 5rem;
 }
-.order-summary{
-    white-space:pre-line
+
+.orderSearchHeaderBox {
+  display: flex;
 }
-.modal .box{
-    text-align:center
+.orderSearchHeader {
+  width: 16.66667%;
+  padding: 0.75rem;
+  text-align: center;
+  border-radius: 4px;
 }
-.modal .buttons{
-    justify-content:center
+.orderSearchHeaderBox > .orderSearchHeader:nth-child(2) {
+  width: 33.33333%;
+}
+
+/* creatOrderInquiryWrapper */
+.creatOrderInquiryWrapper {
+  display: flex;
+  border-bottom: 1px solid #bbb;
+}
+.orderInfo {
+  width: 16.66667%;
+  padding: 0.75rem;
+  text-align: center;
+  color: #4a4a4a;
+  vertical-align: middle;
+  margin: auto;
+}
+.orderInfo:nth-child(2) {
+  width: 33.33333%;
+}
+.cencleOrder {
+  background-color: #fff;
+
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 1em;
+  border: 1px solid transparent;
+  border-color: #dbdbdb;
+  width: 50%;
+  height: 3rem;
+}
+
+.select {
+  border-radius: 4px;
+  height: 2.5em;
+  border: 1px solid transparent;
+  border-color: #dbdbdb;
+
+  height: 3rem;
+  width: 50%;
+  text-align: center;
+  font-size: 1rem;
+}
+.gettingReadyColor {
+  background-color: #feecf0 !important;
+  color: #f14668 !important;
+}
+.gettingReady {
+  font-size: 1rem;
+  background-color: #feecf0 !important;
+  color: #f14668 !important;
+}
+
+.delivering {
+  font-size: 1rem;
+  background-color: #ebfffc !important;
+  color: #00d1b2 !important;
+}
+.deliveringColor {
+  background-color: #ebfffc !important;
+  color: #00d1b2 !important;
+}
+.completion {
+  font-size: 1rem;
+  background-color: #b5b5b5 !important;
+}
+.completionColor {
+  background-color: #b5b5b5 !important;
+}
+/* modal */
+.open {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+.modalBackground {
+  background-color: rgba(10, 10, 10, 0.86);
+  bottom: 0;
+  right: 0;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 9999;
+}
+.modalContent {
+  width: 640px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 9999;
+}
+.modalContentBox {
+  background-color: #fff;
+  padding: 1.25rem;
+  border-radius: 6px;
+}
+.modalContentBox > p {
+  text-align: center;
+}
+.checkBox {
+  display: flex;
+  justify-content: center;
+}
+.checkBox > button:first-of-type {
+  margin-right: 0.5rem;
+  background-color: #fff;
+  border-color: #dbdbdb;
+  margin-top: 1.5rem;
+  border: 1px solid transparent;
+  border-color: #dbdbdb;
+  width: 3rem;
+  height: 2rem;
+}
+.checkBox > button:last-child {
+  background-color: #00d1b2;
+  color: #fff;
+  margin-top: 1.5rem;
+  border-color: transparent;
+  width: 3rem;
+  height: 2rem;
+}
+.modalBtn {
+  height: 32px;
+  width: 32px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100000;
+  border: none;
 }

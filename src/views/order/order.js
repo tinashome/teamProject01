@@ -1,3 +1,4 @@
+import * as Api from "/api.js";
 const button = document.getElementById("buyButton");
 const postalCodeInput = document.querySelector("#postalCode");
 const searchAddressButton = document.querySelector("#searchAddressButton");
@@ -14,6 +15,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   // const res = await fetch("주소")
   // const data = await res.json()
   // 테스트용 객체
+  try {
+    const res = Api.get(`/api/users/`);
+    console.log(res);
+  } catch (e) {
+    {
+      console.log(e);
+    }
+  }
+
   const data = [
     {
       productsTitle: "2020",

@@ -115,7 +115,7 @@ document.addEventListener(
       const btnWrapper = document.createElement("div");
       btnWrapper.classList.add("orderInfo");
       const btn = document.createElement("button");
-      btn.classList.add("button", "cencleOrder");
+      btn.classList.add("button", "cancleOrder");
       btn.setAttribute("id", productId);
       btn.textContent = "주문취소";
       // 화면에 보이기
@@ -130,16 +130,15 @@ document.addEventListener(
         selectWrapper,
         btnWrapper
       );
-      const list = document.getElementById("ordersContainer");
+      const list = document.getElementById("section");
       list.append(wrapper);
     });
 
     // 상태관리 메뉴
     // 충 주문
-    Ordertotal();
     function Ordertotal() {
       const ordersCount = document.getElementById("ordersCount");
-      const btnCnt = document.querySelectorAll(".orderCancel");
+      const btnCnt = document.querySelectorAll(".cancleOrder");
       const ordercnt = btnCnt.length;
       if (ordercnt === 0) {
         ordersCount.textContent = "-";
@@ -147,8 +146,8 @@ document.addEventListener(
         ordersCount.textContent = ordercnt;
       }
     }
+    Ordertotal();
     // 준비중 갯수
-    gettingReadyCnt();
     function gettingReadyCnt() {
       const gettingReadyArr = document.querySelectorAll(".clickSelect");
       let gettingReadyTotal = 0;
@@ -165,8 +164,10 @@ document.addEventListener(
         prepareCount.textContent = gettingReadyTotal;
       }
     }
+    gettingReadyCnt();
+
     // 배송중 갯수
-    deliveringCnt();
+
     function deliveringCnt() {
       const delivering = document.querySelectorAll(".clickSelect");
       let deliveringTotal = 0;
@@ -183,6 +184,8 @@ document.addEventListener(
         deliveryCount.textContent = deliveringTotal;
       }
     }
+    deliveringCnt();
+
     //  배송완료
     deliveryCompletedCnt();
     function deliveryCompletedCnt() {
@@ -203,7 +206,8 @@ document.addEventListener(
     }
 
     // 모든 버튼 들고오기, 이벤트 부여위해
-    const button = document.querySelectorAll(".orderCancel");
+    const button = document.querySelectorAll(".cancleOrder");
+
     let cancleBtnId = "";
     button.forEach((btn) => {
       btn.addEventListener("click", (e) => {
@@ -211,21 +215,21 @@ document.addEventListener(
         cancleBtnId = btn.getAttribute("id");
 
         const modal = document.getElementById("modal");
-        modal.className = "modal is-active";
+        modal.className = "open";
 
         const deleteCancelButton =
           document.getElementById("deleteCancelButton");
 
         deleteCancelButton.addEventListener("click", (e) => {
           e.preventDefault();
-          modal.className = "modal";
+          modal.className = "hidden";
         });
       });
     });
 
     // selected버튼 텍스트 백그라운드 텍스트컬러변경
     function removeSelectClass(splitBtnClass, btn) {
-      for (let i = 0; i < splitBtnClass.length; i++) {
+      for (let i = 1; i < splitBtnClass.length; i++) {
         const btnClassOne = splitBtnClass[i];
         btn.classList.remove(btnClassOne);
       }
@@ -235,33 +239,25 @@ document.addEventListener(
     clickSelect.forEach((btn) => {
       btn.addEventListener("change", () => {
         const selectValue = btn.options[btn.selectedIndex].value;
-        console.log(selectValue);
+
         const btnClass = btn.getAttribute("class");
         const splitBtnClass = btnClass.split(" ");
 
         if (selectValue === "상품 준비중") {
           removeSelectClass(splitBtnClass, btn);
-          btn.classList.add(
-            "has-background-danger-light",
-            "has-text-danger",
-            "clickSelect"
-          );
+          btn.classList.add("gettingReadyColor", "clickSelect");
           gettingReadyCnt();
           deliveringCnt();
           deliveryCompletedCnt();
         } else if (selectValue === "상품 배송중") {
           removeSelectClass(splitBtnClass, btn);
-          btn.classList.add(
-            "has-background-primary-light",
-            "has-text-primary",
-            "clickSelect"
-          );
+          btn.classList.add("deliveringColor", "clickSelect");
           gettingReadyCnt();
           deliveringCnt();
           deliveryCompletedCnt();
         } else {
           removeSelectClass(splitBtnClass, btn);
-          btn.classList.add("has-background-grey-light", "clickSelect");
+          btn.classList.add("completionColor", "clickSelect");
           gettingReadyCnt();
           deliveringCnt();
           deliveryCompletedCnt();
@@ -279,7 +275,7 @@ document.addEventListener(
       e.preventDefault();
       alert("주문정보가 삭제되었습니다");
 
-      modal.className = "modal";
+      modal.className = "hidden";
 
       const deleteBlock = document.getElementById(cancleBtnId);
 
@@ -293,7 +289,7 @@ document.addEventListener(
     //  모달? x버튼
     modalCloseButton.addEventListener("click", (e) => {
       e.preventDefault();
-      modal.className = "modal";
+      modal.className = "hidden";
     });
   }
 );

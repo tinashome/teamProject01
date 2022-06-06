@@ -35,12 +35,11 @@ async function handleSubmit(e) {
   const address2 = detailAddressInput.value;
 
   // 잘 입력했는지 확인
-  const isFullNameValid = fullName.length >= 2;
   const isPasswordValid = newPassword.length >= 4;
   const isPasswordSame = newPassword === passwordConfirm;
 
-  if (!isFullNameValid || !isPasswordValid) {
-    return alert("이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.");
+  if (!isPasswordValid) {
+    return alert("비밀번호는 4글자 이상이어야 합니다.");
   }
 
   if (!isPasswordSame) {
@@ -51,13 +50,17 @@ async function handleSubmit(e) {
     const data = {
       currentPassword,
       phoneNumber,
-      postalCode,
-      address1,
-      address2,
+      address: {
+        postalCode,
+        address1,
+        address2,
+      },
     };
+    console.log(data);
 
     const getUserId = sessionStorage.getItem("userId");
-    await Api.post(`/api/users/${getUserId}`, data);
+    const result = await Api.patch("/api/users/", getUserId, data);
+    console.log(result);
     alert("정보가 수정되었습니다. ");
   } catch (err) {
     console.error(err.stack);

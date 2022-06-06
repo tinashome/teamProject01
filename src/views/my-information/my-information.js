@@ -1,5 +1,6 @@
 import * as Api from "/api.js";
 
+const fullNameInput = document.querySelector("#fullNameInput");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 const passwordInput = document.querySelector("#passwordInput");
 const newPasswordInput = document.querySelector("#newPasswordInput");
@@ -16,10 +17,32 @@ async function searchAddress(e) {
     oncomplete: function (data) {
       postalCodeInput.value = data.zonecode;
       addressInput.value = data.address;
+      detailAddressInput.value = null;
       detailAddressInput.focus();
     },
   }).open();
 }
+
+// 기존 정보 불러오기
+const getUserId = sessionStorage.getItem("userId");
+async function printInformation() {
+  try {
+    const userInfo = await Api.get(`/api/users/${getUserId}`);
+
+    fullNameInput.value = userInfo.fullName;
+    phoneNumberInput.value = userInfo.phoneNumber;
+    postalCodeInput.value = userInfo.address.postalCode;
+    addressInput.value = userInfo.address.address1;
+    detailAddressInput.value = userInfo.address.address2;
+
+    console.log(userInfo);
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
+// 정보 수정하기
 const searchBtn = document.querySelector(".searchBtn");
 searchBtn.addEventListener("click", searchAddress);
 
@@ -56,11 +79,9 @@ async function handleSubmit(e) {
         address2,
       },
     };
-    console.log(data);
 
-    const getUserId = sessionStorage.getItem("userId");
     const result = await Api.patch("/api/users/", getUserId, data);
-    console.log(result);
+
     alert("정보가 수정되었습니다. ");
   } catch (err) {
     console.error(err.stack);
@@ -68,4 +89,5 @@ async function handleSubmit(e) {
   }
 }
 
+printInformation();
 submitEdit.addEventListener("click", handleSubmit);

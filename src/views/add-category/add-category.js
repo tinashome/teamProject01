@@ -1,4 +1,4 @@
-import * as Api from '../../../api.js'
+import * as Api from '../api'
 
 const form = document.querySelector("form");
 form.addEventListener("submit", (e) => {
@@ -24,4 +24,5 @@ form.addEventListener("submit", (e) => {
         break;
     }
   }
+  Api.post("/api/product",data);
 });

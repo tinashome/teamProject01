@@ -1,6 +1,5 @@
 import * as Api from "/api.js";
 
-const fullNameInput = document.querySelector("#fullNameInput");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 const passwordInput = document.querySelector("#passwordInput");
 const newPasswordInput = document.querySelector("#newPasswordInput");
@@ -27,7 +26,6 @@ searchBtn.addEventListener("click", searchAddress);
 async function handleSubmit(e) {
   e.preventDefault();
 
-  const fullName = fullNameInput.value;
   const phoneNumber = phoneNumberInput.value;
   const currentPassword = passwordInput.value;
   const newPassword = newPasswordInput.value;
@@ -59,7 +57,7 @@ async function handleSubmit(e) {
     };
 
     const getUserId = sessionStorage.getItem("userId");
-    await Api.post(`/api/users/${getUserId}`);
+    await Api.post(`/api/users/${getUserId}`, data);
     alert("정보가 수정되었습니다. ");
   } catch (err) {
     console.error(err.stack);

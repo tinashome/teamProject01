@@ -51,15 +51,15 @@ async function handleSubmit(e) {
 
   const phoneNumber = phoneNumberInput.value;
   const currentPassword = passwordInput.value;
-  const newPassword = newPasswordInput.value;
+  const password = newPasswordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
   const postalCode = postalCodeInput.value;
   const address1 = addressInput.value;
   const address2 = detailAddressInput.value;
 
   // 잘 입력했는지 확인
-  const isPasswordValid = newPassword.length >= 4;
-  const isPasswordSame = newPassword === passwordConfirm;
+  const isPasswordValid = password.length >= 4;
+  const isPasswordSame = password === passwordConfirm;
 
   if (!isPasswordValid) {
     return alert("비밀번호는 4글자 이상이어야 합니다.");
@@ -71,6 +71,7 @@ async function handleSubmit(e) {
 
   try {
     const data = {
+      password,
       currentPassword,
       phoneNumber,
       address: {

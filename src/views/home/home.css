@@ -31,6 +31,9 @@ a {
 
 /* 이미지 슬라이드 */
 .slider {
+  /*  */
+  display: none;
+  /*  */
   width: 1024px;
   height: 600px;
   overflow: hidden;
@@ -103,4 +106,22 @@ a {
 .right {
   top: 40%;
   right: 60px;
+}
+
+/* btnList Test */
+.btnList {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding-top: 100px;
+  padding-left: 50px;
+  clear: left;
+}
+button {
+  height: 50px;
+  width: 100px;
+  margin: 10px;
+}
+button a {
+  font-size: 17px;
 }

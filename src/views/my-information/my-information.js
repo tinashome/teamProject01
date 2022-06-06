@@ -49,12 +49,23 @@ async function printInformation() {
 }
 
 // 비밀번호 입력 모달창
-async function close(e) {
+async function modalOpen(e) {
+  e.preventDefault();
+  document.querySelector(".modal").classList.remove("hidden");
+}
+
+async function modalClose(e) {
   e.preventDefault();
   document.querySelector(".modal").classList.add("hidden");
 }
-document.querySelector(".closeBtn").addEventListener("click", close);
+document.querySelector(".background").addEventListener("click", modalClose);
+document.querySelector(".closeBtn").addEventListener("click", modalClose);
 document.querySelector(".closeBtn").addEventListener("click", handleSubmit);
+
+document.querySelector(".closeBtnDelete").addEventListener("click", modalClose);
+document
+  .querySelector(".closeBtnDelete")
+  .addEventListener("click", deleteMyInfo);
 
 // 정보 수정하기
 async function handleSubmit(e) {
@@ -115,10 +126,15 @@ async function deleteMyInfo() {
 }
 
 printInformation();
-submitEdit.addEventListener("click", async function modalOpen(e) {
-  e.preventDefault();
-  passwordInput.focus();
-  document.querySelector(".modal").classList.remove("hidden");
-});
-delMyInfoBtn.addEventListener("click", deleteMyInfo);
 searchBtn.addEventListener("click", searchAddress);
+
+submitEdit.addEventListener("click", modalOpen);
+submitEdit.addEventListener("click", () => {
+  document.querySelector(".closeBtn").classList.remove("hidden");
+  document.querySelector(".closeBtnDelete").classList.add("hidden");
+});
+delMyInfoBtn.addEventListener("click", () => {
+  document.querySelector(".closeBtn").classList.add("hidden");
+  document.querySelector(".closeBtnDelete").classList.remove("hidden");
+});
+delMyInfoBtn.addEventListener("click", modalOpen);

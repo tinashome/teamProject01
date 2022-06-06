@@ -181,8 +181,10 @@ hr {
   border-radius: 10px;
   z-index: 100;
 }
+.hidden {
+  display: none;
+}
 .modalBox button {
-  display: block;
   width: 100px;
   height: 26px;
   margin: 0 auto;
@@ -190,9 +192,6 @@ hr {
   border: none;
   background-color: rgb(138, 126, 115);
   color: whitesmoke;
-}
-.hidden {
-  display: none;
 }
 .modalTitle {
   margin: 10px;

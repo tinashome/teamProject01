@@ -1,31 +1,36 @@
+const payProductQuantity = document.querySelector("#payProductQuantity");
+const payProductPrice = document.querySelector("#payProductPrice");
+const payShippingPrice = document.querySelector("#payShippingPrice");
+const payTotalPrice = document.querySelector("#payTotalPrice");
+const totalPriceArrForPay = [];
 
 //localStorage의 데이터를 받아오기
 //printArr에 배열로 데이터들을 저장하여 반복문을 돌면서 데이터 펴기
 const printArr = [];
-for(let i = 1; i <= localStorage.length; i++){
-  printArr.push(JSON.parse(localStorage.getItem(i)));
-};
+printArr.push(JSON.parse(localStorage.getItem("cartList")));
+
 const displayData = () => {
-  for(let j = 0; j < printArr.length; j++){
+  for(let i = 0; i<printArr[0].length; i++){
     const displaying = document.querySelector(".shoppingListBox");
     const productContainer = document.createElement("div");
-    productContainer.setAttribute("id", "selectedProduct");
+    productContainer.classList.add("selectedProduct");
 
     const inputCheck = document.createElement("input");
     inputCheck.type = "checkbox";
+    inputCheck.name = "check"
     inputCheck.checked = "true";
     inputCheck.classList.add("selectedCheckBox");
     inputCheck.onclick = checkSelectAll;
     //inputCheck.onclick = makingOrder;
 
     const pushProductImage = document.createElement("img");
-    pushProductImage.src = `${printArr[j].img}`;
+    pushProductImage.src = `${printArr[0][i].img}`;
     pushProductImage.classList.add("chocolateImg");
     pushProductImage.alt = "chocolate1";
 
     const pushProductName = document.createElement("div");
     pushProductName.classList.add("SelectedProductName");
-    pushProductName.textContent = `${printArr[j].name}`;
+    pushProductName.textContent = `${printArr[0][i].name}`;
 
     const modifynumb = document.createElement("div");
     modifynumb.classList.add("modifyProductQuantity");
@@ -51,14 +56,14 @@ const displayData = () => {
     const priceBox = document.createElement("div");
     priceBox.classList.add("selectedPrice");
 
-    const wonP = document.createElement("p");
-    const won = document.createElement("span");
-    won.textContent = "원";
+    const wonPrice = document.createElement("p");
+    const priceUnit = document.createElement("span");
+    priceUnit.textContent = "원";
     const priceSpan = document.createElement("span");
     priceSpan.classList.add("productPriceSpan");
-    priceSpan.textContent = `${printArr[j].price}`;
-    wonP.appendChild(priceSpan);
-    wonP.appendChild(won);
+    priceSpan.textContent = `${printArr[0][i].price}`;
+    wonPrice.appendChild(priceSpan);
+    wonPrice.appendChild(priceUnit);
     const xIcon = document.createElement("i");
     xIcon.classList.add("fas");
     xIcon.classList.add("fa-thin");
@@ -68,22 +73,22 @@ const displayData = () => {
     equalIcon.classList.add("fa-thin");
     equalIcon.classList.add("fa-equals");
 
-    const totalWonP = document.createElement("p");
-    const totalWon = document.createElement("span");
-    totalWon.textContent = "원";
+    const totalWonPrice = document.createElement("p");
+    const totalPriceUnit = document.createElement("span");
+    totalPriceUnit.textContent = "원";
     const totalPriceSpan = document.createElement("span");
     totalPriceSpan.classList.add("totalPrice");
-    totalPriceSpan.textContent = `${printArr[j].price}`;
-    totalWonP.appendChild(totalPriceSpan);
-    totalWonP.appendChild(totalWon);
-   
+    totalPriceSpan.textContent = `${printArr[0][i].price}`;
+    totalWonPrice.appendChild(totalPriceSpan);
+    totalWonPrice.appendChild(totalPriceUnit);
+    
 
     const trashIconContiner = document.createElement("div");
     trashIconContiner.classList.add("deleteIcon");
     const trashIcon = document.createElement("i");
     trashIcon.classList.add("fas");
     trashIcon.classList.add("fa-trash-can");
-    //trashIcon.onclick = deleteData;
+    trashIcon.addEventListener("click", deleteData);
     trashIconContiner.appendChild(trashIcon);
 
     productContainer.appendChild(inputCheck);
@@ -92,11 +97,11 @@ const displayData = () => {
     modifynumb.appendChild(minusBtn);
     modifynumb.appendChild(changeQuantity);
     modifynumb.appendChild(plusBtn);
-    priceBox.appendChild(wonP);
+    priceBox.appendChild(wonPrice);
     priceBox.appendChild(xIcon);
     priceBox.appendChild(productQuantityNumb);
     priceBox.appendChild(equalIcon);
-    priceBox.appendChild(totalWonP);
+    priceBox.appendChild(totalWonPrice);
     
 
     productContainer.appendChild(modifynumb);
@@ -104,15 +109,24 @@ const displayData = () => {
     productContainer.appendChild(trashIconContiner);
 
     displaying.appendChild(productContainer);
-}}
+
+    totalPriceArrForPay.push(Number(printArr[0][i].price));
+  }
+  
+}
+
 displayData();
 
-//버튼을 누르면 증가, 감소
-const payProductQuantity = document.querySelector("#payProductQuantity");
-const payProductPrice = document.querySelector("#payProductPrice");
-const payShippingPrice = document.querySelector("#payShippingPrice");
-const payTotalPrice = document.querySelector("#payTotalPrice");
+//결제 정보창 초기 설정
+const totalPriceForPay = totalPriceArrForPay.reduce((prev, next) => prev + next, 0);
+const shippingPrice = 3000;
+payProductQuantity.innerText = printArr[0].length;
+payProductPrice.innerText = totalPriceForPay;
+payShippingPrice.innerText = shippingPrice;
+payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText);
 
+
+//버튼을 누르면 증가, 감소
 function plusQuantity(item){
   let innerNumb = item.path[1].querySelector(".productQuantity").innerText;
   let targetNumber = item.path[1].querySelector(".productQuantity");
@@ -167,7 +181,7 @@ function minusQuantity(item){
 
   // 마이너스 수량으로 넘어가지 않도록 구현
   const minus = item.path[1].querySelector(".minusProductQuantity");
-  if(innerNumb<1){
+  if(innerNumb < 1){
     minus.disabled = true;
     return;
   } else{
@@ -194,19 +208,6 @@ function minusQuantity(item){
   payTotalPrice.innerText = sumOfTotalPrice + 3000;
 }
 
-//결제 정보창 초기 설정
-const totalPrice = document.querySelectorAll(".totalPrice");
-const totalPriceArrForPay = [];
-for(let i = 0; i<totalPrice.length; i++){
-  totalPriceArrForPay.push(totalPrice[i].innerText);
-}
-payProductQuantity.innerText = localStorage.length;
-const totalPriceForPay = totalPriceArrForPay.reduce( (prev, next) => Number(prev)+ Number(next), 0);
-payProductPrice.innerText = totalPriceForPay;
-payShippingPrice.innerText = 3000;
-payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText);
-
-
 
 //전체선택 구현
 const allSelectedCheckbox = document.querySelector("#allSelectedCheckbox");
@@ -231,38 +232,43 @@ function checkSelectAll(){
   }
 }
 
-/**
- * ❌ 휴지통 버튼을 누르면 localStorage에서 해당 데이터 삭제
- * ❌ 체크박스 해제가 되면 결제정보 창 정보 변경 
- */
+// 휴지통 버튼을 누르면 localStorage에서 데이터 삭제
+function deleteData(item){
+  const  targetName = item.path[2].querySelector(".SelectedProductName").innerText;
+  const newStorageItem = [];
+  const findNotDelete = printArr[0].find(e => e.name !== targetName);
+  newStorageItem.push(findNotDelete);
 
-// console.log(selectedCheckBox[0].parentNode);
-
-// // payTotalPrice.innerText = Number(payProductPrice.innerText) + Number(payShippingPrice.innerText);
-// //console.log(selectedCheckBox[0].parentElement.querySelector(".totalPrice").innerText);
-// const totalPriceArr = [];
-// function makingOrder(selected){
-//   const checkedQuantity = selected.path[1].querySelector(".productQuantityNumb").innerText;
-//   console.log(selected.path[1].querySelector(".productQuantityNumb").innerText);
-//   if(selected.path[0].checked == false){
-//     alert("llkj");
-//     payProductQuantity.innerText = Number(payProductQuantity.innerText) - Number(checkedQuantity.innerText)
-//   }
+  localStorage.clear();
+  localStorage.setItem("cartList", JSON.stringify(newStorageItem));
   
-//   //상품수
-//   //상품금액
-//   //총금액
-//   //console.log(selected.path[1].querySelector(".totalPrice").innerText);
-// }
+  alert("삭제되었습니다.");
 
+  location.reload();
+}
 
-// //fake data
-// //localStorage.setItem(2, JSON.stringify({name: "loyal chocolate", price: 4000, img:"http://127.0.0.1:5500/src/views/elice-rabbit.png"}))
+//선택 삭제 클릭하면 선택된 항목 삭제
+const deletePart = document.querySelector("#deletePart");
+deletePart.addEventListener("click", deletePartFunc);
 
-// // 휴지통 버튼을 누르면 localStorage에서 데이터 삭제
-// const deleteIcon = document.querySelector(".deleteIcon");
-// function deleteData(item){
-//   alert("삭제되었습니다.");
-//   console.log(item.pointerId);
-// }
+const deleteChecked = document.querySelectorAll(".selectedCheckBox:checked");
+function deletePartFunc(){
+  const checkedList = [];
+  for(let i = 0; i<deleteChecked.length;i++){
+    checkedList.push(deleteChecked[i].parentNode.querySelector(".SelectedProductName").innerText)
+  }
+  const newStorageItem = [];
+  const findNotDelete = printArr[0].find(e => {
+    for(let j = 0; j<checkedList.length; j++){
+      e.name !== checkedList[j]
+    }
+  })
+  newStorageItem.push(findNotDelete);
 
+  localStorage.clear();
+  localStorage.setItem("cartList", JSON.stringify(newStorageItem));
+  
+  alert("삭제되었습니다.");
+
+  location.reload();
+}

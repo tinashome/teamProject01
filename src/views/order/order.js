@@ -92,22 +92,7 @@ async function doCheckout() {
   const address1 = address1Input.value;
   const address2 = address2Input.value;
   const request = document.getElementById("requestSelectBox").value;
-  // 입력이 안 되어 있을 시
-  // if (!receiverName || !receiverPhoneNumber || !postalCode || !address2)
-  //   return alert("배송지 정보를 모두 입력해 주세요.");
-  // JSON 만듦
-  // const dataJson = JSON.stringify(data)
 
-  // const apiUrl = ``
-
-  // POST 요청
-  // const res = await fetch(apiUrl, {
-  //   method: 'POST',
-  //   headers: {
-  //       'Content-Type': 'application/json',
-  //   },
-  //   body: dataJson,
-  // });
   alert("결제완료");
 
   let sendInfo = {

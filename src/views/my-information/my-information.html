@@ -27,10 +27,29 @@
           <div class="myTitle">MY PAGE</div>
 
           <ul class="categoryList">
-            <li><a href="/orderlist">주문조회</a></li>
+            <li href="/orderlist"><a href="/orderlist">주문조회</a></li>
             <li><a href="/cart">장바구니</a></li>
             <li><a href="/mypage">내 정보 수정</a></li>
           </ul>
+        </div>
+
+        <!-- 비밀번호 입력 모달창 -->
+        <div class="modal hidden">
+          <div class="background"></div>
+          <div class="modalBox">
+            <div class="modalTitle">비밀번호를 입력해주세요.</div>
+            <form>
+              <input
+                class="inputPassword"
+                id="passwordInput"
+                type="password"
+                placeholder="현재 비밀번호를 입력해주세요."
+                autocomplete="off"
+              />
+              <button class="closeBtn">확인</button>
+              <button class="closeBtnDelete hidden">확인</button>
+            </form>
+          </div>
         </div>
 
         <!-- 내 정보 수정 container -->
@@ -43,7 +62,12 @@
               <div class="field">
                 <div class="label">이름</div>
                 <div class="control">
-                  <input class="input" id="fullNameInput" type="text" />
+                  <input
+                    class="input"
+                    id="fullNameInput"
+                    type="text"
+                    readonly
+                  />
                 </div>
               </div>
 
@@ -62,18 +86,6 @@
 
               <hr class="smallHr" />
               <div class="label">비밀번호 변경</div>
-              <div class="field">
-                <label class="smallTitle">현재 비밀번호</label>
-                <div class="control">
-                  <input
-                    class="input"
-                    id="passwordInput"
-                    type="password"
-                    placeholder="현재 비밀번호를 입력해주세요."
-                    autocomplete="off"
-                  />
-                </div>
-              </div>
 
               <div class="field">
                 <label class="smallTitle">새 비밀번호</label>
@@ -131,6 +143,7 @@
               </div>
             </div>
             <button class="submitEdit" id="submitEdit">수정하기</button>
+            <button class="delMyInfoBtn" id="delMyInfoBtn">탈퇴하기</button>
           </form>
         </div>
       </div>

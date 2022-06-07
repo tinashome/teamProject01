@@ -1,13 +1,11 @@
-import * as Api from "/api.js";
+import { get } from "/api.js";
 
 async function getProductList() {
   // API 요청
   try {
-    const productData = await Api.get("/api/productlist");
-    console.log(productData);
+    const productData = await get("/api/products");
+    //forEach 쓰기
     productData.map((e) => {
-      console.log(e);
-
       // innerHTML 쓰지 말기!!!! -> 수정해야함
       const productList = document.querySelector(".productList");
       // productList.appendChild();

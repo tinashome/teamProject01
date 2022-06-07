@@ -1,0 +1,126 @@
+/* section */
+section {
+  padding: 3rem 1.5rem;
+  margin-top: 70px;
+}
+
+/* 장바구니 > 주문결제 > 주문완료 */
+.shoppingCartHeader {
+  font-size: 20px;
+  border-bottom: 1px solid #999;
+  margin-bottom: 20px;
+}
+.shoppingCartHeader .shoppingCartChapter {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+/* orderSearch */
+.orderSearch {
+  background-color: #eff5fb;
+  color: #296fa8;
+  margin-top: 5rem;
+}
+
+.orderSearchHeaderBox {
+  display: flex;
+}
+.orderSearchHeader {
+  width: 16.66667%;
+  padding: 0.75rem;
+  text-align: center;
+  border-radius: 4px;
+}
+.orderSearchHeader:nth-child(2) {
+  width: 50%;
+}
+
+/* creatOrderInquiryWrapper */
+.creatOrderInquiryWrapper {
+  display: flex;
+  border-bottom: 1px solid #bbb;
+}
+.orderInfo {
+  width: 16.66667%;
+  padding: 0.75rem;
+  text-align: center;
+  color: #4a4a4a;
+  vertical-align: middle;
+  margin: auto;
+}
+.orderInfo:nth-child(2) {
+  width: 50%;
+}
+.cencleOrder {
+  background-color: #fff;
+
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 1em;
+  border: 1px solid transparent;
+  border-color: #dbdbdb;
+  width: 50%;
+  height: 3rem;
+}
+
+/* modal */
+.open {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+.modalBackground {
+  background-color: rgba(10, 10, 10, 0.86);
+  bottom: 0;
+  right: 0;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 9999;
+}
+.modalContent {
+  width: 640px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 9999;
+}
+.modalContentBox {
+  background-color: #fff;
+  padding: 1.25rem;
+  border-radius: 6px;
+}
+.modalContentBox > p {
+  text-align: center;
+}
+.checkBox {
+  display: flex;
+  justify-content: center;
+}
+.checkBox > button:first-of-type {
+  margin-right: 0.5rem;
+  background-color: #fff;
+  border-color: #dbdbdb;
+  margin-top: 1.5rem;
+  border: 1px solid transparent;
+  border-color: #dbdbdb;
+  width: 3rem;
+  height: 2rem;
+}
+.checkBox > button:last-child {
+  background-color: #00d1b2;
+  color: #fff;
+  margin-top: 1.5rem;
+  border-color: transparent;
+  width: 3rem;
+  height: 2rem;
+}
+.modalBtn {
+  height: 32px;
+  width: 32px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100000;
+  border: none;
+}

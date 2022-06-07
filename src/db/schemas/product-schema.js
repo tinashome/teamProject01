@@ -10,17 +10,38 @@ const ProductSchema = new Schema(
       type: Number,
       required: true,
     },
-    info: {
+    summary: {
+      type: String,
+    },
+    detail: {
       type: String,
       required: false,
     },
     company: {
-        type: String,
-        required: false,
+      type: String,
+      required: false,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    // TODO: 시간 있으면 추후 img, category는 populate로 전환
+    // 결과값은 그대로 일 것이므로 프론트에 영향X
+    categoryL: { 
+      type: String, 
+    },
+    categoryM: { 
+      type: String, 
+    },
+    categoryS: { 
+      type: String, 
+    },
+    img: {
+      type: String,
     },
   },
   {
-    collection: 'products',
+    collection: "products",
     timestamps: true,
   }
 );

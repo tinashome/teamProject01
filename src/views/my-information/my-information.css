@@ -1,0 +1,224 @@
+/* Default */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+li a {
+  list-style-type: none;
+  color: black;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  height: 980px;
+}
+
+.myInfo {
+  padding-top: 70px;
+  width: 80%;
+  margin: 0 auto;
+  height: 96%;
+}
+
+.categoryBar {
+  background-color: #f4dfba;
+  float: left;
+  width: 25%;
+  height: 100%;
+}
+
+.myInfoBox {
+  border: 1px solid rgb(224, 224, 224);
+  float: right;
+  width: 75%;
+  height: 100%;
+}
+
+.myTitle {
+  background-color: #91684a;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  color: whitesmoke;
+  font-weight: 600;
+}
+
+.categoryList li {
+  border-bottom: 0.5px solid white;
+  padding: 5px 0 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+}
+
+.categoryList li:hover {
+  background-color: whitesmoke;
+}
+
+/* 내 정보 수정 container */
+.myInfoBox {
+  padding: 25px;
+}
+
+.pageTitle {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+hr {
+  margin: 20px 0;
+  color: rgb(224, 224, 224);
+}
+
+.smallHr {
+  color: rgb(240, 240, 240);
+  /* opacity: 0.5; */
+  width: 56%;
+  margin: 15px 0;
+}
+
+.label {
+  width: 50%;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 8px 0 5px 0;
+}
+
+.smallTitle {
+  font-size: 16px;
+}
+
+.control {
+  margin: 8px 0 10px 0;
+}
+
+.field {
+  padding-top: 6px;
+}
+
+.input {
+  height: 35px;
+  border-color: lightgray;
+  border-radius: 10px;
+  width: 50%;
+  padding: 8px;
+}
+
+.searchBtn {
+  width: 72px;
+  height: 35px;
+  border: none;
+  background-color: rgb(157, 146, 135);
+  border-radius: 10px;
+  color: whitesmoke;
+  padding: 8px;
+}
+
+.detailAddressInput {
+  height: 35px;
+  border-color: lightgray;
+  border-radius: 10px;
+  width: 63%;
+  padding: 8px;
+}
+
+.submitEdit {
+  margin-top: 20px;
+  width: 20%;
+  height: 50px;
+  font-size: 17px;
+  color: whitesmoke;
+  background-color: rgb(157, 146, 135);
+  border: none;
+  border-radius: 10px;
+}
+
+/* 비밀번호 입력 모달창 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .background {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.7;
+}
+.modalBox {
+  position: absolute;
+  background-color: white;
+  width: 400px;
+  height: 200px;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  z-index: 100;
+}
+.hidden {
+  display: none;
+}
+.modalBox button {
+  width: 100px;
+  height: 26px;
+  margin: 0 auto;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(138, 126, 115);
+  color: whitesmoke;
+}
+.modalTitle {
+  margin: 10px;
+  text-align: center;
+}
+.inputPassword {
+  height: 40px;
+  border-color: lightgray;
+  border-radius: 10px;
+  width: 80%;
+  padding: 10px;
+  margin: 20px;
+}
+
+.delMyInfoBtn {
+  display: flex;
+  /* margin: 0 30px 20px; */
+  /* margin-top: ; */
+  /* float: right; */
+  /* text-align: center; */
+
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #91684a;
+  background-color: #91684a;
+  color: whitesmoke;
+  border-radius: 8px;
+  width: 60px;
+  height: 25px;
+}

@@ -1,0 +1,184 @@
+/* common */
+
+article {
+  width: 1000px;
+  height: 100vh;
+  margin: 50px auto;
+}
+i {
+  margin: 5px;
+}
+/* 장바구니 > 주문결제 > 주문완료 */
+.shoppingCartHeader {
+  font-size: 20px;
+  border-bottom: 1px solid #999;
+  margin-bottom: 20px;
+}
+.shoppingCartHeader .shoppingCartChapter {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+/* shoppingCartMainBox */
+.shoppingCartMainBox {
+  width: 800px;
+}
+.shoppingListBox {
+  width: 800px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
+}
+
+/* 전체삭제 | 선택삭제 */
+.shoppingListHeader {
+  display: flex;
+  margin-top: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #888;
+}
+.selectedProduct {
+  display: flex;
+}
+.checkbox {
+  display: flex;
+}
+.checkbox p {
+  position: relative;
+  top: -3px;
+  left: 10px;
+}
+#deletePart {
+  position: relative;
+  left: 20px;
+  top: -5px;
+}
+.seperator {
+  position: relative;
+  top: -8px;
+  left: 15px;
+}
+
+/* 장바구니에 담은 품목 */
+.selectedProduct {
+  width: 800px;
+  margin: 10px 0 0 10px;
+  padding: 10px;
+}
+.selectedProduct img {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+}
+
+.modifyProductQuantity {
+  width: 120px;
+  height: 40px;
+  font-size: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  position: relative;
+  top: 100px;
+  left: -130px;
+}
+.SelectedProductName {
+  width: 180px;
+  height: 80px;
+  font-size: 24px;
+  font-weight: 500;
+  position: relative;
+  top: 20px;
+  left: 30px;
+}
+
+/* 장바구니에 담은 품목 수량 추가, 삭제 */
+.minusProductQuantity,
+.plusProductQuantity {
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border: 1px solid #999;
+  line-height: 15px;
+  border-radius: 50px;
+}
+.productQuantity,
+.productQuantityNumb {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+/* 금액 X 수량 */
+.selectedPrice {
+  width: 230px;
+  display: flex;
+  font-size: 20px;
+  position: relative;
+  top: 50px;
+  left: -50px;
+}
+
+/* 결제정보 */
+.payBox {
+  width: 300px;
+  height: 350px;
+  border-radius: 10px;
+  background-color: #f4dfba;
+  padding: 10px;
+  position: absolute;
+  top: 220px;
+  left: 1050px;
+  box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
+}
+
+.payInfoHeader {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  font-weight: bold;
+  font-size: 20px;
+  margin: auto;
+  border-bottom: 1px solid #493323;
+}
+
+.info {
+  width: 250px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+.payTotalPricePart {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  font-weight: bold;
+  font-size: 20px;
+  border-top: 1px solid #493323;
+}
+
+#buyButton {
+  width: 90%;
+  height: 60px;
+  margin: 15px auto 0;
+  color: #fff;
+  font-weight: bold;
+  font-size: 26px;
+  text-align: center;
+  line-height: 55px;
+  border-radius: 10px;
+  background-color: #91684a;
+  cursor: pointer;
+}
+#buyButton:hover {
+  background-color: #493323;
+}
+
+.deleteIcon {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  height: 30px;
+  cursor: pointer;
+}

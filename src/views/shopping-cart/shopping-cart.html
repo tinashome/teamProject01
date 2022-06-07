@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>이상한 나라의 초콜릿</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="shopping-cart.css" />
+    <script src="shopping-cart.js" type="module" defer></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="container mt-3">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="../elice-rabbit.png" width="30" height="30" />
+            <span class="has-text-link">이상한 나라의 초콜릿</span>
+          </a>
+
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+            <ul id="navbar">
+              <li><a href="/login">로그인</a></li>
+              <li><a href="/register">회원가입</a></li>
+              <li>
+                <a href="#cart" aria-current="page">
+                  <span class="icon">
+                    <i class="fas fa-cart-shopping"></i>
+                  </span>
+                  <span>카트</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 메인 -->
+    <main role="main">
+      <article>
+
+        <!-- 장바구니 > 주문결제 > 주문완료  -->
+        <div class="shoppingCartHeader">
+          <p>
+            <span class="shoppingCartChapter">장바구니</span> > 주문결제 > 주문완료
+          </p>
+        </div>
+        <div class="shoppingCartMainBox">
+
+        <!-- 전체삭제 | 선택삭제 -->
+          <div class="shoppingListHeader">
+            <label class="checkbox" >
+              <input type="checkbox" id="allSelectedCheckbox" checked = "true">
+              <p>전체선택</p>
+            </label>
+            <label class="seperator">
+              <span>|</span>
+            </label>
+            <label id="deletePart">
+              <p>선택삭제</p>
+            </label>
+          </div>
+          <div class="shoppingListBox">
+            <!-- 장바구니 부분 박스 / js에서 구현 -->
+            </div>
+        <!-- 결제정보 -->
+        <div class="payBox">
+          <div class="payInfoHeader">
+            <p>결제정보</p>
+          </div>
+          <div class="payInfo">
+            <div class="info">
+              <p>상품수</p>
+              <p><span id="payProductQuantity"></span>개</p>
+            </div>
+            <div class="info">
+              <p>상품금액</p>
+              <p><span id="payProductPrice"></span>원</p>
+            </div>
+            <div class="info">
+              <p>배송비</p>
+              <p><span id="payShippingPrice"></span>원</p>
+            </div>
+          </div>
+          <div class="payTotalPricePart">
+            <p>총 결제금액</p>
+            <p><span id="payTotalPrice"></span>원</p>
+          </div>
+          <div id="buyButton">구매하기</div>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
+
+

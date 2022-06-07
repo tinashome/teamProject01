@@ -11,11 +11,6 @@
       sizes="16x16"
       href="/elice-rabbit-favicon.png"
     />
-    <!-- bulma css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
     <!-- 폰트 어썸: 아이콘 -->
     <script
       defer
@@ -25,56 +20,54 @@
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="home.css" />
     <script src="home.js" type="module" defer></script>
+    <script src="home.js" type="text/javascript"></script>
+    <script src="../navigation/navigation.js" type="module"></script>
+    <link rel="stylesheet" href="../navigation/navigation.css" />
   </head>
   <body>
-    <!-- 헤더 -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="container mt-3">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-n팀</span>
-          </a>
+    <div class="container">
+      <nav class="nav"></nav>
+      <div class="menu"></div>
 
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
+      <!-- Image Slider -->
+      <div class="slider">
+        <div class="slides">
+          <div class="slide"><img src="../imgs/image1.jpg" alt="" /></div>
+          <div class="slide"><img src="../imgs/image2.jpg" alt="" /></div>
+          <div class="slide"><img src="../imgs/image3.jpg" alt="" /></div>
         </div>
 
-          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-            <ul id="navbar">
-              <li><a href="/login">로그인</a></li>
-              <li><a href="/register">회원가입</a></li>
-              <li>
-                <a href="#cart" aria-current="page">
-                  <span class="icon">
-                    <i class="fas fa-cart-shopping"></i>
-                  </span>
-                  <span>카트</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+        <div class="dots">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+
+        <div class="arrow-container">
+          <button class="arrow left" onclick="nextSlides(-1)">
+            <i class="fa-solid fa-chevron-left fa-3x"></i>
+          </button>
+          <button class="arrow right" onclick="nextSlides(1)">
+            <i class="fa-solid fa-chevron-right fa-3x"></i>
+          </button>
         </div>
       </div>
-    </nav>
 
-    <div class="div-container">
-      <div class="landing" id="landingDiv">
-        <h1>랜딩 페이지</h1>
+      <div class="btnList">
+        <button><a href="/addproduct">상품 추가</a></button>
+        <button><a href="/addcategory">카테고리 추가</a></button>
+        <button><a href="/detail">상품 상세페이지</a></button>
+        <button><a href="/productlist">상품 목록</a></button>
+        <button><a href="/addproduct">상품추가</a></button>
       </div>
-      <div class="greeting" id="greetingDiv">
-        <h1>안녕하세요!</h1>
+
+      <div class="btnList">
+        <button><a href="/order">주문</a></button>
+        <button><a href="/ordercomplete">주문 완료</a></button>
+        <button><a href="/orderlist">주문 목록</a></button>
+        <button><a href="/ordermanage">주문 관리</a></button>
+        <button><a href="/managingpage">매니저페이지</a></button>
       </div>
     </div>
-
   </body>
 </html>

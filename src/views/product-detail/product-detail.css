@@ -1,8 +1,8 @@
 /* common */
-p{
+p {
   margin: 20px 0;
 }
-button{
+button {
   width: 200px;
   height: 60px;
   font-size: 18px;
@@ -14,7 +14,7 @@ button{
 }
 
 /* section */
-section{
+.productContainer {
   width: 1000px;
   margin: 50px auto;
   display: grid;
@@ -22,43 +22,41 @@ section{
 }
 
 /* chocolate image */
-.chocolate1{
+#chocolate {
   width: 500px;
   height: 500px;
 }
 
 /* detail information */
-.detailedInfo{
+.detailedInfo {
   width: 500px;
   position: relative;
   left: 30px;
-
 }
-#productName{
+#productName {
   font-size: 30px;
 }
-#price{
+#price {
   font-size: 26px;
   font-weight: bold;
 }
-#productDescription{
+#productDescription {
   font-size: 20px;
 }
-.buttonGroup{
+.buttonGroup {
   position: absolute;
-  bottom: 0;
+  top: 500px;
 }
-#addCart{
-  background-color: #ffe08a;
+#addCart {
+  background-color: #f4dfba;
 }
-#addCart:hover{
-  background-color: #ffdc7d;
-
+#addCart:hover {
+  background-color: #ffdf91;
 }
-#buyDirect{
-  background-color: #3e8ed0;
+#buyDirect {
+  background-color: #91684a;
   color: #ffffff;
 }
-#buyDirect:hover{
-  background-color: #3488ce;
+#buyDirect:hover {
+  background-color: #493323;
 }

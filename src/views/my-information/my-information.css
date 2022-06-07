@@ -38,7 +38,7 @@ a {
 }
 
 .categoryBar {
-  background-color: rgb(235, 235, 235);
+  background-color: #f4dfba;
   float: left;
   width: 25%;
   height: 100%;
@@ -52,7 +52,7 @@ a {
 }
 
 .myTitle {
-  background-color: rgb(138, 126, 115);
+  background-color: #91684a;
   height: 80px;
   display: flex;
   justify-content: center;
@@ -208,9 +208,17 @@ hr {
 
 .delMyInfoBtn {
   display: flex;
+  /* margin: 0 30px 20px; */
+  /* margin-top: ; */
+  /* float: right; */
+  /* text-align: center; */
+
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
+  border: 1px solid #91684a;
+  background-color: #91684a;
+  color: whitesmoke;
+  border-radius: 8px;
+  width: 60px;
+  height: 25px;
 }

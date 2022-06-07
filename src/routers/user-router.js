@@ -141,7 +141,7 @@ userRouter.delete("/:userId", loginRequired, async function (req, res, next) {
 
     const deleteUser = await userService.deleteUser(userInfoRequired);
 
-    res.status(200);
+    res.status(200).json("OK");
   } catch (error) {
     next(error);
   }

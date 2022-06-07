@@ -1,3 +1,4 @@
+import * as Api from "/api.js";
 const button = document.getElementById("buyButton");
 const postalCodeInput = document.querySelector("#postalCode");
 const searchAddressButton = document.querySelector("#searchAddressButton");
@@ -13,10 +14,13 @@ const orderTotal = document.getElementById("payTotalPrice");
 
 const data = [
   {
-    productsTitle: "2020",
-    productsTotal: "dd",
-    deliveryFee: "준비중",
-    orderTotal: "주문취소",
+    productId: "629929b4b4f1aba828940ce1",
+    productsTitle: "초콜릿",
+    productsTotal: "18000",
+    productsPrice: "6000",
+    productsCnt: "3",
+    deliveryFee: "2000",
+    orderTotal: "20000",
   },
 ];
 
@@ -27,9 +31,9 @@ data.forEach((element) => {
   const order = element.orderTotal;
 
   productsTitle.textContent = title;
-  productsTotal.textContent = title;
-  deliveryFee.textContent = title;
-  orderTotal.textContent = title;
+  productsTotal.textContent = total;
+  deliveryFee.textContent = fee;
+  orderTotal.textContent = order;
 });
 
 // 주소찾기
@@ -88,21 +92,9 @@ async function doCheckout() {
   const address1 = address1Input.value;
   const address2 = address2Input.value;
   const request = document.getElementById("requestSelectBox").value;
-
   // 입력이 안 되어 있을 시
-  if (!receiverName || !receiverPhoneNumber || !postalCode || !address2)
-    return alert("배송지 정보를 모두 입력해 주세요.");
-
-  // 테스트용
-  const data = {
-    receiverName,
-    receiverPhoneNumber,
-    postalCode,
-    address1,
-    address2,
-    request,
-  };
-
+  // if (!receiverName || !receiverPhoneNumber || !postalCode || !address2)
+  //   return alert("배송지 정보를 모두 입력해 주세요.");
   // JSON 만듦
   // const dataJson = JSON.stringify(data)
 
@@ -117,6 +109,44 @@ async function doCheckout() {
   //   body: dataJson,
   // });
   alert("결제완료");
-  window.location.href = "../order-complete/order-comple.html";
+
+  let sendInfo = {
+    shipAddress: {
+      postalCode: postalCode,
+      address1: address1,
+      address2: address2,
+      receiverName: receiverName,
+      receiverPhoneNumber: receiverPhoneNumber,
+    },
+    request: request,
+    orderItems: [
+      {
+        productId: "629929b4b4f1aba828940ce1",
+        productName: data[0].productsTitle,
+        price: Number(data[0].productsPrice),
+        quantity: Number(data[0].productsCnt),
+        totalPrice: Number(data[0].productsTotal),
+      },
+    ],
+    totalPrice: Number(data[0].orderTotal),
+    status: "결제완료",
+  };
+
+  // window.location.href = "../order-complete/order-comple.html";
+
+  try {
+    const fff = await Api.post("/api/orders", sendInfo);
+    // displaying(fff);
+    // 로그인 페이지 이동
+    // 응답을 받으면 400 코드 등 뜬다 이걸 이용해서 만들기
+    // window.location.href = "/order-complete";
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
 }
 button.addEventListener("click", doCheckout);
+
+// function displaying(data) {
+//   button.innerText(data);
+// }

@@ -27,14 +27,14 @@ a {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  height: 140vh;
+  height: 980px;
 }
 
 .myInfo {
   padding-top: 70px;
   width: 80%;
   margin: 0 auto;
-  /* height: 96%; */
+  height: 96%;
 }
 
 .categoryBar {
@@ -204,4 +204,13 @@ hr {
   width: 80%;
   padding: 10px;
   margin: 20px;
+}
+
+.delMyInfoBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }

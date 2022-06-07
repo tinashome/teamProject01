@@ -19,9 +19,9 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="add-product.css" />
-    <link rel="stylesheet" href="../../../navigation/navigation.css" />
+    <link rel="stylesheet" href="../navigation/navigation.css" />
     <script src="add-product.js" type="module" defer></script>
-    <script src="../../../navigation/navigation.js" type="module"></script>
+    <script src="../navigation/navigation.js" type="module"></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -33,31 +33,31 @@
     <main role="main">
       <div class="addProductHeader">
         <h1>제품판매</h1>
-        <hr>
+        <hr />
       </div>
       <form method="post" enctype="multipart/form-data">
         <h2>제품을 판매해 보세요</h2>
 
         <div class="field">
           <label for="productName" class="labelName"> 제품 이름</label>
-          <input type="text" placeholder="다크 초콜릿" name="name">
+          <input type="text" placeholder="다크 초콜릿" name="name" />
         </div>
 
         <div class="field">
           <label for="category" class="labelName"> 카테고리</label>
           <select name="categoryS" id="selectCategory">
-            <option> 카테고리를 선택해 주세요. </option>
-            <option value="HandMade"> HandMade </option>
-            <option value="milka"> Milka </option>
-            <option value="Ghana"> Ghana </option>
-            <option value="Kinder"> Kinder </option>
-            <option value="Ferrero"> Ferrero Rocher </option>
+            <option>카테고리를 선택해 주세요.</option>
+            <option value="HandMade">HandMade</option>
+            <option value="milka">Milka</option>
+            <option value="Ghana">Ghana</option>
+            <option value="Kinder">Kinder</option>
+            <option value="Ferrero">Ferrero Rocher</option>
           </select>
         </div>
-        
+
         <div class="field">
           <label for="madeFrom" class="labelName"> 제조사 </label>
-          <input type="text" placeholder="00 초콜릿 제조 (주)" name="company">
+          <input type="text" placeholder="00 초콜릿 제조 (주)" name="company" />
         </div>
 
         <div class="textArea">
@@ -74,7 +74,13 @@
           <label for="image" class="labelName"> 제품 사진 </label>
           <div class="file">
             <label class="fileLabel">
-              <input type="file" class="inputFile" name="upload">
+              <input
+                type="file"
+                accept=".png, .jpeg, .jpg"
+                id="inputFile"
+                name="upload"
+                on
+              />
               <span class="uploadContainer">
                 <span class="fileIcon">
                   <i class="fas fa-upload"></i>
@@ -88,19 +94,24 @@
 
         <div class="field">
           <label for="productNumber" class="labelName"> 재고 수 </label>
-          <input type="number" placeholder="10" name="quantity">
+          <input type="number" placeholder="10" name="quantity" />
         </div>
 
         <div class="field">
           <label for="productPrice" class="labelName"> 가격 </label>
-          <input type="number" placeholder="10000" name="price" >
+          <input type="number" placeholder="10000" name="price" />
         </div>
-        
-        <input type="submit" id="addButton" value="제품 판매하기">
-        
+
+        <input type="submit" id="addButton" value="제품 판매하기" />
       </form>
     </main>
+
+    <!-- <script>
+      function handlePath(input){
+        const file = input.files[0];
+        const makingURL = URL.createObjectURL(file);
+        console.log(makingURL);
+      }
+    </script> -->
   </body>
 </html>
-
-

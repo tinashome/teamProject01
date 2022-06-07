@@ -21,6 +21,7 @@ viewsRouter.use("/order", serveStatic("order"));
 viewsRouter.use("/ordercomplete", serveStatic("order-complete"));
 viewsRouter.use("/orderlist", serveStatic("order-list"));
 viewsRouter.use("/ordermanage", serveStatic("order-manage"));
+viewsRouter.use("/managingpage", serveStatic("managing-page"));
 
 //테스트용입니다.
 viewsRouter.use("/1", serveStatic("test"));

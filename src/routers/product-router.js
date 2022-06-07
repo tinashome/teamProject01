@@ -11,6 +11,7 @@ const productRouter = Router();
 // 상품등록 api (/api/product/register로 요청해야 함.)
 productRouter.post('/product', upload.single("upload"), async (req, res, next) => {
   try {
+    console.log(req);
     if(!req.file) {
       throw new Error(
         `파일이 첨부되지 않았습니다. form의 enctype="multipart/form-data"으로 지정했는지, 내부의 input 태그의 name인자를 upload로 지정해주세요.`

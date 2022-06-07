@@ -38,6 +38,7 @@ function itemList() {
   aLoginTag.appendChild(textLogin);
 
   const aLogoutTag = document.createElement("a");
+  aLogoutTag.setAttribute("class", "logoutBtn");
   const textLogout = document.createTextNode("로그아웃");
   aLogoutTag.setAttribute("href", "/");
   aLogoutTag.appendChild(textLogout);
@@ -45,6 +46,11 @@ function itemList() {
   // 로그인 되었을 경우 (토큰 값 존재)
   if (getToken !== null) {
     liLoginTag.appendChild(aLogoutTag);
+    // 로그아웃 버튼 누를 시
+    liLoginTag.addEventListener("click", () => {
+      window.location.reload();
+      sessionStorage.clear();
+    });
   } else {
     // 로그인이 되어 있지 않을 경우
     liLoginTag.appendChild(aLoginTag);

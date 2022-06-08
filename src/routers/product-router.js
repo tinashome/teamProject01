@@ -19,16 +19,6 @@ productRouter.post('/product', upload.single("upload"), async (req, res, next) =
       );
     }
 
-    // json아닌 form으로 받으므로 하단 코드를 사용치 않음
-
-    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
-    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-    // if (is.emptyObject(req.body)) {
-    //   throw new Error(
-    //     'headers의 Content-Type을 application/json으로 설정해주세요'
-    //   );
-    // }
-
     // req (request)의 body 에서 데이터 가져오기
     const name = req.body.name;
     const price = Number(req.body.price);
@@ -36,9 +26,8 @@ productRouter.post('/product', upload.single("upload"), async (req, res, next) =
     const detail = req.body.detail;
     const company = req.body.company;
     const quantity = Number(req.body.quantity);
-    const categoryL = req.body.categoryL;
-    const categoryM = req.body.categoryM;
-    const categoryS = req.body.categoryS;
+    // 카테고리는 id값으로 들어와야한다.
+    const category = req.body.category;
     const img = req.file.path.replaceAll("\\", "/"); 
 
     // 위 데이터를 유저 db에 추가하기
@@ -49,9 +38,7 @@ productRouter.post('/product', upload.single("upload"), async (req, res, next) =
       detail,
       company,
       quantity,
-      categoryL,
-      categoryM,
-      categoryS,
+      category,
       img
     });
 
@@ -117,29 +104,13 @@ productRouter.patch(
       const detail = req.body.detail;
       const company = req.body.company;
       const quantity = Number(req.body.quantity);
-      const categoryL = req.body.categoryL;
-      const categoryM = req.body.categoryM;
-      const categoryS = req.body.categoryS;
+      const category = req.body.category;
       let img;
       if(req.file) {
         img = req.file.path.replaceAll("\\", "/"); 
       } else {
         img = undefined;
       }
-
-      // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
-      // const currentPassword = req.body.currentPassword;
-
-      // currentPassword 없을 시, 진행 불가
-      // if (!currentPassword) {
-      //   throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
-      // }
-
-      // const userInfoRequired = { userId, currentPassword };
-
-      // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
-      // 보내주었다면, 업데이트용 객체에 삽입함.
-
 
       let toUpdate = {};
       // 수정용으로 들어온 데이터의 유무 체크, 후에 있는 데이터만 patch로 수정한다.
@@ -151,9 +122,7 @@ productRouter.patch(
           ...(detail && { detail }),
           ...(company && { company }),
           ...(quantity && { quantity }),
-          ...(categoryL && { categoryL }),
-          ...(categoryM && { categoryM }),
-          ...(categoryS && { categoryS }),
+          ...(category && { category }),
           ...(img && { img }),
         };
       } else {
@@ -164,9 +133,7 @@ productRouter.patch(
           ...(detail && { detail }),
           ...(company && { company }),
           ...(quantity && { quantity }),
-          ...(categoryL && { categoryL }),
-          ...(categoryM && { categoryM }),
-          ...(categoryS && { categoryS }),
+          ...(category && { category }),
         };
       }
 

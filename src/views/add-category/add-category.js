@@ -24,5 +24,5 @@ form.addEventListener("submit", (e) => {
         break;
     }
   }
-  Api.post("/api/product", formData);
+  Api.postImg("/api/product", formData);
 });

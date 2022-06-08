@@ -24,7 +24,7 @@ app.use('/api/users', userRouter);
 app.use('/api', productRouter);
 app.use('/api', categoryRouter);
 app.use('/api/orders', orderRouter);
-app.use('/boards', boardRouter);
+app.use('/board', boardRouter);
 
 
 // 순서 중요 (errorHandler은 다른 일반 라우팅보다 나중에 있어야 함)

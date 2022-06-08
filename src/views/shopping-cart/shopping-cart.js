@@ -7,12 +7,15 @@ const totalPriceArrForPay = [];
 //localStorage의 데이터를 받아오기
 //printArr에 배열로 데이터들을 저장하여 반복문을 돌면서 데이터 펴기
 const printArr = [];
-printArr.push(Object.keys(localStorage));
+const localStorageItem = JSON.parse(localStorage.getItem("cartList"));
+for (let i = 0; i < localStorageItem.length; i++) {
+  printArr.push(localStorageItem[i]);
+}
 
 const displayData = () => {
-  for (let i = 0; i < printArr[0].length; i++) {
-    const data = JSON.parse(localStorage.getItem(printArr[0][i]));
-    console.log(data);
+  for (let i = 0; i < printArr.length; i++) {
+    // const data = JSON.parse(localStorage.getItem(printArr[0][i]));
+    // console.log(data);
     const displaying = document.querySelector(".shoppingListBox");
     const productContainer = document.createElement("div");
     productContainer.classList.add("selectedProduct");
@@ -26,13 +29,17 @@ const displayData = () => {
     //inputCheck.onclick = makingOrder;
 
     const pushProductImage = document.createElement("img");
-    pushProductImage.src = `${data.img}`;
+    pushProductImage.src = printArr[i].img;
     pushProductImage.classList.add("chocolateImg");
     pushProductImage.alt = "chocolate1";
 
     const pushProductName = document.createElement("div");
     pushProductName.classList.add("SelectedProductName");
-    pushProductName.textContent = `${data.name}`;
+    pushProductName.textContent = printArr[i].name;
+    const id = document.createElement("span");
+    id.classList.add("id");
+    id.textContent = printArr[i].id;
+    id.style.display = "none";
 
     const modifynumb = document.createElement("div");
     modifynumb.classList.add("modifyProductQuantity");
@@ -62,7 +69,7 @@ const displayData = () => {
     priceUnit.textContent = "원";
     const priceSpan = document.createElement("span");
     priceSpan.classList.add("productPriceSpan");
-    priceSpan.textContent = `${data.price}`;
+    priceSpan.textContent = printArr[i].price;
     wonPrice.appendChild(priceSpan);
     wonPrice.appendChild(priceUnit);
     const xIcon = document.createElement("i");
@@ -79,7 +86,7 @@ const displayData = () => {
     totalPriceUnit.textContent = "원";
     const totalPriceSpan = document.createElement("span");
     totalPriceSpan.classList.add("totalPrice");
-    totalPriceSpan.textContent = `${data.price}`;
+    totalPriceSpan.textContent = printArr[i].price;
     totalWonPrice.appendChild(totalPriceSpan);
     totalWonPrice.appendChild(totalPriceUnit);
 
@@ -94,6 +101,7 @@ const displayData = () => {
     productContainer.appendChild(inputCheck);
     productContainer.appendChild(pushProductImage);
     productContainer.appendChild(pushProductName);
+    productContainer.appendChild(id);
     modifynumb.appendChild(minusBtn);
     modifynumb.appendChild(changeQuantity);
     modifynumb.appendChild(plusBtn);
@@ -109,7 +117,7 @@ const displayData = () => {
 
     displaying.appendChild(productContainer);
 
-    totalPriceArrForPay.push(Number(data.price));
+    totalPriceArrForPay.push(Number(printArr[i].price));
   }
 };
 
@@ -121,7 +129,7 @@ const totalPriceForPay = totalPriceArrForPay.reduce(
   0
 );
 const shippingPrice = 3000;
-payProductQuantity.innerText = printArr[0].length;
+payProductQuantity.innerText = printArr.length;
 payProductPrice.innerText = totalPriceForPay;
 payShippingPrice.innerText = shippingPrice;
 payTotalPrice.innerText =
@@ -133,6 +141,7 @@ function plusQuantity(item) {
   let targetNumber = item.path[1].querySelector(".productQuantity");
   let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
   let selectedPrice = item.path[2].querySelector(".productPriceSpan");
+
   innerNumb++;
 
   targetNumber.textContent = innerNumb;
@@ -246,8 +255,12 @@ function checkSelectAll() {
 
 // 휴지통 버튼을 누르면 localStorage에서 데이터 삭제
 function deleteData(item) {
-  const targetName = Object.keys(item.path[10].localStorage);
-  localStorage.removeItem(targetName);
+  const targetid = item.path[2].querySelector(".id").innerText;
+  const newStorageItem = [];
+  const findNotDelete = printArr.find((e) => e.id !== targetid);
+  newStorageItem.push(findNotDelete);
+  localStorage.clear();
+  localStorage.setItem("cartList", JSON.stringify(newStorageItem));
   location.reload();
 }
 
@@ -256,26 +269,26 @@ const deletePart = document.querySelector("#deletePart");
 deletePart.addEventListener("click", deletePartFunc);
 
 const deleteChecked = document.querySelectorAll(".selectedCheckBox:checked");
-function deletePartFunc(input) {
+function deletePartFunc() {
   const checkedList = [];
   for (let i = 0; i < deleteChecked.length; i++) {
-    checkedList.push(
-      Object.keys(deleteChecked[i].ownerDocument.defaultView.localStorage)
-    );
+    if (deleteChecked[i].checked == true) {
+      checkedList.push(
+        deleteChecked[i].parentNode.querySelector(".id").innerText
+      );
+    }
   }
   console.log(checkedList);
-  // const newStorageItem = [];
-  // const findNotDelete = printArr[0].find((e) => {
-  //   for (let j = 0; j < checkedList.length; j++) {
-  //     e.name !== checkedList[j];
-  //   }
-  // });
-  // newStorageItem.push(findNotDelete);
+  const newStorageItem = [];
+  for (let j = 0; j < checkedList.length; j++) {
+    const findNotDelete = printArr.find((e) => e.id !== checkedList[j]);
+    newStorageItem.push(findNotDelete);
+  }
 
-  // localStorage.clear();
-  // localStorage.setItem("cartList", JSON.stringify(newStorageItem));
+  localStorage.clear();
+  localStorage.setItem("cartList", JSON.stringify(newStorageItem));
 
-  // alert("삭제되었습니다.");
+  alert("삭제되었습니다.");
 
-  // location.reload();
+  location.reload();
 }

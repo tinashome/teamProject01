@@ -1,0 +1,93 @@
+/* Default */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+img {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.usersContainer {
+  padding-top: 70px;
+  margin: 0 auto;
+  width: 85%;
+}
+
+.smallTitle {
+  font-size: 25px;
+  margin: 20px;
+}
+
+hr {
+  opacity: 0.6;
+}
+
+.numberBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 110px;
+}
+
+.numTitle {
+  padding: 0 160px;
+  text-align: center;
+  font-size: 16px;
+  color: grey;
+}
+
+.num {
+  font-size: 25px;
+  color: black;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 70px;
+  border-collapse: collapse;
+}
+th {
+  background-color: #91684a;
+  color: whitesmoke;
+}
+td,
+tr,
+th {
+  border-bottom: 1px solid rgb(163, 163, 163);
+  padding: 18px;
+  text-align: center;
+}
+
+/* 권한 select */
+select {
+  width: 120px;
+  height: 35px;
+  text-align: center;
+  background-color: whitesmoke;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+.deleteBtn {
+  width: 120px;
+  height: 35px;
+  text-align: center;
+  background-color: whitesmoke;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 0.9px solid black;
+}

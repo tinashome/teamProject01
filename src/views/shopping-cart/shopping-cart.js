@@ -191,6 +191,7 @@ function plusQuantity(item) {
   let totalQuantityForPay = 0;
   findQuantity.forEach((e) => (totalQuantityForPay += e));
   payProductQuantity.innerText = totalQuantityForPay;
+  localStorage.setItem("totalQuantity", totalQuantityForPay);
 
   // const selectedProduct = document.querySelectorAll(".productQuantity");
   // const quantityArr = [];
@@ -214,6 +215,7 @@ function plusQuantity(item) {
     (prev, next) => Number(prev) + Number(next),
     0
   );
+  console.log(sumOfTotalPrice);
   payProductPrice.innerText = sumOfTotalPrice;
   payTotalPrice.innerText = sumOfTotalPrice + shippingPrice;
 }
@@ -253,17 +255,17 @@ function minusQuantity(item) {
   findQuantity.forEach((e) => (totalQuantityForPay += e));
   payProductQuantity.innerText = totalQuantityForPay;
   localStorage.setItem("totalQuantity", totalQuantityForPay);
-
+  const productQuantity =
+    item.path[2].querySelector(".productQuantity").innerText;
   // 마이너스 수량으로 넘어가지 않도록 구현
   const minus = item.path[1].querySelector(".minusProductQuantity");
-  const changeNum = targetNumber.innerText;
-  if (changeNum < 2) {
+  if (findTarget.quantity < 2) {
     minus.disabled = true;
     return;
   } else {
     minus.disabled = false;
   }
-  payProductQuantity.innerText = totalPrice.innerText;
+  //payProductQuantity.innerText = totalPrice.innerText;
 
   // const selectedProduct = document.querySelectorAll(".productQuantity");
   // const quantityArr = [];
@@ -286,6 +288,7 @@ function minusQuantity(item) {
     (prev, next) => Number(prev) + Number(next),
     0
   );
+  console.log(sumOfTotalPrice);
   payProductPrice.innerText = sumOfTotalPrice;
   payTotalPrice.innerText = sumOfTotalPrice + shippingPrice;
 }
@@ -351,3 +354,8 @@ function deletePartFunc() {
 
   location.reload();
 }
+
+const buyButton = document.querySelector("#buyButton");
+buyButton.addEventListener("click", () => {
+  window.location.href = "/order";
+});

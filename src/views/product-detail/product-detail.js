@@ -35,6 +35,7 @@ addCartBtn.addEventListener("click", async (e) => {
   // localStorage에 저장되는 정보입니다.
   // 제품명을 key 값으로 가지며, 제품명과 가격을 value로 가집니다.
   // 추후 수량기능도 추가하여 반영할 예정입니다.
+  //
 
   const thisData = {};
   thisData.name = data.name;

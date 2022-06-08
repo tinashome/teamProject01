@@ -83,7 +83,7 @@ async function itemList() {
   const liPageTag = document.createElement("li");
   const aPageTag = document.createElement("a");
   const textPage = document.createTextNode("페이지 관리");
-  aPageTag.setAttribute("href", "/pagemanage");
+  aPageTag.setAttribute("href", "/managingpage");
   aPageTag.appendChild(textPage);
   liPageTag.appendChild(aPageTag);
 
@@ -147,11 +147,16 @@ menu.appendChild(barMenu);
 // 토글 형식으로 메뉴 접었다 펴기
 const menuToggle = document.querySelector(".hamburger");
 // menu 카테고리 불러오기
-const menuItemTag = itemList();
+const menuItemTag = await itemList();
 function toggleClick() {
   barMenu.appendChild(menuItemTag[0]);
   barMenu.appendChild(menuItemTag[1]);
   barMenu.appendChild(menuItemTag[2]);
+
+  if (menuItemTag.length === 5) {
+    barMenu.appendChild(menuItemTag[3]);
+    barMenu.appendChild(menuItemTag[4]);
+  }
 
   menu.classList.toggle("hidden");
 }

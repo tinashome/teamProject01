@@ -35,8 +35,6 @@ class ProductService {
 
   // 상품 정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async setProduct(productId, toUpdate) {
-    // 객체 destructuring
-    // const { userId, currentPassword } = userInfoRequired;
 
     // 우선 해당 id의 유저가 db에 있는지 확인
     let product = await this.productModel.findById(productId);
@@ -51,6 +49,7 @@ class ProductService {
       productId,
       update: toUpdate,
     });
+    console.log(product);
 
     return product;
   }

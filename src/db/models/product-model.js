@@ -12,6 +12,11 @@ export class ProductModel {
 
   async findById(productId) {
     const product = await Product.findOne({ _id: productId });
+    
+    // img src에서 인식할 수 있도록 수정해서 프론트로 보냄
+    product.img = product.img.split("/views")[1];
+    console.log(product);
+
     return product;
   }
 
@@ -22,6 +27,11 @@ export class ProductModel {
 
   async findAll() {
     const products = await Product.find({});
+
+    // img src에서 인식할 수 있도록 수정해서 프론트로 보냄
+    products.forEach((product) => product.img = product.img.split("/views")[1])
+    console.log(products);
+
     return products;
   }
 

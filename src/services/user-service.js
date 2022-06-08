@@ -188,7 +188,34 @@ class UserService {
     // const UserId = _id.toString();
     const UserId = _id;
     return UserId;
-  }  
+  }
+
+    // 일반유저의 권한을 관리 권한으로 변경
+  async setRole(userEmail) {
+
+      // 우선 해당 id의 유저가 db에 있는지 확인
+      let user = await this.userModel.findByEmail(userEmail);
+
+      // db에서 찾지 못한 경우, 에러 메시지 반환
+      if (!user) {
+        throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+      }
+      if(user.role === "admin"){
+        throw new Error('변경전(관리자)과 변경후(관리자)의 권한이 같습니다.');
+      }
+      const toUpdate = await{ role : "admin"};
+
+      const userId = user._id;
+      // 이제 주소와,연락처 정보 변경 시작
+    const setRoleUser = await this.userModel.update({
+        userId,
+        update: toUpdate,
+      });
+      const { _id, email, fullName, role, createdAt } = setRoleUser;
+      const result = {_id, email, fullName, role, createdAt};
+  
+      return result;
+    }
 
   // userId로 사용자 정보를 받음.
   async getUserInfo(userId) {

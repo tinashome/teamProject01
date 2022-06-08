@@ -60,21 +60,44 @@ section {
 .checkBar {
   width: 10%;
 }
+
 .creatOrderInquiryWrapper {
   display: flex;
   border-bottom: 1px solid #bbb;
 }
-.checkInfo {
-  width: 10%;
+.select {
+  border-radius: 4px;
+  height: 2.5em;
+  border: 1px solid transparent;
+  border-color: #dbdbdb;
+
+  height: 3rem;
+
+  text-align: center;
+  font-size: 1rem;
+}
+
+.gettingReady {
+  font-size: 1rem;
+}
+
+.delivering {
+  font-size: 1rem;
+}
+
+.completion {
+  font-size: 1rem;
+}
+.orderInfo {
+  width: 16.66667%;
   padding: 0.75rem;
   text-align: center;
   color: #4a4a4a;
   vertical-align: middle;
   margin: auto;
 }
-
-.orderInfo {
-  width: 16.66667%;
+.checkInfo {
+  width: 10%;
   padding: 0.75rem;
   text-align: center;
   color: #4a4a4a;
@@ -108,30 +131,6 @@ section {
   height: 3rem;
 }
 
-.select {
-  border-radius: 4px;
-  height: 2.5em;
-  border: 1px solid transparent;
-  border-color: #dbdbdb;
-
-  height: 3rem;
-
-  text-align: center;
-  font-size: 1rem;
-}
-
-.gettingReady {
-  font-size: 1rem;
-}
-
-.delivering {
-  font-size: 1rem;
-}
-
-.completion {
-  font-size: 1rem;
-}
-
 /* modal */
 .open {
   display: block;
@@ -145,13 +144,17 @@ section {
   right: 0;
   top: 0;
   left: 0;
-  position: absolute;
+  position: fixed;
   z-index: 9999;
 }
 .modalContent {
   width: 640px;
   margin: 0 auto;
-  position: relative;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+
   z-index: 9999;
 }
 .modalContentBox {
@@ -192,4 +195,7 @@ section {
   right: 20px;
   z-index: 100000;
   border: none;
+}
+.scrollLock {
+  overflow: hidden;
 }

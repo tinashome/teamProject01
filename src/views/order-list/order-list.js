@@ -1,4 +1,5 @@
 import * as Api from "/api.js";
+
 // 테스트용
 let data = [];
 const token = sessionStorage.getItem("userId");
@@ -16,7 +17,6 @@ async function getOrder() {
 getOrder();
 
 // 날짜, 상품리스트, 준비상태 불러오기
-
 function datefnc(orderDate) {
   for (let i = 0; i < orderDate.length; i++) {
     let dateInfo = orderDate[i].createdAt;
@@ -81,12 +81,16 @@ function buttonEvent() {
   // 서버에서 id값 받아오면 사용할 id
   const cancleBtn = [];
   button.forEach((btn) => {
+    const body = document.getElementsByTagName("body")[0];
+
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       cancleBtn.push(btn.getAttribute("id"));
+      console.log(body);
       // 숨겨둔 모달을 보이게
       const modal = document.getElementById("modal");
       modal.classList = "open";
+      body.classList.add("scrollLock");
     });
   });
   // 모달 보이게 한 후
@@ -102,11 +106,13 @@ function buttonEvent() {
     // 모달안보이게
 
     modal.className = "hidden";
+    body.classList.remove("scrollLock");
   });
   modalCloseButton.addEventListener("click", (e) => {
     // 모달안보이게
     e.preventDefault();
     modal.className = "hidden";
+    body.classList.remove("scrollLock");
   });
   // 삭제 확인 버튼
   deleteCompleteButton.addEventListener("click", (e) => {
@@ -117,6 +123,7 @@ function buttonEvent() {
 
     // 모달안보이게
     modal.className = "hidden";
+    body.classList.remove("scrollLock");
 
     // id값에 맞는 버튼의 컨테이너 삭제
     const findOrderId = cancleBtn.shift();

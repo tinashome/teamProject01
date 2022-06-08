@@ -1,8 +1,8 @@
 import * as Api from "/api.js";
-
+const body = document.getElementsByTagName("body")[0];
 async function getDate() {
   const getData = await Api.get("/api/orders");
-  console.log(getData);
+
   dataArr(getData);
   Ordertotal();
   gettingReadyCnt();
@@ -12,6 +12,7 @@ async function getDate() {
 }
 getDate();
 
+// 주문정보가 담긴 박스 생성
 function dataArr(getData) {
   for (let i = 0; i < getData.length; i++) {
     const splitDate = getData[i].createdAt;
@@ -112,107 +113,7 @@ function dataArr(getData) {
   }
 }
 
-// 실행시 바로 실행
-
-// ************서버에서 select 버튼 상태 받아와서 selec에 selected추가
-// ***********
-// **********서버에 주문 취소 했다고 id값으로 보내주야
-// ************메뉴바 구현
-// 서버에서 데이터를 받아온다
-
-// data.forEach((element) => {
-//   // 전체감싸기
-//   const wrapper = document.createElement("dev");
-//   wrapper.classList.add("creatOrderInquiryWrapper");
-//   wrapper.setAttribute("id", "order-629428a0eb5d1ed00c61f51c");
-
-//   // 날짜
-//   const orderDate = document.createElement("dev");
-//   orderDate.classList.add("orderInfo");
-//   orderDate.textContent = element.date;
-
-//   // 상품
-//   const orderProduct = document.createElement("div");
-//   orderProduct.classList.add("orderInfo");
-//   orderProduct.textContent = listProduct;
-
-//   // 총액
-//   const orderAmount = document.createElement("div");
-//   orderAmount.classList.add("orderInfo");
-//   orderAmount.textContent = totalAmount;
-
-//   // select
-//   const selectWrapper = document.createElement("div");
-//   selectWrapper.classList.add("orderInfo");
-
-//   const select = document.createElement("select");
-//   // select.classList.add("has-background-danger-light", "has-text-danger")
-//   select.setAttribute("id", "statusSelectBox-628c85a9ae629ef7dc9d7dfe");
-//   select.setAttribute("class", "select");
-
-//   // 옵션
-//   // 준비중
-//   const readyOption = document.createElement("option");
-//   readyOption.classList.add("gettingReady");
-//   readyOption.setAttribute("value", "상품 준비중");
-//   readyOption.textContent = "상품 준비중";
-//   // 배송중
-//   const shippingOption = document.createElement("option");
-//   shippingOption.classList.add("delivering");
-//   shippingOption.setAttribute("value", "상품 배송중");
-//   shippingOption.textContent = "상품 배송중";
-//   // 완료
-//   const completionOption = document.createElement("option");
-//   completionOption.classList.add("completion");
-//   completionOption.setAttribute("value", "배송완료");
-//   completionOption.textContent = "배송완료";
-
-//   // selected넣기
-//   if (userStatusData === "배송완료") {
-//     completionOption.setAttribute("selected", "true");
-//     select.classList.add("clickSelect");
-//   } else if (userStatusData === "상품 준비중") {
-//     readyOption.setAttribute("selected", "true");
-//     select.classList.add("clickSelect");
-//   } else {
-//     shippingOption.setAttribute("selected", "true");
-//     select.classList.add("clickSelect");
-//   }
-
-//   // 확인 버튼
-//   const checkBtnWrapper = document.createElement("div");
-//   checkBtnWrapper.classList.add("checkInfo");
-//   const checkBtn = document.createElement("button");
-//   checkBtn.classList.add("checkBtn", "save");
-
-//   checkBtn.textContent = "확인";
-//   // 버튼
-//   const btnWrapper = document.createElement("div");
-//   btnWrapper.classList.add("orderInfo");
-//   const btn = document.createElement("button");
-//   btn.classList.add("button", "cancleOrder");
-//   btn.setAttribute("id", productId);
-//   btn.textContent = "주문취소";
-//   // 화면에 보이기
-//   checkBtnWrapper.append(checkBtn);
-//   btnWrapper.append(btn);
-//   select.append(readyOption, shippingOption, completionOption);
-
-//   selectWrapper.append(select);
-//   wrapper.append(
-//     orderDate,
-//     orderProduct,
-//     orderAmount,
-//     selectWrapper,
-//     checkBtnWrapper,
-//     btnWrapper
-//   );
-//   const list = document.getElementById("section");
-//   list.append(wrapper);
-// });
-
-// 상태관리 메뉴
-// 충 주문
+// 총주문 갯수
 function Ordertotal() {
   const ordersCount = document.getElementById("ordersCount");
   const btnCnt = document.querySelectorAll(".cancleOrder");
@@ -243,7 +144,6 @@ function gettingReadyCnt() {
 }
 
 // 배송중 갯수
-
 function deliveringCnt() {
   const delivering = document.querySelectorAll(".clickSelect");
   let deliveringTotal = 0;
@@ -261,8 +161,7 @@ function deliveringCnt() {
   }
 }
 
-//  배송완료
-
+//  배송완료 갯수
 function deliveryCompletedCnt() {
   const checkSelet = document.querySelectorAll(".clickSelect");
   let deliveryCompletedTotal = 0;
@@ -281,7 +180,6 @@ function deliveryCompletedCnt() {
 }
 
 // 모든 버튼 들고오기, 이벤트 부여위해
-
 function a() {
   const button = document.querySelectorAll(".cancleOrder");
   let cancleBtnId = "";
@@ -293,23 +191,18 @@ function a() {
       const modal = document.getElementById("modal");
       modal.className = "open";
 
+      body.classList.add("scrollLock");
       const deleteCancelButton = document.getElementById("deleteCancelButton");
 
       deleteCancelButton.addEventListener("click", (e) => {
         e.preventDefault();
         modal.className = "hidden";
+        body.classList.remove("scrollLock");
       });
     });
   });
 
-  // // selected버튼 텍스트 백그라운드 텍스트컬러변경
-  // function removeSelectClass(splitBtnClass, btn) {
-  //   for (let i = 1; i < splitBtnClass.length; i++) {
-  //     const btnClassOne = splitBtnClass[i];
-  //     btn.classList.remove(btnClassOne);
-  //   }
-  // }
-
+  // 셀렉트를 바꾸게 되면 위에 갯수들이 들어가 있는 바 수정
   const clickSelect = document.querySelectorAll(".clickSelect");
   const saveBtn = document.querySelectorAll(".save");
   clickSelect.forEach((btn) => {
@@ -334,7 +227,7 @@ function a() {
     alert("주문정보가 삭제되었습니다");
 
     modal.className = "hidden";
-
+    body.classList.remove("scrollLock");
     const deleteBlock = document.getElementById(cancleBtnId);
 
     deleteBlock.parentNode.parentNode.remove();
@@ -348,5 +241,6 @@ function a() {
   modalCloseButton.addEventListener("click", (e) => {
     e.preventDefault();
     modal.className = "hidden";
+    body.classList.remove("scrollLock");
   });
 }

@@ -215,12 +215,12 @@ function plusQuantity(item) {
     (prev, next) => Number(prev) + Number(next),
     0
   );
-  console.log(sumOfTotalPrice);
   payProductPrice.innerText = sumOfTotalPrice;
-  payTotalPrice.innerText = sumOfTotalPrice + shippingPrice;
+  payTotalPrice.innerText = sumOfTotalPrice + 3000;
 }
 
 function minusQuantity(item) {
+  let innerNumb = item.path[1].querySelector(".productQuantity").innerText;
   const targetNumber = item.path[1].querySelector(".productQuantity");
   const targetQuantity = item.path[2].querySelector(".productQuantityNumb");
   const selectedPrice = item.path[2].querySelector(".productPriceSpan");
@@ -259,7 +259,7 @@ function minusQuantity(item) {
     item.path[2].querySelector(".productQuantity").innerText;
   // 마이너스 수량으로 넘어가지 않도록 구현
   const minus = item.path[1].querySelector(".minusProductQuantity");
-  if (findTarget.quantity < 2) {
+  if (innerNumb < 2) {
     minus.disabled = true;
     return;
   } else {
@@ -288,9 +288,8 @@ function minusQuantity(item) {
     (prev, next) => Number(prev) + Number(next),
     0
   );
-  console.log(sumOfTotalPrice);
   payProductPrice.innerText = sumOfTotalPrice;
-  payTotalPrice.innerText = sumOfTotalPrice + shippingPrice;
+  payTotalPrice.innerText = sumOfTotalPrice + 3000;
 }
 
 //전체선택 구현

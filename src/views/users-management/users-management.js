@@ -92,10 +92,13 @@ async function getUsersList() {
 
       // 일반 등급 -> 관리자 권한 변경 기능
       var roleBtn = document.querySelector(`.select-${e._id}`);
-      roleBtn.addEventListener("change", changeRole);
       roleBtn.addEventListener("change", () => {
+        // sessionStorage.removeItem("userRole");
         sessionStorage.setItem("userRole", e.email);
+        select.style.backgroundColor = "#EAAC7F";
       });
+      roleBtn.addEventListener("change", changeRole);
+      sessionStorage.removeItem("userRole");
     });
   } catch (err) {
     console.error(err.stack);
@@ -136,6 +139,9 @@ async function changeRole() {
     const email = sessionStorage.getItem("userRole");
     const submitEmail = { email };
     const result = await Api.post("/api/users/role", submitEmail);
+
+    window.location.href = "/users";
+    // sessionStorage.removeItem("userRole");
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);

@@ -5,6 +5,8 @@ import is from "@sindresorhus/is";
 import { productService } from '../services';
 import { upload } from '../middlewares';
 import fs from "fs";
+import fsPromises from "node:fs/promises";
+
 
 const productRouter = Router();
 
@@ -159,10 +161,13 @@ productRouter.delete('/products/:productId', async (req, res, next) => {
     const deletedProduct = await productService.delProduct(productId);
 
     // 삭제된 데이터의 img path를 받아서 기존 img 삭제
-    if(fs.existsSync(deletedProduct.img)) {
+    // fsPromises.access: 성공시 undefined 실패시 error반환
+    const isAbsent = await fsPromises.access(deletedProduct.img);
+    if(!isAbsent) {
       try {
-        fs.unlinkSync(deletedProduct.img);
-        console.log("image delete");
+        fs.unlink(deletedProduct.img, ()=>{
+          console.log("image delete");
+        });
       } catch (error) {
         console.log(error);
       }

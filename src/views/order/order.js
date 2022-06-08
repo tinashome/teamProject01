@@ -2,37 +2,57 @@ import * as Api from "/api.js";
 const button = document.getElementById("buyButton");
 const postalCodeInput = document.querySelector("#postalCode");
 const searchAddressButton = document.querySelector("#searchAddressButton");
+const postalCode = document.getElementById("postalCode");
 const address1Input = document.querySelector("#address1");
 const address2Input = document.querySelector("#address2");
 const productsTitle = document.getElementById("payProductQuantity");
 const productsTotal = document.getElementById("payProductPrice");
 const deliveryFee = document.getElementById("payShippingPrice");
 const orderTotal = document.getElementById("payTotalPrice");
+const receiverName = document.getElementById("receiverName");
+const receiverPhoneNumber = document.getElementById("receiverPhoneNumber");
 // 결제정보
+const token = sessionStorage.getItem("userId");
 
-const data = [
-  {
-    productId: "629929b4b4f1aba828940ce1",
-    productsTitle: "초콜릿",
-    productsTotal: "18000",
-    productsPrice: "6000",
-    productsCnt: "3",
-    deliveryFee: "2000",
-    orderTotal: "20000",
-  },
-];
+async function getUserInfo() {
+  const getORderInfo = await Api.get(`/api/users/${token}`);
+  receiverName.value = getORderInfo.fullName;
+  console.log(getORderInfo);
+  receiverPhoneNumber.value = getORderInfo.phoneNumber;
+  address1Input.value = getORderInfo.address.address1;
+  address2Input.value = getORderInfo.address.address2;
+  postalCode.value = getORderInfo.address.postalCode;
+}
+getUserInfo();
 
-data.forEach((element) => {
-  const title = element.productsTitle;
-  const total = element.productsTotal;
-  const fee = element.deliveryFee;
-  const order = element.orderTotal;
+const data = {
+  productId:
+    "이건 orderId다 이건 주문생성 api명세 읽어보면 자동으로 만들어준다",
+  productsTitle: "",
+  productsTotal: 0,
+  productsPrice: "필요없을듯",
+  productsCnt: "3",
+  deliveryFee: "2000",
+  orderTotal: 2000,
+};
 
-  productsTitle.textContent = title;
-  productsTotal.textContent = total;
-  deliveryFee.textContent = fee;
-  orderTotal.textContent = order;
+// 로컬스토리지에서 장바구니 정보 가져오기
+const getLocalStorage = localStorage.getItem("cartList");
+
+JSON.parse(getLocalStorage).forEach((producet) => {
+  data.productsTitle += producet.name + producet.quantity + "개" + "<br>";
+  data.productsTotal += producet.price;
+  data.orderTotal += producet.price;
 });
+
+const total = data.productsTotal;
+const fee = data.deliveryFee;
+const order = data.orderTotal;
+
+productsTitle.innerHTML = data.productsTitle;
+productsTotal.textContent = `${total} 개`;
+deliveryFee.textContent = `${fee} 원`;
+orderTotal.textContent = `${order} 원`;
 
 // 주소찾기
 
@@ -81,10 +101,6 @@ ClickSelectBox.addEventListener("change", () => {
 
 async function doCheckout() {
   // 각 입력값 가져옴
-  const receiverName = document.getElementById("receiverName").value;
-  const receiverPhoneNumber = document.getElementById(
-    "receiverPhoneNumber"
-  ).value;
 
   const postalCode = postalCodeInput.value;
   const address1 = address1Input.value;
@@ -98,38 +114,30 @@ async function doCheckout() {
       postalCode: postalCode,
       address1: address1,
       address2: address2,
-      receiverName: receiverName,
-      receiverPhoneNumber: receiverPhoneNumber,
+      receiverName: receiverName.value,
+      receiverPhoneNumber: receiverPhoneNumber.value,
     },
     request: request,
     orderItems: [
       {
         productId: "629929b4b4f1aba828940ce1",
-        productName: data[0].productsTitle,
-        price: Number(data[0].productsPrice),
-        quantity: Number(data[0].productsCnt),
-        totalPrice: Number(data[0].productsTotal),
+        productName: data.productsTitle,
+        price: Number(data.productsPrice),
+        quantity: Number(data.productsCnt),
+        totalPrice: Number(data.productsTotal),
       },
     ],
-    totalPrice: Number(data[0].orderTotal),
+    totalPrice: Number(data.orderTotal),
     status: "결제완료",
   };
 
-  // window.location.href = "../order-complete/order-comple.html";
+  window.location.href = "../order-complete/order-comple.html";
 
   try {
     const fff = await Api.post("/api/orders", sendInfo);
-    // displaying(fff);
-    // 로그인 페이지 이동
-    // 응답을 받으면 400 코드 등 뜬다 이걸 이용해서 만들기
-    // window.location.href = "/order-complete";
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
 }
 button.addEventListener("click", doCheckout);
-
-// function displaying(data) {
-//   button.innerText(data);
-// }

@@ -1,11 +1,13 @@
 import * as Api from "/api.js";
 const body = document.getElementsByTagName("body")[0];
+// 저거 만드는거 말고 이걸 쓰나?
 let data = [];
+// userId를 session에서 가져옴
 const token = sessionStorage.getItem("userId");
 async function getOrder() {
   try {
+    // userId를 이용해서 주문정보르 가져옴
     const getORderInfo = await Api.get(`/api/orders/${token}`);
-    console.log(getORderInfo);
     datefnc(getORderInfo);
     buttonEvent();
   } catch (err) {
@@ -15,7 +17,7 @@ async function getOrder() {
 }
 getOrder();
 
-// 날짜, 상품리스트, 준비상태 불러오기
+// 주문날짜, 상품이름, orderId, 주문상태 가져오기
 function datefnc(orderDate) {
   for (let i = 0; i < orderDate.length; i++) {
     let dateInfo = orderDate[i].createdAt;
@@ -37,10 +39,8 @@ function datefnc(orderDate) {
     const userStatusData = element.userStatusData;
     const productId = element.productId;
 
-    // 추가할 요소 생성
-
+    // 주문조회
     // 전체를 감싸줄 컨테이너
-
     const wrapper = document.createElement("div");
     wrapper.classList.add("creatOrderInquiryWrapper");
 
@@ -60,6 +60,7 @@ function datefnc(orderDate) {
     btnWrapper.classList.add("orderInfo");
 
     const btn = document.createElement("button");
+    // productId가 orderId인데 이게 필요한 이유는
     btn.setAttribute("id", `${productId}`);
     btn.setAttribute("class", "cencleOrder");
     btn.textContent = "주문 취소";

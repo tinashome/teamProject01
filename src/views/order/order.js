@@ -2,10 +2,8 @@ import * as Api from "/api.js";
 const button = document.getElementById("buyButton");
 const postalCodeInput = document.querySelector("#postalCode");
 const searchAddressButton = document.querySelector("#searchAddressButton");
-
 const address1Input = document.querySelector("#address1");
 const address2Input = document.querySelector("#address2");
-
 const productsTitle = document.getElementById("payProductQuantity");
 const productsTotal = document.getElementById("payProductPrice");
 const deliveryFee = document.getElementById("payShippingPrice");

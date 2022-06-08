@@ -23,12 +23,12 @@ function dataArr(getData) {
     const totalAmount = getData[i].totalPrice;
 
     // 전체감싸기
-    const wrapper = document.createElement("dev");
+    const wrapper = document.createElement("div");
     wrapper.classList.add("creatOrderInquiryWrapper");
     wrapper.setAttribute("id", "order-629428a0eb5d1ed00c61f51c");
 
     // 날짜
-    const orderDate = document.createElement("dev");
+    const orderDate = document.createElement("div");
     orderDate.classList.add("orderInfo");
     orderDate.textContent = date;
 

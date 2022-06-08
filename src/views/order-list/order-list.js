@@ -1,12 +1,11 @@
 import * as Api from "/api.js";
-
-// 테스트용
+const body = document.getElementsByTagName("body")[0];
 let data = [];
 const token = sessionStorage.getItem("userId");
 async function getOrder() {
   try {
     const getORderInfo = await Api.get(`/api/orders/${token}`);
-
+    console.log(getORderInfo);
     datefnc(getORderInfo);
     buttonEvent();
   } catch (err) {
@@ -73,23 +72,21 @@ function datefnc(orderDate) {
   });
 }
 
-function buttonEvent() {
+async function buttonEvent() {
   // 여러개의 클릭 버튼 구현
-
   const button = document.querySelectorAll(".cencleOrder");
-
   // 서버에서 id값 받아오면 사용할 id
   const cancleBtn = [];
   button.forEach((btn) => {
-    const body = document.getElementsByTagName("body")[0];
-
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       cancleBtn.push(btn.getAttribute("id"));
+
       console.log(body);
       // 숨겨둔 모달을 보이게
       const modal = document.getElementById("modal");
       modal.classList = "open";
+
       body.classList.add("scrollLock");
     });
   });
@@ -104,7 +101,7 @@ function buttonEvent() {
     e.preventDefault();
 
     // 모달안보이게
-
+    console.log(body);
     modal.className = "hidden";
     body.classList.remove("scrollLock");
   });
@@ -130,8 +127,15 @@ function buttonEvent() {
     const deleteBlock = document.getElementById(findOrderId);
 
     const changeStatus = deleteBlock.parentNode.previousSibling;
-    changeStatus.textContent = "주문취소";
 
-    Api.patch(`/api/orders/${token}/${findOrderId}`);
+    Api.patch(`/api/orders/${token}/${findOrderId}`)
+      .then(() => {
+        let getNewStatus = Api.get(`/api/orders/${token}`);
+        return getNewStatus;
+      })
+      .then((res) => {
+        let statusFliter = res.filter((x) => x.orderId == findOrderId);
+        changeStatus.textContent = statusFliter[0].status;
+      });
   });
 }

@@ -8,8 +8,8 @@ class CategoryService {
 
   // 카테고리 생성
   async addCategory(categoryInfo) {
-    const { name, level, info, belongTo } = categoryInfo;
-    const newCategoryInfo = { name, level, info, belongTo };
+    const { name, info } = categoryInfo;
+    const newCategoryInfo = { name, info };
 
     const createdNewCategory = await this.categoryModel.create(newCategoryInfo);
 

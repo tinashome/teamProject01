@@ -12,16 +12,12 @@ categoryRouter.post('/category', async (req, res, next) => {
     console.log(req);
     // req (request)의 body 에서 데이터 가져오기
     const name = req.body.name;
-    const level = req.body.level;
     const info = req.body.info;
-    const belongTo = req.body.belongTo||undefined;
 
     // 위 데이터를 유저 db에 추가하기
     const newCategory = await categoryService.addCategory({
       name,
-      level,
       info,
-      belongTo,
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -90,17 +86,13 @@ categoryRouter.patch(
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
       const name = req.body.name;
-      const level = req.body.level;
       const info = req.body.info;
-      const belongTo = req.body.belongTo||undefined;
 
       let toUpdate = {};
       // 수정용으로 들어온 데이터의 유무 체크, 후에 있는 데이터만 patch로 수정한다.
       toUpdate = {
         ...(name && { name }),
-        ...(level && { level }),
         ...(info && { info }),
-        ...(belongTo && { belongTo }),
       };
 
       // 상품 정보를 업데이트함.

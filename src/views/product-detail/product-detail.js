@@ -7,11 +7,11 @@ const productImage = document.querySelector("#chocolate");
 
 async function getData() {
   try {
-    const data = await Api.get("/api/product/629fdc63e121b3f756ad9c1f");
+    const data = await Api.get("/api/product/62a04582934a89332829b054");
     console.log(data);
     productName.textContent = data.name;
     price.textContent = data.price;
-    productImage.src = `/${data.img}`;
+    productImage.src = data.img;
   } catch (err) {
     console.error(err.stack);
   }
@@ -30,7 +30,7 @@ function saveCartList() {
 //'장바구니 추가'버튼을 누르면 alert창이 뜨면서 localStorage에 담기게 됩니다.
 addCartBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  const data = await Api.get("/api/product/629fdc63e121b3f756ad9c1f");
+  const data = await Api.get("/api/product/62a04582934a89332829b054");
 
   // localStorage에 저장되는 정보입니다.
   // 제품명을 key 값으로 가지며, 제품명과 가격을 value로 가집니다.

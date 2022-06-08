@@ -47,7 +47,7 @@ const displayData = () => {
     const minusBtn = document.createElement("button");
     minusBtn.classList.add("minusProductQuantity");
     minusBtn.textContent = "-";
-    minusBtn.onclick = minusQuantity;
+    minusBtn.addEventListener("click", minusQuantity);
 
     const productQuantityNumb = document.createElement("p");
     productQuantityNumb.classList.add("productQuantityNumb");
@@ -142,6 +142,11 @@ function plusQuantity(item) {
   let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
   let selectedPrice = item.path[2].querySelector(".productPriceSpan");
 
+  // 마이너스 버튼이 눌리면 해당 객체를 찾아서 수량 변경후 다시 setItem
+  let thisId = item.path[2].querySelector(".id");
+  let findData = localStorageItem.find((e) => e.id == thisId);
+  console.log(findData);
+
   innerNumb++;
 
   targetNumber.textContent = innerNumb;
@@ -186,6 +191,10 @@ function minusQuantity(item) {
   let targetNumber = item.path[1].querySelector(".productQuantity");
   let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
   let selectedPrice = item.path[2].querySelector(".productPriceSpan");
+  let thisId = item.path[2].querySelector(".id");
+  // 마이너스 버튼이 눌리면 해당 객체를 찾아서 수량 변경후 다시 setItem
+  const targetData = localStorageItem.find((e) => e.id === thisId);
+  console.log(targetData);
   innerNumb--;
 
   targetNumber.textContent = innerNumb;
@@ -278,7 +287,6 @@ function deletePartFunc() {
       );
     }
   }
-  console.log(checkedList);
   const newStorageItem = [];
   for (let j = 0; j < checkedList.length; j++) {
     const findNotDelete = printArr.find((e) => e.id !== checkedList[j]);

@@ -49,6 +49,7 @@ async function getUsersList() {
         select.appendChild(adminOption);
       }
       selectTd.appendChild(select);
+      selectTd.setAttribute("class", `select-${e._id}`);
 
       // 회원 삭제 버튼 구현
       const deleteTd = document.createElement("td");
@@ -90,13 +91,17 @@ async function getUsersList() {
       sessionStorage.removeItem("delUser");
 
       // 일반 등급 -> 관리자 권한 변경 기능
+      var roleBtn = document.querySelector(`.select-${e._id}`);
+      roleBtn.addEventListener("change", changeRole);
+      roleBtn.addEventListener("change", () => {
+        sessionStorage.setItem("userRole", e.email);
+      });
     });
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
 }
-
 // 비밀번호 입력 모달창
 async function modalOpen(e) {
   e.preventDefault();
@@ -128,7 +133,9 @@ async function deleteUser() {
 
 async function changeRole() {
   try {
-    const result = await Api.delete("/api/users/role", userEmail);
+    const email = sessionStorage.getItem("userRole");
+    const submitEmail = { email };
+    const result = await Api.post("/api/users/role", submitEmail);
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);

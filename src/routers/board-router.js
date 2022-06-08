@@ -1,39 +1,39 @@
 import { Router } from "express";
 import is from "@sindresorhus/is";
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
-// import { loginRequired } from '../middlewares';
-import { categoryService } from '../services';
+import { loginRequired } from '../middlewares';
+import { boardService } from '../services';
 
-const categoryRouter = Router();
+const boardRouter = Router();
 
-// 카테고리 등록
-categoryRouter.post('/category', async (req, res, next) => {
+// 게시글 등록
+boardRouter.post('/notice', loginRequired, async (req, res, next) => {
   try {
     console.log(req);
     // req (request)의 body 에서 데이터 가져오기
-    const name = req.body.name;
-    const level = req.body.level;
-    const info = req.body.info;
-    const belongTo = req.body.belongTo||undefined;
+    const numId = req.body.numId;
+    const title = req.body.title;
+    const content = req.body.content;
+    const author = req.body.author;
 
     // 위 데이터를 유저 db에 추가하기
-    const newCategory = await categoryService.addCategory({
-      name,
-      level,
-      info,
-      belongTo,
+    const newPost = await boardService.addPost({
+      numId,
+      title,
+      content,
+      author,
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-    res.status(201).json(newCategory);
+    res.status(201).json(newPost);
   } catch (error) {
     next(error);
   }
 });
 
 // 전체 카테고리 목록 (배열 형태임)
-categoryRouter.get('/categories', async function (req, res, next) {
+boardRouter.get('/categories', async function (req, res, next) {
   try {
     const categories = await categoryService.getCategories();
 
@@ -45,7 +45,7 @@ categoryRouter.get('/categories', async function (req, res, next) {
 });
 
 // 카테고리 상세
-categoryRouter.get('/category/:categoryId', async function (req, res, next) {
+boardRouter.get('/category/:categoryId', async function (req, res, next) {
   try {
     const { categoryId } = req.params;
     const category = await categoryService.getCategory(categoryId);
@@ -58,7 +58,7 @@ categoryRouter.get('/category/:categoryId', async function (req, res, next) {
 });
 
 // 하위 카테고리 조회
-categoryRouter.get('/category/belongTo/:categoryId', async function (req, res, next) {
+boardRouter.get('/category/belongTo/:categoryId', async function (req, res, next) {
   try {
     // 전체 상품 목록을 얻음
     const { categoryId } = req.params;
@@ -73,7 +73,7 @@ categoryRouter.get('/category/belongTo/:categoryId', async function (req, res, n
 
 
 // 카테고리 정보 수정
-categoryRouter.patch(
+boardRouter.patch(
   '/categories/:categoryId',
   async function (req, res, next) {
     try {
@@ -119,7 +119,7 @@ categoryRouter.patch(
 
 
 // 카테고리 삭제  
-categoryRouter.delete('/categories/:categoryId', async (req, res, next) => {
+boardRouter.delete('/categories/:categoryId', async (req, res, next) => {
   const { categoryId } = req.params;
   try {
     // 삭제 후 삭제된 정보 반환
@@ -132,4 +132,4 @@ categoryRouter.delete('/categories/:categoryId', async (req, res, next) => {
   }
 });
 
-export { categoryRouter };
+export { boardRouter };

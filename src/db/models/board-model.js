@@ -9,11 +9,6 @@ export class BoardModel {
     const post = await Board.findOne({ _id: boardId });
     return post;
   }
-
-  // async findByBelongTo(boardId) {
-  //   const category = await Board.find({ belongTo: boardId });
-  //   return category;
-  // }
   
   async create(boardInfo) {
     const createdNewPost = await Board.create(boardInfo);
@@ -25,12 +20,11 @@ export class BoardModel {
     return posts;
   }
 
-  async update({ boardId, update }) {
-    const filter = { _id: boardId };
+  async update({ postId, update }) {
+    const filter = { _id: postId };
     const option = { returnOriginal: false }; // true: 업데이트 이전 값 리턴, false: 후 값 리턴
 
     const updatedPost = await Board.findOneAndUpdate(filter, update, option);
-    
     return updatedPost;
   }
 

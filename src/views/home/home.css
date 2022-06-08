@@ -42,7 +42,7 @@ a {
 }
 
 .slider .slides {
-  display: block;
+  /* display: block; */
   /* width: 8000px; */
   height: 90%;
 }

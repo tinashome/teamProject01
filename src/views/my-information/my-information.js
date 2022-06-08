@@ -1,5 +1,6 @@
 import * as Api from "/api.js";
 
+const fullNameInput = document.querySelector("#fullNameInput");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 const passwordInput = document.querySelector("#passwordInput");
 const newPasswordInput = document.querySelector("#newPasswordInput");
@@ -8,6 +9,10 @@ const postalCodeInput = document.querySelector("#postalCodeInput");
 const addressInput = document.querySelector("#addressInput");
 const detailAddressInput = document.querySelector("#detailAddressInput");
 const submitEdit = document.querySelector("#submitEdit");
+const delMyInfoBtn = document.querySelector("#delMyInfoBtn");
+const searchBtn = document.querySelector(".searchBtn");
+
+const getUserId = sessionStorage.getItem("userId");
 
 // 주소 찾기 api
 async function searchAddress(e) {
@@ -16,48 +21,89 @@ async function searchAddress(e) {
     oncomplete: function (data) {
       postalCodeInput.value = data.zonecode;
       addressInput.value = data.address;
+      detailAddressInput.value = null;
       detailAddressInput.focus();
     },
   }).open();
 }
-const searchBtn = document.querySelector(".searchBtn");
-searchBtn.addEventListener("click", searchAddress);
 
+// 기존 정보 불러오기
+async function printInformation() {
+  try {
+    const userInfo = await Api.get(`/api/users/${getUserId}`);
+
+    fullNameInput.value = userInfo.fullName;
+    phoneNumberInput.value = userInfo.phoneNumber ? userInfo.phoneNumber : null;
+    postalCodeInput.value = userInfo.address
+      ? userInfo.address.postalCode
+      : null;
+    addressInput.value = userInfo.address ? userInfo.address.address1 : null;
+    detailAddressInput.value = userInfo.address
+      ? userInfo.address.address2
+      : null;
+    return userInfo.password;
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
+// 비밀번호 입력 모달창
+async function modalOpen(e) {
+  e.preventDefault();
+  document.querySelector(".modal").classList.remove("hidden");
+}
+
+async function modalClose(e) {
+  e.preventDefault();
+  document.querySelector(".modal").classList.add("hidden");
+}
+document.querySelector(".background").addEventListener("click", modalClose);
+document.querySelector(".closeBtn").addEventListener("click", modalClose);
+document.querySelector(".closeBtn").addEventListener("click", handleSubmit);
+
+document.querySelector(".closeBtnDelete").addEventListener("click", modalClose);
+document
+  .querySelector(".closeBtnDelete")
+  .addEventListener("click", deleteMyInfo);
+
+// 정보 수정하기
 async function handleSubmit(e) {
   e.preventDefault();
 
-  const phoneNumber = phoneNumberInput.value;
   const currentPassword = passwordInput.value;
-  const newPassword = newPasswordInput.value;
+  const phoneNumber = phoneNumberInput.value;
+  const password = newPasswordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
   const postalCode = postalCodeInput.value;
   const address1 = addressInput.value;
   const address2 = detailAddressInput.value;
 
   // 잘 입력했는지 확인
-  const isFullNameValid = fullName.length >= 2;
-  const isPasswordValid = newPassword.length >= 4;
-  const isPasswordSame = newPassword === passwordConfirm;
+  const isPasswordValid = password.length >= 4;
+  const isPasswordSame = password === passwordConfirm;
 
-  if (!isFullNameValid || !isPasswordValid) {
-    return alert("이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.");
+  if (!isPasswordValid) {
+    return alert("비밀번호는 4글자 이상이어야 합니다.");
   }
-
   if (!isPasswordSame) {
     return alert("비밀번호가 일치하지 않습니다.");
   }
 
   try {
     const data = {
+      password,
       currentPassword,
       phoneNumber,
-      postalCode,
-      address1,
-      address2,
+      address: {
+        postalCode,
+        address1,
+        address2,
+      },
     };
 
-    const getUserId = sessionStorage.getItem("userId");
-    await Api.post(`/api/users/${getUserId}`, data);
+    await Api.patch("/api/users/", getUserId, data);
+
     alert("정보가 수정되었습니다. ");
   } catch (err) {
     console.error(err.stack);
@@ -65,4 +111,32 @@ async function handleSubmit(e) {
   }
 }
 
-submitEdit.addEventListener("click", handleSubmit);
+// 탈퇴하기 (회원 정보 삭제)
+async function deleteMyInfo() {
+  try {
+    const currentPassword = passwordInput.value;
+    const submitPassword = { currentPassword };
+
+    const result2 = await Api.delete("/api/users", getUserId, submitPassword);
+
+    window.location.href = "/";
+    sessionStorage.clear();
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
+printInformation();
+searchBtn.addEventListener("click", searchAddress);
+
+submitEdit.addEventListener("click", modalOpen);
+submitEdit.addEventListener("click", () => {
+  document.querySelector(".closeBtn").classList.remove("hidden");
+  document.querySelector(".closeBtnDelete").classList.add("hidden");
+});
+delMyInfoBtn.addEventListener("click", () => {
+  document.querySelector(".closeBtn").classList.add("hidden");
+  document.querySelector(".closeBtnDelete").classList.remove("hidden");
+});
+delMyInfoBtn.addEventListener("click", modalOpen);

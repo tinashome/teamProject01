@@ -7,7 +7,7 @@ import { boardService } from '../services';
 const boardRouter = Router();
 
 // 게시글 등록
-boardRouter.post('/notice', loginRequired, async (req, res, next) => {
+boardRouter.post('/notice/post', loginRequired, async (req, res, next) => {
   try {
     console.log(req);
     // req (request)의 body 에서 데이터 가져오기

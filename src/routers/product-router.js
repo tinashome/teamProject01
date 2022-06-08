@@ -19,16 +19,6 @@ productRouter.post('/product', upload.single("upload"), async (req, res, next) =
       );
     }
 
-    // json아닌 form으로 받으므로 하단 코드를 사용치 않음
-
-    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
-    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-    // if (is.emptyObject(req.body)) {
-    //   throw new Error(
-    //     'headers의 Content-Type을 application/json으로 설정해주세요'
-    //   );
-    // }
-
     // req (request)의 body 에서 데이터 가져오기
     const name = req.body.name;
     const price = Number(req.body.price);
@@ -36,6 +26,7 @@ productRouter.post('/product', upload.single("upload"), async (req, res, next) =
     const detail = req.body.detail;
     const company = req.body.company;
     const quantity = Number(req.body.quantity);
+    // 카테고리 세종류는 id값으로 들어와야한다.
     const categoryL = req.body.categoryL;
     const categoryM = req.body.categoryM;
     const categoryS = req.body.categoryS;

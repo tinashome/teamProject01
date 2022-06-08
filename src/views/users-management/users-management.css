@@ -1,0 +1,162 @@
+/* Default */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+img {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.usersContainer {
+  padding-top: 70px;
+  margin: 0 auto;
+  width: 85%;
+}
+
+.smallTitle {
+  font-size: 25px;
+  margin: 20px;
+}
+
+hr {
+  opacity: 0.6;
+}
+
+.numberBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 110px;
+}
+
+.numTitle {
+  padding: 0 160px;
+  text-align: center;
+  font-size: 16px;
+  color: grey;
+}
+
+.num {
+  font-size: 25px;
+  color: black;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 70px;
+  border-collapse: collapse;
+}
+th {
+  background-color: #91684a;
+  color: whitesmoke;
+}
+td,
+tr,
+th {
+  border-bottom: 1px solid rgb(163, 163, 163);
+  padding: 18px;
+  text-align: center;
+}
+
+/* 권한 select */
+select {
+  width: 120px;
+  height: 35px;
+  text-align: center;
+  background-color: #f4dfba;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+.deleteBtn {
+  width: 120px;
+  height: 35px;
+  text-align: center;
+  background-color: whitesmoke;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 0.9px solid black;
+}
+
+/* 비밀번호 입력 모달창 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .background {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.7;
+}
+.modalBox {
+  position: absolute;
+  background-color: white;
+  width: 400px;
+  height: 200px;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  z-index: 100;
+}
+.hidden {
+  display: none;
+}
+.modalBox button {
+  width: 100px;
+  height: 26px;
+  margin: 0 auto;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(138, 126, 115);
+  color: whitesmoke;
+}
+.modalTitle {
+  margin: 10px;
+  text-align: center;
+}
+.inputPassword {
+  height: 40px;
+  border-color: lightgray;
+  border-radius: 10px;
+  width: 80%;
+  padding: 10px;
+  margin: 20px;
+}
+
+.delMyInfoBtn {
+  display: flex;
+  /* margin: 0 30px 20px; */
+  /* margin-top: ; */
+  /* float: right; */
+  /* text-align: center; */
+
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #91684a;
+  background-color: #91684a;
+  color: whitesmoke;
+  border-radius: 8px;
+  width: 60px;
+  height: 25px;
+}

@@ -1,8 +1,8 @@
-import { get } from "/api.js";
+import * as Api from "/api.js";
 
 async function getUsersList() {
   try {
-    const userData = await get("/api/users");
+    const userData = await Api.get("/api/users");
 
     // 총 회원 수
     const userNum = document.createTextNode(userData.length);
@@ -14,7 +14,6 @@ async function getUsersList() {
     document.querySelector(".managerNum").appendChild(adminNumText);
 
     userData.forEach((e) => {
-      console.log(e);
       const userList = document.querySelector(".usersList");
 
       const userTr = document.createElement("tr");
@@ -41,14 +40,21 @@ async function getUsersList() {
       adminOption.setAttribute("value", "admin");
       adminOption.appendChild(adminText);
 
-      select.appendChild(basicOption);
-      select.appendChild(adminOption);
+      if (e.role === "admin") {
+        select.appendChild(adminOption);
+        select.appendChild(basicOption);
+        select.style.backgroundColor = "#EAAC7F";
+      } else {
+        select.appendChild(basicOption);
+        select.appendChild(adminOption);
+      }
       selectTd.appendChild(select);
 
       // 회원 삭제 버튼 구현
       const deleteTd = document.createElement("td");
       const delBtn = document.createElement("button");
-      delBtn.setAttribute("class", "deleteBtn");
+      delBtn.setAttribute("class", `deleteBtn-${e._id}`);
+      delBtn.classList.add("deleteBtn");
       const delText = document.createTextNode("회원정보 삭제");
       delBtn.appendChild(delText);
       deleteTd.appendChild(delBtn);
@@ -74,9 +80,55 @@ async function getUsersList() {
 
       userList.appendChild(userTr);
 
-      //////
-      // 회원정보 삭제 기능 구현
+      // 회원 정보 삭제
+      const btn = document.querySelector(`.deleteBtn-${e._id}`);
+      sessionStorage.setItem("delUser", e._id);
+      btn.addEventListener("click", modalOpen);
+      btn.addEventListener("click", () => {
+        sessionStorage.setItem("delUser", e._id);
+      });
+      sessionStorage.removeItem("delUser");
+
+      // 일반 등급 -> 관리자 권한 변경 기능
     });
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
+// 비밀번호 입력 모달창
+async function modalOpen(e) {
+  e.preventDefault();
+  document.querySelector(".modal").classList.remove("hidden");
+}
+async function modalClose(e) {
+  e.preventDefault();
+  document.querySelector(".modal").classList.add("hidden");
+}
+document.querySelector(".background").addEventListener("click", modalClose);
+document.querySelector(".closeBtn").addEventListener("click", modalClose);
+document.querySelector(".closeBtn").addEventListener("click", deleteUser);
+
+// 회원 정보 삭제 기능
+async function deleteUser() {
+  try {
+    const inputPassword = document.querySelector(".inputPassword");
+    const currentPassword = inputPassword.value;
+    const submitPassword = { currentPassword };
+
+    const id = sessionStorage.getItem("delUser");
+    const result = await Api.delete("/api/users", id, submitPassword);
+    window.location.href = "/users";
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
+async function changeRole() {
+  try {
+    const result = await Api.delete("/api/users/role", userEmail);
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);

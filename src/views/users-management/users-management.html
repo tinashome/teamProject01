@@ -22,6 +22,25 @@
       <nav class="nav"></nav>
       <div class="menu"></div>
 
+      <!-- 비밀번호 입력 모달창 -->
+      <div class="modal hidden">
+        <div class="background"></div>
+        <div class="modalBox">
+          <div class="modalTitle">비밀번호를 입력해주세요.</div>
+          <form>
+            <input
+              class="inputPassword"
+              id="passwordInput"
+              type="password"
+              placeholder="현재 비밀번호를 입력해주세요."
+              autocomplete="off"
+            />
+            <button class="closeBtn">확인</button>
+            <button class="closeBtnDelete hidden">확인</button>
+          </form>
+        </div>
+      </div>
+
       <div class="usersContainer">
         <div class="smallTitle">회원관리</div>
         <hr />

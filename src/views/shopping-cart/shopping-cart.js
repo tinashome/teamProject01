@@ -144,9 +144,11 @@ function plusQuantity(item) {
 
   // 마이너스 버튼이 눌리면 해당 객체를 찾아서 수량 변경후 다시 setItem
   let thisId = item.path[2].querySelector(".id");
-  let findData = localStorageItem.find((e) => e.id == thisId);
-  console.log(findData);
-
+  const newStorageItem = [];
+  const findTarget = printArr.find((e) => e.id !== thisId);
+  findTarget.quantity += 1;
+  newStorageItem.push(findTarget);
+  console.log(newStorageItem);
   innerNumb++;
 
   targetNumber.textContent = innerNumb;

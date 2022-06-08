@@ -117,7 +117,7 @@ async function deleteMyInfo() {
     const currentPassword = passwordInput.value;
     const submitPassword = { currentPassword };
 
-    const result2 = await Api.delete("/api/users", getUserId, submitPassword);
+    const result = await Api.delete("/api/users", getUserId, submitPassword);
 
     window.location.href = "/";
     sessionStorage.clear();

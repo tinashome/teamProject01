@@ -48,7 +48,7 @@ const displayData = () => {
     const minusBtn = document.createElement("button");
     minusBtn.classList.add("minusProductQuantity");
     minusBtn.textContent = "-";
-    //minusBtn.addEventListener("click", minusQuantity);
+    minusBtn.addEventListener("click", minusQuantity);
 
     const productQuantityNumb = document.createElement("p");
     productQuantityNumb.classList.add("productQuantityNumb");
@@ -60,7 +60,7 @@ const displayData = () => {
     const plusBtn = document.createElement("button");
     plusBtn.classList.add("plusProductQuantity");
     plusBtn.textContent = "+";
-    //plusBtn.onclick = plusQuantity;
+    plusBtn.onclick = plusQuantity;
 
     const priceBox = document.createElement("div");
     priceBox.classList.add("selectedPrice");
@@ -143,14 +143,14 @@ payShippingPrice.innerText = shippingPrice;
 payTotalPrice.innerText =
   Number(payProductPrice.innerText) + Number(payShippingPrice.innerText);
 
-const plusButton = document.querySelectorAll(".plusProductQuantity");
-plusButton.forEach((btn) => {
-  btn.addEventListener("click", plusQuantity);
-});
-const minusButton = document.querySelectorAll(".minusProductQuantity");
-minusButton.forEach((btn) => {
-  btn.addEventListener("click", minusQuantity);
-});
+// const plusButton = document.querySelectorAll(".plusProductQuantity");
+// plusButton.forEach((btn) => {
+//   btn.addEventListener("click", plusQuantity);
+// });
+// const minusButton = document.querySelectorAll(".minusProductQuantity");
+// minusButton.forEach((btn) => {
+//   btn.addEventListener("click", minusQuantity);
+// });
 
 //버튼을 누르면 증가, 감소
 function plusQuantity(item) {
@@ -174,11 +174,11 @@ function plusQuantity(item) {
     }
     return 0;
   });
-  //localStorage.clear();
   localStorage.setItem("cartList", JSON.stringify(newStorageItem));
-
   targetNumber.textContent = findTarget.quantity;
   targetQuantity.textContent = findTarget.quantity;
+  //총 수량 만들기
+  
 
   const totalPrice = item.path[2].querySelector(".totalPrice");
   //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
@@ -198,6 +198,7 @@ function plusQuantity(item) {
     (prev, next) => Number(prev) + Number(next),
     0
   );
+  console.log({ sumOfQuantity, quantityArr });
   payProductQuantity.innerText = sumOfQuantity;
 
   //결제 정보 창에 총가격 표시
@@ -240,14 +241,14 @@ function minusQuantity(item) {
 
   targetNumber.textContent = findTarget.quantity;
   targetQuantity.textContent = findTarget.quantity;
-
+  console.log(findTarget.quantity);
   const totalPrice = item.path[2].querySelector(".totalPrice");
   //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
   totalPrice.innerText = selectedPrice.innerText * findTarget.quantity;
 
   // 마이너스 수량으로 넘어가지 않도록 구현
   const minus = item.path[1].querySelector(".minusProductQuantity");
-  if (innerNumb < 1) {
+  if (innerNumb < 3) {
     minus.disabled = true;
     return;
   } else {
@@ -266,6 +267,7 @@ function minusQuantity(item) {
     0
   );
   payProductQuantity.innerText = sumOfQuantity;
+  console.log({ sumOfQuantity, quantityArr });
 
   const selectedProductPrice = document.querySelectorAll(".totalPrice");
   const totalPriceArr = [];

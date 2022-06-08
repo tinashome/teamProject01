@@ -16,13 +16,10 @@ form.addEventListener("submit", (e) => {
         break;
     }
     switch (item.localName) {
-      case "select":
-        formData.append(item.name, item.value);
-        break;
       case "textarea":
         formData.append(item.name, item.value);
         break;
     }
   }
-  Api.post("/api/product", formData);
+  Api.post("/api/category", formData);
 });

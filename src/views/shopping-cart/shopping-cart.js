@@ -3,6 +3,7 @@ const payProductPrice = document.querySelector("#payProductPrice");
 const payShippingPrice = document.querySelector("#payShippingPrice");
 const payTotalPrice = document.querySelector("#payTotalPrice");
 const totalPriceArrForPay = [];
+const totalQuantityArrForPay = [];
 
 //localStorage의 데이터를 받아오기
 //printArr에 배열로 데이터들을 저장하여 반복문을 돌면서 데이터 펴기
@@ -47,19 +48,19 @@ const displayData = () => {
     const minusBtn = document.createElement("button");
     minusBtn.classList.add("minusProductQuantity");
     minusBtn.textContent = "-";
-    minusBtn.addEventListener("click", minusQuantity);
+    //minusBtn.addEventListener("click", minusQuantity);
 
     const productQuantityNumb = document.createElement("p");
     productQuantityNumb.classList.add("productQuantityNumb");
-    productQuantityNumb.textContent = 1;
+    productQuantityNumb.textContent = printArr[i].quantity;
     const changeQuantity = document.createElement("p");
     changeQuantity.classList.add("productQuantity");
-    changeQuantity.textContent = 1;
+    changeQuantity.textContent = printArr[i].quantity;
 
     const plusBtn = document.createElement("button");
     plusBtn.classList.add("plusProductQuantity");
     plusBtn.textContent = "+";
-    plusBtn.onclick = plusQuantity;
+    //plusBtn.onclick = plusQuantity;
 
     const priceBox = document.createElement("div");
     priceBox.classList.add("selectedPrice");
@@ -86,7 +87,7 @@ const displayData = () => {
     totalPriceUnit.textContent = "원";
     const totalPriceSpan = document.createElement("span");
     totalPriceSpan.classList.add("totalPrice");
-    totalPriceSpan.textContent = printArr[i].price;
+    totalPriceSpan.textContent = printArr[i].price * printArr[i].quantity;
     totalWonPrice.appendChild(totalPriceSpan);
     totalWonPrice.appendChild(totalPriceUnit);
 
@@ -117,7 +118,10 @@ const displayData = () => {
 
     displaying.appendChild(productContainer);
 
-    totalPriceArrForPay.push(Number(printArr[i].price));
+    totalPriceArrForPay.push(
+      Number(printArr[i].price) * Number(printArr[i].quantity)
+    );
+    totalQuantityArrForPay.push(Number(printArr[i].quantity));
   }
 };
 
@@ -128,35 +132,57 @@ const totalPriceForPay = totalPriceArrForPay.reduce(
   (prev, next) => prev + next,
   0
 );
+const totalQuantityInPayBox = totalQuantityArrForPay.reduce(
+  (prev, next) => prev + next,
+  0
+);
 const shippingPrice = 3000;
-payProductQuantity.innerText = printArr.length;
+payProductQuantity.innerText = totalQuantityInPayBox;
 payProductPrice.innerText = totalPriceForPay;
 payShippingPrice.innerText = shippingPrice;
 payTotalPrice.innerText =
   Number(payProductPrice.innerText) + Number(payShippingPrice.innerText);
 
+const plusButton = document.querySelectorAll(".plusProductQuantity");
+plusButton.forEach((btn) => {
+  btn.addEventListener("click", plusQuantity);
+});
+const minusButton = document.querySelectorAll(".minusProductQuantity");
+minusButton.forEach((btn) => {
+  btn.addEventListener("click", minusQuantity);
+});
+
 //버튼을 누르면 증가, 감소
 function plusQuantity(item) {
-  let innerNumb = item.path[1].querySelector(".productQuantity").innerText;
   let targetNumber = item.path[1].querySelector(".productQuantity");
   let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
   let selectedPrice = item.path[2].querySelector(".productPriceSpan");
 
-  // 마이너스 버튼이 눌리면 해당 객체를 찾아서 수량 변경후 다시 setItem
-  let thisId = item.path[2].querySelector(".id");
+  let thisId = item.path[2].querySelector(".id").innerText;
   const newStorageItem = [];
-  const findTarget = printArr.find((e) => e.id !== thisId);
+  const findTarget = printArr.find((e) => e.id == thisId);
   findTarget.quantity += 1;
   newStorageItem.push(findTarget);
-  console.log(newStorageItem);
-  innerNumb++;
+  const findNotTarget = printArr.find((e) => e.id !== thisId);
+  newStorageItem.push(findNotTarget);
+  newStorageItem.sort(function (a, b) {
+    if (a.id > b.id) {
+      return 1;
+    }
+    if (a.id < b.id) {
+      return -1;
+    }
+    return 0;
+  });
+  //localStorage.clear();
+  localStorage.setItem("cartList", JSON.stringify(newStorageItem));
 
-  targetNumber.textContent = innerNumb;
-  targetQuantity.textContent = innerNumb;
+  targetNumber.textContent = findTarget.quantity;
+  targetQuantity.textContent = findTarget.quantity;
 
   const totalPrice = item.path[2].querySelector(".totalPrice");
   //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
-  totalPrice.innerText = selectedPrice.innerText * innerNumb;
+  totalPrice.innerText = selectedPrice.innerText * findTarget.quantity;
 
   //+ 버튼을 누르면 다시 활성화
   const minus = item.path[1].querySelector(".minusProductQuantity");
@@ -185,7 +211,7 @@ function plusQuantity(item) {
     0
   );
   payProductPrice.innerText = sumOfTotalPrice;
-  payTotalPrice.innerText = sumOfTotalPrice + 3000;
+  payTotalPrice.innerText = sumOfTotalPrice + shippingPrice;
 }
 
 function minusQuantity(item) {
@@ -193,18 +219,31 @@ function minusQuantity(item) {
   let targetNumber = item.path[1].querySelector(".productQuantity");
   let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
   let selectedPrice = item.path[2].querySelector(".productPriceSpan");
-  let thisId = item.path[2].querySelector(".id");
-  // 마이너스 버튼이 눌리면 해당 객체를 찾아서 수량 변경후 다시 setItem
-  const targetData = localStorageItem.find((e) => e.id === thisId);
-  console.log(targetData);
-  innerNumb--;
+  let thisId = item.path[2].querySelector(".id").innerText;
+  const newStorageItem = [];
+  const findTarget = printArr.find((e) => e.id == thisId);
+  findTarget.quantity -= 1;
+  newStorageItem.push(findTarget);
+  const findNotTarget = printArr.find((e) => e.id !== thisId);
+  newStorageItem.push(findNotTarget);
+  newStorageItem.sort(function (a, b) {
+    if (a.id > b.id) {
+      return 1;
+    }
+    if (a.id < b.id) {
+      return -1;
+    }
+    return 0;
+  });
+  //localStorage.clear();
+  localStorage.setItem("cartList", JSON.stringify(newStorageItem));
 
-  targetNumber.textContent = innerNumb;
-  targetQuantity.textContent = innerNumb;
+  targetNumber.textContent = findTarget.quantity;
+  targetQuantity.textContent = findTarget.quantity;
 
   const totalPrice = item.path[2].querySelector(".totalPrice");
   //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
-  totalPrice.innerText = selectedPrice.innerText * innerNumb;
+  totalPrice.innerText = selectedPrice.innerText * findTarget.quantity;
 
   // 마이너스 수량으로 넘어가지 않도록 구현
   const minus = item.path[1].querySelector(".minusProductQuantity");
@@ -238,7 +277,7 @@ function minusQuantity(item) {
     0
   );
   payProductPrice.innerText = sumOfTotalPrice;
-  payTotalPrice.innerText = sumOfTotalPrice + 3000;
+  payTotalPrice.innerText = sumOfTotalPrice + shippingPrice;
 }
 
 //전체선택 구현

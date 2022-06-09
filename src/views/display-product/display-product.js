@@ -5,10 +5,8 @@ const tbody = document.querySelector(".tableBody");
 async function getData() {
   try {
     const data = await Api.get("/api/products");
-    console.log(data);
 
     for (let i = 0; i < data.length; i++) {
-      console.log(data[i]);
       let name = document.createElement("td");
       let category = document.createElement("td");
       let price = document.createElement("td");
@@ -46,12 +44,12 @@ async function getData() {
 
 getData();
 
-function modifying() {
-  window.location.href = "/modifyproduct";
+function modifying(item) {
+  const thisId = item.path[0].parentElement.childNodes[0].value;
+  window.location.href = `/modifyproduct/${thisId}`;
 }
 function deleteProduct(item) {
-    const thisId = item.path[0].parentElement.childNodes[0].value;
-    console.log(`/api/categories/${thisId}`);
-    //const deleteThis = Api.delete(`/api/categories/${thisId}`);
-    // location.reload();
+  const thisId = item.path[0].parentElement.childNodes[0].value;
+  const deleteThis = Api.delete(`/api/products/${thisId}`);
+  location.reload();
 }

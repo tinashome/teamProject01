@@ -1,4 +1,5 @@
 import * as Api from "/api.js";
+import { getCurrentDate } from "/useful-functions.js";
 
 async function getUsersList() {
   try {
@@ -61,7 +62,8 @@ async function getUsersList() {
       deleteTd.appendChild(delBtn);
 
       // td 구성
-      const date = document.createTextNode(e.createdAt.substr(0, 10));
+      const currnetCreateAt = getCurrentDate(e.createdAt);
+      const date = document.createTextNode(currnetCreateAt.substr(0, 10));
       const email = document.createTextNode(e.email);
       const role = document.createTextNode(e.role);
       const name = document.createTextNode(e.fullName);

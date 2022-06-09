@@ -26,23 +26,36 @@ async function getUserInfo() {
 getUserInfo();
 
 const data = {
-  productId:
-    "이건 orderId다 이건 주문생성 api명세 읽어보면 자동으로 만들어준다",
+  productId: [],
   productsTitle: "",
   productsTotal: 0,
-  productsPrice: "필요없을듯",
-  productsCnt: "3",
+  productsPrice: 0,
+  productsCnt: 0,
   deliveryFee: "2000",
   orderTotal: 2000,
 };
 
 // 로컬스토리지에서 장바구니 정보 가져오기
 const getLocalStorage = localStorage.getItem("cartList");
+const orderItems = [];
+
+JSON.parse(getLocalStorage).forEach((product) => {
+  orderItems.push({
+    productId: product.id,
+    productName: product.name,
+    price: product.price,
+    quantity: product.quantity,
+    totalPrice: Number(product.price * product.quantity),
+  });
+});
 
 JSON.parse(getLocalStorage).forEach((producet) => {
   data.productsTitle += producet.name + producet.quantity + "개" + "<br>";
   data.productsTotal += producet.price;
   data.orderTotal += producet.price;
+  data.productsPrice = producet.price;
+  data.productsCnt = producet.quantity;
+  data.productId.push(producet.id);
 });
 
 const total = data.productsTotal;
@@ -50,6 +63,7 @@ const fee = data.deliveryFee;
 const order = data.orderTotal;
 
 productsTitle.innerHTML = data.productsTitle;
+
 productsTotal.textContent = `${total} 개`;
 deliveryFee.textContent = `${fee} 원`;
 orderTotal.textContent = `${order} 원`;
@@ -105,7 +119,7 @@ async function doCheckout() {
   const postalCode = postalCodeInput.value;
   const address1 = address1Input.value;
   const address2 = address2Input.value;
-  const request = document.getElementById("requestSelectBox").value;
+  const request = document.getElementById("requestSelectBox");
 
   alert("결제완료");
 
@@ -117,21 +131,13 @@ async function doCheckout() {
       receiverName: receiverName.value,
       receiverPhoneNumber: receiverPhoneNumber.value,
     },
-    request: request,
-    orderItems: [
-      {
-        productId: "629929b4b4f1aba828940ce1",
-        productName: data.productsTitle,
-        price: Number(data.productsPrice),
-        quantity: Number(data.productsCnt),
-        totalPrice: Number(data.productsTotal),
-      },
-    ],
+    request: request.options[request.selectedIndex].text,
+    orderItems: orderItems,
     totalPrice: Number(data.orderTotal),
     status: "결제완료",
   };
 
-  window.location.href = "../order-complete/order-comple.html";
+  window.location.href = "../order-complete/order-complete.html";
 
   try {
     const fff = await Api.post("/api/orders", sendInfo);

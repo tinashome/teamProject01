@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>회원 관리</title>
+
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <script src="users-management.js" type="module" defer></script>
+    <link rel="stylesheet" href="users-management.css" />
+    <script src="../navigation/navigation.js" type="module"></script>
+    <link rel="stylesheet" href="../navigation/navigation.css" />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="nav"></nav>
+      <div class="menu"></div>
+
+      <!-- 비밀번호 입력 모달창 -->
+      <div class="modal hidden">
+        <div class="background"></div>
+        <div class="modalBox">
+          <div class="modalTitle">비밀번호를 입력해주세요.</div>
+          <form>
+            <input
+              class="inputPassword"
+              id="passwordInput"
+              type="password"
+              placeholder="현재 비밀번호를 입력해주세요."
+              autocomplete="off"
+            />
+            <button class="closeBtn">확인</button>
+            <button class="closeBtnDelete hidden">확인</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="usersContainer">
+        <div class="smallTitle">회원관리</div>
+        <hr />
+
+        <div class="numberBar">
+          <div class="numTitle">
+            총 회원 수
+            <div class="usersNum num"></div>
+          </div>
+          <div class="numTitle">
+            관리자 수
+            <div class="managerNum num"></div>
+          </div>
+        </div>
+
+        <table class="usersList">
+          <tr>
+            <th>가입 날짜</th>
+            <th>이메일</th>
+            <th>가입 유형</th>
+            <th>이름</th>
+            <th>권한</th>
+            <th>관리</th>
+          </tr>
+
+          <!-- <tr class="userTr">
+            <td class="dateTd"></td>
+            <td class="emailTd"></td>
+            <td class="roleTd"></td>
+            <td class="nameTd"></td>
+            <td class="selectTd">
+              <select>
+                <option value="basic">일반 사용자</option>
+                <option value="admin">관리자</option>
+              </select>
+            </td>
+            <td><button class="deleteBtn">회원정보 삭제</button></td>
+          </tr> -->
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

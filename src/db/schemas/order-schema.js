@@ -12,7 +12,7 @@ const OrderSchema = new Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
 		},
-		ShipAddress: {
+		shipAddress: {
 			type: new Schema(
 				{
 					postalCode: String,
@@ -35,7 +35,7 @@ const OrderSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		orderitem: [
+		orderItems: [
 			{
 				type: new Schema(
 					{

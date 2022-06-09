@@ -1,0 +1,51 @@
+/* common */
+main {
+  width: 90vw;
+  margin: auto;
+}
+img {
+  width: 80px;
+  margin: 10px;
+  position: relative;
+  top: 50px;
+  left: 10px;
+}
+p {
+  width: 130px;
+  position: relative;
+  top: -80px;
+  left: 150px;
+}
+.menuContainer {
+  margin: auto;
+  width: 700px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.managingOrder,
+.managingUsers,
+.addCategory,
+.addProduct {
+  width: 300px;
+  height: 200px;
+  /* background-color: #f4dfba; */
+  box-shadow: 5px 5px 10px #f4dfba;
+  border-radius: 10px;
+  margin: 20px;
+  transition-duration: 1s;
+}
+
+.managingOrder:hover,
+.managingUsers:hover,
+.addCategory:hover,
+.addProduct:hover {
+  box-shadow: 5px 5px 10px #91684a;
+}
+
+.name {
+  font-weight: bold;
+  position: relative;
+  top: -80px;
+  left: 150px;
+}

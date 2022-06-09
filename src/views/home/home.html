@@ -19,21 +19,20 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="home.css" />
-    <script src="home.js" type="module" defer></script>
-    <script src="home.js" type="text/javascript"></script>
-    <script src="../components/navigation.js" type="module"></script>
+    <script src="../navigation/navigation.js" type="module"></script>
+    <link rel="stylesheet" href="../navigation/navigation.css" />
   </head>
   <body>
-    <!-- 헤더 -->
     <div class="container">
       <nav class="nav"></nav>
+      <div class="menu"></div>
 
       <!-- Image Slider -->
-      <div id="slider">
+      <div class="slider">
         <div class="slides">
-          <div class="slide"><img src="../imgs/image1.jpg" alt="" /></div>
-          <div class="slide"><img src="../imgs/image2.jpg" alt="" /></div>
-          <div class="slide"><img src="../imgs/image3.jpg" alt="" /></div>
+          <div class="slide"><img src="../imgs/image1.jpg" /></div>
+          <div class="slide"><img src="../imgs/image2.jpg" /></div>
+          <div class="slide"><img src="../imgs/image3.jpg" /></div>
         </div>
 
         <div class="dots">
@@ -50,6 +49,24 @@
             <i class="fa-solid fa-chevron-right fa-3x"></i>
           </button>
         </div>
+      </div>
+      <script src="home.js" type="module" defer></script>
+      <script src="home.js" type="text/javascript"></script>
+
+      <div class="btnList">
+        <button><a href="/addproduct">상품 추가</a></button>
+        <button><a href="/addcategory">카테고리 추가</a></button>
+        <button><a href="/detail">상품 상세페이지</a></button>
+        <button><a href="/productlist">상품 목록</a></button>
+        <button><a href="/addproduct">상품추가</a></button>
+      </div>
+
+      <div class="btnList">
+        <button><a href="/order">주문</a></button>
+        <button><a href="/ordercomplete">주문 완료</a></button>
+        <button><a href="/orderlist">주문 목록</a></button>
+        <button><a href="/ordermanage">주문 관리</a></button>
+        <button><a href="/managingpage">매니저페이지</a></button>
       </div>
     </div>
   </body>

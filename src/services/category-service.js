@@ -55,7 +55,7 @@ class CategoryService {
 
   // 카테고리 삭제
   async delCategory(categoryId) {
-    const category = await this.categoryModel.delete(categoryId);
+    const category = await this.categoryModel.delete({categoryId});
     return category;
   }
 }

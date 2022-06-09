@@ -1,17 +1,25 @@
 import { get } from "/api.js";
 
+async function getCategoryList() {
+  try {
+    const productData = await get("/api/categories");
+    console.log(productData);
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
 async function getProductList() {
   // API 요청
   try {
     const productData = await get("/api/products");
 
     productData.forEach((e) => {
-      console.log(e);
       const productList = document.querySelector(".productList");
       const productItem = document.createElement("div");
       productItem.setAttribute("class", "productItem");
       const aTag = document.createElement("a");
-      console.log(e._id);
       aTag.setAttribute("href", `/detail/${e._id}`);
 
       const itemImg = document.createElement("img");
@@ -40,3 +48,4 @@ async function getProductList() {
 }
 
 getProductList();
+getCategoryList();

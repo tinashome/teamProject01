@@ -13,11 +13,7 @@ console.log(productId);
 
 async function getData() {
   try {
-<<<<<<< HEAD
-    const data = await Api.get("/api/product/629ff2c4b31469e41ead951a");
-=======
     const data = await Api.get(`/api/product/${productId}`);
->>>>>>> 0f9e18e3f001a6800a3bb1062529313c5d5d969e
     console.log(data);
     productName.textContent = data.name;
     price.textContent = data.price;

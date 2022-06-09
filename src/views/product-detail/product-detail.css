@@ -60,3 +60,15 @@ button {
 #buyDirect:hover {
   background-color: #493323;
 }
+
+@media screen and (max-width: 880px) {
+  .detailedInfo {
+    width: 500px;
+    position: relative;
+    left: 30px;
+  }
+  .buttonGroup {
+    position: absolute;
+    top: 500px;
+  }
+}

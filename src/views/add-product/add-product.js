@@ -1,5 +1,26 @@
 import * as Api from "../api.js";
 
+const selectCategory = document.querySelector("#category");
+
+async function getData() {
+  try {
+    const data = await Api.get("/api/categories");
+    console.log(data);
+
+    for (let i = 0; i < data.length; i++) {
+      console.log(data[i].name, data[i]._id);
+      let category = document.createElement("option");
+      category.textContent = data[i].name;
+      category.value = data[i]._id;
+      selectCategory.after(category);
+    }
+  } catch (err) {
+    console.error(err.stack);
+  }
+}
+
+getData();
+
 const fileInput = document.querySelector("#inputFile");
 const fileName = document.querySelector("#fileName");
 const form = document.querySelector("form");

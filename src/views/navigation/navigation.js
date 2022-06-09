@@ -1,5 +1,9 @@
 import * as Api from "/api.js";
 
+const hederTag = document.querySelector("head");
+const tags = `<link rel="icon" type="image/png" sizes="16x16" href="../imgs/favicon-1.png" />`
+hederTag.innerHTML+=tags;
+
 const getToken = sessionStorage.getItem("token");
 console.log(getToken);
 

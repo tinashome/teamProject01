@@ -1,13 +1,19 @@
-import * as Api from "../api.js";
+import * as Api from "/api.js";
 
 const addCartBtn = document.querySelector("#addCart");
 const productName = document.querySelector("#productName");
 const price = document.querySelector("#price");
 const productImage = document.querySelector("#chocolate");
 
+const path = window.location.pathname.split("/");
+const productId = path[path.length - 2];
+
+console.log(path);
+console.log(productId);
+
 async function getData() {
   try {
-    const data = await Api.get("/api/product/629ff2c4b31469e41ead951a");
+    const data = await Api.get(`/api/product/${productId}`);
     console.log(data);
     productName.textContent = data.name;
     price.textContent = data.price;
@@ -44,7 +50,7 @@ function saveCartList() {
 //'장바구니 추가'버튼을 누르면 alert창이 뜨면서 localStorage에 담기게 됩니다.
 addCartBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  const data = await Api.get("/api/product/629ff2c4b31469e41ead951a");
+  const data = await Api.get(`/api/product/${productId}`);
 
   // localStorage에 저장되는 정보입니다.
   // 제품명을 key 값으로 가지며, 제품명과 가격을 value로 가집니다.
@@ -108,7 +114,7 @@ function makeUniq() {
 
 const buyDirect = document.querySelector("#buyDirect");
 buyDirect.addEventListener("click", async () => {
-  const data = await Api.get("/api/product/629ff2c4b31469e41ead951a");
+  const data = await Api.get(`/api/product/${productId}`);
 
   const thisData = {};
   thisData.name = data.name;

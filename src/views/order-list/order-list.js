@@ -41,6 +41,7 @@ function datefnc(orderDate) {
   data.forEach((element) => {
     const date = element.date;
     const listProduct = element.listProduct;
+
     const userStatusData = element.userStatusData;
     const productId = element.productId;
 
@@ -55,7 +56,7 @@ function datefnc(orderDate) {
 
     const orderProduct = document.createElement("div");
     orderProduct.classList.add("orderInfo");
-    orderProduct.innerHTML = listProduct;
+    orderProduct.innerText = listProduct;
 
     const userStatus = document.createElement("div");
     userStatus.classList.add("orderInfo");
@@ -140,6 +141,7 @@ async function buttonEvent() {
         return getNewStatus;
       })
       .then((res) => {
+        console.log(res);
         let statusFliter = res.filter((x) => x.orderId == findOrderId);
         changeStatus.textContent = statusFliter[0].status;
       });

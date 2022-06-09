@@ -16,6 +16,7 @@ async function getData() {
 }
 async function deleteOrder(orderId) {
   const getData = await Api.patch("/api/orders", orderId);
+  console.log(getData);
   window.location.reload();
 }
 
@@ -24,8 +25,9 @@ getData();
 // 주문정보가 담긴 박스 생성
 function dataArr(getData) {
   for (let i = 0; i < getData.length; i++) {
-    const splitDate = getData[i].createdAt;    
-    const date = getCurrentDate(splitDate)
+    const splitDate = getData[i].createdAt;
+    console.log(splitDate);
+    const date = getCurrentDate(splitDate);
     const summaryTitle = getData[i].summaryTitle;
     const status = getData[i].status;
     const Id = getData[i].orderId;
@@ -275,6 +277,7 @@ async function getBtns() {
   async function setOrderStatus(orderId, status) {
     const data = { status };
     const setOrder = await Api.post(`/api/orders/${orderId}`, data);
+    console.log(setOrder);
     window.location.reload();
   }
   // 셀렉트를 바꾸게 되면 위에 갯수들이 들어가 있는 바 수정
@@ -297,6 +300,7 @@ async function getBtns() {
 
   // alert에 예
   const deleteCompleteButton = document.getElementById("deleteCompleteButton");
+
   const modalCloseButton = document.getElementById("modalCloseButton");
 
   deleteCompleteButton.addEventListener("click", (e) => {
@@ -304,7 +308,7 @@ async function getBtns() {
     // alert("주문정보가 삭제되었습니다");
     deleteOrder(cancleBtnId);
     modal.className = "hidden";
-    // body.classList.remove("scrollLock");
+    body.classList.remove("scrollLock");
     // const deleteBlock = document.getElementById(cancleBtnId);
 
     // deleteBlock.parentNode.parentNode.remove();

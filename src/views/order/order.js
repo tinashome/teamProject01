@@ -17,6 +17,7 @@ const token = sessionStorage.getItem("userId");
 
 async function getUserInfo() {
   const getORderInfo = await Api.get(`/api/users/${token}`);
+  console.log(getORderInfo);
   receiverName.value = getORderInfo.fullName;
   console.log(getORderInfo);
   receiverPhoneNumber.value = getORderInfo.phoneNumber;
@@ -142,6 +143,7 @@ async function doCheckout() {
 
   try {
     const fff = await Api.post("/api/orders", sendInfo);
+    console.log(fff);
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);

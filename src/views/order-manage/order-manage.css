@@ -57,9 +57,36 @@ section {
 }
 
 /* creatOrderInquiryWrapper */
+.checkBar {
+  width: 10%;
+}
+
 .creatOrderInquiryWrapper {
   display: flex;
   border-bottom: 1px solid #bbb;
+}
+.select {
+  border-radius: 4px;
+  height: 2.5em;
+  border: 1px solid transparent;
+  border-color: #dbdbdb;
+
+  height: 3rem;
+
+  text-align: center;
+  font-size: 1rem;
+}
+
+.gettingReady {
+  font-size: 1rem;
+}
+
+.delivering {
+  font-size: 1rem;
+}
+
+.completion {
+  font-size: 1rem;
 }
 .orderInfo {
   width: 16.66667%;
@@ -69,10 +96,18 @@ section {
   vertical-align: middle;
   margin: auto;
 }
+.checkInfo {
+  width: 10%;
+  padding: 0.75rem;
+  text-align: center;
+  color: #4a4a4a;
+  vertical-align: middle;
+  margin: auto;
+}
 .orderInfo:nth-child(2) {
   width: 33.33333%;
 }
-.cencleOrder {
+.checkBtn {
   background-color: #fff;
 
   border-radius: 4px;
@@ -80,47 +115,22 @@ section {
   font-size: 1em;
   border: 1px solid transparent;
   border-color: #dbdbdb;
-  width: 50%;
+  padding-left: 1rem;
+  padding-right: 1rem;
   height: 3rem;
 }
+.cancleOrder {
+  background-color: #fff;
 
-.select {
   border-radius: 4px;
-  height: 2.5em;
+  box-shadow: none;
+  font-size: 1em;
   border: 1px solid transparent;
   border-color: #dbdbdb;
-
+  width: 60%;
   height: 3rem;
-  width: 50%;
-  text-align: center;
-  font-size: 1rem;
-}
-.gettingReadyColor {
-  background-color: #feecf0 !important;
-  color: #f14668 !important;
-}
-.gettingReady {
-  font-size: 1rem;
-  background-color: #feecf0 !important;
-  color: #f14668 !important;
 }
 
-.delivering {
-  font-size: 1rem;
-  background-color: #ebfffc !important;
-  color: #00d1b2 !important;
-}
-.deliveringColor {
-  background-color: #ebfffc !important;
-  color: #00d1b2 !important;
-}
-.completion {
-  font-size: 1rem;
-  background-color: #b5b5b5 !important;
-}
-.completionColor {
-  background-color: #b5b5b5 !important;
-}
 /* modal */
 .open {
   display: block;
@@ -134,13 +144,17 @@ section {
   right: 0;
   top: 0;
   left: 0;
-  position: absolute;
+  position: fixed;
   z-index: 9999;
 }
 .modalContent {
   width: 640px;
   margin: 0 auto;
-  position: relative;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+
   z-index: 9999;
 }
 .modalContentBox {
@@ -181,4 +195,7 @@ section {
   right: 20px;
   z-index: 100000;
   border: none;
+}
+.scrollLock {
+  overflow: hidden;
 }

@@ -16,12 +16,17 @@ viewsRouter.use("/detail", serveStatic("product-detail"));
 viewsRouter.use("/productlist", serveStatic("product-list"));
 viewsRouter.use("/addproduct", serveStatic("add-product"));
 viewsRouter.use("/addcategory", serveStatic("add-category"));
+viewsRouter.use("/displaycategory", serveStatic("display-category"));
+viewsRouter.use("/displayproduct", serveStatic("display-product"));
+viewsRouter.use("/modifyproduct", serveStatic("modify-product"));
+viewsRouter.use("/modifycategory", serveStatic("modify-category"));
 
 viewsRouter.use("/order", serveStatic("order"));
 viewsRouter.use("/ordercomplete", serveStatic("order-complete"));
 viewsRouter.use("/orderlist", serveStatic("order-list"));
 viewsRouter.use("/ordermanage", serveStatic("order-manage"));
 viewsRouter.use("/managingpage", serveStatic("managing-page"));
+viewsRouter.use("/users", serveStatic("users-management"));
 
 //테스트용입니다.
 viewsRouter.use("/1", serveStatic("test"));

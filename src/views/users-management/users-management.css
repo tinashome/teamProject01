@@ -1,19 +1,7 @@
-/* Default */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-ol,
-ul {
-  list-style: none;
-}
-img {
-  width: 100%;
-  height: 100%;
-  vertical-align: middle;
-  border: none;
 }
 
 a {
@@ -32,7 +20,7 @@ a {
 }
 
 hr {
-  opacity: 0.6;
+  color: lightgrey;
 }
 
 .numberBar {
@@ -128,7 +116,7 @@ select {
   margin: 0 auto;
   border-radius: 10px;
   border: none;
-  background-color: rgb(138, 126, 115);
+  background-color: #91684a;
   color: whitesmoke;
 }
 .modalTitle {
@@ -146,11 +134,6 @@ select {
 
 .delMyInfoBtn {
   display: flex;
-  /* margin: 0 30px 20px; */
-  /* margin-top: ; */
-  /* float: right; */
-  /* text-align: center; */
-
   justify-content: center;
   align-items: center;
   border: 1px solid #91684a;

@@ -23,7 +23,9 @@ viewsRouter.use("/displayproduct", serveStatic("display-product"));
 viewsRouter.use("/modifyproduct/:productId", serveStatic("modify-product"));
 viewsRouter.use("/modifycategory", serveStatic("modify-category"));
 viewsRouter.use("/modifycategory/:id", serveStatic("modify-category"));
+
 viewsRouter.use("/boardlist", serveStatic("board-list"));
+viewsRouter.use("/boardlist/write", serveStatic("add-board-post"));
 
 viewsRouter.use("/order", serveStatic("order"));
 viewsRouter.use("/ordercomplete", serveStatic("order-complete"));

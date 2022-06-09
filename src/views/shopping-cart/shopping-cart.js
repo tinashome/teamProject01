@@ -231,6 +231,7 @@ function minusQuantity(item) {
   // 값을 가져오는거
   // 위에 값을 1<값 if안에 실행
   let innerNumb = item.path[1].querySelector(".productQuantity").innerText;
+
   // const selectedCheckBox = document.getElementsByClassName("selectedCheckBox");
   // console.log(item.path[2].firstChild.checked);
 

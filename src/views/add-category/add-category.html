@@ -35,46 +35,26 @@
         <h1>카테고리 추가</h1>
         <hr />
       </div>
-      <form>
+      <div class="formContainer">
         <h2>카테고리 추가하기</h2>
 
         <div class="field">
           <label for="categoryName" class="labelName"> 카테고리 이름</label>
-          <input type="text" placeholder="다크 초콜릿" name="name" />
+          <input type="text" placeholder="다크 초콜릿" name="name" id="categoryName"/>
         </div>
 
         <div class="textArea">
           <label for="description" class="labelName"> 카테고리 설명 </label>
           <textarea
-            name="description"
+            name="info"
             id="descrption"
             cols="80"
             rows="10"
           ></textarea>
         </div>
 
-        <div class="field">
-          <label for="category" class="labelName"> 상위 카테고리</label>
-          <select name="topCategory" id="selectTopCategory">
-            <option>상위 카테고리를 선택해 주세요.</option>
-            <option value="normal">초콜릿</option>
-            <option value="gift">선물용</option>
-            <option value="bulk">대용량</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="category" class="labelName"> 중분류 카테고리</label>
-          <select name="middleCategory" id="selectMiddleCategory">
-            <option>중분류 카테고리를 선택해 주세요.</option>
-            <option value="milkChocolate">milkChocolate</option>
-            <option value="darkChocolate">darkChocolate</option>
-            <option value="whiteChocolate">whiteChocolate</option>
-          </select>
-        </div>
-
-        <input type="submit" id="addButton" value="제품 판매하기" />
-      </form>
+        <button id="addButton">카테고리 등록하기</button>
+      </div>
     </main>
   </body>
 </html>

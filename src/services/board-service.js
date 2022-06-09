@@ -39,7 +39,7 @@ class BoardService {
 
     // 우선 해당 id의 카테고리가 db에 있는지 확인
     let post = await this.boardModel.findById(postId);
-
+    console.log(post);
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!post) {
       throw new Error('게시글이 없습니다. 다시 한 번 확인해 주세요.');

@@ -1,4 +1,6 @@
 import * as Api from "/api.js";
+import { getCurrentDate } from "/useful-functions.js";
+
 const body = document.getElementsByTagName("body")[0];
 const statusArr = ["결제완료" , "배송준비중" , "발송완료", "주문취소"];
 async function getData() {
@@ -22,8 +24,8 @@ getData();
 // 주문정보가 담긴 박스 생성
 function dataArr(getData) {
   for (let i = 0; i < getData.length; i++) {
-    const splitDate = getData[i].createdAt;
-    const date = splitDate.substr(0, 10);
+    const splitDate = getData[i].createdAt;    
+    const date = getCurrentDate(splitDate)
     const summaryTitle = getData[i].summaryTitle;
     const status = getData[i].status;
     const Id = getData[i].orderId;

@@ -27,7 +27,7 @@ export class ProductModel {
   }
 
   async findAll() {
-    const products = await Product.find({});
+    const products = await Product.find({}).populate(['category']);
 
     // img src에서 인식할 수 있도록 수정해서 프론트로 보냄
     products.forEach((product) => product.img = product.img.split("/views")[1])

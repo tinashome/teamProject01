@@ -164,7 +164,9 @@ function plusQuantity(item) {
   findTarget.quantity += 1;
   newStorageItem.push(findTarget);
   const findNotTarget = printArr.find((e) => e.id !== thisId);
-  newStorageItem.push(findNotTarget);
+  // newStorageItem.push(findNotTarget);
+  printArr.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
+
   newStorageItem.sort(function (a, b) {
     if (a.id > b.id) {
       return 1;
@@ -229,8 +231,9 @@ function minusQuantity(item) {
   const findTarget = printArr.find((e) => e.id == thisId);
   findTarget.quantity -= 1;
   newStorageItem.push(findTarget);
+
   const findNotTarget = printArr.find((e) => e.id !== thisId);
-  newStorageItem.push(findNotTarget);
+  printArr.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
   newStorageItem.sort(function (a, b) {
     if (a.id > b.id) {
       return 1;
@@ -258,13 +261,14 @@ function minusQuantity(item) {
   const productQuantity =
     item.path[2].querySelector(".productQuantity").innerText;
   // 마이너스 수량으로 넘어가지 않도록 구현
+
   const minus = item.path[1].querySelector(".minusProductQuantity");
   if (innerNumb < 2) {
     minus.disabled = true;
-    return;
   } else {
     minus.disabled = false;
   }
+
   //payProductQuantity.innerText = totalPrice.innerText;
 
   // const selectedProduct = document.querySelectorAll(".productQuantity");
@@ -284,6 +288,7 @@ function minusQuantity(item) {
   for (let i = 0; i < selectedProductPrice.length; i++) {
     totalPriceArr.push(selectedProductPrice[i].innerText);
   }
+
   const sumOfTotalPrice = totalPriceArr.reduce(
     (prev, next) => Number(prev) + Number(next),
     0

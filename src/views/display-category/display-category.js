@@ -39,12 +39,12 @@ async function getData() {
 
 getData();
 
-function modifying() {
-  window.location.href = "/modifycategory";
+function modifying(item) {
+  const thisId = item.path[0].parentElement.childNodes[0].value;
+  window.location.href = `/modifycategory/${thisId}`;
 }
 function deleteCategory(item) {
   const thisId = item.path[0].parentElement.childNodes[0].value;
-  console.log(`/api/categories/${thisId}`);
   const deleteThis = Api.delete(`/api/categories/${thisId}`);
-  // location.reload();
+  location.reload();
 }

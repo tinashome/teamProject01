@@ -27,7 +27,7 @@ export class ProductModel {
   }
 
   async findAll() {
-    const products = await Product.find({});
+    const products = await Product.find({}).populate(['category']);
 
     // img src에서 인식할 수 있도록 수정해서 프론트로 보냄
     products.forEach((product) => product.img = product.img.split("/views")[1])
@@ -59,7 +59,8 @@ export class ProductModel {
   }
 
   async delete({ productId }) {
-    const product = await Product.findOneAndDelete({ productId });
+    console.log(productId);
+    const product = await Product.findOneAndDelete({ _id: productId });
     return product;
   }
 }

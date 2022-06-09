@@ -1,40 +1,74 @@
+import * as Api from "/api.js";
+
 const button = document.getElementById("buyButton");
 const postalCodeInput = document.querySelector("#postalCode");
 const searchAddressButton = document.querySelector("#searchAddressButton");
-
+const postalCode = document.getElementById("postalCode");
 const address1Input = document.querySelector("#address1");
 const address2Input = document.querySelector("#address2");
-
 const productsTitle = document.getElementById("payProductQuantity");
 const productsTotal = document.getElementById("payProductPrice");
 const deliveryFee = document.getElementById("payShippingPrice");
 const orderTotal = document.getElementById("payTotalPrice");
+const receiverName = document.getElementById("receiverName");
+const receiverPhoneNumber = document.getElementById("receiverPhoneNumber");
 // 결제정보
-document.addEventListener("DOMContentLoaded", async function () {
-  // const res = await fetch("주소")
-  // const data = await res.json()
-  // 테스트용 객체
-  const data = [
-    {
-      productsTitle: "2020",
-      productsTotal: "dd",
-      deliveryFee: "준비중",
-      orderTotal: "주문취소",
-    },
-  ];
+const token = sessionStorage.getItem("userId");
 
-  data.forEach((element) => {
-    const title = element.productsTitle;
-    const total = element.productsTotal;
-    const fee = element.deliveryFee;
-    const order = element.orderTotal;
+async function getUserInfo() {
+  const getORderInfo = await Api.get(`/api/users/${token}`);
+  console.log(getORderInfo);
+  receiverName.value = getORderInfo.fullName;
+  console.log(getORderInfo);
+  receiverPhoneNumber.value = getORderInfo.phoneNumber;
+  address1Input.value = getORderInfo.address.address1;
+  address2Input.value = getORderInfo.address.address2;
+  postalCode.value = getORderInfo.address.postalCode;
+}
+getUserInfo();
 
-    productsTitle.textContent = title;
-    productsTotal.textContent = title;
-    deliveryFee.textContent = title;
-    orderTotal.textContent = title;
+const data = {
+  productId: [],
+  productsTitle: "",
+  productsTotal: 0,
+  productsPrice: 0,
+  productsCnt: 0,
+  deliveryFee: "2000",
+  orderTotal: 2000,
+};
+
+// 로컬스토리지에서 장바구니 정보 가져오기
+const getLocalStorage = localStorage.getItem("cartList");
+const orderItems = [];
+
+JSON.parse(getLocalStorage).forEach((product) => {
+  orderItems.push({
+    productId: product.id,
+    productName: product.name,
+    price: product.price,
+    quantity: product.quantity,
+    totalPrice: Number(product.price * product.quantity),
   });
 });
+
+JSON.parse(getLocalStorage).forEach((producet) => {
+  data.productsTitle += producet.name + producet.quantity + "개" + "<br>";
+  data.productsTotal += producet.price;
+  data.orderTotal += producet.price;
+  data.productsPrice = producet.price;
+  data.productsCnt = producet.quantity;
+  data.productId.push(producet.id);
+});
+
+const total = data.productsTotal;
+const fee = data.deliveryFee;
+const order = data.orderTotal;
+
+productsTitle.innerHTML = data.productsTitle;
+
+productsTotal.textContent = `${total} 개`;
+deliveryFee.textContent = `${fee} 원`;
+orderTotal.textContent = `${order} 원`;
 
 // 주소찾기
 
@@ -83,44 +117,36 @@ ClickSelectBox.addEventListener("change", () => {
 
 async function doCheckout() {
   // 각 입력값 가져옴
-  const receiverName = document.getElementById("receiverName").value;
-  const receiverPhoneNumber = document.getElementById(
-    "receiverPhoneNumber"
-  ).value;
 
   const postalCode = postalCodeInput.value;
   const address1 = address1Input.value;
   const address2 = address2Input.value;
-  const request = document.getElementById("requestSelectBox").value;
+  const request = document.getElementById("requestSelectBox");
 
-  // 입력이 안 되어 있을 시
-  if (!receiverName || !receiverPhoneNumber || !postalCode || !address2)
-    return alert("배송지 정보를 모두 입력해 주세요.");
+  alert("결제완료");
 
-  // 테스트용
-  const data = {
-    receiverName,
-    receiverPhoneNumber,
-    postalCode,
-    address1,
-    address2,
-    request,
+  let sendInfo = {
+    shipAddress: {
+      postalCode: postalCode,
+      address1: address1,
+      address2: address2,
+      receiverName: receiverName.value,
+      receiverPhoneNumber: receiverPhoneNumber.value,
+    },
+    request: request.options[request.selectedIndex].text,
+    orderItems: orderItems,
+    totalPrice: Number(data.orderTotal),
+    status: "결제완료",
   };
 
-  // JSON 만듦
-  // const dataJson = JSON.stringify(data)
+  // window.location.href = "../order-complete/order-complete.html";
 
-  // const apiUrl = ``
-
-  // POST 요청
-  // const res = await fetch(apiUrl, {
-  //   method: 'POST',
-  //   headers: {
-  //       'Content-Type': 'application/json',
-  //   },
-  //   body: dataJson,
-  // });
-  alert("결제완료");
-  window.location.href = "../order-completion/order-complete.html";
+  try {
+    const fff = await Api.post("/api/orders", sendInfo);
+    console.log(fff);
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
 }
 button.addEventListener("click", doCheckout);

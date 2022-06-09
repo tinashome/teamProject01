@@ -5,7 +5,6 @@ const selectCategory = document.querySelector("#category");
 async function getData() {
   try {
     const data = await Api.get("/api/categories");
-    console.log(data);
 
     for (let i = 0; i < data.length; i++) {
       console.log(data[i].name, data[i]._id);
@@ -60,4 +59,6 @@ form.addEventListener("submit", (e) => {
     }
   }
   Api.postImg("/api/product", formData);
+
+  form.reset();
 });

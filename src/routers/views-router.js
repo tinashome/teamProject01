@@ -17,6 +17,10 @@ viewsRouter.use("/detail/:id", serveStatic("product-detail"));
 viewsRouter.use("/productlist", serveStatic("product-list"));
 viewsRouter.use("/addproduct", serveStatic("add-product"));
 viewsRouter.use("/addcategory", serveStatic("add-category"));
+viewsRouter.use("/displaycategory", serveStatic("display-category"));
+viewsRouter.use("/displayproduct", serveStatic("display-product"));
+viewsRouter.use("/modifyproduct", serveStatic("modify-product"));
+viewsRouter.use("/modifycategory", serveStatic("modify-category"));
 
 viewsRouter.use("/order", serveStatic("order"));
 viewsRouter.use("/ordercomplete", serveStatic("order-complete"));

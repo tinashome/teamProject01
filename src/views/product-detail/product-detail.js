@@ -1,4 +1,4 @@
-import * as Api from "../api.js";
+import * as Api from "/api.js";
 
 const addCartBtn = document.querySelector("#addCart");
 const productName = document.querySelector("#productName");

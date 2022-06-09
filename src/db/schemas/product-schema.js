@@ -31,10 +31,6 @@ const ProductSchema = new Schema(
       type: Schema.Types.ObjectId, 
       ref: 'categories',
     },
-    // categoryM: { 
-    //   type: Schema.Types.ObjectId, 
-    //   ref: 'categories',
-    // },
     // categoryS: { 
     //   type: Schema.Types.ObjectId, 
     //   ref: 'categories',

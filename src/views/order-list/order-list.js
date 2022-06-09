@@ -1,5 +1,6 @@
 import * as Api from "/api.js";
 import { getCurrentDate } from "/useful-functions.js";
+
 const body = document.getElementsByTagName("body")[0];
 // 저거 만드는거 말고 이걸 쓰나?
 let data = [];
@@ -23,8 +24,8 @@ getOrder();
 function datefnc(orderDate) {
   for (let i = 0; i < orderDate.length; i++) {
     let dateInfo = orderDate[i].createdAt;
+    let date = getCurrentDate(dateInfo);
 
-    const date = dateInfo.substr(0, 10);
     const listProduct = orderDate[i].summaryTitle;
 
     const productId = orderDate[i].orderId;

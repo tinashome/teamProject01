@@ -50,11 +50,7 @@ function saveCartList() {
 //'장바구니 추가'버튼을 누르면 alert창이 뜨면서 localStorage에 담기게 됩니다.
 addCartBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-<<<<<<< HEAD
-  const data = await Api.get("/api/product/629ff2c4b31469e41ead951a");
-=======
   const data = await Api.get(`/api/product/${productId}`);
->>>>>>> 0f9e18e3f001a6800a3bb1062529313c5d5d969e
 
   // localStorage에 저장되는 정보입니다.
   // 제품명을 key 값으로 가지며, 제품명과 가격을 value로 가집니다.
@@ -118,11 +114,7 @@ function makeUniq() {
 
 const buyDirect = document.querySelector("#buyDirect");
 buyDirect.addEventListener("click", async () => {
-<<<<<<< HEAD
-  const data = await Api.get("/api/product/629ff2c4b31469e41ead951a");
-=======
   const data = await Api.get(`/api/product/${productId}`);
->>>>>>> 0f9e18e3f001a6800a3bb1062529313c5d5d969e
 
   const thisData = {};
   thisData.name = data.name;

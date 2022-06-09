@@ -51,10 +51,59 @@ async function getData() {
     
       // 다음페이지에 넘겨줄 product의 id를 value로 할당
       // name.value = data[i]._id;
-
   } catch (err) {
     console.error(err.stack);
   }
 }
   
 getData();
+
+
+////////////////////////////////////////////////////////////
+
+
+
+const form = document.querySelector("form");
+
+inputFile.addEventListener("input", (e) => {
+  e.preventDefault();
+  fileName.textContent = " 사진 저장 성공! ";
+});
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  alert("제품 정보가 수정되었습니다.");
+
+  const formData = new FormData();
+
+  //데이터 만들기
+
+  for (const item of form.elements) {
+    switch (item.type) {
+      case "number":
+        formData.append(item.name, item.value);
+        break;
+      case "text":
+        formData.append(item.name, item.value);
+        break;
+      case "file":
+        formData.append("upload", inputFile.files[0]);
+        break;
+    }
+    switch (item.localName) {
+      case "select":
+        formData.append(item.name, item.value);
+        break;
+      case "textarea":
+        formData.append(item.name, item.value);
+        break;
+    }
+  }
+
+  try {
+    //patch 가능한 api로 바꾸기
+    //const patching = await Api.patch(`/api/products`, `${productId}`, formData);
+  } catch (err) {
+    console.error(err.stack);
+  }
+});

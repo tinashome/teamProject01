@@ -4,21 +4,34 @@ async function getProductList() {
   // API 요청
   try {
     const productData = await get("/api/products");
-    //forEach 쓰기
-    productData.map((e) => {
-      // innerHTML 쓰지 말기!!!! -> 수정해야함
-      const productList = document.querySelector(".productList");
-      // productList.appendChild();
 
-      const item = `
-      <div class="productItem">
-        <a href="#">
-          <img class="itemImg" src="img.jpg" />
-          <div class="itemName">${e.name}</div>
-          <div class="itemPrice">${e.price}원</div>
-        </a>
-      </div>`;
-      productList.innerHTML += item;
+    productData.forEach((e) => {
+      console.log(e);
+      const productList = document.querySelector(".productList");
+      const productItem = document.createElement("div");
+      productItem.setAttribute("class", "productItem");
+      const aTag = document.createElement("a");
+      console.log(e._id);
+      aTag.setAttribute("href", `/detail/${e._id}`);
+
+      const itemImg = document.createElement("img");
+      const itemName = document.createElement("div");
+      const itemPrice = document.createElement("div");
+      itemImg.setAttribute("class", "itemImg");
+      itemImg.setAttribute("src", `${e.img}`);
+      itemName.setAttribute("class", "itemName");
+      itemPrice.setAttribute("class", "itemPrice");
+
+      const nameText = document.createTextNode(`${e.name}`);
+      const priceText = document.createTextNode(`${e.price}`);
+      itemName.appendChild(nameText);
+      itemPrice.appendChild(priceText);
+
+      aTag.appendChild(itemImg);
+      aTag.appendChild(itemName);
+      aTag.appendChild(itemPrice);
+      productItem.appendChild(aTag);
+      productList.appendChild(productItem);
     });
   } catch (err) {
     console.error(err.stack);

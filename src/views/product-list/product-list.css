@@ -29,14 +29,14 @@ a {
 
 /* 가로 슬라이드 카테고리 메뉴 */
 .categorySlide {
-  width: 70%;
+  width: 80%;
   height: 200px;
   margin: 0 auto;
 }
 
 /* 상품 옵션 선택 바 */
 .productOptionBar {
-  width: 70%;
+  width: 80%;
   height: 30px;
 
   margin: 0 auto;
@@ -49,7 +49,7 @@ a {
 }
 
 .productList {
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -76,7 +76,7 @@ a {
 }
 
 .itemImg {
-  width: 220px;
+  width: 100%;
   height: 150px;
   margin-bottom: 12px;
   /* margin: 10px; */

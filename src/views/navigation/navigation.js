@@ -1,8 +1,12 @@
 import * as Api from "/api.js";
 
 const hederTag = document.querySelector("head");
-const tags = `<link rel="icon" type="image/png" sizes="16x16" href="../imgs/favicon-1.png" />`
-hederTag.innerHTML+=tags;
+const faviconTag = document.createElement("link");
+faviconTag.setAttribute("rel", "icon");
+faviconTag.setAttribute("type", "image/png");
+faviconTag.setAttribute("sizes", "16x16");
+faviconTag.setAttribute("href", "../imgs/favicon-1.png");
+hederTag.appendChild(faviconTag);
 
 const getToken = sessionStorage.getItem("token");
 console.log(getToken);

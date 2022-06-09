@@ -54,7 +54,7 @@ async function post(endpoint, data) {
 
   return result;
 }
-//////////////////////////////////////////////////////////////////
+
 // api 로 POST 요청 (/endpoint 로, JSON 데이터 형태로 요청함)
 async function postImg(endpoint, data) {
   const apiUrl = endpoint;
@@ -63,14 +63,14 @@ async function postImg(endpoint, data) {
   // const bodyData = JSON.stringify(data);
   const bodyData = data;
 
-  console.log(`%cPOST 요청: ${apiUrl}`, "color: #296aba;");
-  console.log(`%cPOST 요청 데이터: ${bodyData}`, "color: #296aba;");
+  console.log(`%cPOST 요청: ${apiUrl}`, 'color: #296aba;');
+  console.log(`%cPOST 요청 데이터: ${bodyData}`, 'color: #296aba;');
 
   const res = await fetch(apiUrl, {
-    method: "POST",
+    method: 'POST',
     headers: {
       // 'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
     body: bodyData,
   });
@@ -87,7 +87,6 @@ async function postImg(endpoint, data) {
 
   return result;
 }
-//////////////////////////////////////////////////////////////////
 
 // api 로 PATCH 요청 (/endpoint/params 로, JSON 데이터 형태로 요청함)
 async function patch(endpoint, params = "", data) {

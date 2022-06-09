@@ -1,28 +1,22 @@
-import * as Api from "../api";
+import * as Api from "../api.js";
 
-const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
+const addButton = document.querySelector("#addButton");
+addButton.addEventListener("click", async (e) => {
   e.preventDefault();
   alert("제품 정보가 저장되었습니다.");
   //데이터 백으로 넘기는 작업
+  const name = document.querySelector("#categoryName").value;
+  const info = document.querySelector("#descrption").value;
 
-  const formData = new FormData();
-
-  //데이터 만들기
-  for (const item of form.elements) {
-    switch (item.type) {
-      case "text":
-        formData.append(item.name, item.value);
-        break;
-    }
-    switch (item.localName) {
-      case "select":
-        formData.append(item.name, item.value);
-        break;
-      case "textarea":
-        formData.append(item.name, item.value);
-        break;
-    }
+  let data = {
+    name,
+    info,
+  };
+  console.log(data);
+  try {
+    const sendData = await Api.post("/api/category", data);
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
-  Api.post("/api/product", formData);
 });

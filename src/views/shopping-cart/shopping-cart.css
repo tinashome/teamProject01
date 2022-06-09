@@ -28,6 +28,10 @@ i {
   border-radius: 10px;
   box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
 }
+.shoppingListContainer {
+  position: relative;
+  top: -350px;
+}
 
 /* 전체삭제 | 선택삭제 */
 .shoppingListHeader {
@@ -124,10 +128,10 @@ i {
   height: 350px;
   border-radius: 10px;
   background-color: #f4dfba;
+  position: relative;
+  top: 0px;
+  left: 850px;
   padding: 10px;
-  position: absolute;
-  top: 220px;
-  left: 1050px;
   box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
 }
 

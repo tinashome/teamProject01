@@ -27,15 +27,18 @@ const ProductSchema = new Schema(
     },
     // TODO: 시간 있으면 추후 img, category는 populate로 전환
     // 결과값은 그대로 일 것이므로 프론트에 영향X
-    categoryL: { 
-      type: String, 
+    category: { 
+      type: Schema.Types.ObjectId, 
+      ref: 'categories',
     },
-    categoryM: { 
-      type: String, 
-    },
-    categoryS: { 
-      type: String, 
-    },
+    // categoryM: { 
+    //   type: Schema.Types.ObjectId, 
+    //   ref: 'categories',
+    // },
+    // categoryS: { 
+    //   type: Schema.Types.ObjectId, 
+    //   ref: 'categories',
+    // },
     img: {
       type: String,
     },

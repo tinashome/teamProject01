@@ -1,4 +1,5 @@
 import * as Api from "/api.js";
+import { getCurrentDate } from "/useful-functions.js";
 const body = document.getElementsByTagName("body")[0];
 // 저거 만드는거 말고 이걸 쓰나?
 let data = [];
@@ -8,6 +9,7 @@ async function getOrder() {
   try {
     // userId를 이용해서 주문정보르 가져옴
     const getORderInfo = await Api.get(`/api/orders/${token}`);
+
     datefnc(getORderInfo);
     buttonEvent();
   } catch (err) {
@@ -21,8 +23,10 @@ getOrder();
 function datefnc(orderDate) {
   for (let i = 0; i < orderDate.length; i++) {
     let dateInfo = orderDate[i].createdAt;
+
     const date = dateInfo.substr(0, 10);
     const listProduct = orderDate[i].summaryTitle;
+
     const productId = orderDate[i].orderId;
     const userStatusData = orderDate[i].status;
 
@@ -50,7 +54,7 @@ function datefnc(orderDate) {
 
     const orderProduct = document.createElement("div");
     orderProduct.classList.add("orderInfo");
-    orderProduct.textContent = listProduct;
+    orderProduct.innerHTML = listProduct;
 
     const userStatus = document.createElement("div");
     userStatus.classList.add("orderInfo");

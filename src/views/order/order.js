@@ -1,4 +1,5 @@
 import * as Api from "/api.js";
+
 const button = document.getElementById("buyButton");
 const postalCodeInput = document.querySelector("#postalCode");
 const searchAddressButton = document.querySelector("#searchAddressButton");
@@ -137,7 +138,7 @@ async function doCheckout() {
     status: "결제완료",
   };
 
-  window.location.href = "../order-complete/order-complete.html";
+  // window.location.href = "../order-complete/order-complete.html";
 
   try {
     const fff = await Api.post("/api/orders", sendInfo);

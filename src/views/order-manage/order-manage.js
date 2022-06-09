@@ -1,6 +1,6 @@
 import * as Api from "/api.js";
 const body = document.getElementsByTagName("body")[0];
-const statusArr = ["결제완료" , "배송준비중" , "발송완료", "주문취소"];
+const statusArr = ["결제완료", "배송준비중", "발송완료", "주문취소"];
 async function getData() {
   const getData = await Api.get("/api/orders");
 
@@ -13,7 +13,7 @@ async function getData() {
   getBtns();
 }
 async function deleteOrder(orderId) {
-  const getData = await Api.patch("/api/orders",orderId);
+  const getData = await Api.patch("/api/orders", orderId);
   window.location.reload();
 }
 
@@ -28,7 +28,7 @@ function dataArr(getData) {
     const status = getData[i].status;
     const Id = getData[i].orderId;
     const totalPrice = getData[i].totalPrice;
-    const statusArr = ["결제완료" , "배송준비중" , "발송완료", "주문취소"];
+    const statusArr = ["결제완료", "배송준비중", "발송완료", "주문취소"];
 
     // 전체감싸기
     const wrapper = document.createElement("div");
@@ -53,7 +53,9 @@ function dataArr(getData) {
     // 총액
     const orderAmount = document.createElement("div");
     orderAmount.classList.add("orderInfo");
-    orderAmount.textContent = totalPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    orderAmount.textContent = totalPrice
+      .toString()
+      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
     // select
     const selectWrapper = document.createElement("div");
@@ -86,18 +88,17 @@ function dataArr(getData) {
     cancelOption.classList.add("incomplete");
     cancelOption.setAttribute("value", statusArr[3]);
     cancelOption.textContent = statusArr[3];
-// console.log(cancelOption)
+    // console.log(cancelOption)
 
-
-// function setSelected(){
-//   completionOption.setAttribute("selected", "true");
-//   select.classList.add("clickSelect");  
-// }
+    // function setSelected(){
+    //   completionOption.setAttribute("selected", "true");
+    //   select.classList.add("clickSelect");
+    // }
     //selected넣기
     // completionOption.setAttribute("selected", "true");
     // select.classList.add("clickSelect");
     // console.log(status);
-    
+
     if (status === statusArr[0]) {
       // console.log("1",status === statusArr[0]);
       readyOption.setAttribute("selected", "true");
@@ -113,15 +114,13 @@ function dataArr(getData) {
       completionOption.setAttribute("selected", "true");
       select.classList.add("clickSelect");
       //setSelected();
-    } else if (status === statusArr[3]){
-      cancelOption.setAttribute("selected", "true");  
+    } else if (status === statusArr[3]) {
+      cancelOption.setAttribute("selected", "true");
       select.setAttribute("disabled", "true");
       // cencelbtn.setAttribute("disabled", "disabled");
       select.classList.add("clickSelect");
       //setSelected();
     }
-    
-    
 
     // 확인 버튼
     const checkBtnWrapper = document.createElement("div");
@@ -141,10 +140,10 @@ function dataArr(getData) {
     // 화면에 보이기
     // console.log(select.value);
     // if(select.value === "주문취소" ){
-      if(status === statusArr[3]){
-        btn.setAttribute("disabled","disabled");
-        checkBtn.setAttribute("disabled","disabled");
-      };
+    if (status === statusArr[3]) {
+      btn.setAttribute("disabled", "disabled");
+      checkBtn.setAttribute("disabled", "disabled");
+    }
     checkBtnWrapper.append(checkBtn);
     btnWrapper.append(btn);
     select.append(readyOption, shippingOption, completionOption, cancelOption);
@@ -232,7 +231,7 @@ function deliveryCompletedCnt() {
 
 //  주문취소 갯수
 function orderCancelCnt() {
-  const checkSelet = document.querySelectorAll(".clickSelect"); 
+  const checkSelet = document.querySelectorAll(".clickSelect");
   let orderCanceledTotal = 0;
   checkSelet.forEach((element) => {
     const deliveryStatus = element.options[element.selectedIndex].value;
@@ -271,25 +270,25 @@ async function getBtns() {
     });
   });
 
-  async function setOrderStatus(orderId,status){
-    const data = {status}
-    const setOrder = await Api.post(`/api/orders/${orderId}`,data)
+  async function setOrderStatus(orderId, status) {
+    const data = { status };
+    const setOrder = await Api.post(`/api/orders/${orderId}`, data);
     window.location.reload();
   }
   // 셀렉트를 바꾸게 되면 위에 갯수들이 들어가 있는 바 수정
   const clickSelect = document.querySelectorAll(".clickSelect");
   //const saveBtn = document.querySelectorAll(".save");
   clickSelect.forEach((btn) => {
-    const orderId = btn.getAttribute("id").replace("statusSelectBox-","");
+    const orderId = btn.getAttribute("id").replace("statusSelectBox-", "");
     btn.addEventListener("change", () => {
       const status = btn.value;
       const saveBtn = document.getElementById(`checkBtn - ${orderId}`);
       saveBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          // gettingReadyCnt();
-          // deliveringCnt();
-          // deliveryCompletedCnt();
-          setOrderStatus(orderId,status);
+        e.preventDefault();
+        // gettingReadyCnt();
+        // deliveringCnt();
+        // deliveryCompletedCnt();
+        setOrderStatus(orderId, status);
       });
     });
   });
@@ -328,6 +327,5 @@ async function getBtns() {
 //     select.addEventListener("change", (e) => {
 //       e.preventDefault();
 //       console.log(select);
-
 
 // })})}

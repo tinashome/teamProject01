@@ -56,10 +56,10 @@ class OrderService {
 
     //shipAddress,orderItems은 변경후 전체를 받아야함, 변경 값만 받으면 나머지는 초기화됨
     //status가 결제완료 이면 주문정보 변경가능, 배송준비중/발송완료일때는 변경 불가
-
-    const summaryTitle = toUpdate.orderItems.reduce((acc,cur,idx)=> acc + `${idx===0?"":"\n"}${cur.productName} ${cur.quantity}개`, "")
-    toUpdate.summaryTitle = summaryTitle;
-
+    if (toUpdate.orderItems){
+      const summaryTitle = toUpdate.orderItems.reduce((acc,cur,idx)=> acc + `${idx===0?"":"\n"}${cur.productName} ${cur.quantity}개`, "")
+      toUpdate.summaryTitle = summaryTitle;
+    }
     const updatedOrder = await this.orderModel.update({
       orderId,
       update: toUpdate,

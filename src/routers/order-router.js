@@ -77,7 +77,7 @@ orderRouter.get("/:userId/:orderId", loginRequired, async function (req, res, ne
 });
 
 // (관리)주문정보를 변경(배송정보,주문일부취소만 가능)
-orderRouter.put("/:orderId", loginRequired, async function (req, res, next) {
+orderRouter.post("/:orderId", loginRequired, async function (req, res, next) {
 	try {
 		const userRole = await req.currentUserRole;
 		if (userRole !== "admin") {
@@ -108,7 +108,7 @@ orderRouter.put("/:orderId", loginRequired, async function (req, res, next) {
 });
 
 // (회원)주문정보를 변경(발송 전 상태일때 : 배송정보,주문일부취소만 가능)
-orderRouter.put("/:userId/:orderId", loginRequired, async function (req, res, next) {
+orderRouter.post("/:userId/:orderId", loginRequired, async function (req, res, next) {
 	try {
 		const userId = req.params.userId;
 		const orderId = req.params.orderId;

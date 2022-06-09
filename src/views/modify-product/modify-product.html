@@ -40,7 +40,7 @@
 
         <div class="field">
           <label for="productName" class="labelName"> 제품 이름</label>
-          <input type="text" placeholder="다크 초콜릿" name="name" id="productName"/>
+          <input type="text" placeholder="다크 초콜릿" name="name" id="name"/>
         </div>
 
         <div class="field">
@@ -52,7 +52,7 @@
 
         <div class="field">
           <label for="madeFrom" class="labelName"> 제조사 </label>
-          <input type="text" placeholder="00 초콜릿 제조 (주)" name="company"  id="company"/>
+          <input type="text" placeholder="00 초콜릿 제조 (주)" name="company" id="company"/>
         </div>
 
         <div class="textArea">
@@ -65,8 +65,13 @@
           <textarea name="detail" id="detail" cols="80" rows="10"></textarea>
         </div>
 
-        <div class="fileField">
+        
+        <div class="field" id="imgField">
           <label for="image" class="labelName"> 제품 사진 </label>
+          <img src="" alt="제품 사진" id="img"/>
+        </div>
+
+        <div class="fileField">
           <div class="file">
             <label class="fileLabel">
               <input

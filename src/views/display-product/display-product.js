@@ -1,4 +1,5 @@
 import * as Api from "../api.js";
+import { addCommas } from "/useful-functions.js";
 
 const tbody = document.querySelector(".tableBody");
 
@@ -25,7 +26,7 @@ async function getData() {
       category.textContent = data[i].category.name;
       category.classList.add("category");
 
-      price.textContent = data[i].price;
+      price.textContent = addCommas(data[i].price);
       price.classList.add("price");
 
       description.textContent = data[i].summary;

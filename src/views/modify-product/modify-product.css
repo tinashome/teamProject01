@@ -97,3 +97,8 @@ textarea:hover {
   border: none;
   border-radius: 10px;
 }
+
+/* 이미지 */
+#img {
+  height: inherit;
+}

@@ -1,0 +1,72 @@
+.displayCategoryHeader {
+  width: 1200px;
+  margin: 80px auto 0;
+}
+
+/* common */
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-left: 60px;
+}
+
+article {
+  width: 1200px;
+  margin: 0 auto;
+}
+table {
+  width: 1000px;
+  margin: 0 auto;
+}
+button {
+  width: 50px;
+  height: 30px;
+  margin: 10px;
+}
+tr {
+  height: 50px;
+  border-bottom: 1px solid #493323;
+}
+
+/* custom */
+#headRow {
+  width: 100%;
+  background-color: #493323;
+  color: #fff;
+  height: 40px;
+  line-height: 40px;
+}
+#categoryName {
+  width: 100px;
+}
+#categoryDescription {
+  width: 700px;
+}
+
+
+.modifyButton {
+  background-color: #f4dfba;
+  border: none;
+  margin-left: 40px;
+  transition-duration: 0.5s;
+}
+.deleteButton {
+  background-color: #eaac7f;
+  border: none;
+  transition-duration: 0.5s;
+}
+.modifyButton:hover {
+  background-color: #ffdf91;
+}
+.deleteButton:hover {
+  background-color: #91684a;
+  color: #fff;
+}
+
+.name {
+  text-align: center;
+}
+.description {
+  width: 660px;
+  padding: 10px 0 0 20px;
+}

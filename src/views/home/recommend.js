@@ -1,4 +1,5 @@
 import { get } from "/api.js";
+import { addCommas } from "/useful-functions.js";
 
 // 상품 목록 받아오기
 async function getProductList() {
@@ -24,7 +25,7 @@ async function getProductList() {
         itemPrice.setAttribute("class", "itemPrice");
 
         const nameText = document.createTextNode(`${e.name}`);
-        const priceText = document.createTextNode(`${e.price}`);
+        const priceText = document.createTextNode(`${addCommas(e.price)}원`);
         itemName.appendChild(nameText);
         itemPrice.appendChild(priceText);
 

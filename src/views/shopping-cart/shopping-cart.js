@@ -238,6 +238,7 @@ function plusQuantity(item) {
   } else {
     let targetNumber = item.path[1].querySelector(".productQuantity");
     targetNumber.textContent = Number(targetNumber.innerText) + 1;
+
     let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
     targetQuantity.textContent = Number(targetQuantity.innerText) + 1;
     let totalPrice = item.path[2].querySelector(".totalPrice");

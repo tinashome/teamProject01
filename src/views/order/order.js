@@ -52,10 +52,11 @@ JSON.parse(getLocalStorage).forEach((product) => {
 });
 
 orderItems.forEach((data) => {
+  console.log(data);
   const productContainer = document.createElement("div");
   productContainer.classList.add("productContainer");
   const img = document.createElement("img");
-  img.src = data.img;
+  img.src = data.productImg;
   productContainer.appendChild(img);
 
   const itemName = document.createElement("div");

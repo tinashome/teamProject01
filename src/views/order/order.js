@@ -19,6 +19,10 @@ const token = sessionStorage.getItem("userId");
 async function getUserInfo() {
   const getORderInfo = await Api.get(`/api/users/${token}`);
   receiverName.value = getORderInfo.fullName;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 3bd9585d82b307c9e4499f44c5ebaa0017bcfafc
   receiverPhoneNumber.value = getORderInfo.phoneNumber;
   address1Input.value = getORderInfo.address.address1;
   address2Input.value = getORderInfo.address.address2;

@@ -96,7 +96,7 @@ async function itemList() {
   const manager = await managerAccount();
   var result = [];
   if (manager) {
-    result = [liLoginTag, liCartTag, liMyPageTag, liPageTag];
+    result = [liLoginTag, liCartTag, liMyPageTag, liPageTag, liAccountTag];
   } else {
     result = [liLoginTag, liCartTag, liMyPageTag, liAccountTag];
   }
@@ -108,8 +108,9 @@ const navbarItemTag = await itemList();
 navbarItems.appendChild(navbarItemTag[0]);
 navbarItems.appendChild(navbarItemTag[1]);
 navbarItems.appendChild(navbarItemTag[2]);
-if (navbarItemTag.length === 4) {
-  navbarItems.appendChild(navbarItemTag[3]);
+navbarItems.appendChild(navbarItemTag[3]);
+if (navbarItemTag.length === 5) {
+  navbarItems.appendChild(navbarItemTag[4]);
 }
 
 // 관리자 계정으로 로그인
@@ -157,9 +158,9 @@ function toggleClick() {
   barMenu.appendChild(menuItemTag[0]);
   barMenu.appendChild(menuItemTag[1]);
   barMenu.appendChild(menuItemTag[2]);
+  barMenu.appendChild(menuItemTag[3]);
 
   if (menuItemTag.length === 5) {
-    barMenu.appendChild(menuItemTag[3]);
     barMenu.appendChild(menuItemTag[4]);
   }
 

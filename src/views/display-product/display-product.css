@@ -30,22 +30,27 @@ tr {
 /* custom */
 #headRow {
   width: 100%;
-  background-color: #f4dfba;
+  background-color: #493323;
+  color: #fff;
   height: 40px;
   line-height: 40px;
 }
-#productName {
+#headRow #productName {
   width: 100px;
 }
-#productCategory {
-  width: 80px;
+#headRow #productCategory {
+  width: 100px;
 }
-#productDescription {
-  width: 500px;
+#headRow #productPrice {
+  width: 100px;
+}
+
+#headRow #modifyButton {
+  width: 200px;
 }
 
 .modifyButton {
-  background-color: #ffdf91;
+  background-color: #f4dfba;
   border: none;
   margin-left: 40px;
 }
@@ -53,10 +58,18 @@ tr {
   background-color: #eaac7f;
   border: none;
 }
+.modifyButton:hover {
+  background-color: #ffdf91;
+}
+.deleteButton:hover {
+  background-color: #91684a;
+  color: #fff;
+}
 
 .name {
   text-align: center;
 }
 .description {
   width: 660px;
+  padding: 10px 0 0 20px;
 }

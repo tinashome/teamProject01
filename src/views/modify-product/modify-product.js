@@ -36,28 +36,26 @@ async function getData() {
     inputPrice.value = pastProduct.price;
 
     // 폼에 카테고리 목록 주입, 기존값은 selected
-    categories.forEach(category => {
+    categories.forEach((category) => {
       let option = document.createElement("option");
-      
-      if(pastProduct.category == category._id) {
+
+      if (pastProduct.category == category._id) {
         option.selected = true;
       }
       option.textContent = category.name;
       option.value = category._id;
 
-      selectCategory.append(option);    
+      selectCategory.append(option);
     });
-    
-    
-      // 다음페이지에 넘겨줄 product의 id를 value로 할당
-      // name.value = data[i]._id;
+
+    // 다음페이지에 넘겨줄 product의 id를 value로 할당
+    // name.value = data[i]._id;
   } catch (err) {
     console.error(err.stack);
   }
 }
-  
-getData();
 
+getData();
 
 ////////////////////////////////////////////////////////////
 // 상품 추가에서 없는값은 넘겨주지 않기때문에, 그 경우는 다루지 않음
@@ -106,4 +104,5 @@ form.addEventListener("submit", async (e) => {
   } catch (err) {
     console.error(err.stack);
   }
+  location.reload();
 });

@@ -6,10 +6,10 @@ const modifyCategory = document.querySelector(".modifyCategory");
 const modifyProduct = document.querySelector(".modifyProduct");
 
 order.addEventListener("click", () => {
-  window.location.href = "/addproduct";
+  window.location.href = "/ordermanage";
 });
 users.addEventListener("click", () => {
-  window.location.href = "/addproduct";
+  window.location.href = "/users";
 });
 category.addEventListener("click", () => {
   window.location.href = "/addcategory";

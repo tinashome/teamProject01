@@ -52,7 +52,7 @@ a {
 }
 
 .myTitle {
-  background-color: #91684a;
+  background-color: #493323;
   height: 80px;
   display: flex;
   justify-content: center;
@@ -75,6 +75,18 @@ a {
   background-color: whitesmoke;
 }
 
+/* myPage 메뉴 */
+#orderList,
+#cart,
+#myPage {
+  cursor: pointer;
+}
+#orderList:hover,
+#cart:hover,
+#myPage:hover {
+  background-color: #91684a;
+  color: #fff;
+}
 /* 내 정보 수정 container */
 .myInfoBox {
   padding: 25px;
@@ -129,7 +141,7 @@ hr {
   width: 72px;
   height: 35px;
   border: none;
-  background-color: rgb(157, 146, 135);
+  background-color: #91684a;
   border-radius: 10px;
   color: whitesmoke;
   padding: 8px;
@@ -149,7 +161,7 @@ hr {
   height: 50px;
   font-size: 17px;
   color: whitesmoke;
-  background-color: rgb(157, 146, 135);
+  background-color: #91684a;
   border: none;
   border-radius: 10px;
 }
@@ -207,18 +219,16 @@ hr {
 }
 
 .delMyInfoBtn {
-  display: flex;
-  /* margin: 0 30px 20px; */
-  /* margin-top: ; */
-  /* float: right; */
-  /* text-align: center; */
-
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  top: 9px;
+  left: 500px;
   border: 1px solid #91684a;
   background-color: #91684a;
-  color: whitesmoke;
+  color: #fff;
   border-radius: 8px;
-  width: 60px;
-  height: 25px;
+  width: 90px;
+  height: 30px;
+}
+.delMyInfoBtn:hover {
+  color: #fff;
 }

@@ -1,7 +1,7 @@
 /* common */
 main {
   width: 90vw;
-  margin: auto;
+  margin: 80px auto 30px;
 }
 img {
   width: 80px;
@@ -13,7 +13,7 @@ img {
 p {
   width: 130px;
   position: relative;
-  top: -80px;
+  top: -30px;
   left: 150px;
 }
 .menuContainer {
@@ -32,7 +32,7 @@ p {
   width: 300px;
   height: 200px;
   /* background-color: #f4dfba; */
-  box-shadow: 5px 5px 10px #f4dfba;
+  box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
   border-radius: 10px;
   margin: 20px;
   transition-duration: 1s;
@@ -50,6 +50,6 @@ p {
 .name {
   font-weight: bold;
   position: relative;
-  top: -80px;
+  top: -50px;
   left: 150px;
 }

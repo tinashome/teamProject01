@@ -61,7 +61,7 @@ body::-webkit-scrollbar {
 /* 이미지 슬라이드 */
 .slider {
   margin: 40px auto;
-  width: 1024px;
+  width: 100%;
   height: 500px;
   overflow: hidden;
   position: relative;
@@ -191,6 +191,7 @@ img {
   width: 100%;
   height: 150px;
   margin-bottom: 12px;
+  border-radius: 10px;
   /* margin: 10px; */
 }
 .itemPrice {
@@ -228,7 +229,7 @@ footer {
   align-items: center;
   padding: 50px 0;
   margin-top: 100px;
-  background-color: #91684a;
+  background-color: #493323;
 }
 
 .footerLogo {
@@ -299,29 +300,32 @@ p {
     width: 100%;
     height: auto;
     flex-direction: column;
-    background-color: #91684a;
+    background-color: #493323;
     padding: 20px 0;
   }
+
   .footerLogo {
     clear: left;
     width: 100%;
     margin: 20px 0;
   }
+
   .footerContent {
     width: 100%;
     clear: left;
     display: flex;
     align-items: center;
     justify-content: center;
-
     margin: 20px 0;
   }
+
   .footerLink {
     width: 100%;
     clear: left;
     justify-content: center;
     margin: 20px 0;
   }
+
   .gitlabBtn {
     margin-right: 0px;
   }
@@ -333,5 +337,10 @@ p {
 
   .itemImg {
     width: 100%;
+  }
+
+  .categoryBar {
+    height: 400px;
+    top: 80px;
   }
 }

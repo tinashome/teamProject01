@@ -5,11 +5,6 @@ const Board = model('boards', BoardSchema);
 
 export class BoardModel {
 
-  async findById(boardId) {
-    const post = await Board.findOne({ _id: boardId }).populate(['author']);
-    return post;
-  }
-  
   async create(boardInfo) {
     const createdNewPost = await Board.create(boardInfo);
     return createdNewPost;
@@ -20,6 +15,11 @@ export class BoardModel {
     return posts;
   }
 
+  async findById(boardId) {
+    const post = await Board.findOne({ _id: boardId }).populate(['author']);
+    return post;
+  }
+  
   async update({ postId, update }) {
     const filter = { _id: postId };
     const option = { returnOriginal: false }; // true: 업데이트 이전 값 리턴, false: 후 값 리턴
@@ -29,9 +29,7 @@ export class BoardModel {
   }
 
   async delete({ postId }) {
-  // async deleteOne({ categoryId }) {
     const post = await Board.deleteOne({ _id: postId });
-    // const result = await Category.deleteOne({ _id: categoryId });
     return post;
   }
 }

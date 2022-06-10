@@ -59,8 +59,13 @@ async function deleteCategory(item) {
   });
 
   if(needDelete == 0) {
-    const deleteThis = Api.delete(`/api/categories/${thisId}`);
-    alert("삭제되었습니다.");
-    location.reload();
+    const isOk = confirm("정말로 삭제 하시겠습니까?");
+    if(isOk) {
+      const deleteThis = Api.delete(`/api/categories/${thisId}`);
+      alert("삭제되었습니다.");
+      location.reload();
+    } else {
+      return;
+    }
   }
 }

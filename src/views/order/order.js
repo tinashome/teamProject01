@@ -170,8 +170,7 @@ async function doCheckout() {
     totalPrice: Number(data.orderTotal),
     status: "결제완료",
   };
-
-  // window.location.href = "../order-complete/order-complete.html";
+  console.log(sendInfo);
 
   try {
     const fff = await Api.post("/api/orders", sendInfo);
@@ -180,5 +179,6 @@ async function doCheckout() {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
+  window.location.href = "../order-complete/order-complete.html";
 }
 button.addEventListener("click", doCheckout);

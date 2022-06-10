@@ -1,4 +1,5 @@
 import * as Api from "/api.js";
+import { addCommas } from "/useful-functions.js";
 
 const button = document.getElementById("buyButton");
 const postalCodeInput = document.querySelector("#postalCode");
@@ -19,10 +20,6 @@ const token = sessionStorage.getItem("userId");
 async function getUserInfo() {
   const getORderInfo = await Api.get(`/api/users/${token}`);
   receiverName.value = getORderInfo.fullName;
-<<<<<<< HEAD
-
-=======
->>>>>>> 3bd9585d82b307c9e4499f44c5ebaa0017bcfafc
   receiverPhoneNumber.value = getORderInfo.phoneNumber;
   address1Input.value = getORderInfo.address.address1;
   address2Input.value = getORderInfo.address.address2;
@@ -70,7 +67,7 @@ orderItems.forEach((data) => {
 
   const priceForOne = document.createElement("div");
   priceForOne.classList.add("price");
-  priceForOne.textContent = `${data.price}원`;
+  priceForOne.textContent = `${addCommas(data.price)}원`;
   productContainer.appendChild(priceForOne);
 
   const quantity = document.createElement("div");
@@ -80,7 +77,7 @@ orderItems.forEach((data) => {
 
   const totalPriceEachItem = document.createElement("div");
   totalPriceEachItem.classList.add("totalPrice");
-  totalPriceEachItem.textContent = `${data.totalPrice}원`;
+  totalPriceEachItem.textContent = `${addCommas(data.totalPrice)}원`;
   productContainer.appendChild(totalPriceEachItem);
 
   shoppingList.appendChild(productContainer);
@@ -95,9 +92,9 @@ JSON.parse(getLocalStorage).forEach((producet) => {
   data.productId.push(producet.id);
 });
 
-const total = data.productsTotal;
-const fee = data.deliveryFee;
-const order = data.orderTotal;
+const total = addCommas(data.productsTotal);
+const fee = addCommas(data.deliveryFee);
+const order = addCommas(data.orderTotal);
 
 //productsTitle.innerHTML = data.productsTitle;
 

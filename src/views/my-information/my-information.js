@@ -140,3 +140,17 @@ delMyInfoBtn.addEventListener("click", () => {
   document.querySelector(".closeBtnDelete").classList.remove("hidden");
 });
 delMyInfoBtn.addEventListener("click", modalOpen);
+
+const orderList = document.querySelector("#orderList");
+const cart = document.querySelector("#cart");
+const myPage = document.querySelector("#myPage");
+
+orderList.addEventListener("click", () => {
+  window.location.href = "/orderList";
+});
+cart.addEventListener("click", () => {
+  window.location.href = "/cart";
+});
+myPage.addEventListener("click", () => {
+  window.location.href = "/myPage";
+});

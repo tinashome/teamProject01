@@ -5,12 +5,12 @@ section {
 }
 
 /* 장바구니 > 주문결제 > 주문완료 */
-.shoppingCartHeader {
+.manageUseHeader {
   font-size: 20px;
   border-bottom: 1px solid #999;
   margin-bottom: 20px;
 }
-.shoppingCartHeader .shoppingCartChapter {
+.managingOrderPage {
   font-size: 36px;
   font-weight: bold;
 }
@@ -38,9 +38,10 @@ section {
 
 /* orderSearch */
 .orderSearch {
-  background-color: #eff5fb;
-  color: #296fa8;
+  background-color: #91684a;
+  color: #fff;
   margin-top: 5rem;
+  font-weight: bold;
 }
 
 .orderSearchHeaderBox {

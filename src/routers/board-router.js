@@ -9,14 +9,14 @@ const boardRouter = Router();
 // 게시글 등록
 boardRouter.post('/notice/post', loginRequired, async (req, res, next) => {
   try {
-    const numId = req.body.numId;
+    // const numId = req.body.numId;
     const title = req.body.title;
     const content = req.body.content;
     const author = req.body.author;
 
     // 위 데이터를 유저 db에 추가하기
     const newPost = await boardService.addPost({
-      numId,
+      // numId,
       title,
       content,
       author,
@@ -46,10 +46,10 @@ boardRouter.get('/notice/posts', async function (req, res, next) {
 boardRouter.get('/notice/post/:postId', async function (req, res, next) {
   try {
     const { postId } = req.params;
-    const category = await boardService.getPost(postId);
+    const post = await boardService.getPost(postId);
 
     // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json(category);
+    res.status(200).json(post);
   } catch (error) {
     next(error);
   }

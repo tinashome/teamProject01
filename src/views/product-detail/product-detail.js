@@ -101,6 +101,12 @@ function makeUniq() {
 
 const buyDirect = document.querySelector("#buyDirect");
 buyDirect.addEventListener("click", async () => {
+  const token = sessionStorage.getItem("token");
+  if (!token) {
+    alert("글쓰기는 로그인한 유저만 가능합니다.");
+    window.location.href = "/login";
+  }
+
   const data = await Api.get(`/api/product/${productId}`);
 
   const thisData = {};

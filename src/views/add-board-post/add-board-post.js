@@ -31,10 +31,10 @@ addButton.addEventListener("click", async (e) => {
   try {
     const sendData = await Api.post("/boards/notice/post", data);
     console.log(sendData);
+
+    window.location.href = "/boardlist";
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
-
-  window.location.href = "/boardlist";
 });

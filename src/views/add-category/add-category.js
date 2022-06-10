@@ -12,12 +12,12 @@ addButton.addEventListener("click", async (e) => {
     name,
     info,
   };
+
   try {
     const sendData = await Api.post("/api/category", data);
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
-
-  location.reload();
+  window.location.href = `/displaycategory`;
 });

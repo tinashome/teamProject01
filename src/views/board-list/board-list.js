@@ -80,8 +80,6 @@ function writing(item) {
     window.location.href = "/login";
     return;
   }
-  // console.log(item);
-  // const thisId = item.path[0].parentElement.childNodes[0].value;
   window.location.href = `/boardlist/write`;
 }
 

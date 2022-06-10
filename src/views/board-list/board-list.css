@@ -13,19 +13,31 @@ h1 {
 article {
   width: 1200px;
   margin: 0 auto;
+  padding-top: 20px;
 }
 table {
-  width: 1000px;
+  width: 1200px;
   margin: 0 auto;
 }
 button {
-  width: 50px;
-  height: 30px;
+  width: 55px;
+  height: 35px;
+  background-color: #91684a;
+  color: white;
+  border: none;
+  border-radius: 10px;
   margin: 10px;
 }
 tr {
   height: 50px;
   border-bottom: 1px solid #493323;
+}
+
+.btn {
+  width: 100%;
+  display: flex;
+  padding: 30px;
+  justify-content: center;
 }
 
 /* custom */
@@ -34,5 +46,5 @@ tr {
   background-color: #493323;
   color: #fff;
   height: 40px;
-  line-height: 40px;
+  line-height: 50px;
 }

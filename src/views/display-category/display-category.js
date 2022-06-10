@@ -42,9 +42,25 @@ function modifying(item) {
   const thisId = item.path[0].parentElement.childNodes[0].value;
   window.location.href = `/modifycategory/${thisId}`;
 }
-function deleteCategory(item) {
-  alert("삭제되었습니다.");
+async function deleteCategory(item) {
+  // 지우려는 카테고리
   const thisId = item.path[0].parentElement.childNodes[0].value;
-  const deleteThis = Api.delete(`/api/categories/${thisId}`);
-  location.reload();
+
+  const allProducts = await Api.get(`/api/products`);
+  // console.log(allProducts);
+
+  let needDelete = 0;
+  allProducts.forEach(element => {
+    if(element.category._id == thisId) {
+      alert("카테고리가 지정된 상품이 있습니다. 해당 상품을 모두 삭제 후 요청 하십시오.");
+      needDelete += 1;
+      return;
+    }
+  });
+
+  if(needDelete == 0) {
+    const deleteThis = Api.delete(`/api/categories/${thisId}`);
+    alert("삭제되었습니다.");
+    location.reload();
+  }
 }

@@ -80,7 +80,6 @@ async function getUsersList() {
       userTr.appendChild(nameTd);
       userTr.appendChild(selectTd);
       userTr.appendChild(deleteTd);
-
       userList.appendChild(userTr);
 
       // 회원 정보 삭제

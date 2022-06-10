@@ -25,7 +25,7 @@ a {
 
 .navbarLogo {
   float: left;
-  width: 40%;
+  width: 30%;
   padding: 25px 0 25px 60px;
 }
 
@@ -35,8 +35,8 @@ a {
 
 .navbarItems {
   float: left;
-  width: 60%;
-  padding: 25px 60px;
+  width: 70%;
+  padding: 25px 60px 25px 0;
   z-index: 1;
 }
 
@@ -59,7 +59,7 @@ ul.navbarItems a {
   display: none;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 800px) {
   .hamburger {
     display: block;
     float: right;

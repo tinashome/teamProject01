@@ -164,13 +164,14 @@ function plusQuantity(item) {
 
     const newStorageItem = [];
     // 로컬스토리지에서 박스랑 id같은걸 찾ㅈ아서
-    const findTarget = printArr.find((e) => e.id == thisId);
+    let getLocal = JSON.parse(localStorage.getItem("cartList"));
+    const findTarget = getLocal.find((e) => e.id == thisId);
     findTarget.quantity += 1;
 
     newStorageItem.push(findTarget);
-    const findNotTarget = printArr.find((e) => e.id !== thisId);
+    const findNotTarget = getLocal.find((e) => e.id !== thisId);
     // newStorageItem.push(findNotTarget);
-    printArr.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
+    getLocal.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
 
     newStorageItem.sort(function (a, b) {
       if (a.id > b.id) {
@@ -251,12 +252,13 @@ function minusQuantity(item) {
       const selectedPrice = item.path[2].querySelector(".productPriceSpan");
       const thisId = item.path[2].querySelector(".id").innerText;
       const newStorageItem = [];
-      const findTarget = printArr.find((e) => e.id == thisId);
+      let getLocal = JSON.parse(localStorage.getItem("cartList"));
+      const findTarget = getLocal.find((e) => e.id == thisId);
       findTarget.quantity -= 1;
       newStorageItem.push(findTarget);
 
-      const findNotTarget = printArr.find((e) => e.id !== thisId);
-      printArr.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
+      const findNotTarget = getLocal.find((e) => e.id !== thisId);
+      getLocal.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
       newStorageItem.sort(function (a, b) {
         if (a.id > b.id) {
           return 1;
@@ -471,10 +473,14 @@ function deleteData(item) {
 
 //선택 삭제 클릭하면 선택된 항목 삭제
 const deletePart = document.querySelector("#deletePart");
+
 deletePart.addEventListener("click", deletePartFunc);
 
 const deleteChecked = document.querySelectorAll(".selectedCheckBox:checked");
+
 function deletePartFunc() {
+  let getLocal = JSON.parse(localStorage.getItem("cartList"));
+  // 체크가 되어있는 id값
   const checkedList = [];
   for (let i = 0; i < deleteChecked.length; i++) {
     if (deleteChecked[i].checked == true) {
@@ -483,18 +489,19 @@ function deletePartFunc() {
       );
     }
   }
-  const newStorageItem = [];
-  for (let j = 0; j < checkedList.length; j++) {
-    const findNotDelete = printArr.find((e) => e.id !== checkedList[j]);
-    newStorageItem.push(findNotDelete);
-  }
 
-  localStorage.clear();
-  localStorage.setItem("cartList", JSON.stringify(newStorageItem));
+  let newStorageItem;
+  for (let j = 0; j < checkedList.length; j++) {
+    const findNotDelete = getLocal.filter((e) => e.id !== checkedList[j]);
+    newStorageItem = findNotDelete;
+  }
+  console.log(newStorageItem);
+  // localStorage.clear();
+  // localStorage.setItem("cartList", JSON.stringify(newStorageItem));
 
   alert("삭제되었습니다.");
 
-  location.reload();
+  // location.reload();
 }
 
 const buyButton = document.querySelector("#buyButton");

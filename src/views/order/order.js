@@ -19,7 +19,7 @@ async function getUserInfo() {
   const getORderInfo = await Api.get(`/api/users/${token}`);
   console.log(getORderInfo);
   receiverName.value = getORderInfo.fullName;
-  console.log(getORderInfo);
+
   receiverPhoneNumber.value = getORderInfo.phoneNumber;
   address1Input.value = getORderInfo.address.address1;
   address2Input.value = getORderInfo.address.address2;

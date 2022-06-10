@@ -80,7 +80,7 @@ async function handleSubmit(e) {
   const address2 = detailAddressInput.value;
 
   // 잘 입력했는지 확인
-  const isPasswordValid = password.length >= 4;
+  const isPasswordValid = password.length >= 8;
   const isPasswordSame = password === passwordConfirm;
 
   if (!isPasswordValid) {
@@ -125,6 +125,12 @@ async function deleteMyInfo() {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
+}
+
+// 비회원일 경우
+const token = sessionStorage.getItem("token");
+if (!token) {
+  window.location.href = "/login";
 }
 
 printInformation();

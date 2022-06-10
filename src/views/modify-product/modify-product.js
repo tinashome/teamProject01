@@ -88,9 +88,9 @@ form.addEventListener("submit", async (e) => {
         break;
       case "file":
         // 사진 추가가 있다면
-        if(fileName.textContent == " 사진 저장 성공! ") {
+        if (fileName.textContent == " 사진 저장 성공! ") {
           formData.append("upload", inputFile.files[0]);
-        } 
+        }
         break;
     }
     switch (item.localName) {
@@ -103,13 +103,11 @@ form.addEventListener("submit", async (e) => {
     }
   }
 
-
   try {
     //patch 가능한 api로 바꾸기
     const patching = await Api.patch(`/api/products`, `${productId}`, formData);
-
   } catch (err) {
     console.error(err.stack);
   }
-  location.reload();
+  window.location.href = "/displayproduct";
 });

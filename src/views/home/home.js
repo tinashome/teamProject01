@@ -30,5 +30,39 @@ function imgSlide(n) {
   dots[slideIdx - 1].className += " active";
 }
 
+const viewMore = document.querySelector(".viewMore");
+viewMore.addEventListener("click", () => {
+  window.location.href = "/productlist";
+});
+
+const allBtn = document.querySelector(".allBtn");
+allBtn.addEventListener("click", () => {
+  window.location.href = "/productlist";
+});
+
+const lotte = document.querySelector(".lotte");
+lotte.addEventListener("click", () => {
+  sessionStorage.setItem("category", "Lotte");
+  window.location.href = "/productlist";
+});
+
+const mika = document.querySelector(".milka");
+mika.addEventListener("click", () => {
+  sessionStorage.setItem("category", "Milka");
+  window.location.href = "/productlist";
+});
+
+const godiva = document.querySelector(".godiva");
+godiva.addEventListener("click", () => {
+  sessionStorage.setItem("category", "Godiva");
+  window.location.href = "/productlist";
+});
+
+const guylian = document.querySelector(".guylian");
+guylian.addEventListener("click", () => {
+  sessionStorage.setItem("category", "Guylian");
+  window.location.href = "/productlist";
+});
+
 // 자동 슬라이드 구현
 setInterval("nextSlides(1)", 6000);

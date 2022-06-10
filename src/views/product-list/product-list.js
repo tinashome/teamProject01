@@ -1,4 +1,5 @@
 import { get } from "/api.js";
+import { addCommas } from "/useful-functions.js";
 
 async function getCategoryList() {
   try {
@@ -10,6 +11,7 @@ async function getCategoryList() {
       liTag.setAttribute("class", "category");
       const categoryText = document.createTextNode(e.name);
       liTag.appendChild(categoryText);
+      liTag.classList.add(e.name);
       categoryItems.appendChild(liTag);
 
       liTag.addEventListener("click", () => {
@@ -46,7 +48,6 @@ async function getProductList() {
 
     printProduct = [];
     productData.forEach((e) => {
-      console.log(e)
       const productItem = document.createElement("div");
       productItem.setAttribute("class", "productItem");
       productItem.classList.add(e.category.name);
@@ -62,7 +63,7 @@ async function getProductList() {
       itemPrice.setAttribute("class", "itemPrice");
 
       const nameText = document.createTextNode(`${e.name}`);
-      const priceText = document.createTextNode(`${e.price}`);
+      const priceText = document.createTextNode(`${addCommas(e.price)}원`);
       itemName.appendChild(nameText);
       itemPrice.appendChild(priceText);
 
@@ -73,10 +74,30 @@ async function getProductList() {
       printProduct.push(productItem);
     });
 
-    printProduct.forEach((print) => {
-      productList.appendChild(print);
-      cnt += 1;
-    });
+    if (clickCategory) {
+      allBtn.classList.remove("selectCategory");
+      const click = document.querySelector(`.${clickCategory}`);
+      click.classList.add("selectCategory");
+
+      // 기존 목록 없애기
+      for (var i = 0; i < cnt; i++) {
+        const delDiv = document.querySelector(".productItem");
+        productList.removeChild(delDiv);
+      }
+      cnt = 0;
+      printProduct.forEach((print) => {
+        if (`productItem ${clickCategory}` === print.className) {
+          cnt += 1;
+          productList.appendChild(print);
+        }
+      });
+      sessionStorage.removeItem("category");
+    } else {
+      printProduct.forEach((print) => {
+        productList.appendChild(print);
+        cnt += 1;
+      });
+    }
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
@@ -84,6 +105,7 @@ async function getProductList() {
 }
 
 const productList = document.querySelector(".productList");
+const clickCategory = sessionStorage.getItem("category");
 var printProduct = [];
 var cnt = 0;
 getProductList();

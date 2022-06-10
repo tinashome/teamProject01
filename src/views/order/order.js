@@ -6,18 +6,18 @@ const searchAddressButton = document.querySelector("#searchAddressButton");
 const postalCode = document.getElementById("postalCode");
 const address1Input = document.querySelector("#address1");
 const address2Input = document.querySelector("#address2");
-const productsTitle = document.getElementById("payProductQuantity");
+// const productsTitle = document.getElementById("payProductQuantity");
 const productsTotal = document.getElementById("payProductPrice");
 const deliveryFee = document.getElementById("payShippingPrice");
 const orderTotal = document.getElementById("payTotalPrice");
 const receiverName = document.getElementById("receiverName");
 const receiverPhoneNumber = document.getElementById("receiverPhoneNumber");
+const shoppingList = document.querySelector("#shoppingList");
 // 결제정보
 const token = sessionStorage.getItem("userId");
 
 async function getUserInfo() {
   const getORderInfo = await Api.get(`/api/users/${token}`);
-  console.log(getORderInfo);
   receiverName.value = getORderInfo.fullName;
 
   receiverPhoneNumber.value = getORderInfo.phoneNumber;
@@ -33,8 +33,8 @@ const data = {
   productsTotal: 0,
   productsPrice: 0,
   productsCnt: 0,
-  deliveryFee: "2000",
-  orderTotal: 2000,
+  deliveryFee: "3000",
+  orderTotal: 3000,
 };
 
 // 로컬스토리지에서 장바구니 정보 가져오기
@@ -45,10 +45,42 @@ JSON.parse(getLocalStorage).forEach((product) => {
   orderItems.push({
     productId: product.id,
     productName: product.name,
+    productImg: product.img,
     price: product.price,
     quantity: product.quantity,
     totalPrice: Number(product.price * product.quantity),
   });
+});
+
+orderItems.forEach((data) => {
+  console.log(data);
+  const productContainer = document.createElement("div");
+  productContainer.classList.add("productContainer");
+  const img = document.createElement("img");
+  img.src = data.productImg;
+  productContainer.appendChild(img);
+
+  const itemName = document.createElement("div");
+  itemName.classList.add("name");
+  itemName.textContent = data.productName;
+  productContainer.appendChild(itemName);
+
+  const priceForOne = document.createElement("div");
+  priceForOne.classList.add("price");
+  priceForOne.textContent = `${data.price}원`;
+  productContainer.appendChild(priceForOne);
+
+  const quantity = document.createElement("div");
+  quantity.classList.add("quantity");
+  quantity.textContent = `${data.quantity}개`;
+  productContainer.appendChild(quantity);
+
+  const totalPriceEachItem = document.createElement("div");
+  totalPriceEachItem.classList.add("totalPrice");
+  totalPriceEachItem.textContent = `${data.totalPrice}원`;
+  productContainer.appendChild(totalPriceEachItem);
+
+  shoppingList.appendChild(productContainer);
 });
 
 JSON.parse(getLocalStorage).forEach((producet) => {
@@ -64,7 +96,7 @@ const total = data.productsTotal;
 const fee = data.deliveryFee;
 const order = data.orderTotal;
 
-productsTitle.innerHTML = data.productsTitle;
+//productsTitle.innerHTML = data.productsTitle;
 
 productsTotal.textContent = `${total} 개`;
 deliveryFee.textContent = `${fee} 원`;

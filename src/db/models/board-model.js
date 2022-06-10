@@ -6,7 +6,7 @@ const Board = model('boards', BoardSchema);
 export class BoardModel {
 
   async findById(boardId) {
-    const post = await Board.findOne({ _id: boardId });
+    const post = await Board.findOne({ _id: boardId }).populate(['author']);
     return post;
   }
   
@@ -16,7 +16,7 @@ export class BoardModel {
   }
 
   async findAll() {
-    const posts = await Board.find({});
+    const posts = await Board.find({}).populate(['author']);;
     return posts;
   }
 
@@ -28,9 +28,9 @@ export class BoardModel {
     return updatedPost;
   }
 
-  async delete({ boardId }) {
+  async delete({ postId }) {
   // async deleteOne({ categoryId }) {
-    const post = await Board.deleteOne({ boardId });
+    const post = await Board.deleteOne({ _id: postId });
     // const result = await Category.deleteOne({ _id: categoryId });
     return post;
   }

@@ -82,7 +82,7 @@ ul.navbarItems a {
     display: block;
     position: fixed;
     width: 100%;
-    padding-top: 70px;
+    padding-top: 20px;
     background-color: rgb(233, 233, 233);
     z-index: 1;
   }

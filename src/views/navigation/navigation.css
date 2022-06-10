@@ -63,6 +63,7 @@ ul.navbarItems a {
   .hamburger {
     display: block;
     float: right;
+    cursor: pointer;
   }
 
   .navbarLogo {
@@ -79,7 +80,7 @@ ul.navbarItems a {
 
   .menu {
     display: block;
-    position: absolute;
+    position: fixed;
     width: 100%;
     padding-top: 70px;
     background-color: rgb(233, 233, 233);

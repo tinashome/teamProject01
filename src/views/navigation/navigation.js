@@ -5,7 +5,7 @@ const faviconTag = document.createElement("link");
 faviconTag.setAttribute("rel", "icon");
 faviconTag.setAttribute("type", "image/png");
 faviconTag.setAttribute("sizes", "16x16");
-faviconTag.setAttribute("href", "../imgs/favicon-1.png");
+faviconTag.setAttribute("href", "/../imgs/favicon-1.png");
 hederTag.appendChild(faviconTag);
 
 const getToken = sessionStorage.getItem("token");
@@ -81,8 +81,8 @@ async function itemList() {
   // 관리자 계정에서만 보일 버튼
   const liAccountTag = document.createElement("li");
   const aAccountTag = document.createElement("a");
-  const textAccount = document.createTextNode("계정 관리");
-  aAccountTag.setAttribute("href", "/accountmanage");
+  const textAccount = document.createTextNode("공지사항");
+  aAccountTag.setAttribute("href", "/boardlist");
   aAccountTag.appendChild(textAccount);
   liAccountTag.appendChild(aAccountTag);
 
@@ -96,9 +96,9 @@ async function itemList() {
   const manager = await managerAccount();
   var result = [];
   if (manager) {
-    result = [liLoginTag, liCartTag, liMyPageTag, liPageTag, liAccountTag];
+    result = [liLoginTag, liCartTag, liMyPageTag, liPageTag];
   } else {
-    result = [liLoginTag, liCartTag, liMyPageTag];
+    result = [liLoginTag, liCartTag, liMyPageTag, liAccountTag];
   }
 
   return result;
@@ -108,9 +108,8 @@ const navbarItemTag = await itemList();
 navbarItems.appendChild(navbarItemTag[0]);
 navbarItems.appendChild(navbarItemTag[1]);
 navbarItems.appendChild(navbarItemTag[2]);
-if (navbarItemTag.length === 5) {
+if (navbarItemTag.length === 4) {
   navbarItems.appendChild(navbarItemTag[3]);
-  navbarItems.appendChild(navbarItemTag[4]);
 }
 
 // 관리자 계정으로 로그인

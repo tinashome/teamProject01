@@ -4,20 +4,20 @@ const addCartBtn = document.querySelector("#addCart");
 const productName = document.querySelector("#productName");
 const price = document.querySelector("#price");
 const productImage = document.querySelector("#chocolate");
+const productDescription = document.querySelector("#productDescription");
+const productSummary = document.querySelector("#productSummary");
 
 const path = window.location.pathname.split("/");
 const productId = path[path.length - 2];
 
-console.log(path);
-console.log(productId);
-
 async function getData() {
   try {
     const data = await Api.get(`/api/product/${productId}`);
-    console.log(data);
     productName.textContent = data.name;
     price.textContent = data.price;
     productImage.src = data.img;
+    productDescription.textContent = data.detail;
+    productSummary.textContent = data.summary;
   } catch (err) {
     console.error(err.stack);
   }
@@ -78,20 +78,6 @@ addCartBtn.addEventListener("click", async (e) => {
 
   makeAddCartList();
   makeUniq();
-
-  // if (uniqCartList.length == 0 || ) {
-  //   addCartList.push(thisData);
-  //   alert("장바구니에 추가되었습니다.");
-  // }
-  // console.log(uniqCartList);
-  // for (let i = 0; i < uniqCartList.length; i++) {
-  //   if (uniqCartList[i].id == data._id) {
-  //     alert("이미 추가된 상품입니다!");
-  //   }
-  // }
-
-  // makeAddCartList();
-  // makeUniq();
   saveCartList();
 });
 

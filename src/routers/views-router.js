@@ -28,6 +28,7 @@ viewsRouter.use("/boardlist/write", serveStatic("add-board-post"));
 viewsRouter.use("/boardlist/:postId", serveStatic("update-board-post"));
 
 viewsRouter.use("/order", serveStatic("order"));
+viewsRouter.use("/buydirectorder", serveStatic("buy-direct-order"));
 viewsRouter.use("/ordercomplete", serveStatic("order-complete"));
 viewsRouter.use("/orderlist", serveStatic("order-list"));
 viewsRouter.use("/ordermanage", serveStatic("order-manage"));

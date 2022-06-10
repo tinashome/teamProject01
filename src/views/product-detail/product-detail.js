@@ -112,5 +112,5 @@ buyDirect.addEventListener("click", async () => {
 
   localStorage.setItem("buyDirect", JSON.stringify(thisData));
 
-  window.location.href = "/order";
+  window.location.href = "/buydirectorder";
 });

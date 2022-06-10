@@ -1,4 +1,4 @@
-.addProductHeader {
+.addCategoryHeader {
   width: 1200px;
   margin: 80px auto 0;
 }
@@ -14,7 +14,7 @@ h2 {
   width: 100%;
   text-align: center;
 }
-form {
+.formContainer {
   width: 600px;
   margin: 30px auto 30px;
   text-align: left;
@@ -39,7 +39,8 @@ label {
 }
 
 /* 카테고리 선택 */
-#selectCategory,
+#selectTopCategory,
+#selectMiddleCategory,
 input {
   width: 500px;
   height: 30px;
@@ -71,7 +72,7 @@ input {
 .fileIcon {
   margin: 10px;
 }
-#inputFile {
+.inputFile {
   display: none;
 }
 textarea {
@@ -96,9 +97,4 @@ textarea:hover {
   background-color: #493323;
   border: none;
   border-radius: 10px;
-}
-
-/* 이미지 */
-#img {
-  height: inherit;
 }

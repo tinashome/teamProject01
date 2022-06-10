@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+// import { autoIncrement } from require('mongoose-auto-increment');
 
 const BoardSchema = new Schema(
   {

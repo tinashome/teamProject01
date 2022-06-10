@@ -7,12 +7,11 @@ async function getData() {
     const data = await Api.get("/api/categories");
 
     for (let i = 0; i < data.length; i++) {
-      console.log(data[i].name, data[i].info);
-      let name = document.createElement("td");
-      let description = document.createElement("td");
-      let tr = document.createElement("tr");
-      let modifyButton = document.createElement("button");
-      let deleteButton = document.createElement("button");
+      const name = document.createElement("td");
+      const description = document.createElement("td");
+      const tr = document.createElement("tr");
+      const modifyButton = document.createElement("button");
+      const deleteButton = document.createElement("button");
       name.textContent = data[i].name;
       name.classList.add("name");
       description.textContent = data[i].info;
@@ -44,6 +43,7 @@ function modifying(item) {
   window.location.href = `/modifycategory/${thisId}`;
 }
 function deleteCategory(item) {
+  alert("삭제되었습니다.");
   const thisId = item.path[0].parentElement.childNodes[0].value;
   const deleteThis = Api.delete(`/api/categories/${thisId}`);
   location.reload();

@@ -1,33 +1,55 @@
 import * as Api from "/api.js";
 
+// url에서 productId 받아오기
 const path = window.location.pathname.split("/");
 const productId = path[path.length - 2];
+console.log(productId);
 
-const findCategory = [];
-// const matchingCategory = findCategory.concat("", productId);
-
-const productName = document.querySelector("#productName");
-const company = document.querySelector("#company");
-const summary = document.querySelector("#summary");
-const detail = document.querySelector("#detail");
-const inputFile = document.querySelector("#inputFile");
-const quantity = document.querySelector("#quantity");
-const price = document.querySelector("#price");
-
-const selectCategory = document.querySelector("#category");
+// html 요소 선택
+const inputName = document.querySelector("#name");
+const selectCategory = document.querySelector("#selectCategory");
+const inputCompany = document.querySelector("#company");
+const inputSummary = document.querySelector("#summary");
+const inputDetail = document.querySelector("#detail");
+const inputImg = document.querySelector("#img");
+const inputQuantity = document.querySelector("#quantity");
+const inputPrice = document.querySelector("#price");
 
 async function getData() {
   try {
-    const data = await Api.get(`/api/product/${productId}`);
-    console.log(data);
-    productName.value = data.name;
-    findCategory.push(data.category);
-    company.value = data.company;
-    summary.textContent = data.summary;
-    detail.textContent = data.detail;
-    inputFile.textContent = data.inputFile;
-    quantity.value = data.quantity;
-    price.value = data.price;
+    // 수정 전 기존 상품데이터 호출
+    const pastProduct = await Api.get(`/api/product/${productId}`);
+    console.log(pastProduct);
+
+    // 카테고리 목록 호출
+    const categories = await Api.get("/api/categories");
+    console.log(categories);
+
+    // 폼에 기존값 할당
+    inputName.value = pastProduct.name;
+
+    inputCompany.value = pastProduct.company;
+    inputSummary.value = pastProduct.summary;
+    inputDetail.value = pastProduct.detail;
+    inputImg.src = pastProduct.img;
+    inputQuantity.value = pastProduct.quantity;
+    inputPrice.value = pastProduct.price;
+
+    // 폼에 카테고리 목록 주입, 기존값은 selected
+    categories.forEach((category) => {
+      let option = document.createElement("option");
+
+      if (pastProduct.category == category._id) {
+        option.selected = true;
+      }
+      option.textContent = category.name;
+      option.value = category._id;
+
+      selectCategory.append(option);
+    });
+
+    // 다음페이지에 넘겨줄 product의 id를 value로 할당
+    // name.value = data[i]._id;
   } catch (err) {
     console.error(err.stack);
   }
@@ -35,25 +57,9 @@ async function getData() {
 
 getData();
 
-async function makeCategory() {
-  try {
-    const data = await Api.get("/api/categories");
-
-    for (let i = 0; i < data.length; i++) {
-      console.log(data[i].name, data[i]._id);
-      let category = document.createElement("option");
-      if (data[i]._id === findCategory[0]) {
-        selectCategory.textContent = data[i].name;
-      }
-      category.textContent = data[i].name;
-      category.value = data[i]._id;
-      selectCategory.after(category);
-    }
-  } catch (err) {
-    console.error(err.stack);
-  }
-}
-makeCategory();
+////////////////////////////////////////////////////////////
+// 상품 추가에서 없는값은 넘겨주지 않기때문에, 그 경우는 다루지 않음
+// 상품이 항상 있는 상태를 가정
 
 const form = document.querySelector("form");
 
@@ -94,8 +100,9 @@ form.addEventListener("submit", async (e) => {
 
   try {
     //patch 가능한 api로 바꾸기
-    //const patching = await Api.patch(`/api/products`, `${productId}`, formData);
+    const patching = await Api.patch(`/api/products`, `${productId}`, formData);
   } catch (err) {
     console.error(err.stack);
   }
+  location.reload();
 });

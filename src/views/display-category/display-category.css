@@ -31,7 +31,8 @@ tr {
 /* custom */
 #headRow {
   width: 100%;
-  background-color: #f4dfba;
+  background-color: #493323;
+  color: #fff;
   height: 40px;
   line-height: 40px;
 }
@@ -41,6 +42,7 @@ tr {
 #categoryDescription {
   width: 700px;
 }
+
 
 .modifyButton {
   background-color: #f4dfba;
@@ -66,5 +68,5 @@ tr {
 }
 .description {
   width: 660px;
-  padding-left: 20px;
+  padding: 10px 0 0 20px;
 }

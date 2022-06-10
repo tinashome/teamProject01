@@ -3,21 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-n팀</title>
-    <!-- 아이콘 -->
-    <!-- <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/elice-rabbit-favicon.png"
-    /> -->
-    <!-- 폰트 어썸: 아이콘 -->
+    <title>이상한 나라의 초콜릿</title>
     <script
       defer
       src="https://kit.fontawesome.com/7630448495.js"
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
+    <script src="recommend.js" type="module" defer></script>
     <link rel="stylesheet" href="home.css" />
     <script src="../navigation/navigation.js" type="module"></script>
     <link rel="stylesheet" href="../navigation/navigation.css" />
@@ -30,9 +23,17 @@
       <!-- Image Slider -->
       <div class="slider">
         <div class="slides">
-          <div class="slide"><img src="../imgs/image1.jpg" /></div>
-          <div class="slide"><img src="../imgs/image2.jpg" /></div>
-          <div class="slide"><img src="../imgs/image3.jpg" /></div>
+          <div class="slide">
+            <a href="/detail/62a1a4e722d988ddbbe58d27"
+              ><img src="../imgs/image3.jpg"
+            /></a>
+          </div>
+          <div class="slide">
+            <a href=""><img src="../imgs/image1.jpg" /></a>
+          </div>
+          <div class="slide">
+            <a href=""><img src="../imgs/image2.jpg" /></a>
+          </div>
         </div>
 
         <div class="dots">
@@ -50,9 +51,9 @@
           </button>
         </div>
       </div>
-      <script src="home.js" type="module" defer></script>
-      <script src="home.js" type="text/javascript"></script>
+    </div>
 
+<<<<<<< HEAD
       <div class="btnList">
         <button><a href="/productlist">상품 목록</a></button>
       </div>
@@ -67,7 +68,37 @@
 
       <div class="btnList">
         <button><a href="/boardlist">게시글 목록</a></button>
-      </div>
+=======
+    <!-- 상품 추천 container -->
+    <div class="recommendContainer">
+      <div class="recommendTitle">이 상품 어때요?</div>
+      <div class="productList"></div>
     </div>
+
+    <!-- footer -->
+    <footer>
+      <div class="footerLogo">
+        <div class="logo"></div>
+      </div>
+      <div class="footerContent">
+        <div>
+          <p>주소: 부산시 연제구</p>
+          <p>고객센터 이용약관 개인정보 방침</p>
+          <p>ⓒ 2022 Team02 Enacho.All Rights Reserved.</p>
+        </div>
+      </div>
+      <div class="footerLink">
+        <div class="githubBtn"><a href=""></a></div>
+        <div class="gitlabBtn">
+          <a
+            href="https://kdt-gitlab.elice.io/sw_track/class_02_busan/web_project/team2/shopping-mall"
+          ></a>
+        </div>
+>>>>>>> 83b0e907f949d9afaaad06a7945087633bee4de4
+      </div>
+    </footer>
+
+    <script src="home.js" type="text/javascript"></script>
+    <script src="home.js" type="module" defer></script>
   </body>
 </html>

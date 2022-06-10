@@ -11,6 +11,11 @@ ul {
 
 body {
   margin: 0;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 a {

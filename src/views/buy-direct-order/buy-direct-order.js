@@ -143,8 +143,6 @@ async function doCheckout() {
   const address2 = address2Input.value;
   const request = document.getElementById("requestSelectBox");
 
-  alert("결제완료");
-
   let sendInfo = {
     shipAddress: {
       postalCode: postalCode,
@@ -154,13 +152,14 @@ async function doCheckout() {
       receiverPhoneNumber: receiverPhoneNumber.value,
     },
     request: request.options[request.selectedIndex].text,
-    orderItems: orderItems,
-    totalPrice: Number(data.orderTotal),
+    orderItems: [getLocalStorage],
+    totalPrice: Number(getLocalStorage.price),
     status: "결제완료",
   };
 
   try {
     const fff = await Api.post("/api/orders", sendInfo);
+    alert("결제완료");
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);

@@ -68,8 +68,11 @@ function modifying(productId) {
   window.location.href = `/modifyproduct/${productId}`;
 }
 function deleteProduct(item) {
-  alert("삭제되었습니다.");
   const thisId = item.path[0].parentElement.childNodes[0].value;
-  const deleteThis = Api.delete(`/api/products/${thisId}`);
-  location.reload();
+  const isOk = confirm("정말로 삭제 하시겠습니까?");
+  if(isOk) {
+    const deleteThis = Api.delete(`/api/products/${thisId}`);
+    alert("삭제되었습니다.");
+    location.reload();
+  }
 }

@@ -55,21 +55,6 @@ boardRouter.get('/notice/post/:postId', async function (req, res, next) {
   }
 });
 
-// // 하위 카테고리 조회
-// boardRouter.get('/category/belongTo/:categoryId', async function (req, res, next) {
-//   try {
-//     // 전체 상품 목록을 얻음
-//     const { categoryId } = req.params;
-//     const categories = await categoryService.getUnderCategory(categoryId);
-
-//     // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
-//     res.status(200).json(categories);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-
 // 게시글 정보 수정
 boardRouter.patch(
   '/notice/post/:postId',
@@ -112,7 +97,7 @@ boardRouter.patch(
 );
 
 
-// 카테고리 삭제  
+// 게시글 삭제  
 boardRouter.delete('/notice/post/:postId', async (req, res, next) => {
   const { postId } = req.params;
   try {

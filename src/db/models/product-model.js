@@ -42,16 +42,20 @@ export class ProductModel {
 
     const updatedProduct = await Product.findByIdAndUpdate(filter, update, option);
 
-    // 수정용으로 들어온 img 정보가 있다면 기존 img 삭제
+    // 기존 img 삭제
     // fsPromises.access: 성공시 undefined 실패시 error반환
-    const isAbsent = await fsPromises.access(updatedProduct.img);
-    if(!isAbsent) {
-      try {
-        fs.unlink(updatedProduct.img, ()=>{
-          console.log("image delete");
-        });
-      } catch (error) {
-        console.log(error);
+
+    // 업데이트하고자 하는 이미지가 있으면
+    if(update.img) {
+      const isAbsent = await fsPromises.access(updatedProduct.img);
+      if(!isAbsent) {
+        try {
+          fs.unlink(updatedProduct.img, ()=>{
+            console.log("image delete");
+          });
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
     

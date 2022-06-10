@@ -60,8 +60,10 @@ getData();
 ////////////////////////////////////////////////////////////
 // 상품 추가에서 없는값은 넘겨주지 않기때문에, 그 경우는 다루지 않음
 // 상품이 항상 있는 상태를 가정
+// => 상품이 수정될때와 안될때 분기가 필요
 
 const form = document.querySelector("form");
+const fileName = document.querySelector("#fileName");
 
 inputFile.addEventListener("input", (e) => {
   e.preventDefault();
@@ -85,7 +87,10 @@ form.addEventListener("submit", async (e) => {
         formData.append(item.name, item.value);
         break;
       case "file":
-        formData.append("upload", inputFile.files[0]);
+        // 사진 추가가 있다면
+        if(fileName.textContent == " 사진 저장 성공! ") {
+          formData.append("upload", inputFile.files[0]);
+        } 
         break;
     }
     switch (item.localName) {
@@ -98,9 +103,11 @@ form.addEventListener("submit", async (e) => {
     }
   }
 
+
   try {
     //patch 가능한 api로 바꾸기
     const patching = await Api.patch(`/api/products`, `${productId}`, formData);
+
   } catch (err) {
     console.error(err.stack);
   }

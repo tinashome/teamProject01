@@ -46,9 +46,10 @@ async function getProductList() {
 
     printProduct = [];
     productData.forEach((e) => {
+      console.log(e)
       const productItem = document.createElement("div");
       productItem.setAttribute("class", "productItem");
-      productItem.classList.add(e.company);
+      productItem.classList.add(e.category.name);
       const aTag = document.createElement("a");
       aTag.setAttribute("href", `/detail/${e._id}`);
 

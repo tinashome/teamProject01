@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>이상한 나라의 초콜릿</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../elice-rabbit-favicon.png"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="update-board-post.css" />
+    <link rel="stylesheet" href="../navigation/navigation.css" />
+    <script src="update-board-post.js" type="module" defer></script>
+    <script src="../navigation/navigation.js" type="module"></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div class="container">
+      <nav class="nav"></nav>
+      <div class="menu"></div>
+    </div>
+    <!-- 메인 -->
+    <main role="main">
+      <div class="addCategoryHeader">
+        <h1>게시글 수정</h1>
+        <hr />
+      </div>
+      <div class="formContainer">
+        <h2>게시글 수정하기</h2>
+
+        <div class="field">
+          <label for="categoryName" class="labelName"> 게시글 이름</label>
+          <input type="text" name="title" id="title" />
+        </div>
+
+        <div class="field">
+          <label for="categoryName" class="labelName"> 글쓴이</label>
+          <input type="text" name="author" id="author" readonly/>
+        </div>
+
+        <div class="textArea">
+          <label for="description" class="labelName"> 내용 </label>
+          <textarea name="content" id="content" cols="80" rows="10"></textarea>
+        </div>
+
+        <button id="addButton">수정하기</button>
+      </div>
+    </main>
+  </body>
+</html>

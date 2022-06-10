@@ -1,0 +1,104 @@
+.addProductHeader {
+  width: 1200px;
+  margin: 80px auto 0;
+}
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-left: 60px;
+}
+h2 {
+  font-size: 20px;
+  margin: 20px 0;
+  color: #493323;
+  width: 100%;
+  text-align: center;
+}
+form {
+  width: 600px;
+  margin: 30px auto 30px;
+  text-align: left;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px rgba(10, 10, 10, 0.1);
+  padding: 10px;
+}
+
+/* form 내부 공통부분 */
+.field {
+  width: 600px;
+  height: 70px;
+  margin-left: 30px;
+}
+.textArea,
+.fileField {
+  width: 600px;
+  margin-left: 30px;
+}
+label {
+  display: block;
+}
+
+/* 카테고리 선택 */
+#selectCategory,
+input {
+  width: 500px;
+  height: 30px;
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 5px;
+}
+
+/* 사진 업로드 */
+.fileField {
+  width: 500px;
+  height: 100px;
+}
+.fileLabel {
+  width: 500px;
+  height: 50px;
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 5px;
+  line-height: 50px;
+  position: relative;
+  top: 20px;
+}
+.uploadContainer {
+  display: inline-block;
+  width: 150px;
+  height: 50px;
+  padding-left: 10px;
+  background-color: #dbdbdb;
+}
+.fileIcon {
+  margin: 10px;
+}
+#inputFile {
+  display: none;
+}
+textarea {
+  width: 500px;
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 5px;
+}
+#selectCategory:hover,
+input:hover,
+textarea:hover {
+  border: 1px solid #999;
+}
+
+/* 제품 판매하기 버튼 */
+#addButton {
+  width: 550px;
+  height: 50px;
+  margin: 20px;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  background-color: #493323;
+  border: none;
+  border-radius: 10px;
+}
+
+/* 이미지 */
+#img {
+  height: inherit;
+}

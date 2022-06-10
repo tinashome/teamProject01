@@ -1,8 +1,14 @@
 import * as Api from "/api.js";
 
-const getToken = sessionStorage.getItem("token");
-console.log(getToken);
+const hederTag = document.querySelector("head");
+const faviconTag = document.createElement("link");
+faviconTag.setAttribute("rel", "icon");
+faviconTag.setAttribute("type", "image/png");
+faviconTag.setAttribute("sizes", "16x16");
+faviconTag.setAttribute("href", "../imgs/favicon-1.png");
+hederTag.appendChild(faviconTag);
 
+const getToken = sessionStorage.getItem("token");
 const nav = document.querySelector(".nav");
 
 // logo 부분

@@ -6,7 +6,7 @@ class BoardService {
     this.boardModel = boardModel;
   }
 
-  // 카테고리 생성
+  // 게시글 생성
   async addPost(postInfo) {
     const { numId, title, content, author } = postInfo;
     const newPostInfo = { numId, title, content, author };
@@ -16,13 +16,13 @@ class BoardService {
     return createdNewPost;
   }
 
-  // 카테고리 목록
+  // 게시글 목록
   async getPosts() {
     const posts = await this.boardModel.findAll();
     return posts;
   }
 
-  // 카테고리 한개
+  // 게시글 한개
   async getPost(postId) {
     const post = await this.boardModel.findById(postId);
     return post;
@@ -34,12 +34,12 @@ class BoardService {
   //   return category;
   // }
 
-  // 카테고리 수정
+  // 게시글 수정
   async setPost(postId, toUpdate) {
 
     // 우선 해당 id의 카테고리가 db에 있는지 확인
     let post = await this.boardModel.findById(postId);
-
+    console.log(post);
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!post) {
       throw new Error('게시글이 없습니다. 다시 한 번 확인해 주세요.');
@@ -55,7 +55,7 @@ class BoardService {
 
   // 게시글 삭제
   async delPost(postId) {
-    const post = await this.boardModel.delete(postId);
+    const post = await this.boardModel.delete({postId});
     return post;
   }
 }

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>이상한 나라의 초콜릿</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../elice-rabbit-favicon.png"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="modify-product.css" />
+    <link rel="stylesheet" href="../navigation/navigation.css" />
+    <script src="modify-product.js" type="module" defer></script>
+    <script src="../navigation/navigation.js" type="module"></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div class="container">
+      <nav class="nav"></nav>
+      <div class="menu"></div>
+    </div>
+    <!-- 메인 -->
+    <main role="main">
+      <div class="addProductHeader">
+        <h1>제품판매</h1>
+        <hr />
+      </div>
+      <form method="post" enctype="multipart/form-data" accept-charset="utf-8">
+        <h2>제품을 판매해 보세요</h2>
+
+        <div class="field">
+          <label for="productName" class="labelName"> 제품 이름</label>
+          <input type="text" placeholder="다크 초콜릿" name="name" id="name"/>
+        </div>
+
+        <div class="field">
+          <label for="category" class="labelName"> 카테고리</label>
+          <select name="category" id="selectCategory">
+            <option id="category">카테고리를 선택해 주세요.</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="madeFrom" class="labelName"> 제조사 </label>
+          <input type="text" placeholder="00 초콜릿 제조 (주)" name="company" id="company"/>
+        </div>
+
+        <div class="textArea">
+          <label for="description" class="labelName"> 요약 설명 </label>
+          <textarea name="summary" id="summary" cols="80" rows="10"></textarea>
+        </div>
+
+        <div class="textArea">
+          <label for="detail" class="labelName"> 상세 설명 </label>
+          <textarea name="detail" id="detail" cols="80" rows="10"></textarea>
+        </div>
+
+        
+        <div class="field" id="imgField">
+          <label for="image" class="labelName"> 제품 사진 </label>
+          <img src="" alt="제품 사진" id="img"/>
+        </div>
+
+        <div class="fileField">
+          <div class="file">
+            <label class="fileLabel">
+              <input
+                type="file"
+                accept=".png, .jpeg, .jpg"
+                id="inputFile"
+                name="upload"
+                on
+              />
+              <span class="uploadContainer">
+                <span class="fileIcon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="fileUpload">사진 업로드</span>
+              </span>
+              <span id="fileName">사진 파일(png, jpeg, jpg)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="productNumber" class="labelName"> 재고 수 </label>
+          <input type="number" placeholder="10" name="quantity" id="quantity"/>
+        </div>
+
+        <div class="field">
+          <label for="productPrice" class="labelName"> 가격 </label>
+          <input type="number" placeholder="10000" name="price" id="price"/>
+        </div>
+
+        <input type="submit" id="addButton" value="제품 수정하기" />
+      </form>
+    </main>
+
+  </body>
+</html>

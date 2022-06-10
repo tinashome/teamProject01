@@ -224,6 +224,26 @@ userRouter.post("/role", loginRequired, async function (req, res, next) {
   }
 });
 
+//유저 id값을 받아서 이름을 반환(게시판에서 사용)
+userRouter.get("/:userId/name", loginRequired, async function (req, res, next) {
+  try {
+    const currentUserId = req.currentUserId;
+    const userRole = await req.currentUserRole;
+    const userId = req.params.userId;
+
+    if (userId !== currentUserId && userRole !== "admin"){
+      console.log(`${userRole}의 userId로 이름조회 요청이 거부됨`);
+			throw new Error("권한이 없습니다.");
+    }
+
+    const userName = await userService.getUserInfo(userId);
+    const {fullName} = userName;
+    res.status(200).json({fullName});
+  } catch (error) {
+    next(error);
+  }
+});
+
 // 아이디값가져오는 api (아래는 /id 이지만, 실제로는 /api/users/id 요청해야 함.)
 userRouter.get("/id", loginRequired, async function (req, res, next) {
   try {

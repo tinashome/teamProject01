@@ -9,16 +9,14 @@ const boardRouter = Router();
 // 게시글 등록
 boardRouter.post('/notice/post', loginRequired, async (req, res, next) => {
   try {
-    console.log(req);
-    // req (request)의 body 에서 데이터 가져오기
-    const numId = req.body.numId;
+    // const numId = req.body.numId;
     const title = req.body.title;
     const content = req.body.content;
     const author = req.body.author;
 
     // 위 데이터를 유저 db에 추가하기
     const newPost = await boardService.addPost({
-      numId,
+      // numId,
       title,
       content,
       author,
@@ -32,49 +30,49 @@ boardRouter.post('/notice/post', loginRequired, async (req, res, next) => {
   }
 });
 
-// 전체 카테고리 목록 (배열 형태임)
-boardRouter.get('/categories', async function (req, res, next) {
+// 전체 게시글 목록 (배열 형태임)
+boardRouter.get('/notice/posts', async function (req, res, next) {
   try {
-    const categories = await categoryService.getCategories();
+    const posts = await boardService.getPosts();
 
     // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json(categories);
+    res.status(200).json(posts);
   } catch (error) {
     next(error);
   }
 });
 
-// 카테고리 상세
-boardRouter.get('/category/:categoryId', async function (req, res, next) {
+// 게시글 상세
+boardRouter.get('/notice/post/:postId', async function (req, res, next) {
   try {
-    const { categoryId } = req.params;
-    const category = await categoryService.getCategory(categoryId);
+    const { postId } = req.params;
+    const post = await boardService.getPost(postId);
 
     // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json(category);
+    res.status(200).json(post);
   } catch (error) {
     next(error);
   }
 });
 
-// 하위 카테고리 조회
-boardRouter.get('/category/belongTo/:categoryId', async function (req, res, next) {
-  try {
-    // 전체 상품 목록을 얻음
-    const { categoryId } = req.params;
-    const categories = await categoryService.getUnderCategory(categoryId);
+// // 하위 카테고리 조회
+// boardRouter.get('/category/belongTo/:categoryId', async function (req, res, next) {
+//   try {
+//     // 전체 상품 목록을 얻음
+//     const { categoryId } = req.params;
+//     const categories = await categoryService.getUnderCategory(categoryId);
 
-    // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json(categories);
-  } catch (error) {
-    next(error);
-  }
-});
+//     // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
+//     res.status(200).json(categories);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 
-// 카테고리 정보 수정
+// 게시글 정보 수정
 boardRouter.patch(
-  '/categories/:categoryId',
+  '/notice/post/:postId',
   async function (req, res, next) {
     try {
       // content-type 을 application/json 로 프론트에서
@@ -86,31 +84,27 @@ boardRouter.patch(
       }
 
       // params로부터 id를 가져옴
-      const categoryId = req.params.categoryId;
+      const postId = req.params.postId;
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
-      const name = req.body.name;
-      const level = req.body.level;
-      const info = req.body.info;
-      const belongTo = req.body.belongTo||undefined;
+      const title = req.body.title;
+      const content = req.body.content;
 
       let toUpdate = {};
       // 수정용으로 들어온 데이터의 유무 체크, 후에 있는 데이터만 patch로 수정한다.
       toUpdate = {
-        ...(name && { name }),
-        ...(level && { level }),
-        ...(info && { info }),
-        ...(belongTo && { belongTo }),
+        ...(title && { title }),
+        ...(content && { content }),
       };
 
       // 상품 정보를 업데이트함.
-      const updatedCategoryInfo = await categoryService.setCategory(
-        categoryId,
+      const updatedPostInfo = await boardService.setPost(
+        postId,
         toUpdate
       );
 
       // 업데이트 이후의 상품 데이터를 프론트에 보내 줌
-      res.status(200).json(updatedCategoryInfo);
+      res.status(200).json(updatedPostInfo);
     } catch (error) {
       next(error);
     }
@@ -119,11 +113,11 @@ boardRouter.patch(
 
 
 // 카테고리 삭제  
-boardRouter.delete('/categories/:categoryId', async (req, res, next) => {
-  const { categoryId } = req.params;
+boardRouter.delete('/notice/post/:postId', async (req, res, next) => {
+  const { postId } = req.params;
   try {
     // 삭제 후 삭제된 정보 반환
-    await categoryService.delCategory(categoryId);
+    await boardService.delPost(postId);
 
     // 삭제된 정보 반환
     res.status(200).json("OK");

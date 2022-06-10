@@ -1,6 +1,7 @@
 import { model } from 'mongoose';
 import { ProductSchema } from '../schemas/product-schema';
 import fs from "fs";
+import fsPromises from "node:fs/promises";
 
 const Product = model('products', ProductSchema);
 
@@ -26,7 +27,7 @@ export class ProductModel {
   }
 
   async findAll() {
-    const products = await Product.find({});
+    const products = await Product.find({}).populate(['category']);
 
     // img src에서 인식할 수 있도록 수정해서 프론트로 보냄
     products.forEach((product) => product.img = product.img.split("/views")[1])
@@ -37,18 +38,24 @@ export class ProductModel {
 
   async update({ productId, update }) {
     const filter = { _id: productId };
-    // const option = { returnOriginal: false };
+    const option = { returnOriginal: true }; // true: 업데이트 이전 값 리턴, false: 후 값 리턴
 
-    // const updatedProduct = await Product.findByIdAndUpdate(filter, update,{new: true});
-    const updatedProduct = await Product.findOneAndUpdate(filter, update/*, option*/);
-    
-    // 수정용으로 들어온 img 정보가 있다면 기존 img 삭제
-    if(fs.existsSync(updatedProduct.img)) {
-      try {
-        fs.unlinkSync(updatedProduct.img);
-        console.log("image delete");
-      } catch (error) {
-        console.log(error);
+    const updatedProduct = await Product.findByIdAndUpdate(filter, update, option);
+
+    // 기존 img 삭제
+    // fsPromises.access: 성공시 undefined 실패시 error반환
+
+    // 업데이트하고자 하는 이미지가 있으면
+    if(update.img) {
+      const isAbsent = await fsPromises.access(updatedProduct.img);
+      if(!isAbsent) {
+        try {
+          fs.unlink(updatedProduct.img, ()=>{
+            console.log("image delete");
+          });
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
     
@@ -56,7 +63,8 @@ export class ProductModel {
   }
 
   async delete({ productId }) {
-    const product = await Product.findOneAndDelete({ productId });
+    console.log(productId);
+    const product = await Product.findOneAndDelete({ _id: productId });
     return product;
   }
 }

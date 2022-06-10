@@ -1,3 +1,5 @@
+import { addCommas } from "/useful-functions.js";
+
 const payProductQuantity = document.querySelector("#payProductQuantity");
 const payProductPrice = document.querySelector("#payProductPrice");
 const payShippingPrice = document.querySelector("#payShippingPrice");
@@ -8,7 +10,9 @@ const totalQuantityArrForPay = [];
 //localStorage의 데이터를 받아오기
 //printArr에 배열로 데이터들을 저장하여 반복문을 돌면서 데이터 펴기
 const printArr = [];
-const localStorageItem = JSON.parse(localStorage.getItem("cartList"));
+const localStorageItem = JSON.parse(
+  localStorage.getItem("cartLitargetNumber = st")
+);
 for (let i = 0; i < localStorageItem.length; i++) {
   printArr.push(localStorageItem[i]);
 }
@@ -140,9 +144,12 @@ const shippingPrice = 3000;
 payProductQuantity.innerText = totalQuantityInPayBox;
 payProductPrice.innerText = totalPriceForPay;
 payShippingPrice.innerText = shippingPrice;
-payTotalPrice.innerText =
-  Number(payProductPrice.innerText) + Number(payShippingPrice.innerText);
-
+// payTotalPrice.innerText = addCommas(
+//   Number(payProductPrice.innerText) + Number(payShippingPrice.innerText)
+// );
+console.log(
+  Number(payProductPrice.innerText) + Number(payShippingPrice.innerText)
+);
 //버튼을 누르면 증가, 감소
 function plusQuantity(item) {
   if (item.path[2].firstChild.checked) {

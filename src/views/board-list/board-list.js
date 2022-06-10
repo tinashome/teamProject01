@@ -58,9 +58,9 @@ getData();
 function writing() {
   window.location.href = "/boardlist/write";
 }
-function deleteCategory(item) {
-  const thisId = item.path[0].parentElement.childNodes[0].value;
-  console.log(`/api/categories/${thisId}`);
-  const deleteThis = Api.delete(`/api/categories/${thisId}`);
-  // location.reload();
-}
+// function deleteCategory(item) {
+//   const thisId = item.path[0].parentElement.childNodes[0].value;
+//   console.log(`/api/categories/${thisId}`);
+//   const deleteThis = Api.delete(`/api/categories/${thisId}`);
+//   // location.reload();
+// }

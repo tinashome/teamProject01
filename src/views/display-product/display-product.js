@@ -37,7 +37,7 @@ async function getData() {
       // 수정, 삭제버튼 생성 및 이벤트 추가
       modifyButton.textContent = "수정";
       modifyButton.classList.add("modifyButton");
-      modifyButton.addEventListener("click", function() {
+      modifyButton.addEventListener("click", function () {
         const productId = data[i]._id;
 
         modifying(productId);
@@ -67,6 +67,7 @@ function modifying(productId) {
   window.location.href = `/modifyproduct/${productId}`;
 }
 function deleteProduct(item) {
+  alert("삭제되었습니다.");
   const thisId = item.path[0].parentElement.childNodes[0].value;
   const deleteThis = Api.delete(`/api/products/${thisId}`);
   location.reload();

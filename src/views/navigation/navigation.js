@@ -9,8 +9,6 @@ faviconTag.setAttribute("href", "../imgs/favicon-1.png");
 hederTag.appendChild(faviconTag);
 
 const getToken = sessionStorage.getItem("token");
-console.log(getToken);
-
 const nav = document.querySelector(".nav");
 
 // logo 부분

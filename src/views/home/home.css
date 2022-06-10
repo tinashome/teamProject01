@@ -11,18 +11,16 @@ a {
 
 .container {
   /* width: 1024px; */
+  width: 90%;
   margin: 0 auto;
 
   display: flex;
   justify-content: center;
-  height: 100vh;
+  height: 700px;
 }
 
 /* 이미지 슬라이드 */
 .slider {
-  /*  */
-  display: none;
-  /*  */
   width: 1024px;
   height: 600px;
   overflow: hidden;
@@ -31,16 +29,20 @@ a {
 }
 
 .slider .slides {
-  /* display: block; */
-  /* width: 8000px; */
   height: 90%;
 }
 
 .slider .slide {
   display: none;
   float: left;
-  width: 1024px;
+  width: 100%;
   height: 100%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .dots {
@@ -97,20 +99,173 @@ a {
   right: 60px;
 }
 
-/* btnList Test */
-.btnList {
-  display: flex;
-  position: relative;
+/* recommend container */
+.recommendContainer {
+  width: 60%;
+  margin: 0 auto;
+  height: 300px;
+}
+
+.recommendTitle {
+  padding: 20px 0;
+  font-size: 30px;
+  text-align: center;
+}
+
+.productList {
   width: 100%;
-  padding-top: 100px;
-  padding-left: 50px;
-  clear: left;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: repeat(minmax(30%, 1fr));
+  grid-gap: 20px 8px;
+  text-align: center;
 }
-button {
-  height: 50px;
-  width: 100px;
-  margin: 10px;
+
+.productItem {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  border: 1px solid #493323;
+  /* background-color: #91684a; */
+  border-radius: 10px;
 }
-button a {
+
+.productItem a {
+  color: black;
+  /* float: left; */
   font-size: 17px;
+  text-align: center;
+}
+
+.productItem:hover {
+  background-color: rgb(245, 236, 220);
+  transition: 0.3s;
+}
+
+.itemImg {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 12px;
+  /* margin: 10px; */
+}
+.itemPrice {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* footer */
+footer {
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 50px 0;
+  margin-top: 120px;
+  background-color: #91684a;
+}
+
+.footerLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30%;
+  height: 100%;
+}
+
+.logo {
+  background-image: url("../imgs/logoImg.png");
+  background-size: cover;
+  width: 170px;
+  height: 50px;
+}
+
+.footerContent {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 30%;
+}
+
+p {
+  color: #c68b59;
+  padding: 3px;
+  font-size: 14px;
+}
+
+.footerLink {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 100%;
+  width: 40%;
+}
+
+.gitlabBtn {
+  width: 40px;
+  height: 40px;
+  background-image: url("../imgs/gitlabImg.png");
+  background-size: cover;
+  margin-right: 100px;
+}
+
+.gitlabBtn a {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+.gitlabBtn:hover {
+  width: 47px;
+  height: 47px;
+  transition: 0.5s;
+}
+
+@media screen and (max-width: 800px) {
+  footer {
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    background-color: #91684a;
+    padding: 20px 0;
+  }
+  .footerLogo {
+    clear: left;
+    width: 100%;
+    margin: 20px 0;
+  }
+  .footerContent {
+    width: 100%;
+    clear: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 20px 0;
+  }
+  .footerLink {
+    width: 100%;
+    clear: left;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .gitlabBtn {
+    margin-right: 0px;
+  }
+
+  .productList {
+    width: 90%;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .itemImg {
+    width: 100%;
+  }
 }

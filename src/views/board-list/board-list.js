@@ -1,7 +1,12 @@
 import * as Api from "../api.js";
+import * as usefulFunc from "../useful-functions.js";
 
 const tbody = document.querySelector(".tableBody");
 const writeButton = document.querySelector("#addButton");
+
+const userId = sessionStorage.getItem("userId");
+console.log(userId);
+
 
 async function getData() {
   try {
@@ -12,40 +17,58 @@ async function getData() {
     for (let i = 0; i < posts.length; i++) {
       // html 요소 생성
       let tr = document.createElement("tr");
-      let numId = document.createElement("td");
+      let createDate = document.createElement("td");
       let title = document.createElement("td");
       let author = document.createElement("td");
-      let views = document.createElement("td");
-      let createDate = document.createElement("td");
+      let content = document.createElement("td");
+
+      let modifyBtn = document.createElement("button");
+      let deleteBtn = document.createElement("button");
 
       // 요소에 배열값 할당 + 요소에 class 추가
-      numId.textContent = posts[i].numId;
-      numId.classList.add("numId");
+      createDate.textContent = usefulFunc.getCurrentDate(posts[i].createdAt);
+      createDate.classList.add("createdAt");
 
       title.textContent = posts[i].title;
       title.classList.add("title");
 
-      // content.textContent = posts[i].content;
-      // content.classList.add("content");
-
-      author.textContent = posts[i].author;
+      author.textContent = posts[i].author.fullName;
       author.classList.add("author");
-      
-      createDate.textContent = posts[i].createdAt;
-      createDate.classList.add("createdAt");
 
-      views.textContent = posts[i].views;
-      views.classList.add("views");
+      content.textContent = posts[i].content;
+      content.classList.add("content");
+
+      modifyBtn.textContent = "수정";
+      modifyBtn.setAttribute("id", `modifyBtn${i}`);
+      modifyBtn.addEventListener("click", e=>modiPost(posts[i]._id));
+      deleteBtn.textContent = "삭제";
+      deleteBtn.setAttribute("id", `deleteBtn${i}`);
+      deleteBtn.addEventListener("click", e=>delPost(posts[i]._id));
+
 
       // 상세에 넘겨줄 게시글 하나의 id값
-      numId.value = posts[i]._id;
+      // title.value = posts[i]._id;
 
-      tr.appendChild(numId);
+      tr.appendChild(createDate);
       tr.appendChild(title);
       tr.appendChild(author);      
-      tr.appendChild(createDate);
-      tr.appendChild(views);
-      tbody.appendChild(tr);
+      tr.appendChild(content);
+      content.appendChild(modifyBtn);
+      content.appendChild(deleteBtn);
+      tbody.insertBefore(tr, tbody.firstChild);
+
+
+      // 세션 유저와 글쓴유저가 같으면 수정/삭제버튼이 보인다.
+      if (userId != posts[i].author._id) {
+        let targetModiBtn = document.querySelector(`#modifyBtn${i}`);
+        targetModiBtn.hidden = true;
+
+        let targetDelBtn = document.querySelector(`#deleteBtn${i}`);
+        targetDelBtn.hidden = true;
+      }
+      // modifyBtn.style.visibility = hidden;
+      // deleteBtn.style.visibility = hidden;
+      
     }
     writeButton.addEventListener("click", writing);
   } catch (err) {
@@ -55,8 +78,27 @@ async function getData() {
 
 getData();
 
-function writing() {
-  window.location.href = "/boardlist/write";
+function writing(item) {
+  if (!userId) {
+    alert("글쓰기는 로그인한 유저만 가능합니다.");
+    return;
+  }
+  // console.log(item);
+  // const thisId = item.path[0].parentElement.childNodes[0].value;
+  window.location.href = `/boardlist/write`;
+}
+
+function modiPost(postId) {
+  window.location.href = `/boardlist/${postId}`;
+}
+
+async function delPost(postId) {
+  try {
+    const deleteThis = await Api.delete(`/boards/notice/post/${postId}`);
+  } catch(err) {
+    console.error(err.stack);
+  }
+  location.reload();
 }
 // function deleteCategory(item) {
 //   const thisId = item.path[0].parentElement.childNodes[0].value;

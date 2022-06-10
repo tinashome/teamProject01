@@ -143,63 +143,63 @@ payShippingPrice.innerText = shippingPrice;
 payTotalPrice.innerText =
   Number(payProductPrice.innerText) + Number(payShippingPrice.innerText);
 
-// const plusButton = document.querySelectorAll(".plusProductQuantity");
-// plusButton.forEach((btn) => {
-//   btn.addEventListener("click", plusQuantity);
-// });
-// const minusButton = document.querySelectorAll(".minusProductQuantity");
-// minusButton.forEach((btn) => {
-//   btn.addEventListener("click", minusQuantity);
-// });
-
 //버튼을 누르면 증가, 감소
 function plusQuantity(item) {
   if (item.path[2].firstChild.checked) {
-    const targetNumber = item.path[1].querySelector(".productQuantity");
-    const targetQuantity = item.path[2].querySelector(".productQuantityNumb");
-    const selectedPrice = item.path[2].querySelector(".productPriceSpan");
-    console.log(selectedPrice);
+    let targetNumber = item.path[1].querySelector(".productQuantity");
+    let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
+    let selectedPrice = item.path[2].querySelector(".productPriceSpan");
 
     const thisId = item.path[2].querySelector(".id").innerText;
 
     const newStorageItem = [];
     // 로컬스토리지에서 박스랑 id같은걸 찾ㅈ아서
     let getLocal = JSON.parse(localStorage.getItem("cartList"));
-    const findTarget = getLocal.find((e) => e.id == thisId);
-    findTarget.quantity += 1;
 
-    newStorageItem.push(findTarget);
-    const findNotTarget = getLocal.find((e) => e.id !== thisId);
-    // newStorageItem.push(findNotTarget);
-    getLocal.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
-
-    newStorageItem.sort(function (a, b) {
-      if (a.id > b.id) {
-        return 1;
+    // 객체고 수량만 밖?ㅝ다
+    let findTarget;
+    getLocal.forEach((x) => {
+      if (x.id == thisId) {
+        x.quantity = Number(x.quantity) + 1;
+        findTarget = x.quantity;
       }
-      if (a.id < b.id) {
-        return -1;
-      }
-      return 0;
     });
-    localStorage.setItem("cartList", JSON.stringify(newStorageItem));
-    targetNumber.textContent = findTarget.quantity;
-    targetQuantity.textContent = findTarget.quantity;
+
+    // const findTarget = getLocal.find((e) => e.id == thisId);
+    // findTarget.quantity += 1;
+
+    // newStorageItem.push(findTarget);
+    // const findNotTarget = getLocal.filter((e) => e.id !== thisId);
+    // newStorageItem.push(findNotTarget);
+    // getLocal.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
+
+    // newStorageItem.sort(function (a, b) {
+    //   if (a.id > b.id) {
+    //     return 1;
+    //   }
+    //   if (a.id < b.id) {
+    //     return -1;
+    //   }
+    //   return 0;
+    // });
+    localStorage.setItem("cartList", JSON.stringify(getLocal));
+    targetNumber.textContent = findTarget;
+    targetQuantity.textContent = findTarget;
 
     const totalPrice = item.path[2].querySelector(".totalPrice");
     //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
-    totalPrice.innerText = selectedPrice.innerText * findTarget.quantity;
+    totalPrice.innerText = Number(selectedPrice.innerText) * Number(findTarget);
 
     //+ 버튼을 누르면 다시 활성화
     const minus = item.path[1].querySelector(".minusProductQuantity");
     minus.disabled = false;
 
     // 결제정보 창에 변경된 수량 반영
-    const findQuantity = newStorageItem.map((e) => e.quantity);
-    let totalQuantityForPay = 0;
-    findQuantity.forEach((e) => (totalQuantityForPay += e));
-    payProductQuantity.innerText = totalQuantityForPay;
-    localStorage.setItem("totalQuantity", totalQuantityForPay);
+    // const findQuantity = newStorageItem.map((e) => e.quantity);
+    // let totalQuantityForPay = 0;
+    // findQuantity.forEach((e) => (totalQuantityForPay += e));
+    // payProductQuantity.innerText = totalQuantityForPay;
+    // localStorage.setItem("totalQuantity", totalQuantityForPay);
 
     // const selectedProduct = document.querySelectorAll(".productQuantity");
     // const quantityArr = [];
@@ -213,6 +213,9 @@ function plusQuantity(item) {
     // console.log({ sumOfQuantity, quantityArr });
     // payProductQuantity.innerText = sumOfQuantity;
 
+    let getPayProductQuantity = document.getElementById("payProductQuantity");
+    getPayProductQuantity.textContent =
+      Number(getPayProductQuantity.textContent) + 1;
     //결제 정보 창에 총가격 표시
     const selectedProductPrice = document.querySelectorAll(".totalPrice");
     const totalPriceArr = [];
@@ -247,55 +250,61 @@ function minusQuantity(item) {
 
   if (innerNumb > 1) {
     if (item.path[2].firstChild.checked) {
-      const targetNumber = item.path[1].querySelector(".productQuantity");
-      const targetQuantity = item.path[2].querySelector(".productQuantityNumb");
-      const selectedPrice = item.path[2].querySelector(".productPriceSpan");
+      let targetNumber = item.path[1].querySelector(".productQuantity");
+      let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
+      let selectedPrice = item.path[2].querySelector(".productPriceSpan");
+
       const thisId = item.path[2].querySelector(".id").innerText;
+
       const newStorageItem = [];
+      // 로컬스토리지에서 박스랑 id같은걸 찾ㅈ아서
       let getLocal = JSON.parse(localStorage.getItem("cartList"));
-      const findTarget = getLocal.find((e) => e.id == thisId);
-      findTarget.quantity -= 1;
-      newStorageItem.push(findTarget);
 
-      const findNotTarget = getLocal.find((e) => e.id !== thisId);
-      getLocal.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
-      newStorageItem.sort(function (a, b) {
-        if (a.id > b.id) {
-          return 1;
+      // 객체고 수량만 밖?ㅝ다
+      let findTarget;
+      getLocal.forEach((x) => {
+        if (x.id == thisId) {
+          x.quantity = Number(x.quantity) - 1;
+          findTarget = x.quantity;
         }
-        if (a.id < b.id) {
-          return -1;
-        }
-        return 0;
       });
-      //localStorage.clear();
-      localStorage.setItem("cartList", JSON.stringify(newStorageItem));
 
-      targetNumber.textContent = findTarget.quantity;
-      targetQuantity.textContent = findTarget.quantity;
+      // const findTarget = getLocal.find((e) => e.id == thisId);
+      // findTarget.quantity += 1;
+
+      // newStorageItem.push(findTarget);
+      // const findNotTarget = getLocal.filter((e) => e.id !== thisId);
+      // newStorageItem.push(findNotTarget);
+      // getLocal.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
+
+      // newStorageItem.sort(function (a, b) {
+      //   if (a.id > b.id) {
+      //     return 1;
+      //   }
+      //   if (a.id < b.id) {
+      //     return -1;
+      //   }
+      //   return 0;
+      // });
+      localStorage.setItem("cartList", JSON.stringify(getLocal));
+      targetNumber.textContent = findTarget;
+      targetQuantity.textContent = findTarget;
+
       const totalPrice = item.path[2].querySelector(".totalPrice");
       //주문 수량과 가격을 곱하여 해당 상품의 총 금액을 보여줌
-      totalPrice.innerText = selectedPrice.innerText * findTarget.quantity;
+      totalPrice.innerText =
+        Number(selectedPrice.innerText) * Number(findTarget);
+
+      //+ 버튼을 누르면 다시 활성화
+      const minus = item.path[1].querySelector(".minusProductQuantity");
+      minus.disabled = false;
 
       // 결제정보 창에 변경된 수량 반영
-      const findQuantity = newStorageItem.map((e) => e.quantity);
-      let totalQuantityForPay = 0;
-      findQuantity.forEach((e) => (totalQuantityForPay += e));
-      payProductQuantity.innerText = totalQuantityForPay;
-      localStorage.setItem("totalQuantity", totalQuantityForPay);
-      const productQuantity =
-        item.path[2].querySelector(".productQuantity").innerText;
-      // 마이너스 수량으로 넘어가지 않도록 구현
-
-      const minus = item.path[1].querySelector(".minusProductQuantity");
-
-      if (innerNumb < 3) {
-        minus.disabled = true;
-      } else {
-        minus.disabled = false;
-      }
-
-      //payProductQuantity.innerText = totalPrice.innerText;
+      // const findQuantity = newStorageItem.map((e) => e.quantity);
+      // let totalQuantityForPay = 0;
+      // findQuantity.forEach((e) => (totalQuantityForPay += e));
+      // payProductQuantity.innerText = totalQuantityForPay;
+      // localStorage.setItem("totalQuantity", totalQuantityForPay);
 
       // const selectedProduct = document.querySelectorAll(".productQuantity");
       // const quantityArr = [];
@@ -306,15 +315,18 @@ function minusQuantity(item) {
       //   (prev, next) => Number(prev) + Number(next),
       //   0
       // );
-      // payProductQuantity.innerText = sumOfQuantity;
       // console.log({ sumOfQuantity, quantityArr });
+      // payProductQuantity.innerText = sumOfQuantity;
 
+      let getPayProductQuantity = document.getElementById("payProductQuantity");
+      getPayProductQuantity.textContent =
+        Number(getPayProductQuantity.textContent) - 1;
+      //결제 정보 창에 총가격 표시
       const selectedProductPrice = document.querySelectorAll(".totalPrice");
       const totalPriceArr = [];
       for (let i = 0; i < selectedProductPrice.length; i++) {
         totalPriceArr.push(selectedProductPrice[i].innerText);
       }
-
       const sumOfTotalPrice = totalPriceArr.reduce(
         (prev, next) => Number(prev) + Number(next),
         0
@@ -406,12 +418,15 @@ function selectAll(item) {
     localStorage.setItem("totalQuantity", JSON.stringify(getLocalTotal));
   }
 }
+
+// 전체말고 선택창
 function checkSelectAll(item) {
   let getLocal = JSON.parse(localStorage.getItem("cartList"));
   let id = item.path[1].querySelector(".id").innerText;
   if (item.path[0].checked == false) {
     allSelectedCheckbox.checked = false;
 
+    // let arr = getLocal.filter((x) => x.id !== id);
     payProductQuantity.innerText -=
       item.path[1].childNodes[4].childNodes[1].innerText;
 
@@ -447,6 +462,7 @@ function checkSelectAll(item) {
     payTotalPrice.innerText =
       Number(payTotalPrice.innerText) +
       Number(item.path[1].childNodes[5].childNodes[4].childNodes[0].innerText);
+
     getLocal.forEach((x) => {
       if (x.id == id) {
         x.quantity =
@@ -454,6 +470,7 @@ function checkSelectAll(item) {
           Number(item.path[1].childNodes[4].childNodes[1].innerText);
       }
     });
+
     localStorage.setItem("cartList", JSON.stringify(getLocal));
   }
 }
@@ -463,9 +480,11 @@ function checkSelectAll(item) {
 // 휴지통 버튼을 누르면 localStorage에서 데이터 삭제
 function deleteData(item) {
   const targetid = item.path[2].querySelector(".id").innerText;
-  const newStorageItem = [];
-  const findNotDelete = printArr.find((e) => e.id !== targetid);
-  newStorageItem.push(findNotDelete);
+
+  let getLocal = JSON.parse(localStorage.getItem("cartList"));
+  let newStorageItem;
+  const findNotDelete = getLocal.filter((e) => e.id !== targetid);
+  newStorageItem = findNotDelete;
   localStorage.clear();
   localStorage.setItem("cartList", JSON.stringify(newStorageItem));
   location.reload();
@@ -476,28 +495,44 @@ const deletePart = document.querySelector("#deletePart");
 
 deletePart.addEventListener("click", deletePartFunc);
 
-const deleteChecked = document.querySelectorAll(".selectedCheckBox:checked");
+const deleteChecked = document.querySelectorAll(".selectedCheckBox");
 
 function deletePartFunc() {
   let getLocal = JSON.parse(localStorage.getItem("cartList"));
   // 체크가 되어있는 id값
-  const checkedList = [];
+  let checkedList = [];
+
   for (let i = 0; i < deleteChecked.length; i++) {
     if (deleteChecked[i].checked == true) {
       checkedList.push(
         deleteChecked[i].parentNode.querySelector(".id").innerText
       );
+
+      deleteChecked[i].parentNode.remove();
     }
   }
+  let ffff = [];
+  getLocal.forEach((x) => {
+    if (!checkedList.includes(x.id)) {
+      ffff.push(x);
+    }
+  });
 
-  let newStorageItem;
-  for (let j = 0; j < checkedList.length; j++) {
-    const findNotDelete = getLocal.filter((e) => e.id !== checkedList[j]);
-    newStorageItem = findNotDelete;
-  }
-  console.log(newStorageItem);
-  // localStorage.clear();
-  // localStorage.setItem("cartList", JSON.stringify(newStorageItem));
+  // for (let j = 0; j < checkedList.length; j++) {
+
+  // let findNotDelete = getLocal.includes(newStorageItem[j]);
+  // if (!findNotDelete) newStorageItem.push(findNotDelete);
+  // }
+
+  localStorage.clear();
+  localStorage.setItem("cartList", JSON.stringify(ffff));
+
+  // let findStorageItem = [];
+  // getLocal.forEach((x) => {
+  //   if (!newStorageItem.includes(x)) {
+  //     findStorageItem.push(x);
+  //   }
+  // });
 
   alert("삭제되었습니다.");
 
@@ -506,5 +541,17 @@ function deletePartFunc() {
 
 const buyButton = document.querySelector("#buyButton");
 buyButton.addEventListener("click", () => {
-  window.location.href = "/order";
+  let getLocal = JSON.parse(localStorage.getItem("cartList"));
+  let setLocalStorage = [];
+  getLocal.forEach((x) => {
+    if (Number(x.quantity) !== 0) {
+      setLocalStorage.push(x);
+    }
+  });
+  if (setLocalStorage.length !== 0) {
+    localStorage.setItem("cartList", JSON.stringify(setLocalStorage));
+    window.location.href = "/order";
+  } else {
+    alert("상품수량을 확인하세요");
+  }
 });

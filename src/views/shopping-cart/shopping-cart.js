@@ -15,10 +15,9 @@ for (let i = 0; i < localStorageItem.length; i++) {
   printArr.push(localStorageItem[i]);
 }
 
+// 로딩시 페이지 구현
 const displayData = () => {
   for (let i = 0; i < printArr.length; i++) {
-    // const data = JSON.parse(localStorage.getItem(printArr[0][i]));
-    // console.log(data);
     const displaying = document.querySelector(".shoppingListBox");
     const productContainer = document.createElement("div");
     productContainer.classList.add("selectedProduct");
@@ -29,7 +28,6 @@ const displayData = () => {
     inputCheck.checked = "true";
     inputCheck.classList.add("selectedCheckBox");
     inputCheck.addEventListener("click", checkSelectAll);
-    //inputCheck.onclick = makingOrder;
 
     const pushProductImage = document.createElement("img");
     pushProductImage.src = printArr[i].img;
@@ -151,6 +149,7 @@ payTotalPrice.innerText = shippingPrice + totalPriceForPay;
 
 //버튼을 누르면 증가, 감소
 function plusQuantity(item) {
+  // 체크박스에 체크확인
   if (item.path[2].firstChild.checked) {
     let targetNumber = item.path[1].querySelector(".productQuantity");
     let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
@@ -158,11 +157,9 @@ function plusQuantity(item) {
 
     const thisId = item.path[2].querySelector(".id").innerText;
 
-    const newStorageItem = [];
-    // 로컬스토리지에서 박스랑 id같은걸 찾ㅈ아서
+    //로컬스토리지 설정
     let getLocal = JSON.parse(localStorage.getItem("cartList"));
 
-    // 객체고 수량만 밖?ㅝ다
     let findTarget;
     getLocal.forEach((x) => {
       if (x.id == thisId) {
@@ -171,23 +168,6 @@ function plusQuantity(item) {
       }
     });
 
-    // const findTarget = getLocal.find((e) => e.id == thisId);
-    // findTarget.quantity += 1;
-
-    // newStorageItem.push(findTarget);
-    // const findNotTarget = getLocal.filter((e) => e.id !== thisId);
-    // newStorageItem.push(findNotTarget);
-    // getLocal.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
-
-    // newStorageItem.sort(function (a, b) {
-    //   if (a.id > b.id) {
-    //     return 1;
-    //   }
-    //   if (a.id < b.id) {
-    //     return -1;
-    //   }
-    //   return 0;
-    // });
     localStorage.setItem("cartList", JSON.stringify(getLocal));
     targetNumber.textContent = findTarget;
     targetQuantity.textContent = findTarget;
@@ -199,25 +179,6 @@ function plusQuantity(item) {
     //+ 버튼을 누르면 다시 활성화
     const minus = item.path[1].querySelector(".minusProductQuantity");
     minus.disabled = false;
-
-    // 결제정보 창에 변경된 수량 반영
-    // const findQuantity = newStorageItem.map((e) => e.quantity);
-    // let totalQuantityForPay = 0;
-    // findQuantity.forEach((e) => (totalQuantityForPay += e));
-    // payProductQuantity.innerText = totalQuantityForPay;
-    // localStorage.setItem("totalQuantity", totalQuantityForPay);
-
-    // const selectedProduct = document.querySelectorAll(".productQuantity");
-    // const quantityArr = [];
-    // for (let i = 0; i < selectedProduct.length; i++) {
-    //   quantityArr.push(selectedProduct[i].innerText);
-    // }
-    // const sumOfQuantity = quantityArr.reduce(
-    //   (prev, next) => Number(prev) + Number(next),
-    //   0
-    // );
-    // console.log({ sumOfQuantity, quantityArr });
-    // payProductQuantity.innerText = sumOfQuantity;
 
     let getPayProductQuantity = document.getElementById("payProductQuantity");
     getPayProductQuantity.textContent =
@@ -247,13 +208,8 @@ function plusQuantity(item) {
 }
 
 function minusQuantity(item) {
-  // 값을 가져오는거
-  // 위에 값을 1<값 if안에 실행
   let innerNumb = item.path[1].querySelector(".productQuantity").innerText;
-
-  // const selectedCheckBox = document.getElementsByClassName("selectedCheckBox");
-  // console.log(item.path[2].firstChild.checked);
-
+  // 1보다 작을시 버튼 클릭 금지
   if (innerNumb > 1) {
     if (item.path[2].firstChild.checked) {
       let targetNumber = item.path[1].querySelector(".productQuantity");
@@ -262,11 +218,9 @@ function minusQuantity(item) {
 
       const thisId = item.path[2].querySelector(".id").innerText;
 
-      const newStorageItem = [];
-      // 로컬스토리지에서 박스랑 id같은걸 찾ㅈ아서
+      // 로컬스토리지에서 박스랑 id같은걸 찾기
       let getLocal = JSON.parse(localStorage.getItem("cartList"));
 
-      // 객체고 수량만 밖?ㅝ다
       let findTarget;
       getLocal.forEach((x) => {
         if (x.id == thisId) {
@@ -275,23 +229,6 @@ function minusQuantity(item) {
         }
       });
 
-      // const findTarget = getLocal.find((e) => e.id == thisId);
-      // findTarget.quantity += 1;
-
-      // newStorageItem.push(findTarget);
-      // const findNotTarget = getLocal.filter((e) => e.id !== thisId);
-      // newStorageItem.push(findNotTarget);
-      // getLocal.length !== 1 ? newStorageItem.push(findNotTarget) : 1;
-
-      // newStorageItem.sort(function (a, b) {
-      //   if (a.id > b.id) {
-      //     return 1;
-      //   }
-      //   if (a.id < b.id) {
-      //     return -1;
-      //   }
-      //   return 0;
-      // });
       localStorage.setItem("cartList", JSON.stringify(getLocal));
       targetNumber.textContent = findTarget;
       targetQuantity.textContent = findTarget;
@@ -304,25 +241,6 @@ function minusQuantity(item) {
       //+ 버튼을 누르면 다시 활성화
       const minus = item.path[1].querySelector(".minusProductQuantity");
       minus.disabled = false;
-
-      // 결제정보 창에 변경된 수량 반영
-      // const findQuantity = newStorageItem.map((e) => e.quantity);
-      // let totalQuantityForPay = 0;
-      // findQuantity.forEach((e) => (totalQuantityForPay += e));
-      // payProductQuantity.innerText = totalQuantityForPay;
-      // localStorage.setItem("totalQuantity", totalQuantityForPay);
-
-      // const selectedProduct = document.querySelectorAll(".productQuantity");
-      // const quantityArr = [];
-      // for (let i = 0; i < selectedProduct.length; i++) {
-      //   quantityArr.push(selectedProduct[i].innerText);
-      // }
-      // const sumOfQuantity = quantityArr.reduce(
-      //   (prev, next) => Number(prev) + Number(next),
-      //   0
-      // );
-      // console.log({ sumOfQuantity, quantityArr });
-      // payProductQuantity.innerText = sumOfQuantity;
 
       let getPayProductQuantity = document.getElementById("payProductQuantity");
       getPayProductQuantity.textContent =
@@ -366,6 +284,7 @@ function selectAll(item) {
 
   if (allSelectedCheckbox.checked == true) {
     selectedCheckBox.forEach((x) => {
+      // 체크박스중에 false일때만
       if (x.checked == false) {
         const id = x.parentNode.querySelector(".id").innerText;
 
@@ -380,7 +299,7 @@ function selectAll(item) {
             getPayQuantity.innerText =
               Number(getPayQuantity.innerText) +
               Number(x.parentNode.querySelector(".productQuantity").innerText);
-            // getPayQuantity.innerText = Number(getPayQuantity.innerText)+
+
             getPay.innerText =
               Number(getPay.innerText) +
               Number(x.parentNode.querySelector(".totalPrice").innerText);
@@ -432,7 +351,6 @@ function checkSelectAll(item) {
   if (item.path[0].checked == false) {
     allSelectedCheckbox.checked = false;
 
-    // let arr = getLocal.filter((x) => x.id !== id);
     payProductQuantity.innerText -=
       item.path[1].childNodes[4].childNodes[1].innerText;
 
@@ -481,8 +399,6 @@ function checkSelectAll(item) {
   }
 }
 
-// 체크박스 선택 취소 시
-
 // 휴지통 버튼을 누르면 localStorage에서 데이터 삭제
 function deleteData(item) {
   const targetid = item.path[2].querySelector(".id").innerText;
@@ -518,33 +434,22 @@ function deletePartFunc() {
     }
   }
   let ffff = [];
+  let payInfoChange = [];
   getLocal.forEach((x) => {
     if (!checkedList.includes(x.id)) {
       ffff.push(x);
+    } else {
+      payInfoChange.push(x);
     }
   });
-
-  // for (let j = 0; j < checkedList.length; j++) {
-
-  // let findNotDelete = getLocal.includes(newStorageItem[j]);
-  // if (!findNotDelete) newStorageItem.push(findNotDelete);
-  // }
 
   localStorage.clear();
   localStorage.setItem("cartList", JSON.stringify(ffff));
 
-  // let findStorageItem = [];
-  // getLocal.forEach((x) => {
-  //   if (!newStorageItem.includes(x)) {
-  //     findStorageItem.push(x);
-  //   }
-  // });
-
   alert("삭제되었습니다.");
-
-  // location.reload();
 }
 
+// 결제버튼 클릭시
 const buyButton = document.querySelector("#buyButton");
 buyButton.addEventListener("click", () => {
   let getLocal = JSON.parse(localStorage.getItem("cartList"));

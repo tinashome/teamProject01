@@ -12,7 +12,7 @@ const localStorageItem = JSON.parse(localStorage.getItem("cartList"));
 for (let i = 0; i < localStorageItem.length; i++) {
   printArr.push(localStorageItem[i]);
 }
-console.log(printArr);
+
 const displayData = () => {
   for (let i = 0; i < printArr.length; i++) {
     // const data = JSON.parse(localStorage.getItem(printArr[0][i]));
@@ -26,7 +26,7 @@ const displayData = () => {
     inputCheck.name = "check";
     inputCheck.checked = "true";
     inputCheck.classList.add("selectedCheckBox");
-    inputCheck.onclick = checkSelectAll;
+    inputCheck.addEventListener("click", checkSelectAll);
     //inputCheck.onclick = makingOrder;
 
     const pushProductImage = document.createElement("img");
@@ -158,11 +158,15 @@ function plusQuantity(item) {
     const targetNumber = item.path[1].querySelector(".productQuantity");
     const targetQuantity = item.path[2].querySelector(".productQuantityNumb");
     const selectedPrice = item.path[2].querySelector(".productPriceSpan");
+    console.log(selectedPrice);
 
     const thisId = item.path[2].querySelector(".id").innerText;
+
     const newStorageItem = [];
+    // 로컬스토리지에서 박스랑 id같은걸 찾ㅈ아서
     const findTarget = printArr.find((e) => e.id == thisId);
     findTarget.quantity += 1;
+
     newStorageItem.push(findTarget);
     const findNotTarget = printArr.find((e) => e.id !== thisId);
     // newStorageItem.push(findNotTarget);
@@ -221,13 +225,18 @@ function plusQuantity(item) {
     payProductPrice.innerText = sumOfTotalPrice;
     payTotalPrice.innerText = sumOfTotalPrice + 3000;
   } else {
-    const targetNumber = item.path[1].querySelector(".productQuantity");
+    let targetNumber = item.path[1].querySelector(".productQuantity");
     targetNumber.textContent = Number(targetNumber.innerText) + 1;
+    let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
+    targetQuantity.textContent = Number(targetQuantity.innerText) + 1;
+    let totalPrice = item.path[2].querySelector(".totalPrice");
+    let selectedPrice = item.path[2].querySelector(".productPriceSpan");
+    totalPrice.innerText =
+      Number(totalPrice.innerText) + Number(selectedPrice.innerText);
   }
 }
 
 function minusQuantity(item) {
-  console.log(1);
   // 값을 가져오는거
   // 위에 값을 1<값 if안에 실행
   let innerNumb = item.path[1].querySelector(".productQuantity").innerText;
@@ -311,8 +320,14 @@ function minusQuantity(item) {
       payProductPrice.innerText = sumOfTotalPrice;
       payTotalPrice.innerText = sumOfTotalPrice + 3000;
     } else {
-      const targetNumber = item.path[1].querySelector(".productQuantity");
+      let targetNumber = item.path[1].querySelector(".productQuantity");
       targetNumber.textContent = targetNumber.innerText - 1;
+      let targetQuantity = item.path[2].querySelector(".productQuantityNumb");
+      targetQuantity.textContent = targetQuantity.innerText - 1;
+      let totalPrice = item.path[2].querySelector(".totalPrice");
+      let selectedPrice = item.path[2].querySelector(".productPriceSpan");
+      totalPrice.innerText =
+        Number(totalPrice.innerText) - Number(selectedPrice.innerText);
     }
   }
 }
@@ -320,24 +335,124 @@ function minusQuantity(item) {
 //전체선택 구현
 const allSelectedCheckbox = document.querySelector("#allSelectedCheckbox");
 const selectedCheckBox = document.querySelectorAll(".selectedCheckBox");
-console.log(selectedCheckBox);
+
 allSelectedCheckbox.addEventListener("click", selectAll);
-function selectAll() {
+function selectAll(item) {
+  let getLocal = JSON.parse(localStorage.getItem("cartList"));
+  let getLocalTotal = JSON.parse(localStorage.getItem("totalQuantity"));
+  let getPayQuantity = document.getElementById("payProductQuantity");
+  let getPay = document.getElementById("payProductPrice");
+  let getPayTotal = document.getElementById("payTotalPrice");
+
   if (allSelectedCheckbox.checked == true) {
-    selectedCheckBox.forEach((check) => (check.checked = true));
-  }
-  if (allSelectedCheckbox.checked == false) {
-    selectedCheckBox.forEach((check) => (check.checked = false));
+    selectedCheckBox.forEach((x) => {
+      if (x.checked == false) {
+        const id = x.parentNode.querySelector(".id").innerText;
+
+        getLocal.forEach((y) => {
+          if (y.id === id) {
+            y.quantity =
+              Number(y.quantity) +
+              Number(x.parentNode.querySelector(".productQuantity").innerText);
+            getLocalTotal += Number(
+              x.parentNode.querySelector(".productQuantity").innerText
+            );
+            getPayQuantity.innerText =
+              Number(getPayQuantity.innerText) +
+              Number(x.parentNode.querySelector(".productQuantity").innerText);
+            // getPayQuantity.innerText = Number(getPayQuantity.innerText)+
+            getPay.innerText =
+              Number(getPay.innerText) +
+              Number(x.parentNode.querySelector(".totalPrice").innerText);
+            getPayTotal.innerText =
+              Number(getPayTotal.innerText) +
+              Number(x.parentNode.querySelector(".totalPrice").innerText);
+          }
+        });
+      }
+      x.checked = true;
+    });
+    localStorage.setItem("cartList", JSON.stringify(getLocal));
+    localStorage.setItem("totalQuantity", JSON.stringify(getLocalTotal));
+  } else if (allSelectedCheckbox.checked == false) {
+    selectedCheckBox.forEach((x) => {
+      if (x.checked == true) {
+        const id = x.parentNode.querySelector(".id").innerText;
+        getLocal.forEach((y) => {
+          if (y.id === id) {
+            y.quantity =
+              Number(y.quantity) -
+              Number(x.parentNode.querySelector(".productQuantity").innerText);
+            getLocalTotal -= Number(
+              x.parentNode.querySelector(".productQuantity").innerText
+            );
+            getPayQuantity.innerText =
+              Number(getPayQuantity.innerText) -
+              Number(x.parentNode.querySelector(".productQuantity").innerText);
+            getPay.innerText =
+              Number(getPay.innerText) -
+              Number(x.parentNode.querySelector(".totalPrice").innerText);
+            getPayTotal.innerText =
+              Number(getPayTotal.innerText) -
+              Number(x.parentNode.querySelector(".totalPrice").innerText);
+          }
+        });
+      }
+      x.checked = false;
+    });
+    localStorage.setItem("cartList", JSON.stringify(getLocal));
+    localStorage.setItem("totalQuantity", JSON.stringify(getLocalTotal));
   }
 }
-function checkSelectAll() {
-  for (let i = 0; i < selectedCheckBox.length; i++) {
-    if (selectedCheckBox[i].checked == false) {
-      allSelectedCheckbox.checked = false;
-      return;
-    } else {
+function checkSelectAll(item) {
+  let getLocal = JSON.parse(localStorage.getItem("cartList"));
+  let id = item.path[1].querySelector(".id").innerText;
+  if (item.path[0].checked == false) {
+    allSelectedCheckbox.checked = false;
+
+    payProductQuantity.innerText -=
+      item.path[1].childNodes[4].childNodes[1].innerText;
+
+    payProductPrice.innerText -=
+      item.path[1].childNodes[5].childNodes[4].childNodes[0].innerText;
+    payTotalPrice.innerText -=
+      item.path[1].childNodes[5].childNodes[4].childNodes[0].innerText;
+    getLocal.forEach((x) => {
+      if (x.id == id) {
+        x.quantity =
+          Number(x.quantity) -
+          Number(item.path[1].childNodes[4].childNodes[1].innerText);
+      }
+    });
+    localStorage.setItem("cartList", JSON.stringify(getLocal));
+  } else {
+    let trueCnt = 0;
+    for (let i = 0; i < selectedCheckBox.length; i++) {
+      if (selectedCheckBox[i].checked === true) {
+        trueCnt += 1;
+      }
+    }
+    if (trueCnt == selectedCheckBox.length) {
       allSelectedCheckbox.checked = true;
     }
+
+    payProductQuantity.innerText =
+      Number(payProductQuantity.innerText) +
+      Number(item.path[1].childNodes[4].childNodes[1].innerText);
+    payProductPrice.innerText =
+      Number(payProductPrice.innerText) +
+      Number(item.path[1].childNodes[5].childNodes[4].childNodes[0].innerText);
+    payTotalPrice.innerText =
+      Number(payTotalPrice.innerText) +
+      Number(item.path[1].childNodes[5].childNodes[4].childNodes[0].innerText);
+    getLocal.forEach((x) => {
+      if (x.id == id) {
+        x.quantity =
+          Number(x.quantity) +
+          Number(item.path[1].childNodes[4].childNodes[1].innerText);
+      }
+    });
+    localStorage.setItem("cartList", JSON.stringify(getLocal));
   }
 }
 

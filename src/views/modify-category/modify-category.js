@@ -22,7 +22,7 @@ getData();
 const addButton = document.querySelector("#addButton");
 addButton.addEventListener("click", async (e) => {
   e.preventDefault();
-  alert("카테고리가 수정되었습니다.")
+  alert("카테고리가 수정되었습니다.");
   const name = document.querySelector("#categoryName").value;
   const info = document.querySelector("#descrption").value;
   const patchData = {
@@ -40,4 +40,5 @@ addButton.addEventListener("click", async (e) => {
   } catch (err) {
     console.error(err.stack);
   }
+  window.location.href = "/displaycategory";
 });

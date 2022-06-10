@@ -7,7 +7,6 @@ const searchAddressButton = document.querySelector("#searchAddressButton");
 const postalCode = document.getElementById("postalCode");
 const address1Input = document.querySelector("#address1");
 const address2Input = document.querySelector("#address2");
-// const productsTitle = document.getElementById("payProductQuantity");
 const productsTotal = document.getElementById("payProductPrice");
 const deliveryFee = document.getElementById("payShippingPrice");
 const orderTotal = document.getElementById("payTotalPrice");
@@ -27,80 +26,69 @@ async function getUserInfo() {
 }
 getUserInfo();
 
-const data = {
-  productId: [],
-  productsTitle: "",
-  productsTotal: 0,
-  productsPrice: 0,
-  productsCnt: 0,
-  deliveryFee: "3000",
-  orderTotal: 3000,
-};
+// const data = {
+//   productId: [],
+//   productsTitle: "",
+//   productsTotal: 0,
+//   productsPrice: 0,
+//   productsCnt: 0,
+//   deliveryFee: "3000",
+//   orderTotal: 3000,
+// };
 
 // 로컬스토리지에서 장바구니 정보 가져오기
-const getLocalStorage = localStorage.getItem("cartList");
-const orderItems = [];
+const getLocalStorage = JSON.parse(localStorage.getItem("buyDirect"));
+console.log(getLocalStorage);
 
-JSON.parse(getLocalStorage).forEach((product) => {
-  orderItems.push({
-    productId: product.id,
-    productName: product.name,
-    productImg: product.img,
-    price: product.price,
-    quantity: product.quantity,
-    totalPrice: Number(product.price * product.quantity),
-  });
-});
-
-orderItems.forEach((data) => {
-  console.log(data);
+function displaying() {
   const productContainer = document.createElement("div");
   productContainer.classList.add("productContainer");
   const img = document.createElement("img");
-  img.src = data.productImg;
+  img.src = getLocalStorage.img;
   productContainer.appendChild(img);
 
   const itemName = document.createElement("div");
   itemName.classList.add("name");
-  itemName.textContent = data.productName;
+  itemName.textContent = getLocalStorage.name;
   productContainer.appendChild(itemName);
 
   const priceForOne = document.createElement("div");
   priceForOne.classList.add("price");
-  priceForOne.textContent = `${addCommas(data.price)}원`;
+  priceForOne.textContent = `${addCommas(getLocalStorage.price)}원`;
   productContainer.appendChild(priceForOne);
 
   const quantity = document.createElement("div");
   quantity.classList.add("quantity");
-  quantity.textContent = `${data.quantity}개`;
+  quantity.textContent = `${getLocalStorage.quantity}개`;
   productContainer.appendChild(quantity);
 
   const totalPriceEachItem = document.createElement("div");
   totalPriceEachItem.classList.add("totalPrice");
-  totalPriceEachItem.textContent = `${addCommas(data.totalPrice)}원`;
+  totalPriceEachItem.textContent = `${addCommas(getLocalStorage.price)}원`;
   productContainer.appendChild(totalPriceEachItem);
 
   shoppingList.appendChild(productContainer);
-});
+}
+displaying();
 
-JSON.parse(getLocalStorage).forEach((producet) => {
-  data.productsTitle += producet.name + producet.quantity + "개" + "<br>";
-  data.productsTotal += producet.price;
-  data.orderTotal += producet.price;
-  data.productsPrice = producet.price;
-  data.productsCnt = producet.quantity;
-  data.productId.push(producet.id);
-});
+// JSON.parse(getLocalStorage).forEach((producet) => {
+//   data.productsTitle += producet.name + producet.quantity + "개" + "<br>";
+//   data.productsTotal += producet.price;
+//   data.orderTotal += producet.price;
+//   data.productsPrice = producet.price;
+//   data.productsCnt = producet.quantity;
+//   data.productId.push(producet.id);
+// });
 
-const total = addCommas(data.productsTotal);
-const fee = addCommas(data.deliveryFee);
-const order = addCommas(data.orderTotal);
+const fee = addCommas(3000);
+const totalPrice = getLocalStorage.price + 3000;
+const total = addCommas(totalPrice);
 
 //productsTitle.innerHTML = data.productsTitle;
 
-productsTotal.textContent = `${total} 개`;
+productsTotal.textContent = `${getLocalStorage.quantity} 개`;
 deliveryFee.textContent = `${fee} 원`;
-orderTotal.textContent = `${order} 원`;
+orderTotal.textContent = `${total} 원`;
 
 // 주소찾기
 
@@ -155,8 +143,6 @@ async function doCheckout() {
   const address2 = address2Input.value;
   const request = document.getElementById("requestSelectBox");
 
-  alert("결제완료");
-
   let sendInfo = {
     shipAddress: {
       postalCode: postalCode,
@@ -166,15 +152,14 @@ async function doCheckout() {
       receiverPhoneNumber: receiverPhoneNumber.value,
     },
     request: request.options[request.selectedIndex].text,
-    orderItems: orderItems,
-    totalPrice: Number(data.orderTotal),
+    orderItems: [getLocalStorage],
+    totalPrice: Number(getLocalStorage.price),
     status: "결제완료",
   };
-  console.log(sendInfo);
 
   try {
     const fff = await Api.post("/api/orders", sendInfo);
-    console.log(fff);
+    alert("결제완료");
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);

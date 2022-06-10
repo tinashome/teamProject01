@@ -12,6 +12,9 @@ button {
   margin: 0 10px;
   cursor: pointer;
 }
+main {
+  height: 800px;
+}
 
 /* section */
 .productContainer {
@@ -102,5 +105,111 @@ button {
     position: absolute;
     top: 380px;
     left: calc(50% - 225px);
+    margin-bottom: 100px;
+  }
+}
+
+/* footer */
+footer {
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 50px 0;
+  margin-top: 120px;
+  background-color: #493323;
+}
+
+.footerLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30%;
+  height: 100%;
+}
+
+.logo {
+  background-image: url("../imgs/logoImg.png");
+  background-size: cover;
+  width: 170px;
+  height: 50px;
+}
+
+.footerContent {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 30%;
+}
+
+.footer {
+  color: #c68b59;
+  padding: 3px;
+  font-size: 14px;
+}
+
+.footerLink {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 100%;
+  width: 40%;
+}
+
+.gitlabBtn {
+  width: 40px;
+  height: 40px;
+  background-image: url("../imgs/gitlabImg.png");
+  background-size: cover;
+  margin-right: 100px;
+}
+
+.gitlabBtn a {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+.gitlabBtn:hover {
+  width: 47px;
+  height: 47px;
+  transition: 0.5s;
+}
+
+@media screen and (max-width: 800px) {
+  footer {
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    /* margin-top: 100px; */
+    flex-direction: column;
+    background-color: #493323;
+    padding: 20px 0;
+  }
+  .footerLogo {
+    clear: left;
+    width: 100%;
+    margin: 20px 0;
+  }
+  .footerContent {
+    width: 100%;
+    clear: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 20px 0;
+  }
+  .footerLink {
+    width: 100%;
+    clear: left;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .gitlabBtn {
+    margin-right: 0px;
   }
 }

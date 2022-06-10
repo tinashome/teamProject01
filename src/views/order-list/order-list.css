@@ -17,8 +17,9 @@ section {
 
 /* orderSearch */
 .orderSearch {
-  background-color: #eff5fb;
-  color: #296fa8;
+  background-color: #493323;
+  color: #fff;
+  font-weight: bold;
   margin-top: 5rem;
 }
 

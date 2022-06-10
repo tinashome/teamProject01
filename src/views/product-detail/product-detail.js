@@ -1,4 +1,5 @@
 import * as Api from "/api.js";
+import { addCommas } from "/useful-functions.js";
 
 const addCartBtn = document.querySelector("#addCart");
 const productName = document.querySelector("#productName");
@@ -14,7 +15,7 @@ async function getData() {
   try {
     const data = await Api.get(`/api/product/${productId}`);
     productName.textContent = data.name;
-    price.textContent = data.price;
+    price.textContent = addCommas(data.price);
     productImage.src = data.img;
     productDescription.textContent = data.detail;
     productSummary.textContent = data.summary;

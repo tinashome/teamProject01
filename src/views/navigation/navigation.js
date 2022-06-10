@@ -5,7 +5,7 @@ const faviconTag = document.createElement("link");
 faviconTag.setAttribute("rel", "icon");
 faviconTag.setAttribute("type", "image/png");
 faviconTag.setAttribute("sizes", "16x16");
-faviconTag.setAttribute("href", "../imgs/favicon-1.png");
+faviconTag.setAttribute("href", "/../imgs/favicon-1.png");
 hederTag.appendChild(faviconTag);
 
 const getToken = sessionStorage.getItem("token");
@@ -81,7 +81,7 @@ async function itemList() {
   // 관리자 계정에서만 보일 버튼
   const liAccountTag = document.createElement("li");
   const aAccountTag = document.createElement("a");
-  const textAccount = document.createTextNode("게시판");
+  const textAccount = document.createTextNode("공지사항");
   aAccountTag.setAttribute("href", "/boardlist");
   aAccountTag.appendChild(textAccount);
   liAccountTag.appendChild(aAccountTag);

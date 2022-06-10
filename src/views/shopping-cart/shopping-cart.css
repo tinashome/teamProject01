@@ -8,6 +8,11 @@ article {
 i {
   margin: 5px;
 }
+
+main {
+  margin-top: 80px;
+}
+
 /* 장바구니 > 주문결제 > 주문완료 */
 .shoppingCartHeader {
   font-size: 20px;

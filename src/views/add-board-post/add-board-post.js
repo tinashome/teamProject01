@@ -10,10 +10,8 @@ async function getData() {
 
   let author = document.querySelector("#author");
   author.value = user.fullName;
-
 }
 getData();
-
 
 const addButton = document.querySelector("#addButton");
 addButton.addEventListener("click", async (e) => {
@@ -38,8 +36,5 @@ addButton.addEventListener("click", async (e) => {
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
 
-  location.reload();
+  window.location.href = "/boardlist";
 });
-
-
-

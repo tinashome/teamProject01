@@ -1,10 +1,9 @@
-import { model } from 'mongoose';
-import { CategorySchema } from '../schemas/category-schema';
+import { model } from "mongoose";
+import { CategorySchema } from "../schemas/category-schema";
 
-const Category = model('categories', CategorySchema);
+const Category = model("categories", CategorySchema);
 
 export class CategoryModel {
-
   async create(categoryInfo) {
     const createdNewCategory = await Category.create(categoryInfo);
     return createdNewCategory;
@@ -29,7 +28,11 @@ export class CategoryModel {
     const filter = { _id: categoryId };
     const option = { returnOriginal: false }; // true: 업데이트 이전 값 리턴, false: 후 값 리턴
 
-    const updatedCategory = await Category.findOneAndUpdate(filter, update, option);
+    const updatedCategory = await Category.findOneAndUpdate(
+      filter,
+      update,
+      option
+    );
     return updatedCategory;
   }
 

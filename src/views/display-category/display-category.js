@@ -50,17 +50,19 @@ async function deleteCategory(item) {
   // console.log(allProducts);
 
   let needDelete = 0;
-  allProducts.forEach(element => {
-    if(element.category._id == thisId) {
-      alert("카테고리가 지정된 상품이 있습니다. 해당 상품을 모두 삭제 후 요청 하십시오.");
+  allProducts.forEach((element) => {
+    if (element.category._id == thisId) {
+      alert(
+        "카테고리가 지정된 상품이 있습니다. 해당 상품을 모두 삭제 후 요청 하십시오."
+      );
       needDelete += 1;
       return;
     }
   });
 
-  if(needDelete == 0) {
+  if (needDelete == 0) {
     const isOk = confirm("정말로 삭제 하시겠습니까?");
-    if(isOk) {
+    if (isOk) {
       const deleteThis = Api.delete(`/api/categories/${thisId}`);
       alert("삭제되었습니다.");
       location.reload();

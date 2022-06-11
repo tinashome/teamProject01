@@ -1,13 +1,13 @@
-import { Schema } from 'mongoose';
+import { Schema } from "mongoose";
 
 const CategorySchema = new Schema(
   {
     name: {
-      type: String, 
+      type: String,
       unique: true,
     },
     info: {
-      type: String, 
+      type: String,
     },
   },
   {

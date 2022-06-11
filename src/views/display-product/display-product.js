@@ -70,7 +70,7 @@ function modifying(productId) {
 function deleteProduct(item) {
   const thisId = item.path[0].parentElement.childNodes[0].value;
   const isOk = confirm("정말로 삭제 하시겠습니까?");
-  if(isOk) {
+  if (isOk) {
     const deleteThis = Api.delete(`/api/products/${thisId}`);
     alert("삭제되었습니다.");
     location.reload();

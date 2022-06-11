@@ -61,8 +61,6 @@ async function getData() {
         let targetDelBtn = document.querySelector(`#deleteBtn${i}`);
         targetDelBtn.hidden = true;
       }
-      // modifyBtn.style.visibility = hidden;
-      // deleteBtn.style.visibility = hidden;
     }
     writeButton.addEventListener("click", writing);
   } catch (err) {

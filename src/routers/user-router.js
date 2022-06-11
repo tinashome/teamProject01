@@ -199,7 +199,7 @@ userRouter.put("/:userId", loginRequired, async function (req, res, next) {
 // 권한정보 수정 관리등급이 회원등급에게 권한 부여가능.
 userRouter.post("/role", loginRequired, async function (req, res, next) {
   try {
-        // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
       throw new Error(
@@ -208,10 +208,10 @@ userRouter.post("/role", loginRequired, async function (req, res, next) {
     }
 
     const userRole = await req.currentUserRole;
-		if (userRole !== "admin") {
-			console.log(`${userRole}의 전체 권한 부여 요청이 거부됨`);
-			throw new Error("권한이 없습니다.");
-		}
+    if (userRole !== "admin") {
+      console.log(`${userRole}의 전체 권한 부여 요청이 거부됨`);
+      throw new Error("권한이 없습니다.");
+    }
     const email = await req.body.email;
 
     // 사용자 정보를 업데이트함.
@@ -231,14 +231,14 @@ userRouter.get("/:userId/name", loginRequired, async function (req, res, next) {
     const userRole = await req.currentUserRole;
     const userId = req.params.userId;
 
-    if (userId !== currentUserId && userRole !== "admin"){
+    if (userId !== currentUserId && userRole !== "admin") {
       console.log(`${userRole}의 userId로 이름조회 요청이 거부됨`);
-			throw new Error("권한이 없습니다.");
+      throw new Error("권한이 없습니다.");
     }
 
     const userName = await userService.getUserInfo(userId);
-    const {fullName} = userName;
-    res.status(200).json({fullName});
+    const { fullName } = userName;
+    res.status(200).json({ fullName });
   } catch (error) {
     next(error);
   }

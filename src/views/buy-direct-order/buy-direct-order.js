@@ -34,16 +34,6 @@ async function getUserInfo() {
 }
 getUserInfo();
 
-// const data = {
-//   productId: [],
-//   productsTitle: "",
-//   productsTotal: 0,
-//   productsPrice: 0,
-//   productsCnt: 0,
-//   deliveryFee: "3000",
-//   orderTotal: 3000,
-// };
-
 // 로컬스토리지에서 장바구니 정보 가져오기
 const getLocalStorage = JSON.parse(localStorage.getItem("buyDirect"));
 console.log(getLocalStorage);
@@ -79,20 +69,9 @@ function displaying() {
 }
 displaying();
 
-// JSON.parse(getLocalStorage).forEach((producet) => {
-//   data.productsTitle += producet.name + producet.quantity + "개" + "<br>";
-//   data.productsTotal += producet.price;
-//   data.orderTotal += producet.price;
-//   data.productsPrice = producet.price;
-//   data.productsCnt = producet.quantity;
-//   data.productId.push(producet.id);
-// });
-
 const fee = addCommas(3000);
 const totalPrice = getLocalStorage.price + 3000;
 const total = addCommas(totalPrice);
-
-//productsTitle.innerHTML = data.productsTitle;
 
 productsTotal.textContent = `${getLocalStorage.quantity} 개`;
 deliveryFee.textContent = `${fee} 원`;

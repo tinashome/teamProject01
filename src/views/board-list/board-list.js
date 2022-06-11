@@ -7,13 +7,12 @@ const writeButton = document.querySelector("#addButton");
 const userId = sessionStorage.getItem("userId");
 console.log(userId);
 
-
 async function getData() {
   try {
     // 게시글 목록 호출
     const posts = await Api.get("/boards/notice/posts");
     console.log(posts);
-    
+
     for (let i = 0; i < posts.length; i++) {
       // html 요소 생성
       let tr = document.createElement("tr");
@@ -40,23 +39,21 @@ async function getData() {
 
       modifyBtn.textContent = "수정";
       modifyBtn.setAttribute("id", `modifyBtn${i}`);
-      modifyBtn.addEventListener("click", e=>modiPost(posts[i]._id));
+      modifyBtn.addEventListener("click", (e) => modiPost(posts[i]._id));
       deleteBtn.textContent = "삭제";
       deleteBtn.setAttribute("id", `deleteBtn${i}`);
-      deleteBtn.addEventListener("click", e=>delPost(posts[i]._id));
-
+      deleteBtn.addEventListener("click", (e) => delPost(posts[i]._id));
 
       // 상세에 넘겨줄 게시글 하나의 id값
       // title.value = posts[i]._id;
 
       tr.appendChild(createDate);
       tr.appendChild(title);
-      tr.appendChild(author);      
+      tr.appendChild(author);
       tr.appendChild(content);
       content.appendChild(modifyBtn);
       content.appendChild(deleteBtn);
       tbody.insertBefore(tr, tbody.firstChild);
-
 
       // 세션 유저와 글쓴유저가 같으면 수정/삭제버튼이 보인다.
       if (userId != posts[i].author._id) {
@@ -68,7 +65,6 @@ async function getData() {
       }
       // modifyBtn.style.visibility = hidden;
       // deleteBtn.style.visibility = hidden;
-      
     }
     writeButton.addEventListener("click", writing);
   } catch (err) {
@@ -81,10 +77,9 @@ getData();
 function writing(item) {
   if (!userId) {
     alert("글쓰기는 로그인한 유저만 가능합니다.");
+    window.location.href = "/login";
     return;
   }
-  // console.log(item);
-  // const thisId = item.path[0].parentElement.childNodes[0].value;
   window.location.href = `/boardlist/write`;
 }
 
@@ -95,7 +90,7 @@ function modiPost(postId) {
 async function delPost(postId) {
   try {
     const deleteThis = await Api.delete(`/boards/notice/post/${postId}`);
-  } catch(err) {
+  } catch (err) {
     console.error(err.stack);
   }
   location.reload();

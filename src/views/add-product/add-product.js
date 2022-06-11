@@ -26,7 +26,7 @@ const form = document.querySelector("form");
 
 fileInput.addEventListener("input", (e) => {
   e.preventDefault();
-  fileName.textContent = " 사진 저장 성공! ";
+  fileName.textContent = "사진 선택 완료!";
 });
 
 form.addEventListener("submit", (e) => {
@@ -61,4 +61,6 @@ form.addEventListener("submit", (e) => {
   Api.postImg("/api/product", formData);
 
   form.reset();
+
+  window.location.href = `/displayproduct`;
 });

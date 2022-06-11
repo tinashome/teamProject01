@@ -19,10 +19,18 @@ const token = sessionStorage.getItem("userId");
 async function getUserInfo() {
   const getORderInfo = await Api.get(`/api/users/${token}`);
   receiverName.value = getORderInfo.fullName;
-  receiverPhoneNumber.value = getORderInfo.phoneNumber;
-  address1Input.value = getORderInfo.address.address1;
-  address2Input.value = getORderInfo.address.address2;
-  postalCode.value = getORderInfo.address.postalCode;
+  receiverPhoneNumber.value = getORderInfo.phoneNumber
+    ? getORderInfo.phoneNumber
+    : null;
+  address1Input.value = getORderInfo.address.address1
+    ? getORderInfo.address.address1
+    : null;
+  address2Input.value = getORderInfo.address.address2
+    ? getORderInfo.address.address2
+    : null;
+  postalCode.value = getORderInfo.address.postalCode
+    ? getORderInfo.address.postalCode
+    : null;
 }
 getUserInfo();
 
@@ -91,7 +99,6 @@ deliveryFee.textContent = `${fee} 원`;
 orderTotal.textContent = `${total} 원`;
 
 // 주소찾기
-
 function searchAddress() {
   new daum.Postcode({
     oncomplete: function (data) {
@@ -137,11 +144,15 @@ ClickSelectBox.addEventListener("change", () => {
 
 async function doCheckout() {
   // 각 입력값 가져옴
-
   const postalCode = postalCodeInput.value;
   const address1 = address1Input.value;
   const address2 = address2Input.value;
   const request = document.getElementById("requestSelectBox");
+
+  if (!postalCode || !address1) {
+    alert("배송지 정보를 입력해주세요. ");
+    return;
+  }
 
   let sendInfo = {
     shipAddress: {

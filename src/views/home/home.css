@@ -19,18 +19,15 @@ body::-webkit-scrollbar {
 }
 
 .container {
-  /* width: 1024px; */
   width: 90%;
   margin: 0 auto;
-  /* display: flex; */
   justify-content: center;
-  /* height: 600px; */
 }
 
 /* 카테고리 선택 */
 .categoryBar {
   padding-top: 90px;
-  width: 80%;
+  width: 100%;
   height: 200px;
   margin: 0 auto;
 
@@ -39,13 +36,18 @@ body::-webkit-scrollbar {
   justify-content: center;
 }
 
+ul .categoryList {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+}
+
 .categoryList li {
   float: left;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 20px 40px;
-  border: 1px solid #f4dfba;
   border-radius: 100%;
   width: 90px;
   height: 90px;
@@ -295,6 +297,10 @@ p {
     width: 80%;
   }
 
+  .slider {
+    height: 350px;
+  }
+
   footer {
     bottom: 0;
     width: 100%;
@@ -340,7 +346,30 @@ p {
   }
 
   .categoryBar {
-    height: 400px;
+    height: 250px;
     top: 80px;
+    width: 100%;
+  }
+
+  ul .categoryList {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .categoryList li {
+    margin: 3px;
+    width: 77px;
+    height: 77px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .recommendContainer {
+    width: 80%;
+  }
+
+  .categoryList li {
+    margin: 15px;
   }
 }

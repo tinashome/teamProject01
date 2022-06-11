@@ -2,12 +2,12 @@ import { Router } from "express";
 import is from "@sindresorhus/is";
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 // import { loginRequired } from '../middlewares';
-import { categoryService } from '../services';
+import { categoryService } from "../services";
 
 const categoryRouter = Router();
 
 // 카테고리 등록
-categoryRouter.post('/category', async (req, res, next) => {
+categoryRouter.post("/category", async (req, res, next) => {
   try {
     console.log(req);
     // req (request)의 body 에서 데이터 가져오기
@@ -29,7 +29,7 @@ categoryRouter.post('/category', async (req, res, next) => {
 });
 
 // 전체 카테고리 목록 (배열 형태임)
-categoryRouter.get('/categories', async function (req, res, next) {
+categoryRouter.get("/categories", async function (req, res, next) {
   try {
     const categories = await categoryService.getCategories();
 
@@ -41,7 +41,7 @@ categoryRouter.get('/categories', async function (req, res, next) {
 });
 
 // 카테고리 상세
-categoryRouter.get('/category/:categoryId', async function (req, res, next) {
+categoryRouter.get("/category/:categoryId", async function (req, res, next) {
   try {
     const { categoryId } = req.params;
     const category = await categoryService.getCategory(categoryId);
@@ -54,30 +54,32 @@ categoryRouter.get('/category/:categoryId', async function (req, res, next) {
 });
 
 // 하위 카테고리 조회
-categoryRouter.get('/category/belongTo/:categoryId', async function (req, res, next) {
-  try {
-    // 전체 상품 목록을 얻음
-    const { categoryId } = req.params;
-    const categories = await categoryService.getUnderCategory(categoryId);
+categoryRouter.get(
+  "/category/belongTo/:categoryId",
+  async function (req, res, next) {
+    try {
+      // 전체 상품 목록을 얻음
+      const { categoryId } = req.params;
+      const categories = await categoryService.getUnderCategory(categoryId);
 
-    // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json(categories);
-  } catch (error) {
-    next(error);
+      // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
+      res.status(200).json(categories);
+    } catch (error) {
+      next(error);
+    }
   }
-});
-
+);
 
 // 카테고리 정보 수정
 categoryRouter.patch(
-  '/categories/:categoryId',
+  "/categories/:categoryId",
   async function (req, res, next) {
     try {
       // content-type 을 application/json 로 프론트에서
       // 설정 안 하고 요청하면, body가 비어 있게 됨.
       if (is.emptyObject(req.body)) {
         throw new Error(
-          'headers의 Content-Type을 application/json로 설정해주세요'
+          "headers의 Content-Type을 application/json로 설정해주세요"
         );
       }
 
@@ -109,9 +111,8 @@ categoryRouter.patch(
   }
 );
 
-
-// 카테고리 삭제  
-categoryRouter.delete('/categories/:categoryId', async (req, res, next) => {
+// 카테고리 삭제
+categoryRouter.delete("/categories/:categoryId", async (req, res, next) => {
   const { categoryId } = req.params;
   try {
     // 삭제 후 삭제된 정보 반환

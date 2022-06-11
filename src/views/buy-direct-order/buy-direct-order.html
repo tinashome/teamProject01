@@ -1,144 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>이상한 나라의 초콜릿</title>
     <!-- css -->
-    <link rel="stylesheet" href="./buy-direct-order.css">
+    <link rel="stylesheet" href="./buy-direct-order.css" />
     <!-- 다음 주소 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <!-- nav -->
     <script
-    defer
-    src="https://kit.fontawesome.com/7630448495.js"
-    crossorigin="anonymous"
-  ></script>
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="../../navigation/navigation.js" type="module"></script>
     <link rel="stylesheet" href="../../navigation/navigation.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <nav class="nav"></nav>
-        <div class="menu">
+      <nav class="nav"></nav>
+      <div class="menu"></div>
     </header>
     <section>
-        <div class="orderHeader">
-            <p>
-                장바구니 > <span class="orderChapter">주문결제</span> > 주문완료
-            </p>
-        </div>
-        <div class="shoppingListBox">
-            <h2>주문 상품</h2>
-            <!-- 장바구니 부분 박스 / js에서 구현 -->
-            <div id="shoppingList">
+      <div class="orderHeader">
+        <p>장바구니 > <span class="orderChapter">주문결제</span> > 주문완료</p>
+      </div>
+      <div class="shoppingListBox">
+        <h2>주문 상품</h2>
+        <!-- 장바구니 부분 박스 / js에서 구현 -->
+        <div id="shoppingList"></div>
+      </div>
+      <div class="orderMainBox">
+        <div class="deliveryBox">
+          <p class="deliveryInfoHeader">배송지정보</p>
+          <div class="deliveryInfoContainer">
+            <div class="deliveryInfo">
+              <div class="deliveryLabel">
+                <label for="">이름</label>
+              </div>
+              <div class="deliveryInputWrapper">
+                <input type="text" class="deliveryInput" id="receiverName" />
+              </div>
             </div>
-        </div>
-        <div class="orderMainBox">
-            <div class="deliveryBox">
-                <p class="deliveryInfoHeader">배송지정보</p>
-                <div class="deliveryInfoContainer">
-                    <div class="deliveryInfo">
-                        <div class="deliveryLabel">
-                            <label for="">이름</label>
-                        </div>
-                        <div class="deliveryInputWrapper">
-                            <input type="text" class="deliveryInput" id="receiverName">
-                        </div>
-                    </div>
-                    <div class="deliveryInfo">
-                        <div class="deliveryLabel">
-                            <label for="">연락처</label>
-                        </div>
-                        <div class="deliveryInputWrapper">
-                            <input type="text" class="deliveryInput" id="receiverPhoneNumber">
-                        </div>
-                    </div>
-                    <div class="deliveryInfo">
-                        <div class="deliveryLabel">
-                            <label for="">주소</label>
-                        </div>
-                        <div class="address">
-                                <div>
-                                    <input type="text" class="deliveryInput" id="postalCode">
-                                    <button class="addressBtn" id="searchAddressButton">주소찾기</button>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="deliveryInfo">
-                        <div class="deliveryLabel">
-                            <label for=""></label>
-                        </div>
-                        <div class="deliveryInputWrapper">
-                            <input type="text" class="deliveryInput" id="address1">
-                        </div>
-                    </div>
-                    <div class="deliveryInfo">
-                        <div class="deliveryLabel">
-                            <label for=""></label>
-                        </div>
-                        <div class="deliveryInputWrapper">
-                            <input type="text" class="deliveryInput" id="address2">
-                        </div>
-                    </div>
-                    <div class="deliveryInfo">
-                        <div class="deliveryLabel">
-                            <label for="">요청사항</label>
-                        </div>
-                        <div class="deliveryInputWrapper">
-                            <select id="requestSelectBox">
-                                <option value="0" class="selectOption">
-                                    배송시 요청사항을 선택해 주세요.
-                                </option>
-                                <option value="1" class="selectOption">
-                                    직접 수령하겠습니다.
-                                </option>
-                                <option value="2" class="selectOption">
-                                    배송 전 연락바랍니다.
-                                </option>
-                                <option value="3" class="selectOption">
-                                    부재 시 경비실에 맡겨주세요.
-                                </option>
-                                <option value="4" class="selectOption">
-                                    부재 시 문 앞에 놓아주세요.
-                                </option>
-                                <option value="5" class="selectOption">
-                                    부재 시 택배함에 넣어주세요.
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+            <div class="deliveryInfo">
+              <div class="deliveryLabel">
+                <label for="">연락처</label>
+              </div>
+              <div class="deliveryInputWrapper">
+                <input
+                  type="text"
+                  class="deliveryInput"
+                  id="receiverPhoneNumber"
+                />
+              </div>
             </div>
-            <div class="payBox">
-                <div class="payInfoHeader">
-                    <p>결제정보</p>
+            <div class="deliveryInfo">
+              <div class="deliveryLabel">
+                <label for="">주소</label>
+              </div>
+              <div class="address">
+                <div>
+                  <input type="text" class="deliveryInput" id="postalCode" />
+                  <button class="addressBtn" id="searchAddressButton">
+                    주소찾기
+                  </button>
                 </div>
-                <div class="payInfo">
-                    <div class="info">
-                        <p class="paddingTop">상품금액</p>
-                        <p class="paddingTop"><span id="payProductPrice"></span></p>
-                    </div>
-                    <div class="info">
-                        <p class="paddingTop">배송비</p>
-                        <p class="paddingTop"><span id="payShippingPrice"></span></p>
-                    </div>
-                </div>
-                <div class="payTotalPricePart">
-                    <p>총 결제금액</p>
-                    <p><span id="payTotalPrice"></span></p>
-                </div>
-                <button type="submit" id="buyButton">결제하기</button>
+              </div>
             </div>
+            <div class="deliveryInfo">
+              <div class="deliveryLabel">
+                <label for=""></label>
+              </div>
+              <div class="deliveryInputWrapper">
+                <input type="text" class="deliveryInput" id="address1" />
+              </div>
+            </div>
+            <div class="deliveryInfo">
+              <div class="deliveryLabel">
+                <label for=""></label>
+              </div>
+              <div class="deliveryInputWrapper">
+                <input type="text" class="deliveryInput" id="address2" />
+              </div>
+            </div>
+            <div class="deliveryInfo">
+              <div class="deliveryLabel">
+                <label for="">요청사항</label>
+              </div>
+              <div class="deliveryInputWrapper">
+                <select id="requestSelectBox">
+                  <option value="0" class="selectOption">
+                    배송시 요청사항을 선택해 주세요.
+                  </option>
+                  <option value="1" class="selectOption">
+                    직접 수령하겠습니다.
+                  </option>
+                  <option value="2" class="selectOption">
+                    배송 전 연락바랍니다.
+                  </option>
+                  <option value="3" class="selectOption">
+                    부재 시 경비실에 맡겨주세요.
+                  </option>
+                  <option value="4" class="selectOption">
+                    부재 시 문 앞에 놓아주세요.
+                  </option>
+                  <option value="5" class="selectOption">
+                    부재 시 택배함에 넣어주세요.
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="payBox">
+          <div class="payInfoHeader">
+            <p>결제정보</p>
+          </div>
+          <div class="payInfo">
+            <div class="info">
+              <p class="paddingTop">상품금액</p>
+              <p class="paddingTop"><span id="payProductPrice"></span></p>
+            </div>
+            <div class="info">
+              <p class="paddingTop">배송비</p>
+              <p class="paddingTop"><span id="payShippingPrice"></span></p>
+            </div>
+          </div>
+          <div class="payTotalPricePart">
+            <p>총 결제금액</p>
+            <p><span id="payTotalPrice"></span></p>
+          </div>
+          <button type="submit" id="buyButton">결제하기</button>
+        </div>
+      </div>
     </section>
-
 
     <!-- head에서는 js적용 오류 -->
     <script src="./buy-direct-order.js" type="module" defer></script>
-</body>
-
+  </body>
 </html>

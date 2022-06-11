@@ -15,7 +15,6 @@ async function getData() {
     title.value = data.title;
     author.value = data.author.fullName;
     content.textContent = data.content;
-
   } catch (err) {
     console.error(err.stack);
   }
@@ -26,7 +25,7 @@ getData();
 const addButton = document.querySelector("#addButton");
 addButton.addEventListener("click", async (e) => {
   e.preventDefault();
-  alert("게시글이 수정되었습니다.")
+  alert("게시글이 수정되었습니다.");
   const title = document.querySelector("#title").value;
   const content = document.querySelector("#content").value;
   const patchData = {

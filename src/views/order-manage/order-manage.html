@@ -1,91 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>이상한 나라의 초콜릿</title>
 
     <!-- 폰트 어썸: 아이콘 -->
     <script
-    defer
-    src="https://kit.fontawesome.com/7630448495.js"
-    crossorigin="anonymous"
-  ></script>
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
 
-    <link rel="stylesheet" href="./order-manage.css">
+    <link rel="stylesheet" href="./order-manage.css" />
     <script src="../../navigation/navigation.js" type="module"></script>
-    <link rel="stylesheet" href="../../navigation/navigation.css">
+    <link rel="stylesheet" href="../../navigation/navigation.css" />
     <script src="./order-manage.js" type="module"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <nav class="nav"></nav>
-        <div class="menu">
-            <div>
+      <nav class="nav"></nav>
+      <div class="menu"></div>
     </header>
     <section class="section" id="section">
-        <div class="manageUseHeader">
-            <p>
-                <span class="managingOrderPage">주문관리</span>
-            </p>
+      <div class="manageUseHeader">
+        <p>
+          <span class="managingOrderPage">주문관리</span>
+        </p>
+      </div>
+      <nav class="orderManageNav">
+        <div class="statusBox">
+          <p class="orderStatusHeader">총주문수</p>
+          <p class="orderStatus" id="ordersCount"></p>
         </div>
-        <nav class="orderManageNav">
+        <div class="statusBox">
+          <p class="orderStatusHeader">결제완료</p>
+          <p class="orderStatus" id="prepareCount"></p>
+        </div>
+        <div class="statusBox">
+          <p class="orderStatusHeader">배송준비중</p>
+          <p class="orderStatus" id="deliveryCount"></p>
+        </div>
+        <div class="statusBox">
+          <p class="orderStatusHeader">발송완료</p>
+          <p class="orderStatus" id="completeCount"></p>
+        </div>
+        <div class="statusBox">
+          <p class="orderStatusHeader">주문취소</p>
+          <p class="orderStatus" id="cancelCount"></p>
+        </div>
+      </nav>
+      <div class="orderSearch">
+        <div class="orderSearchHeaderBox">
+          <div class="orderSearchHeader">날짜</div>
+          <div class="orderSearchHeader">주문번호</div>
+          <div class="orderSearchHeader">품목</div>
+          <div class="orderSearchHeader">주문총액</div>
+          <div class="orderSearchHeader">상태</div>
+          <div class="orderSearchHeader checkBar">확인</div>
+          <div class="orderSearchHeader">주문취소</div>
+        </div>
+      </div>
 
-            <div class="statusBox">
-                <p class="orderStatusHeader">총주문수</p>
-                <p class="orderStatus" id="ordersCount"></p>
+      <div id="modal" class="hidden">
+        <div class="modalBackground"></div>
+        <div class="modalContent">
+          <div class="modalContentBox">
+            <p>주문 취소 시 복구할 수 없습니다. 정말로 취소하시겠습니까?</p>
+            <div class="checkBox">
+              <button id="deleteCompleteButton">예</button>
+              <button id="deleteCancelButton">아니오</button>
             </div>
-            <div class="statusBox">
-                <p class="orderStatusHeader">결제완료</p>
-                <p class="orderStatus" id="prepareCount"></p>
-            </div>
-            <div class="statusBox">
-                <p class="orderStatusHeader">배송준비중</p>
-                <p class="orderStatus" id="deliveryCount"></p>
-            </div>
-            <div class="statusBox">
-                <p class="orderStatusHeader">발송완료</p>
-                <p class="orderStatus" id="completeCount"></p>
-            </div>
-            <div class="statusBox">
-              <p class="orderStatusHeader">주문취소</p>
-              <p class="orderStatus" id="cancelCount"></p>
           </div>
-
-        </nav>
-        <div class="orderSearch">
-            <div class="orderSearchHeaderBox">
-                <div class="orderSearchHeader">날짜</div>
-                <div class="orderSearchHeader">주문번호</div>
-                <div class="orderSearchHeader">품목</div>
-                <div class="orderSearchHeader">주문총액</div>
-                <div class="orderSearchHeader">상태</div>
-                <div class="orderSearchHeader checkBar">확인</div>
-                <div class="orderSearchHeader">주문취소</div>
-            </div>
-
         </div>
-
-
-        <div id="modal" class="hidden">
-            <div class="modalBackground"></div>
-            <div class="modalContent">
-                <div class="modalContentBox">
-                    <p>
-                        주문 취소 시 복구할 수 없습니다. 정말로 취소하시겠습니까?
-                    </p>
-                    <div class="checkBox">
-                        <button id="deleteCompleteButton">예</button>
-                        <button id="deleteCancelButton">아니오</button>
-                    </div>
-                </div>
-            </div>
-            <button class="modalBtn" id="modalCloseButton">x</button>
-        </div>
+        <button class="modalBtn" id="modalCloseButton">x</button>
+      </div>
     </section>
-</body>
-
+  </body>
 </html>

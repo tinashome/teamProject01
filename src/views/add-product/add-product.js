@@ -61,6 +61,5 @@ form.addEventListener("submit", (e) => {
   Api.postImg("/api/product", formData);
 
   form.reset();
-
   window.location.href = `/displayproduct`;
 });

@@ -1,4 +1,4 @@
-import { boardModel } from '../db';
+import { boardModel } from "../db";
 
 class BoardService {
   // 본 파일의 맨 아래에서, new BoardService(boardModel) 하면, 이 함수의 인자로 전달됨
@@ -36,13 +36,12 @@ class BoardService {
 
   // 게시글 수정
   async setPost(postId, toUpdate) {
-
     // 우선 해당 id의 카테고리가 db에 있는지 확인
     let post = await this.boardModel.findById(postId);
     console.log(post);
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!post) {
-      throw new Error('게시글이 없습니다. 다시 한 번 확인해 주세요.');
+      throw new Error("게시글이 없습니다. 다시 한 번 확인해 주세요.");
     }
     // 업데이트 진행
     post = await this.boardModel.update({
@@ -55,7 +54,7 @@ class BoardService {
 
   // 게시글 삭제
   async delPost(postId) {
-    const post = await this.boardModel.delete({postId});
+    const post = await this.boardModel.delete({ postId });
     return post;
   }
 }

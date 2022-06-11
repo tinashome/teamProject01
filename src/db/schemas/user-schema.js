@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { Schema } from "mongoose";
 
 const UserSchema = new Schema(
   {
@@ -34,11 +34,11 @@ const UserSchema = new Schema(
     role: {
       type: String,
       required: false,
-      default: 'basic-user',
+      default: "basic-user",
     },
   },
   {
-    collection: 'users',
+    collection: "users",
     timestamps: true,
   }
 );

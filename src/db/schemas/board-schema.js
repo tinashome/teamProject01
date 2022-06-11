@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { Schema } from "mongoose";
 
 const BoardSchema = new Schema(
   {
@@ -6,7 +6,7 @@ const BoardSchema = new Schema(
       type: Number,
     },
     title: {
-      type: String, 
+      type: String,
       required: true,
     },
     content: {
@@ -15,12 +15,12 @@ const BoardSchema = new Schema(
     },
     author: {
       type: Schema.Types.ObjectId,
-      ref: 'users',
+      ref: "users",
     },
     views: {
       type: Number,
       default: 0,
-    }
+    },
   },
   {
     collection: "boards",

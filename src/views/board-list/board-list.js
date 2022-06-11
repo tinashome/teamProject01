@@ -5,13 +5,11 @@ const tbody = document.querySelector(".tableBody");
 const writeButton = document.querySelector("#addButton");
 
 const userId = sessionStorage.getItem("userId");
-console.log(userId);
 
 async function getData() {
   try {
     // 게시글 목록 호출
     const posts = await Api.get("/boards/notice/posts");
-    console.log(posts);
 
     for (let i = 0; i < posts.length; i++) {
       // html 요소 생성
@@ -95,9 +93,27 @@ async function delPost(postId) {
   }
   location.reload();
 }
-// function deleteCategory(item) {
-//   const thisId = item.path[0].parentElement.childNodes[0].value;
-//   console.log(`/api/categories/${thisId}`);
-//   const deleteThis = Api.delete(`/api/categories/${thisId}`);
-//   // location.reload();
-// }
+
+// 관리자 계정으로 로그인
+async function managerAccount() {
+  try {
+    const getUserId = sessionStorage.getItem("userId");
+    if (getUserId) {
+      const managerInfo = await Api.get(`/api/users/${getUserId}`);
+
+      if (managerInfo.role === "admin") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
+const manager = await managerAccount();
+if (!manager) {
+  writeButton.style.display = "none";
+}

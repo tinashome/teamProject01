@@ -73,7 +73,7 @@ const fee = addCommas(3000);
 const totalPrice = getLocalStorage.price + 3000;
 const total = addCommas(totalPrice);
 
-productsTotal.textContent = `${getLocalStorage.quantity} 개`;
+productsTotal.textContent = `${getLocalStorage.price} 원`;
 deliveryFee.textContent = `${fee} 원`;
 orderTotal.textContent = `${total} 원`;
 

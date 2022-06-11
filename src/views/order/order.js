@@ -106,7 +106,7 @@ const order = addCommas(data.orderTotal);
 
 //productsTitle.innerHTML = data.productsTitle;
 
-productsTotal.textContent = `${total} 개`;
+productsTotal.textContent = `${total} 원`;
 deliveryFee.textContent = `${fee} 원`;
 orderTotal.textContent = `${order} 원`;
 

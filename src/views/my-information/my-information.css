@@ -19,6 +19,10 @@ body {
   margin: 0;
 }
 
+header {
+  padding-top: 50px;
+}
+
 a {
   text-decoration: none;
 }

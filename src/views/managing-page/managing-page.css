@@ -16,6 +16,15 @@ p {
   top: -30px;
   left: 150px;
 }
+
+header {
+  margin-top: -30px;
+}
+
+.container {
+  padding-top: 80px;
+}
+
 .menuContainer {
   margin: auto;
   width: 700px;

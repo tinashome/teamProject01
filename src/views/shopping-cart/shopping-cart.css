@@ -9,8 +9,12 @@ i {
   margin: 5px;
 }
 
-main {
-  margin-top: 80px;
+header {
+  padding-top: 55px;
+}
+
+.main {
+  padding-top: 80px;
 }
 
 /* 장바구니 > 주문결제 > 주문완료 */

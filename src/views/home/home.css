@@ -18,6 +18,10 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+header {
+  padding-top: 50px;
+}
+
 .container {
   width: 90%;
   margin: 0 auto;
@@ -347,7 +351,7 @@ p {
 
   .categoryBar {
     height: 250px;
-    top: 80px;
+    padding-top: 80px;
     width: 100%;
   }
 

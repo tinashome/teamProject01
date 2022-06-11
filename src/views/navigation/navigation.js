@@ -88,7 +88,7 @@ async function itemList() {
 
   const liPageTag = document.createElement("li");
   const aPageTag = document.createElement("a");
-  const textPage = document.createTextNode("페이지 관리");
+  const textPage = document.createTextNode("사이트 관리");
   aPageTag.setAttribute("href", "/managingpage");
   aPageTag.appendChild(textPage);
   liPageTag.appendChild(aPageTag);

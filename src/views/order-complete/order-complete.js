@@ -8,5 +8,5 @@ orderDetailButton.addEventListener("click", (e) => {
 // 홈으로 이동 버튼
 const shoppingButton = document.getElementById("shoppingButton");
 shoppingButton.addEventListener("click", (e) => {
-  window.location.href = "/home";
+  window.location.href = "/";
 });

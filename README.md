@@ -1,12 +1,12 @@
 # 이상한 나라의 초콜릿 프로젝트
 
 초콜릿제품을 전문적으로 판매하는 쇼핑몰을 구현였습니다. 2022.5.30 ~ 2022.6.10<br />
-####🔗 http://kdt-sw2-busan-team02.elicecoding.com/
+#### 🔗 http://kdt-sw2-busan-team02.elicecoding.com/
 
-##🍫structure chart
+## 🍫structure chart
 ![default](src/views/imgs/site.png)
 
-##🍪 Tech stacks & Tools
+##🍪 Tech stacks & Tools <br />
 <img src="https://img.shields.io/badge/HTML5-FFDF91?style=flat&logo=HTML5&logoColor=white"/>
 <img src="https://img.shields.io/badge/CSS3-F4DFBA?style=flat&logo=CSS3&logoColor=white"/>
 <img src="https://img.shields.io/badge/JavaScript-91684A?style=flat&logo=JavaScript&logoColor=white"/> <br />
@@ -19,7 +19,7 @@
 <img src="https://img.shields.io/badge/GitLab-F4DFBA?style=flat&logo=GitLab&logoColor=white"/>
 <img src="https://img.shields.io/badge/Figma-91684A?style=flat&logo=Figma&logoColor=white"/>
 <img src="https://img.shields.io/badge/Notion-FFDF91?style=flat&logo=Notion&logoColor=white"/>
-
+ <br />
 ## 🍰Developers
 박소정 , 백광천 , 반유진 , 이수정 , 주현정
 

@@ -1,35 +1,29 @@
-# 쇼핑몰 웹 서비스 프로젝트
+# 이상한 나라의 초콜릿 프로젝트
 
-제품들을 조회하고, 장바구니에 추가하고, 또 주문을 할 수 있는 쇼핑몰 웹 서비스 제작 프로젝트입니다. <br />
-**웹 구현 예시** (링크는 프로젝트 기간에만 유효합니다)
+초콜릿제품을 전문적으로 판매하는 쇼핑몰을 구현였습니다. 2022.5.30 ~ 2022.6.10<br />
+####🔗 http://kdt-sw2-busan-team02.elicecoding.com/
 
-### http://shopping-demo.elicecoding.com/
+##🍫structure chart
+![default](src/views/imgs/site.png)
 
-<br>
+##🍪 Tech stacks & Tools
+<img src="https://img.shields.io/badge/HTML5-FFDF91?style=flat&logo=HTML5&logoColor=white"/>
+<img src="https://img.shields.io/badge/CSS3-F4DFBA?style=flat&logo=CSS3&logoColor=white"/>
+<img src="https://img.shields.io/badge/JavaScript-91684A?style=flat&logo=JavaScript&logoColor=white"/> <br />
+<img src="https://img.shields.io/badge/Node.js-FFDF91?style=flat&logo=Node.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/Express-EAAC7F?style=flat&logo=Express&logoColor=white"/>
+<img src="https://img.shields.io/badge/MongoDB-FFDF91?style=flat&logo=MongoDB&logoColor=white"/> <br />
+<img src="https://img.shields.io/badge/Vscode-F4DFBA?style=flat&logo=Vscode&logoColor=white"/>
+<img src="https://img.shields.io/badge/Postman-91684A?style=flat&logo=Postman&logoColor=white"/>
+<img src="https://img.shields.io/badge/Git-EAAC7F?style=flat&logo=Git&logoColor=white"/>
+<img src="https://img.shields.io/badge/GitLab-F4DFBA?style=flat&logo=GitLab&logoColor=white"/>
+<img src="https://img.shields.io/badge/Figma-91684A?style=flat&logo=Figma&logoColor=white"/>
+<img src="https://img.shields.io/badge/Notion-FFDF91?style=flat&logo=Notion&logoColor=white"/>
 
-** 핵심 기능은 하기입니다. (이외에도 더 있으며, 추가 안내 될 프로젝트 평가기준표에서 구체화될 예정입니다.) <br>
-1. 회원가입, 로그인, 회원정보 수정 등 **유저 정보 관련 CRUD** 
-2. **제품 목록**을 조회 및, **제품 상세 정보**를 조회 가능함. 
-3. 장바구니에 제품을 추가할 수 있으며, **장바구니에서 CRUD** 작업이 가능함.
-4. 장바구니는 서버 DB가 아닌, 프론트 단에서 저장 및 관리됨 (localStorage, indexedDB 등)
-5. 장바구니에서 주문을 진행하며, **주문 완료 후 조회 및 삭제**가 가능함.
+## 🍰Developers
+박소정 , 백광천 , 반유진 , 이수정 , 주현정
 
-## 주요 사용 기술
-
-### 1. 프론트엔드
-
-- **Vanilla javascript**, html, css (**Bulma css**)
-- Font-awesome 
-- Daum 도로명 주소 api 
-- 이외
-
-### 2. 백엔드 
-
-- **Express** (nodemon, babel-node로 실행됩니다.)
-- Mongodb, Mongoose
-- cors
-- 이외
-
+---
 ## 폴더 구조
 - 프론트: `src/views` 폴더 
 - 백: src/views 이외 폴더 전체
@@ -52,11 +46,9 @@ npm run start
 yarn
 yarn start
 ```
-
 <br>
 
 ---
-
 본 프로젝트에서 제공하는 모든 코드 등의는 저작권법에 의해 보호받는 ㈜엘리스의 자산이며, 무단 사용 및 도용, 복제 및 배포를 금합니다.
 Copyright 2022 엘리스 Inc. All rights reserved.
 

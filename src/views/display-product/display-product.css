@@ -12,6 +12,7 @@ h1 {
 
 article {
   width: 1200px;
+  margin: auto;
 }
 table {
   width: 1000px;

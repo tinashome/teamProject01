@@ -18,9 +18,8 @@
 <img src="https://img.shields.io/badge/Git-EAAC7F?style=flat&logo=Git&logoColor=white"/>
 <img src="https://img.shields.io/badge/GitLab-F4DFBA?style=flat&logo=GitLab&logoColor=white"/>
 <img src="https://img.shields.io/badge/Figma-91684A?style=flat&logo=Figma&logoColor=white"/>
-<img src="https://img.shields.io/badge/Notion-FFDF91?style=flat&logo=Notion&logoColor=white"/>
-<br />
-<br />
+<img src="https://img.shields.io/badge/Notion-FFDF91?style=flat&logo=Notion&logoColor=white"/><br />
+
 ## 🍰Developers
 박소정 , 백광천 , 반유진 , 이수정 , 주현정
 

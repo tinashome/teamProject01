@@ -452,6 +452,12 @@ function deletePartFunc() {
 // 결제버튼 클릭시
 const buyButton = document.querySelector("#buyButton");
 buyButton.addEventListener("click", () => {
+  const token = sessionStorage.getItem("token");
+  if (!token) {
+    alert("상품 구매는 로그인한 유저만 가능합니다.");
+    window.location.href = "/login";
+    return;
+  }
   let getLocal = JSON.parse(localStorage.getItem("cartList"));
   let setLocalStorage = [];
   getLocal.forEach((x) => {

@@ -2,7 +2,7 @@ import { userModel } from "../db";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import { comparePassword } from '../util/functions';
 class UserService {
   // 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
   constructor(userModel) {
@@ -52,10 +52,7 @@ class UserService {
     const correctPasswordHash = user.password; // db에 저장되어 있는 암호화된 비밀번호
 
     // 매개변수의 순서 중요 (1번째는 프론트가 보내온 비밀번호, 2번쨰는 db에 있떤 암호화된 비밀번호)
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      correctPasswordHash
-    );
+    const isPasswordCorrect = comparePassword(password,correctPasswordHash)
 
     if (!isPasswordCorrect) {
       throw new Error(
@@ -95,10 +92,7 @@ class UserService {
 
     // 비밀번호 일치 여부 확인
     const correctPasswordHash = user.password;
-    const isPasswordCorrect = await bcrypt.compare(
-      currentPassword,
-      correctPasswordHash
-    );
+    const isPasswordCorrect = comparePassword(password,correctPasswordHash)
 
     if (!isPasswordCorrect) {
       throw new Error(
@@ -163,10 +157,7 @@ class UserService {
 
     // 비밀번호 일치 여부 확인
     const correctPasswordHash = user.password;
-    const isPasswordCorrect = await bcrypt.compare(
-      currentPassword,
-      correctPasswordHash
-    );
+    const isPasswordCorrect = comparePassword(password,correctPasswordHash)
 
     if (!isPasswordCorrect) {
       throw new Error(

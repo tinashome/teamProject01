@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 export const makeCurrentYYMMDD = () => {
 	const date = new Date();
 	const sYear = date.getFullYear();
@@ -13,4 +15,12 @@ export const makeCurrentYYMMDD = () => {
 
 export const newSummaryTitle = (orderItems) => {
   return orderItems.reduce( (acc, cur, idx) => acc + `${idx === 0 ? "" : "\n"}${cur.productName} ${cur.quantity}개`, "");  
+}
+
+export const comparePassword = async function (password,correctPasswordHash){
+  const isPasswordCorrect =  await bcrypt.compare(
+    password,
+    correctPasswordHash
+  );
+  return isPasswordCorrect
 }

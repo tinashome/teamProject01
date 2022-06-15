@@ -1,5 +1,6 @@
 import { model } from "mongoose";
 import { OrderSchema } from "../schemas/order-schema";
+import { makeCurrentYYMMDD } from '../../util/functions';
 
 const Order = model("orders", OrderSchema);
 
@@ -52,20 +53,8 @@ export class OrderModel {
   //주문번호생성
   async newOrderId() {
     //orderId생성 날짜 + 일련번호(총문서갯수를 세서 부여하므로 문서삭제시 중복번호 발생함)
-    const date = new Date();
-    const sYear = date.getFullYear();
-    let sMonth = date.getMonth() + 1;
-    let sDate = date.getDate();
-
-    sMonth = sMonth > 9 ? sMonth : "0" + sMonth;
-    sDate = sDate > 9 ? sDate : "0" + sDate;
-
     const orderLength = await Order.count();
-    const orderId =
-      String(sYear).slice(2) +
-      sMonth +
-      sDate +
-      String(orderLength).padStart(6, 0);
+    const orderId = makeCurrentYYMMDD() + String(orderLength).padStart(6, 0);
 
     return orderId;
   }

@@ -6,7 +6,10 @@ const productName = document.querySelector("#productName");
 const price = document.querySelector("#price");
 const productImage = document.querySelector("#chocolate");
 const productDescription = document.querySelector("#productDescription");
-const productSummary = document.querySelector("#productSummary");
+const numQuantity = document.querySelector("#numQuantity");
+const decreaseBtn = document.querySelector("#decreaseBtn");
+const increaseBtn = document.querySelector("#increaseBtn");
+const numInput = document.querySelector("#numInput");
 
 const path = window.location.pathname.split("/");
 const productId = path[path.length - 2];
@@ -19,12 +22,32 @@ async function getData() {
     productImage.src = data.img;
     productDescription.textContent = data.detail;
     productSummary.textContent = data.summary;
+    numQuantity.textContent = data.quantity;
   } catch (err) {
     console.error(err.stack);
   }
 }
 
 getData();
+
+const reqProductInfo = await fetch(`/api/product/${productId}`, {
+	headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
+});
+const prodictInfo = await reqProductInfo.json()
+
+decreaseBtn.addEventListener("click", () => {
+	if (Number(numInput.value) !== 1){
+    numInput.value = Number(numInput.value) - 1;
+    price.textContent = addCommas(prodictInfo.price * numInput.value)
+  }
+});
+increaseBtn.addEventListener("click", () => {
+  if (Number(numInput.value) !== Number(numQuantity.textContent)){
+    numInput.value = Number(numInput.value) + 1;
+    price.textContent = addCommas(prodictInfo.price * numInput.value)
+  }
+});
+
 
 const CARTLIST_KEY = "cartList";
 // //임시 장바구니

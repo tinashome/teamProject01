@@ -34,9 +34,24 @@
 
             <p id="productSummary"></p>
             <p id="productDescription"></p>
+
+            <div class="numContainer">
+              <button class="numBtn decreaseBtn" id="decreaseBtn">
+                <span class="blind">수량감소</span>
+              </button>
+              <input type="text" value=1 class="num" id="numInput">
+              <button class="numBtn increaseBtn" id="increaseBtn">
+                <span class="blind">수량증가</span>
+              </button>
+              <div class="numText">
+                <span>재고수량 : </span>
+                <span id="numQuantity"></span>
+                <span>개</span>
+              </div>
+            </div>
+
             <p class="priceContainer"><span id="price"></span>원</p>
           </div>
-
           <div class="buttonGroup">
             <button id="addCart">장바구니 추가하기</button>
             <button id="buyDirect">바로 구매하기</button>

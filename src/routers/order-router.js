@@ -112,7 +112,6 @@ orderRouter.post("/:orderId", loginRequired, async function (req, res, next) {
     // 주문정보를 변경함
     const updateOrderInfo = await orderService.setOrder(orderId, toUpdate);
 
-    // summaryTitle추가하여 보내주기
     // 업데이트 이후의 주문정보를 프론트에 보내 줌
     res.status(200).json(updateOrderInfo);
   } catch (error) {
@@ -149,7 +148,6 @@ orderRouter.post(
         userId
       );
 
-      // summaryTitle추가하여 보내주기
       // 업데이트 이후의 주문정보를 프론트에 보내 줌
       res.status(200).json(updateOrderInfo);
     } catch (error) {

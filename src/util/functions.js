@@ -10,3 +10,7 @@ export const makeCurrentYYMMDD = () => {
 	const YYMMDD = String(sYear).slice(2) + sMonth + sDate;
 	return YYMMDD;
 };
+
+export const newSummaryTitle = (orderItems) => {
+  return orderItems.reduce( (acc, cur, idx) => acc + `${idx === 0 ? "" : "\n"}${cur.productName} ${cur.quantity}개`, "");  
+}

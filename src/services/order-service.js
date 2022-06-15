@@ -1,4 +1,5 @@
 import { orderModel } from "../db";
+import { newSummaryTitle } from '../util/functions';
 
 class OrderService {
   // 본 파일의 맨 아래에서, new OrderService(orderModel) 하면, 이 함수의 인자로 전달됨
@@ -11,11 +12,7 @@ class OrderService {
     const { userId, shipAddress, request, orderItems, totalPrice, status } =
       orderInfo;
 
-    const summaryTitle = orderItems.reduce(
-      (acc, cur, idx) =>
-        acc + `${idx === 0 ? "" : "\n"}${cur.productName} ${cur.quantity}개`,
-      ""
-    );
+    const summaryTitle = newSummaryTitle(orderItems)
     const orderId = await this.orderModel.newOrderId();
 
     const newOrderInfo = {
@@ -73,11 +70,7 @@ class OrderService {
     //shipAddress,orderItems은 변경후 전체를 받아야함, 변경 값만 받으면 나머지는 초기화됨
     //status가 결제완료 이면 주문정보 변경가능, 배송준비중/발송완료일때는 변경 불가
     if (toUpdate.orderItems) {
-      const summaryTitle = toUpdate.orderItems.reduce(
-        (acc, cur, idx) =>
-          acc + `${idx === 0 ? "" : "\n"}${cur.productName} ${cur.quantity}개`,
-        ""
-      );
+      const summaryTitle = newSummaryTitle(orderItems)
       toUpdate.summaryTitle = summaryTitle;
     }
     const updatedOrder = await this.orderModel.update({

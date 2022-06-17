@@ -153,6 +153,60 @@ main {
   background-position: 0px 0px;
 }
 
+#cartDiv{
+  display: none;
+  position: absolute;
+  width: 350px;
+  height: 140px;
+  background-color:#fff;
+  top: 50%;
+  left: 50%;
+  margin-left: -175px;
+  margin-top: -70px;
+  padding-top: 10px;
+  z-index: 1000002;
+  visibility: visible;  
+  text-align: center;
+  border-radius: 5px;
+}
+.cartDivBtn{
+  display: inline;
+  width: 130px;
+  height: 40px;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color:#f4dfba;
+}
+
+.cartDivBtn:hover {
+  background-color: #ffdf91;
+}
+
+#cartDivCloseBtn{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0px;
+  right: -10px;
+  background-color: #233549;
+  outline: none;
+  background: url("/../imgs/imgs.png") no-repeat;
+  background-position: -100px 0px;
+}
+
+#modal{
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
 @media screen and (max-width: 900px) {
   #chocolate {
     width: 400px;

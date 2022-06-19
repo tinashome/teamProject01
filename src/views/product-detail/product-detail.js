@@ -24,7 +24,7 @@ const productId = path[path.length - 2];
 cartDivCloseBtn.addEventListener("click", cartDivToggle);
 closeCartDiv.addEventListener("click", cartDivToggle);
 goToCart.addEventListener("click", () => {
-	window.location.href = "/buydirectorder";
+	window.location.href = "/cart";
 });
 
 //제품정보 저장
@@ -37,8 +37,10 @@ getData();
 removeBuyDirect();
 buyDirectBtn.addEventListener("click", buyDirect);
 addCartBtn.addEventListener("click", () => {
-	addCart(productInfo._id, productInfo.price, numInput.value);
+	addCart(productInfo._id, productInfo.price, numInput.value, productInfo.name, productInfo.img, productInfo.quantity);
 });
+
+modal.addEventListener("click",cartDivToggle);
 
 async function getData() {
 	try {
@@ -56,7 +58,15 @@ async function getData() {
 
 //바로구매하기
 async function buyDirect() {
-	await localStorage.setItem("buyDirect", JSON.stringify({ id: productInfo._id, price: productInfo.price, quantity: numInput.value }));
+	await localStorage.setItem("buyDirect", JSON.stringify({ 
+    id: productInfo._id, 
+    price: productInfo.price, 
+    quantity: numInput.value ,
+    name: productInfo.name,
+    img: productInfo.img,
+    maxQuantity: productInfo.quantity,
+    check: true
+  }));
 	window.location.href = "/buydirectorder";
 }
 //로컬저장소의 바로구매 비우기
@@ -79,21 +89,25 @@ increaseBtn.addEventListener("click", () => {
 	}
 });
 
-async function addCart(id, price, quantity) {
+
+async function addCart( id, price, quantity, name, img ,maxQuantity ) {
 	cartDivToggle();
 	removeBuyDirect();
 	const myStorage = await window.localStorage;
 	const cartLen = myStorage.length;
 	for (let i = 0; i < cartLen; i++) {
-		const getStorage = JSON.parse(myStorage.getItem(i));
-		const getStorageQuantity = getStorage.quantity;
-		const setStorageQuantity = Number(getStorageQuantity) + Number(quantity);
+    const key = localStorage.key(i)
+		const getStorage = JSON.parse(myStorage.getItem(key));
 		if (id === getStorage.id) {
-			localStorage.setItem(i, JSON.stringify({ id, price, quantity: setStorageQuantity }));
+      const getStorageQuantity = getStorage.quantity;
+      const setStorageQuantity = Number(getStorageQuantity) + Number(quantity);
+      await localStorage.setItem(id, JSON.stringify({ 
+        id, price, quantity: setStorageQuantity , name, img, maxQuantity, check:true
+      }));
 			return;
 		}
 	}
-	localStorage.setItem(cartLen, JSON.stringify({ id, price, quantity }));
+	localStorage.setItem(id, JSON.stringify({ id, price, quantity, name, img, maxQuantity, check:true }));
 }
 
 async function cartDivToggle() {

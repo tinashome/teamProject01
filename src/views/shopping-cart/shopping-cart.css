@@ -52,22 +52,26 @@ header {
 .selectedProduct {
   display: flex;
 }
+input {
+  width: 20px;
+  height: 20px;
+}
 .checkbox {
   display: flex;
 }
 .checkbox p {
   position: relative;
-  top: -3px;
+  /* top: -3px; */
   left: 10px;
 }
 #deletePart {
   position: relative;
   left: 20px;
-  top: -5px;
+  /* top: -3px; */
 }
 .seperator {
   position: relative;
-  top: -8px;
+  /* top: -5px; */
   left: 15px;
 }
 
@@ -96,7 +100,7 @@ header {
 .SelectedProductName {
   width: 180px;
   height: 80px;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 500;
   position: relative;
   top: 20px;
@@ -104,14 +108,15 @@ header {
 }
 
 /* 장바구니에 담은 품목 수량 추가, 삭제 */
-.minusProductQuantity,
-.plusProductQuantity {
+.decreaseBtn,
+.increaseBtn {
   width: 30px;
   height: 30px;
   background-color: #fff;
   border: 1px solid #999;
   line-height: 15px;
   border-radius: 50px;
+  cursor: pointer;
 }
 .productQuantity,
 .productQuantityNumb {
@@ -123,7 +128,7 @@ header {
 
 /* 금액 X 수량 */
 .selectedPrice {
-  width: 230px;
+  width: 250px;
   display: flex;
   font-size: 20px;
   position: relative;
@@ -162,7 +167,7 @@ header {
 }
 .payTotalPricePart {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 2fr;
   width: 100%;
   height: 60px;
   line-height: 60px;
